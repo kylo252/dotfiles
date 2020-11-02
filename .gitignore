@@ -100,9 +100,7 @@
 #     No.
 #
 # --- Add your entries below this line:
-!/.zshrc
 !/.zshrc.user
-!/.bashrc
 !/.bashrc.user
 !/.config/bash/**
 !/.config/zsh/*
