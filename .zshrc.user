@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+# Adds `~/.local/bin` to $PATH
+export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+
+# ~/ Clean-up:
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Source Prezto.
+
+[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+[ -f "${ZDOTDIR:-$HOME}/.zpreztorc" ] && source "${ZDOTDIR:-$HOME}/.zpreztorc"
+[ -f "${ZDOTDIR:-$HOME}/.zsh_aliases" ] && source "${ZDOTDIR:-$HOME}/.zsh_aliases"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
+ZSH_AUTOSUGGEST_USE_ASYNC="ON"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
