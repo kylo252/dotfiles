@@ -17,7 +17,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias rmd='rm -rd'
 alias paux='ps aux | grep'
-alias bashconfig="$EDITOR ~/.bashrc.user"
+alias bashconfig="nvim ~/.bashrc.user"
 alias rcsrc=""
 alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
 alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
