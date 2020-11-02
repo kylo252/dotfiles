@@ -1,0 +1,113 @@
+### dotfiles
+#
+# --- Initialization:
+#
+#     git init --bare "$HOME/.dtf.git"
+#
+# --- Installation:
+#
+#     alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
+#     dtf checkout
+#
+#     We could have just initialized the repository directly in the home
+#     folder, but the advantage of doing it with a bare repo and a work tree
+#     is that normal uses of `git` won't try and use the home folder if you
+#     aren't in a git repository.
+#
+# --- Usage:
+#
+#     You can use `git add/commit/status/push` as usual, just replace `git`
+#     with `dtf`. Note that before using `add`, you need to list the file
+#     below.
+#
+# --- How it works:
+#
+#     The following line prevents Git from scanning any folders any number of
+#     levels underneath the repository work tree (home folder). Unlike if we
+#     used a `*` only, this allows you to scan a folder without also including
+#     including its contents by listing it with a `!` (see the next section).
+#     If we used a single `*`, we would have needed to list each folder to scan
+#     like `!.config` `.config/*` instead of just `!.config`.
+/**
+#
+#     The following line causes Git to track this file.
+!/.gitignore
+#
+# --- Adding dotfiles:
+#
+#     To add dotfiles, let git scan each parent directory (note: this doesn't
+#     cause git to actually include files from it) like:
+#
+#         !/.config/
+#         !/.config/myapp/
+#
+#     The leading slash is important, as it forces the path matching to start
+#     at the root of the repository, not subdirectories too.
+#
+#     Then, after you've included the parent directories, you also need to
+#     include files from it, like:
+#
+#         !/.config/myapp/myapp.conf
+#
+#     You can also use wildcards, like:
+#
+#         !/.config/myapp/*.conf
+#
+#     Or include everything in the directory, like:
+#
+#         !/.config/myapp/*
+#
+#     Note that a wildcard like that only includes files. To also include
+#     subdirectories, you need to list them the same way as mentioned at the
+#     beginning of this section, like:
+#
+#         !/.config/myapp/*
+#         !/.config/myapp/stuff/*
+#
+#     Alternatively, you can include all subdirectories and their files
+#     recursively with something like:
+#
+#         !/.config/myapp/**
+#
+# --- Example:
+#
+#         !/.Xresources
+#         !/.config/
+#         !/.config/mpv/
+#         !/.config/mpv/**
+#         !/.config/i3
+#         !/.config/i3/config
+#
+# --- FAQ:
+#
+#   : Can I safely use `git reset`?
+#     Yes, you can. Even when using `git reset --hard`, the only files which
+#     will be touched by git are the ones listed here.
+#
+#   : How can I see which on-disk files may be touched by git?
+#     Use the command:
+#
+#         ( git status --short | grep '^?' | cut -d" " -f2- && git ls-files ) | sort -u`
+#
+#     That will list all files which git is currently aware of (i.e. files in
+#     the current commit + files being staged + files on disk).
+#
+#   : Will this be slow with a large home folder?
+#     No, it won't. This is because the `/**` ignore prevents git from even
+#     scanning the directories.
+#
+#   : Will this gitignore file interfere with my repositories?
+#     No.
+#
+# --- Add your entries below this line:
+!/.zshrc
+!/.zshrc.user
+!/.bashrc
+!/.bashrc.user
+!/.config/bash/**
+!/.config/zsh/*
+!/.config/nvim/*
+!/.config/nvim/general/*
+!/.config/nvim/plug-config/*
+!/.config/nvim/keys/*
+!/.config/nvim/themes/*
