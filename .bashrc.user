@@ -5,8 +5,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export BASHDOTDIR="$XDG_CONFIG_HOME/bash"
 
-
-
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 export HISTSIZE=100000
 export HISTFILESIZE=2000000
@@ -14,11 +12,12 @@ export HISTFILE="$XDG_DATA_HOME/bash/history"
 shopt -s histappend
 export HISTIGNORE="ls:ps:history"
 PROMPT_COMMAND='history -a'
-export TERM=`echo -n $TERM | sed 's/-256color//'`
-if [ $TERM_PROGRAM = 'vscode' ]; then
+export TERM
+TERM=$(echo -n "$TERM" | sed 's/-256color//')
+if [ "$TERM_PROGRAM" = 'vscode' ]; then
     export WHO_AM_I="vscode"
-    #source /repo/ekhhaga/sdk/R43A47/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi
-    source /repo/ekhhaga/sdk/R40A125/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi
+    SDK_ENV="/repo/ekhhaga/sdk/R40A125/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi"
+    [ -f "$SDK_ENV" ] && source "$SDK_ENV"
     #export LD_LIBRARY_PATH=/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/../../../../../arm-wrs-linux-gnueabi/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/../../../../../arm-wrs-linux-gnueabi/lib/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/lib/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/usr/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/usr/lib:$LD_LIBRARY_PATH
     export CLANGD_FLAGS='--sysroot=/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi' # seems useless
     export CPLUS_INCLUDE_PATH="$SDKTARGETSYSROOT/usr/include/c++/5.2.0":$CPLUS_INCLUDE_PATH
@@ -40,7 +39,7 @@ else
     {
     	echo "eval \ "
     	echo "\$\(/home/ekhhaga/.local/miniconda3/bin/conda shell.bash hook\)"
-    }
+   }
     
     #if echo $TERM | grep -q -- '-256color'; then
     #    echo -e '\n\n256-color mode not supported on this host.  Reverting TERM...\n'
@@ -49,8 +48,8 @@ else
     
     # old $PS1=\u@\h[\A][${PWD#${PWD%/*/*/*}/}]\$
     PROMPT_DIRTRIM=1
-    #export PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]\[$(tput sgr0)\]\[\033[38;5;199m\]\$(__git_ps1)\[$(tput sgr0)\]$ \[$(tput sgr0)\]"
-    export PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]@WSL:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]\[$(tput sgr0)\]\[\033[38;5;199m\]\$(__git_ps1)\[$(tput sgr0)\]$ \[$(tput sgr0)\]"
+    export PS1
+    PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]\[$(tput sgr0)\]\[\033[38;5;199m\]\$(__git_ps1)\[$(tput sgr0)\]$ \[$(tput sgr0)\]"
     
     #export PYTHONIOENCODING=UTF-8
     #function _update_ps1() {
@@ -64,6 +63,7 @@ else
     #eval "$(starship init bash)"
     #export STARSHIP_CONFIG=$HOME/.config/starship.toml
 fi
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#export NVM_DIR="$HOME/.config/nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
