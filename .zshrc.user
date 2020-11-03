@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-# Adds `~/.local/bin` to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
-
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -11,16 +8,20 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-# Source Prezto.
 
-[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-[ -f "${ZDOTDIR:-$HOME}/.zpreztorc" ] && source "${ZDOTDIR:-$HOME}/.zpreztorc"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_aliases" ] && source "${ZDOTDIR:-$HOME}/.zsh_aliases"
+[ -f "${ZDOTDIR:-$HOME}/.zsh_functions" ] && source "${ZDOTDIR:-$HOME}/.zsh_functions"
+[ -f "${ZDOTDIR:-$HOME}/.zsh_completion" ] && source "${ZDOTDIR:-$HOME}/.zsh_completion"
+[ -f "${ZDOTDIR:-$HOME}/.fzf.zsh" ] && source "${ZDOTDIR:-$HOME}/.fzf.zsh"
+[ -f "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "${ZDOTDIR:-$HOME}/.zsh_prompt" ] && source "${ZDOTDIR:-$HOME}/.zsh_prompt"
+
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC="ON"
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-export NVM_DIR="$HOME/.config/nvm"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
