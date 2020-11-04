@@ -8,16 +8,16 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+export PATH=$PATH:~/local/bin
 
 [ -f "${ZDOTDIR:-$HOME}/.zsh_aliases" ] && source "${ZDOTDIR:-$HOME}/.zsh_aliases"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_functions" ] && source "${ZDOTDIR:-$HOME}/.zsh_functions"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_completion" ] && source "${ZDOTDIR:-$HOME}/.zsh_completion"
-[ -f "${ZDOTDIR:-$HOME}/.fzf.zsh" ] && source "${ZDOTDIR:-$HOME}/.fzf.zsh"
 [ -f "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_prompt" ] && source "${ZDOTDIR:-$HOME}/.zsh_prompt"
-
-compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+#compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC="ON"
@@ -25,3 +25,8 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+#export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+export FZF_DEFAULT_COMMAND='rg -uu --files'

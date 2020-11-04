@@ -13,7 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Utils
 Plug 'preservim/nerdtree' "The NERDTree is a file system explorer for the Vim editor
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

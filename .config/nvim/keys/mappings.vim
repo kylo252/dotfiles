@@ -46,4 +46,8 @@ nnoremap <leader><Delete> :tabclose<CR>
 " inoremap <C-tab>   <Esc>:tabnext<CR>i
 " inoremap <C-t>     <Esc>:tabnew<CR>
   
-  
+" Search quickly
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :Buffers<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-f> :Rg 
