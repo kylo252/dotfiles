@@ -28,7 +28,7 @@ else
     [ -f "${BASHDOTDIR:-$HOME}/env" ] && source "${BASHDOTDIR:-$HOME}/env"
     [ -f "${BASHDOTDIR:-$HOME}/.bash_git" ] && source "${BASHDOTDIR:-$HOME}/.bash_git" 
     [ -f "${BASHDOTDIR:-$HOME}/.bash_aliases" ] && source "${BASHDOTDIR:-$HOME}/.bash_aliases"
-    [ -f "${BASHDOTDIR:-$HOME}/.fzf.bash" ] && source "${BASHDOTDIR:-$HOME}/.fzf.bash"
+    [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash 
 
     ## https://unix.stackexchange.com/questions/439254/use-my-already-running-ssh-agent-process ##
     export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
