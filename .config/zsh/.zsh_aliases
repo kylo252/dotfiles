@@ -29,6 +29,7 @@ alias ff='find . -maxdepth 1 -type f -name'
 alias fd='find . -maxdepth 1 -type d -name'
 
 
+
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
