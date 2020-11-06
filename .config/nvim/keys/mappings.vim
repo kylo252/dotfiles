@@ -52,3 +52,8 @@ nnoremap <leader><Delete> :tabclose<CR>
   
 " start merge mode
 nmap <leader>mt <plug>(MergetoolToggle) 
+" Search quickly
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :Buffers<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-f> :Rg 

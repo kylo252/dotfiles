@@ -1,0 +1,3 @@
+[ -f "${ZDOTDIR:-$HOME}/powerlevel10k/powerlevel10k.zsh-theme" ] && source "${ZDOTDIR:-$HOME}/powerlevel10k/powerlevel10k.zsh-theme"
+[ -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ] && source "${ZDOTDIR:-$HOME}/.p10k.zsh"
+[ -f "${ZDOTDIR:-$HOME}/powerlevel10k/config/p10k-rainbow.zsh" ] && source "${ZDOTDIR:-$HOME}/powerlevel10k/config/p10k-rainbow.zsh"
