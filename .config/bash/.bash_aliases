@@ -34,4 +34,7 @@ if alias rm &> /dev/null
 then
     unalias rm
 fi
-
+RunCondaInit(){
+    	echo "eval \ "
+    	echo "\$\(/home/ekhhaga/.local/miniconda3/bin/conda shell.bash hook\)"
+    }
