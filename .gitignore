@@ -102,7 +102,7 @@
 # --- Add your entries below this line:
 !/.zshrc.user
 !/.bashrc.user
-!/.config/bash/**
+!/.config/bash/*
 !/.config/zsh/*
 !/.config/nvim/*
 !/.config/nvim/general/*
