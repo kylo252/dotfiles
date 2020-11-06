@@ -1,17 +1,21 @@
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 
-" " Copy to clipboard
+" Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-" " Paste from clipboard
+" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+
+" Enabble paste mode 
+inoremap <F2> <esc>:set paste!<cr>i
+nnoremap <F2> :set paste!<cr>
 
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
@@ -46,4 +50,5 @@ nnoremap <leader><Delete> :tabclose<CR>
 " inoremap <C-tab>   <Esc>:tabnext<CR>i
 " inoremap <C-t>     <Esc>:tabnew<CR>
   
-  
+" start merge mode
+nmap <leader>mt <plug>(MergetoolToggle) 

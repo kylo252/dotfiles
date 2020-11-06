@@ -37,3 +37,6 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 "
 "" You can't stop me
 cmap w!! w !sudo tee %
+
+"" set node path manually
+let g:coc_node_path = '/app/vbuild/RHEL7-x86_64/nodejs/14.7.0/bin/node'
