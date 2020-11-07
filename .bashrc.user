@@ -18,7 +18,7 @@ if [ "$TERM_PROGRAM" = 'vscode' ]; then
     unset PYTHONHOME
     unset PYTHONPATH
 else
-    source "$HOME/.config/variables.sh"
+    source "$HOME/.config/paths.sh"
 fi
 
 [ -f "${BASHDOTDIR:-$HOME}/.bash_aliases" ] && source "${BASHDOTDIR:-$HOME}/.bash_aliases"

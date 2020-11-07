@@ -2,7 +2,6 @@
 export EDITOR=nvim
 export BASHRC=~/.bashrc     
 export CDPATH='.:/repo/ekhhaga:~/local'
-export DISPLAY='localhost:0.0'
 
 alias where='type -a'
 alias l='ls -CF --color=auto'
