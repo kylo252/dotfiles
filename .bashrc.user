@@ -1,10 +1,5 @@
 #!/bin/bash
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export BASHDOTDIR="$XDG_CONFIG_HOME/bash"
-
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 export HISTSIZE=100000
 export HISTFILESIZE=2000000
@@ -23,10 +18,11 @@ if [ "$TERM_PROGRAM" = 'vscode' ]; then
     unset PYTHONHOME
     unset PYTHONPATH
 else
-    [ -f "${BASHDOTDIR:-$HOME}/env" ] && source "${BASHDOTDIR:-$HOME}/env"
+    source "$HOME/.config/variables.sh"
 fi
 
 [ -f "${BASHDOTDIR:-$HOME}/.bash_aliases" ] && source "${BASHDOTDIR:-$HOME}/.bash_aliases"
 [ -f "${BASHDOTDIR:-$HOME}/.bash_prompt" ] && source "${BASHDOTDIR:-$HOME}/.bash_prompt"
-[ -f "${BASHDOTDIR:-$HOME}/.fzf.bash" ] && source "${BASHDOTDIR:-$HOME}/.fzf.bash"
-
+[ -f "$XDG_CONFIG_HOME/fzf/fzf.bash" ] && source "$XDG_CONFIG_HOME/fzf/fzf.bash"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
