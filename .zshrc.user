@@ -16,6 +16,7 @@ export PATH=$PATH:~/local/bin
 [ -f "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_prompt" ] && source "${ZDOTDIR:-$HOME}/.zsh_prompt"
+[ -f "${ZDOTDIR:-$HOME/.config}/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "${ZDOTDIR:-$HOME/.config}/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 #compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
