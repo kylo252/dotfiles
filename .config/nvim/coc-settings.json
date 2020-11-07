@@ -1,4 +1,2 @@
 {
-    "node.binPath": "/app/vbuild/RHEL7-x86_64/nodejs/14.7.0/bin/node",
-    "npm.binPath": "/app/vbuild/RHEL7-x86_64/nodejs/14.7.0/bin/npm"
 }
