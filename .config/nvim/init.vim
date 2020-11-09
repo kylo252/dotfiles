@@ -20,9 +20,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'samoshkin/vim-mergetool'
-Plug 'vim-syntastic/syntastic'
-Plug 'NLKNguyen/papercolor-theme'
-
+"Plug 'NLKNguyen/papercolor-theme'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'liuchengxu/vim-which-key'
+Plug 'morhetz/gruvbox'
 " GIT
 Plug 'tpope/vim-fugitive'
 
@@ -30,20 +31,26 @@ Plug 'tpope/vim-fugitive'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
-
+set shell=/usr/bin/bash
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/paths.vim
 source $HOME/.config/nvim/keys/mappings.vim
+source $HOME/.config/nvim/keys/coc-maps.vim
+source $HOME/.config/nvim/keys/which-key.vim
 source $HOME/.config/nvim/plug-config/merge.vim
 source $HOME/.config/nvim/plug-config/neoterm.vim
+source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
-source $HOME/.config/nvim/plug-config/syntastic.vim 
-source $HOME/.config/nvim/themes/papercolor.vim
+"source $HOME/.config/nvim/themes/papercolor.vim
 source $HOME/.config/nvim/themes/airline.vim
 
+autocmd vimenter * ++nested colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
 let NERDTreeShowHidden=1
-autocmd! bufwritepost ~/.config/nvim/init.vim source $MYVIMRC
-
+" c++ syntax highlighting
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 " Check file in shellcheck:
 "	map <leader>s :ShellCheck! <CR>
 "	map <leader>f :LShellCheck! <CR>
