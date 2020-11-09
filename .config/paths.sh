@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Fix module path taken from /app/arc/2.4/profiles/arc.bashrc
 #unset MODULEPATH
 #export MODULEPATH=$MODULEPATH_TCSH
@@ -6,10 +7,11 @@
 # unset PROMPT_COMMAND
 PATH=~/bin:$PATH
 PATH=~/local/bin:$PATH
-PATH=~/local//homebrew/bin:$PATH
+#PATH=~/local/homebrew/bin:$PATH
+#PATH=~/local/homebrew/sbin:$PATH
 PATH=~/.local/bin:$PATH # python/pip
-export PATH 
-export DISPLAY=localhost:0.0
+export PATH
+
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/.cache"
@@ -18,7 +20,7 @@ export DISPLAY=localhost:0.0
 
 [ -z "$ZDOTDIR" ] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-[ -z "$BASDOTDIR" ] && export BASHDOTDIR="$XDG_CONFIG_HOME/bash"
+[ -z "$BASHDOTDIR" ] && export BASHDOTDIR="$XDG_CONFIG_HOME/bash"
 
 [ -z "$NVM_DIR" ] && export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 
@@ -32,3 +34,6 @@ else
 fi
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# homebrew
+eval "$(~/.linuxbrew/bin/brew shellenv)"

@@ -2,7 +2,6 @@
 export EDITOR=nvim
 export ZSHRC=~/.zshrc     
 export CDPATH='.:/repo/$USER:$USER/local'
-export DISPLAY='localhost:0.0'
 
 alias where='type -a'
 alias l='ls -CF --color=auto'
