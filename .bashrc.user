@@ -1,13 +1,4 @@
 #!/bin/bash
-
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTSIZE=100000
-export HISTFILESIZE=2000000
-export HISTFILE="$XDG_DATA_HOME/bash/history"
-shopt -s histappend
-export HISTIGNORE="ls:ps:history"
-PROMPT_COMMAND='history -a'
-
 if [ "$TERM_PROGRAM" = 'vscode' ]; then
     export WHO_AM_I="vscode"
     SDK_ENV="/repo/ekhhaga/sdk/R40A125/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi"
@@ -26,3 +17,13 @@ fi
 [ -f "$XDG_CONFIG_HOME/fzf/fzf.bash" ] && source "$XDG_CONFIG_HOME/fzf/fzf.bash"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+export HISTFILE="$XDG_DATA_HOME/bash/history"
+shopt -s histappend
+export HISTIGNORE="ls:ps:history"
+PROMPT_COMMAND='history -a'
+
+
