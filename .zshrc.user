@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 [ -f "${ZDOTDIR:-$HOME}/.zsh_aliases" ] && source "${ZDOTDIR:-$HOME}/.zsh_aliases"
 [ -f "${ZDOTDIR:-$HOME}/.zsh_functions" ] && source "${ZDOTDIR:-$HOME}/.zsh_functions"
@@ -19,6 +21,3 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-#export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
