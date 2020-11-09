@@ -106,7 +106,7 @@
 !/.config/bash/.bash_*
 !/.config/zsh/.zsh_*
 !/.config/nvim/*
-!/.config/nvim/general/*
-!/.config/nvim/plug-config/*
-!/.config/nvim/keys/*
-!/.config/nvim/themes/*
+!/.config/nvim/general/**
+!/.config/nvim/plug-config/**
+!/.config/nvim/keys/**
+!/.config/nvim/themes/**
