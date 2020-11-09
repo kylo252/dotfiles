@@ -36,4 +36,8 @@ fi
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # homebrew
-eval "$(~/.linuxbrew/bin/brew shellenv)"
+if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+  # set locale for perl
+  export LC_ALL=C
+fi

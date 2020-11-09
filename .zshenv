@@ -1,2 +1,2 @@
-source "$HOME/.config/paths.sh"
+source "$HOME/.config/dev_env.sh"
 
