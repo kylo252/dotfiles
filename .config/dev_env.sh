@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
+
 # Fix module path taken from /app/arc/2.4/profiles/arc.bashrc
 #unset MODULEPATH
 #export MODULEPATH=$MODULEPATH_TCSH
 
-# https://www.reddit.com/r/Fedora/comments/37n9vi/vte/
-# unset PROMPT_COMMAND
 PATH=~/bin:$PATH
 PATH=~/local/bin:$PATH
-#PATH=~/local/homebrew/bin:$PATH
-#PATH=~/local/homebrew/sbin:$PATH
-PATH=~/.local/bin:$PATH # python/pip
+PATH=~/.local/bin:$PATH 
 export PATH
 
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
@@ -26,6 +23,8 @@ export PATH
 
 [ -z "$NPM_CONFIG_USERCONFIG" ] && export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
+[ -z "$RIPGREP_CONFIG_PATH" ] && export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
@@ -41,3 +40,4 @@ if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   # set locale for perl
   export LC_ALL=C
 fi
+

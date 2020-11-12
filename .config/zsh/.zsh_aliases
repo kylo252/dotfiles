@@ -1,9 +1,12 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
 export EDITOR=nvim
-export ZSHRC=~/.zshrc     
+export ZSHRC=~/.zshrc.user     
 export CDPATH='.:/repo/$USER:$USER/local'
 
-alias where='type -a'
+alias bashconf="$EDITOR ~/.bashrc.user"
+alias zshconf="$EDITOR ~/.zshrc.user"
+
 alias l='ls -CF --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 alias la='ls -A --color=auto'
@@ -15,23 +18,22 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias rmd='rm -rd'
-alias paux='ps aux | grep'
-alias bashconfig="$EDITOR ~/.bashrc.user"
+alias paux='ps aux | rg'
 alias rcsrc=""
 alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
 alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
 alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
-cf() { du -a ~/.config/* ~/.scripts/* | awk '{print $2}' | fzf | xargs -r $EDITOR ;}
 
 alias f='find . -name'
 alias ff='find . -maxdepth 1 -type f -name'
 alias fd='find . -maxdepth 1 -type d -name'
-
-
 
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
     unalias rm
 fi
-
+alias nvp='nvimpager'
+export PAGER='nvimpager'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'

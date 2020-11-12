@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+csf() { rg --files ~/.config ~/.scripts --type zshrc --type sh --type vim | fzf | xargs -r $EDITOR ;}

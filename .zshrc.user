@@ -1,16 +1,17 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_completion" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_completion"
 
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 
-[ -f "${ZDOTDIR:-$HOME}/.zsh_aliases" ] && source "${ZDOTDIR:-$HOME}/.zsh_aliases"
-[ -f "${ZDOTDIR:-$HOME}/.zsh_functions" ] && source "${ZDOTDIR:-$HOME}/.zsh_functions"
-[ -f "${ZDOTDIR:-$HOME}/.zsh_completion" ] && source "${ZDOTDIR:-$HOME}/.zsh_completion"
-[ -f "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ -f "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -f "${ZDOTDIR:-$HOME}/.zsh_prompt" ] && source "${ZDOTDIR:-$HOME}/.zsh_prompt"
-[ -f "${ZDOTDIR:-$HOME/.config}/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "${ZDOTDIR:-$HOME/.config}/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
+# load the prompt last, but test with it before
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
+
 [ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+[ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
 #compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
@@ -19,5 +20,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 
 

@@ -20,10 +20,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'samoshkin/vim-mergetool'
-"Plug 'NLKNguyen/papercolor-theme'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'liuchengxu/vim-which-key'
 Plug 'morhetz/gruvbox'
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
 " GIT
 Plug 'tpope/vim-fugitive'
 
@@ -51,6 +52,9 @@ let NERDTreeShowHidden=1
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
+" for LF
+let g:lf_command_override = 'lf -command "set hidden"'
+
 " Check file in shellcheck:
 "	map <leader>s :ShellCheck! <CR>
 "	map <leader>f :LShellCheck! <CR>
