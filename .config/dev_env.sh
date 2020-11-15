@@ -26,6 +26,7 @@ export PATH
 [ -z "$RIPGREP_CONFIG_PATH" ] && export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
 [ -z "$GEM_HOME" ] && export GEM_HOME="$XDG_DATA_HOME/gem"
+
 [ -z "$GEM_SPEC_CACHE" ] && export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
 # Preferred editor for local and remote sessions
@@ -33,14 +34,5 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
   export EDITOR='nvim'
-fi
-
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-# homebrew
-if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-  # set locale for perl
-  export LC_ALL=C
 fi
 

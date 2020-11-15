@@ -26,7 +26,8 @@ alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias dts='dtf status'
 alias dtc='dtf commit -m '
 alias dtp='dtf push'
-alias dfsf='diff-so-fancy | less --tabs=4 -RFX'
+alias delta='delta --24-bit-color always'
+alias dfsf='delta --diff-so-fancy'
 alias f='find . -name'
 alias ff='find . -maxdepth 1 -type f -name'
 alias fd='find . -maxdepth 1 -type d -name'
@@ -38,5 +39,12 @@ then
 fi
 alias nvp='nvimpager'
 export PAGER='nvimpager'
+export DELTA_PAGER='less'
+export DELTA_NAVIGATE='1 git diff'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
+
+# set locale for perl
+export LC_ALL=C
+export LANG=en_US.UTF-8
+export LANGAUGE=en_US.UTF-8

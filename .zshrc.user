@@ -1,25 +1,36 @@
 #!/usr/bin/env zsh
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [ -z "$VIRTUAL_ENV" ]; then
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+fi
+
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
+
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_completion" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_completion"
 
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
-
-# load the prompt last, but test with it before
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
 [ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+
 [ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
+
 #compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
-ZSH_AUTOSUGGEST_USE_ASYNC="ON"
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+# load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# load homebrew
+if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+fi
+
+
+
 
 
 

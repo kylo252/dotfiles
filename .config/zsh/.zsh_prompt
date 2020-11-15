@@ -1,11 +1,22 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [ -z "$VIRTUAL_ENV" ]; then
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    fi
-fi
+#!/usr/bin/env zsh
+
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_completion" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_completion"
+
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 
 [ -f "${ZDOTDIR:-$HOME}/powerlevel10k/powerlevel10k.zsh-theme" ] && source "${ZDOTDIR:-$HOME}/powerlevel10k/powerlevel10k.zsh-theme"
 [ -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ] && source "${ZDOTDIR:-$HOME}/.p10k.zsh"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
+ZSH_AUTOSUGGEST_USE_ASYNC="ON"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+MODE_CURSOR_VIINS="blinking bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS"
+MODE_CURSOR_VICMD="dark grey block"
+MODE_CURSOR_SEARCH="steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
