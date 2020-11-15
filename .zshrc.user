@@ -23,12 +23,18 @@ fi
 #compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
+# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+export NVM_AUTO_USE=true
+#export NVM_NO_USE=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+[ -f "$XDG_CONFIG_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" 
 
 # load homebrew
 if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 fi
-
+zmodload zsh/nearcolor
 #zprof
 
