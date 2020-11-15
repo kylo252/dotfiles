@@ -17,18 +17,19 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'samoshkin/vim-mergetool'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'liuchengxu/vim-which-key'
 Plug 'morhetz/gruvbox'
 Plug 'ptzz/lf.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'ap/vim-css-color'
+Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'mhinz/vim-startify'
 " GIT
 Plug 'tpope/vim-fugitive'
-
-" cheat-sheet
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
