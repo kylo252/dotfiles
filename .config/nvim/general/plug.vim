@@ -1,5 +1,5 @@
 " Bootstrap Plug
-let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
+let autoload_plug_path = stdpath('config') . '/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
   silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs 
       \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
@@ -7,7 +7,7 @@ if !filereadable(autoload_plug_path)
 endif
 unlet autoload_plug_path
 
-call plug#begin('~/.config/nvim/plugged')  
+call plug#begin('~/.config/nvim/autoload/plugged')  
 
 " Declare the list of plugins.
 
