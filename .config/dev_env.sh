@@ -19,8 +19,6 @@ export PATH
 
 [ -z "$BASHDOTDIR" ] && export BASHDOTDIR="$XDG_CONFIG_HOME/bash"
 
-[ -z "$NVM_DIR" ] && export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-
 [ -z "$NPM_CONFIG_USERCONFIG" ] && export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
 [ -z "$RIPGREP_CONFIG_PATH" ] && export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
@@ -36,3 +34,4 @@ else
   export EDITOR='nvim'
 fi
 
+export NVM_DIR="$XDG_CONFIG_HOME/nvm"
