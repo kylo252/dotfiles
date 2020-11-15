@@ -25,6 +25,9 @@ export PATH
 
 [ -z "$RIPGREP_CONFIG_PATH" ] && export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
+[ -z "$GEM_HOME" ] && export GEM_HOME="$XDG_DATA_HOME/gem"
+[ -z "$GEM_SPEC_CACHE" ] && export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
