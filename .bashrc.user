@@ -18,12 +18,3 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTSIZE=100000
-export HISTFILESIZE=2000000
-export HISTFILE="$XDG_DATA_HOME/bash/history"
-shopt -s histappend
-export HISTIGNORE="ls:ps:history"
-PROMPT_COMMAND='history -a'
-
-
