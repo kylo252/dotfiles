@@ -35,3 +35,9 @@ else
 fi
 
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTFILE="$XDG_DATA_HOME/shell/history"
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+export HISTIGNORE="ls:ps:history"
