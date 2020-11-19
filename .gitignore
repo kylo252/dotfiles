@@ -103,8 +103,9 @@
 !/.zshrc.user
 !/.bashrc.user
 !/.config/
-!/.config/bash/.bash_*
-!/.config/zsh/.zsh_*
+!/.config/*
+!/.config/bash/**
+#!/.config/zsh/**
 !/.config/nvim/*
 !/.config/nvim/general/**
 !/.config/nvim/plug-config/**

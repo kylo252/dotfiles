@@ -13,7 +13,7 @@ export PATH
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/.cache"
 
-[ -z "$HISTFILE" ] && export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+[ -z "$HISTFILE" ] && export HISTFILE="$XDG_DATA_HOME/shell/history"
 
 [ -z "$ZDOTDIR" ] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
@@ -36,5 +36,5 @@ else
   export EDITOR='nvim'
 fi
 
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+export NVM_DIR="$XDG_DATA_HOME/nvm"
 
