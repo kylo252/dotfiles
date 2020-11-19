@@ -33,7 +33,14 @@ if alias rm &> /dev/null
 then
     unalias rm
 fi
+
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTFILE="$XDG_DATA_HOME/shell/history"
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+export HISTIGNORE="ls:ps:history"
+
 RunCondaInit(){
     	echo "eval \ "
     	echo "\$\(/home/ekhhaga/.local/miniconda3/bin/conda shell.bash hook\)"
-    }
+}
