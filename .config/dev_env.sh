@@ -27,6 +27,8 @@ export PATH
 
 [ -z "$GEM_SPEC_CACHE" ] && export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
+[ -z "$GOPATH" ] && export GOPATH="$XDG_DATA_HOME/go"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
@@ -36,8 +38,3 @@ fi
 
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTFILE="$XDG_DATA_HOME/shell/history"
-export HISTSIZE=100000
-export HISTFILESIZE=2000000
-export HISTIGNORE="ls:ps:history"
