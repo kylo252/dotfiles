@@ -50,7 +50,6 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTFILE="$XDG_DATA_HOME/shell/history"
 export HISTSIZE=100000
 export HISTFILESIZE=2000000
 export HISTIGNORE="ls:ps:history"
