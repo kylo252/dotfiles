@@ -20,7 +20,7 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
 " for LF
-let g:lf_command_override = 'lf -command "set hidden"'
+"let g:lf_command_override = 'lf -command "set hidden"'
 
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
