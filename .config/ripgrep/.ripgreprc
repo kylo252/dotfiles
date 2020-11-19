@@ -8,6 +8,7 @@
 # Add my 'zshrc' type
 --type-add=zshrc:*.zsh*
 --type-add=bashrc:*.sh*
+--type-add=automake:*makefile.in*
 
 # Using glob patterns to include/exclude files or folders
 --glob=!git/*
