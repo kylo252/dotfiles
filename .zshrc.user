@@ -1,14 +1,4 @@
 #!/usr/bin/env zsh
-#
-#zmodload zsh/zprof
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [ -z "$VIRTUAL_ENV" ]; then
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    fi
-fi
 
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
@@ -20,6 +10,17 @@ fi
 
 [ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
+#
+#zmodload zsh/zprof
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [ -z "$VIRTUAL_ENV" ]; then
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+fi
+
 #compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # load nvm
@@ -29,12 +30,15 @@ export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
 #export NVM_NO_USE=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" 
+[ -f "$XDG_DATA_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" ] && source "$XDG_DATA_HOME/zsh/zsh-nvm/zsh-nvm.plugin.zsh" 
 
 # load homebrew
 if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 fi
-zmodload zsh/nearcolor
+#zmodload zsh/nearcolor
 #zprof
-
+if [ ! -z $ZSH_INIT_COMMAND ]; then
+    echo "Running: $ZSH_INIT_COMMAND"
+    eval "$ZSH_INIT_COMMAND"
+fi
