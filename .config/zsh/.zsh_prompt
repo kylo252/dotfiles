@@ -1,14 +1,20 @@
 #!/usr/bin/env zsh
 
-[ -f "$XDG_CONFIG_HOME/zsh/powerlevel10k/powerlevel10k.zsh-theme" ] && source "$XDG_CONFIG_HOME/zsh/powerlevel10k/powerlevel10k.zsh-theme"
+[ -f "$XDG_DATA_HOME/zsh/powerlevel10k/powerlevel10k.zsh-theme" ] && \
+    source "$XDG_DATA_HOME/zsh/powerlevel10k/powerlevel10k.zsh-theme"
+
 [ -f "$XDG_CONFIG_HOME/zsh/.p10k.zsh" ] && source "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
+
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_completion" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_completion"
 
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$XDG_DATA_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    source "$XDG_DATA_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$XDG_DATA_HOME/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && \
+    source "$XDG_DATA_HOME/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" 
 
-[ -f "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && source "$XDG_CONFIG_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
+[ -f "$XDG_DATA_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && \
+    source "$XDG_DATA_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"

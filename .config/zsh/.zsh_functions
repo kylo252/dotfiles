@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 
-csf() { rg --files ~/.config ~/.scripts --type zshrc --type sh --type vim | fzf | xargs -r $EDITOR ;}
+cf() { rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r $editor ;}
+
+sf() { rg --files /repo/$USER/scripts ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard ;}

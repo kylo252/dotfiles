@@ -43,8 +43,16 @@ export DELTA_PAGER='less'
 export DELTA_NAVIGATE='1 git diff'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
 # set locale for perl
-export LC_ALL=C
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export LANGAUGE=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTFILE="$XDG_DATA_HOME/shell/history"
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+export HISTIGNORE="ls:ps:history"
+
+
