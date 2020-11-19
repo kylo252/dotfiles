@@ -41,3 +41,4 @@ augroup myvimrc
   au!
   au BufWritePost init.vim,plug.vim ++nested so $MYVIMRC 
 augroup END
+
