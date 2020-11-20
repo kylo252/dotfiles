@@ -1,6 +1,5 @@
 {
     "npm.binPath": "$NVM_DIR/versions/node/v15.2.0/bin/npm",
-    "sh.enable": true,
     "json.format.enable": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "sh",

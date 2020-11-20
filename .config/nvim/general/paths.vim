@@ -1,4 +1,6 @@
 let g:loaded_python_provider = 0
 let g:loaded_ruby_provider = 0
 let g:loaded_perl_provider = 0
-let g:node_host_prog = "$NVM_DIR/versions/node/v15.2.0/bin/neovim-node-host"
+let g:python3_host_prog = trim(system('which python3'))
+let g:coc_node_path = trim(system('which node'))
+
