@@ -55,3 +55,4 @@ export SAVEHIST=10000
 export HISTIGNORE="ls:ps:history"
 setopt SHARE_HISTORY
 
+
