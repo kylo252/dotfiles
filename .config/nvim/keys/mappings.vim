@@ -27,7 +27,7 @@ nnoremap <C-s> :w<CR>
 " Alternate way to quit
 nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
-nnoremap <C-c> <Esc>
+inoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -37,6 +37,12 @@ nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
 nnoremap <leader>4 4gt
 nnoremap <leader>5 5gt
+
+" easier splits navigation
+imap <C-h> <C-w>h
+imap <C-j> <C-w>j
+imap <C-k> <C-w>k
+imap <C-l> <C-w>l
 
 " Tab opening and closing
 nnoremap <leader><Insert> :tabnew<CR>
@@ -60,6 +66,9 @@ nmap <leader>mt <plug>(MergetoolToggle)
 
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
+
+" delete buffer 
+nnoremap <Leader>q :Bdelete<CR>
 
 nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
