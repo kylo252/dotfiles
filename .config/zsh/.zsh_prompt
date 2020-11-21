@@ -13,19 +13,9 @@
 [ -f "$XDG_DATA_HOME/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && \
     source "$XDG_DATA_HOME/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" 
 
-[ -f "$XDG_DATA_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh" ] && \
-    source "$XDG_DATA_HOME/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
-
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC="ON"
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-MODE_CURSOR_VIINS="blinking bar"
-MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS"
-MODE_CURSOR_VICMD="dark grey block"
-MODE_CURSOR_SEARCH="steady underline"
-MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
 
 # path settings 
 cdpath=(/repo/ekhhaga)

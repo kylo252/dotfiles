@@ -1,16 +1,5 @@
 #!/usr/bin/env zsh
 
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
-
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
-
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
-
-[ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
-
-[ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
-
-#
 #zmodload zsh/zprof
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -21,10 +10,16 @@ if [ -z "$VIRTUAL_ENV" ]; then
     fi
 fi
 
-#compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
-# load nvm
-# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
+
+[ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
+
+[ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+
+[ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
+
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
@@ -37,8 +32,8 @@ if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 fi
 #zmodload zsh/nearcolor
-#zprof
 if [ ! -z $ZSH_INIT_COMMAND ]; then
     echo "Running: $ZSH_INIT_COMMAND"
     eval "$ZSH_INIT_COMMAND"
 fi
+#zprof

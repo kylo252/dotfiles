@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/khgh/.config/nvim'
+let g:netrw_dirhist_4='/home/khgh/.config'
+let g:netrw_dirhist_3='/home/khgh'
+let g:netrw_dirhist_2='/home/khgh/.scripts'
+let g:netrw_dirhist_1='/home/khgh'
