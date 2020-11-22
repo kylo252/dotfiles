@@ -56,6 +56,8 @@ nnoremap <leader><Delete> :tabclose<CR>
 " inoremap <C-tab>   <Esc>:tabnext<CR>i
 " inoremap <C-t>     <Esc>:tabnew<CR>
   
+map <leader>n :NERDTreeToggle<CR>
+
 " start merge mode
 nmap <leader>mt <plug>(MergetoolToggle) 
 " Search quickly

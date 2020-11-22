@@ -35,6 +35,7 @@ else
     Plug 'lambdalisue/gina.vim'
     Plug 'tomtom/tcomment_vim'
     Plug 'moll/vim-bbye'
+    Plug 'pearofducks/ansible-vim'
 endif 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
