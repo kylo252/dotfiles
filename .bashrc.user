@@ -1,25 +1,9 @@
-#!/bin/bash
-if [ "$TERM_PROGRAM" = 'vscode' ]; then
-    export WHO_AM_I="vscode"
-    SDK_ENV="/repo/ekhhaga/sdk/R40A125/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi"
-    [ -f "$SDK_ENV" ] && source "$SDK_ENV"
-    #export LD_LIBRARY_PATH=/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/../../../../../arm-wrs-linux-gnueabi/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/5.2.0/../../../../../arm-wrs-linux-gnueabi/lib/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/lib/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/usr/lib/arm-wrs-linux-gnueabi/5.2.0/:/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi/usr/lib:$LD_LIBRARY_PATH
-    export CLANGD_FLAGS='--sysroot=/repo/ekhhaga/sdk/R40A125/sysroots/armv7a-vfp-neon-wrs-linux-gnueabi' # seems useless
-    export CPLUS_INCLUDE_PATH="$SDKTARGETSYSROOT/usr/include/c++/5.2.0":$CPLUS_INCLUDE_PATH
-    unset PYTHONHOME
-    unset PYTHONPATH
-else
-    source "$HOME/.config/dev_env.sh"
-fi
+#!/usr/bin/env bash
 
-[ -f "${BASHDOTDIR:-$HOME}/.bash_aliases" ] && source "${BASHDOTDIR:-$HOME}/.bash_aliases"
-[ -f "${BASHDOTDIR:-$HOME}/.bash_prompt" ] && source "${BASHDOTDIR:-$HOME}/.bash_prompt"
-[ -f "$XDG_CONFIG_HOME/fzf/fzf.bash" ] && source "$XDG_CONFIG_HOME/fzf/fzf.bash"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f "$XDG_CONFIG_HOME/bash/.bash_aliases" ] && source "$XDG_CONFIG_HOME/bash/.bash_aliases"
 
+[ -f "$XDG_CONFIG_HOME/bash/.bash_prompt" ] && source "$XDG_CONFIG_HOME/bash/.bash_prompt"
 
 shopt -s histappend
+
 PROMPT_COMMAND='history -a'
-
-
