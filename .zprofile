@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Fix module path taken from /app/arc/2.4/profiles/arc.bashrc
 #unset MODULEPATH
 #export MODULEPATH=$MODULEPATH_TCSH
 
-PATH=~/bin:$PATH
 PATH=~/local/bin:$PATH
 PATH=~/.local/bin:$PATH 
+PATH=~/.scripts:$PATH
 export PATH
 
 export XDG_CONFIG_HOME="$HOME/.config"

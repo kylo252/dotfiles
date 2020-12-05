@@ -26,12 +26,10 @@ alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias dts='dtf status'
 alias dtc='dtf commit -m '
 alias dtp='dtf push'
-alias delta='delta --24-bit-color always'
-alias dfsf='delta --diff-so-fancy'
 alias f='find . -name'
 alias ff='find . -maxdepth 1 -type f -name'
 alias fd='find . -maxdepth 1 -type d -name'
-
+alias htop='htop --user $USER'
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
@@ -81,3 +79,5 @@ cdpath=(/repo/ekhhaga)
 typeset -U path cdpath fpath
 
 setopt auto_cd
+
+#export HOMEBREW_PREFIX="$HOME/.linuxbrew"

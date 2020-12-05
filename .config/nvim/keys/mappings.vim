@@ -48,6 +48,7 @@ imap <C-l> <C-w>l
 nnoremap <leader><Insert> :tabnew<CR>
 nnoremap <leader><Delete> :tabclose<CR>
 
+nnoremap <leader>n :<C-u>NERDTreeToggle<CR>
 " Tab navigation like Firefox.
 " nnoremap <C-S-t> :tabprevious<CR>
 " nnoremap <Ci-t>   :tabnext<CR>
@@ -64,11 +65,11 @@ nmap <leader>mt <plug>(MergetoolToggle)
 "nnoremap <C-g> :GFiles<CR>
 "nnoremap <C-f> :Rg 
 
-nmap <Leader>f [fzf-p]
-xmap <Leader>f [fzf-p]
-
 " delete buffer 
 nnoremap <Leader>q :Bdelete<CR>
+
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
 
 nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>

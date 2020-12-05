@@ -35,8 +35,6 @@ set incsearch
 "" You can't stop me
 cmap w!! w !sudo tee %
 
-set shell=/usr/bin/bash
-
 " Toggle relativenumber only in normal mode
 augroup numbertoggle
     autocmd!

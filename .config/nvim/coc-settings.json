@@ -3,8 +3,10 @@
     "json.format.enable": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "sh",
-        "json"
+        "json",
+        "python"
     ],
+    "python.formatting.provider": "yapf",
     "diagnostic-languageserver.linters": {
         "shellcheck": {
             "command": "shellcheck",
@@ -77,7 +79,7 @@
             ],
             "initializationOptions": {
                 "cache": {
-                    "directory": ".ccls-cache"
+                    "directory": "/home/ekhhaga/.cache/ccls"
                 },
                 "index": {
                     "initialBlacklist": [

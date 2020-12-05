@@ -41,6 +41,6 @@ export HISTFILESIZE=2000000
 export HISTIGNORE="ls:ps:history"
 
 RunCondaInit(){
-    	echo "eval \ "
-    	echo "\$\(/home/ekhhaga/.local/miniconda3/bin/conda shell.bash hook\)"
+    echo "eval \ "
+    echo "\$\(/home/ekhhaga/.local/miniconda3/bin/conda shell.bash hook\)"
 }
