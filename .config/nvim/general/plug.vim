@@ -16,7 +16,6 @@ else
     " Utils
     Plug 'preservim/nerdtree' "The NERDTree is a file system explorer for the Vim editor
     Plug 'junegunn/fzf'
-    Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     "Plug 'junegunn/fzf.vim'
     Plug 'kassio/neoterm'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -25,9 +24,12 @@ else
     Plug 'morhetz/gruvbox'
     "Plug 'ptzz/lf.vim'
     Plug 'ap/vim-css-color'
+    " Better tabline
+    Plug 'romgrk/barbar.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'itchyny/lightline.vim'
     Plug 'shinchu/lightline-gruvbox.vim'
-    Plug 'mengelbrecht/lightline-bufferline'
+    "Plug 'mengelbrecht/lightline-bufferline'
     Plug 'mhinz/vim-startify'
     Plug 'tweekmonster/startuptime.vim'
     " GIT
