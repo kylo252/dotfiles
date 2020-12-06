@@ -33,4 +33,6 @@ export EDITOR='nvim'
 
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 
+export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
+
 export DISPLAY=localhost:0.0
