@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-export EDITOR=nvim
-export ZSHRC=~/.zshrc.user     
-export CDPATH='.:/repo/$USER:$USER/local'
-
 alias bashconf="$EDITOR ~/.bashrc.user"
 alias zshconf="$EDITOR ~/.zshrc.user"
 
@@ -26,58 +22,11 @@ alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias dts='dtf status'
 alias dtc='dtf commit -m '
 alias dtp='dtf push'
-alias f='find . -name'
-alias ff='find . -maxdepth 1 -type f -name'
-alias fd='find . -maxdepth 1 -type d -name'
 alias htop='htop --user $USER'
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
     unalias rm
 fi
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export DELTA_PAGER='less'
-export DELTA_NAVIGATE='1 git diff'
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-
-# set locale for perl
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
-export HISTSIZE=10000
-export HISTFILESIZE=10000
-export SAVEHIST=10000
-export HISTIGNORE="ls:ps:history"
-setopt SHARE_HISTORY
-
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
-export NVM_NO_USE=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-
-# disable the goddamn beep!
-unsetopt BEEP
-
-
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
-export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-export MODE_CURSOR_VIINS="blinking bar"
-export MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS"
-export MODE_CURSOR_VICMD="dark grey block"
-export MODE_CURSOR_SEARCH="steady underline"
-export MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-export MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
-
-# path settings 
-cdpath=(/repo/ekhhaga)
-typeset -U path cdpath fpath
-
-setopt auto_cd
 
 #export HOMEBREW_PREFIX="$HOME/.linuxbrew"

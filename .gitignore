@@ -104,6 +104,7 @@
 !/.bashrc.user
 !/.config/
 !/.config/*
+.config/user*
 !/.config/bash/**
 #!/.config/zsh/**
 !/.config/nvim/*

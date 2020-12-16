@@ -4,9 +4,32 @@ cf() { rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r $
 
 sf() { rg --files /repo/$USER/scripts ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard ;}
 
-lc_rec () { export LC_ALL=en.US-UTF-8 }
+ff() { rg --vimgrep "$0" | fzf }
+
+lc_rec () {
+    export LANGUAGE=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+}
 
 prep_dev () { source $DEV_SDK && unset PYTHONHOME }
 
 prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
+
+# find-in-file - usage: fif <SEARCH_TERM>
+fif() {
+    if [ ! "$#" -gt 0 ]; then
+        echo "Need a string to search for!";
+        return 1;
+    fi
+    rg "$1" --vimgrep --color ansi | fzf --ansi --preview "rg --smart-case --pretty --context 10 '$1' {}"
+}
+
+gif() {
+    if [ ! "$#" -gt 0 ]; then
+        echo "Need a string to search for!";
+        return 1;
+    fi
+    rg "$1" "$2" --vimgrep --color ansi | fzf --ansi # --preview "rg --smart-case --pretty --context 10 '$2' {}"
+}
 

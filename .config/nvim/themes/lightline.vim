@@ -2,7 +2,7 @@
 set laststatus=2
 set noshowmode " turn off extra -- INSERT --
 let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
+let g:lightline.colorscheme = 'one'
 
 " Change colors to be darker for status bar and tab bar
 let g:lightline.component_expand = {

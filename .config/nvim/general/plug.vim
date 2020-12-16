@@ -9,35 +9,37 @@ unlet autoload_plug_path
 
 call plug#begin("$XDG_DATA_HOME/nvim/autoload/plugged")  
 
+" sane defaults
+Plug 'sheerun/vimrc'
+
 " Declare the list of plugins.
 if exists('g:vscode')
     Plug 'machakann/vim-highlightedyank'
 else
     " Utils
-    Plug 'preservim/nerdtree' "The NERDTree is a file system explorer for the Vim editor
+    Plug 'preservim/nerdtree' 
     Plug 'junegunn/fzf'
-    "Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf.vim'
     Plug 'kassio/neoterm'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'jackguo380/vim-lsp-cxx-highlight'
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'morhetz/gruvbox'
-    "Plug 'ptzz/lf.vim'
+    " Plug 'morhetz/gruvbox'
+    Plug 'romgrk/doom-one.vim'
+    " Plug 'ptzz/lf.vim'
     Plug 'ap/vim-css-color'
     " Better tabline
     Plug 'romgrk/barbar.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'itchyny/lightline.vim'
-    Plug 'shinchu/lightline-gruvbox.vim'
-    "Plug 'mengelbrecht/lightline-bufferline'
+    " Plug 'shinchu/lightline-gruvbox.vim'
+    " Plug 'mengelbrecht/lightline-bufferline'
     Plug 'mhinz/vim-startify'
-    Plug 'tweekmonster/startuptime.vim'
-    " GIT
+    " Plug 'tweekmonster/startuptime.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'lambdalisue/gina.vim'
     Plug 'tomtom/tcomment_vim'
     Plug 'moll/vim-bbye'
-    Plug 'pearofducks/ansible-vim'
+    Plug 'unblevable/quick-scope'
 endif 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()

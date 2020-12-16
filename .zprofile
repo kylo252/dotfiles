@@ -29,10 +29,7 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
 export GOPATH="$XDG_DATA_HOME/go"
 
-export EDITOR='nvim'
-
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 
 export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
 
-export DISPLAY=localhost:0.0
