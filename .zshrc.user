@@ -13,6 +13,8 @@ if [ -z "$VIRTUAL_ENV" ]; then
    fi
 fi
 
+[ -f "$XDG_CONFIG_HOME/zsh/.envrc" ] && source "$XDG_CONFIG_HOME/zsh/.envrc"
+
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
 
 [ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"

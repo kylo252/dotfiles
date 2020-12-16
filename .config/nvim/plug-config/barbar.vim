@@ -1,6 +1,7 @@
 " NOTE: This variable doesn't exist before barbar runs. Create it before
 "       setting any option.
-let bufferline = {}
+" let bufferline = {}
+let bufferline = get(g:, 'bufferline', {})
 
 " Enable/disable animations
 let bufferline.animation = v:true

@@ -1,8 +1,9 @@
 
 source $HOME/.config/nvim/general/paths.vim
+source $HOME/.config/nvim/keys/mappings.vim
 source $HOME/.config/nvim/general/plug.vim
 source $HOME/.config/nvim/general/settings.vim
-source $HOME/.config/nvim/keys/mappings.vim
+source $HOME/.config/nvim/plug-config/quickscope.vim
 if exists('g:vscode')
     source $HOME/.config/nvim/general/vscode.vim
 else
@@ -27,6 +28,6 @@ else
     endif
     
     " Theme
-    let g:gruvbox_contrast_dark='hard'
-    autocmd vimenter * ++nested colorscheme gruvbox
+    " let g:gruvbox_contrast_dark='hard'
+    autocmd vimenter * ++nested colorscheme doom-one
 endif
