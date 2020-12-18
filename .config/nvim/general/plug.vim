@@ -10,7 +10,7 @@ unlet autoload_plug_path
 call plug#begin("$XDG_DATA_HOME/nvim/autoload/plugged")  
 
 " sane defaults
-Plug 'sheerun/vimrc'
+" Plug 'sheerun/vimrc'
 
 " Declare the list of plugins.
 if exists('g:vscode')

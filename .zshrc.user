@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 #
 # zmodload zsh/zprof
 #
@@ -8,16 +7,17 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [ -z "$VIRTUAL_ENV" ]; then
-   if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+   if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+     source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
    fi
 fi
 
-[ -f "$XDG_CONFIG_HOME/zsh/.envrc" ] && source "$XDG_CONFIG_HOME/zsh/.envrc"
+# disable the goddamn beep!
+unsetopt BEEP
 
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_aliases" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
+source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
 
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_functions" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
+source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
 
 if [ ! -z $ZSH_INIT_COMMAND ]; then
     eval "$ZSH_INIT_COMMAND"
@@ -27,7 +27,6 @@ fi
 if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 fi
-
 
 # quick modules
 fpath=("$XDG_CONFIG_HOME/zsh/modules" "${fpath[@]}")
@@ -39,13 +38,10 @@ source <(antibody init)
 
 antibody bundle < ~/.config/zsh/.zsh_plugins.txt
 
-[ -f "$XDG_CONFIG_HOME/zsh/.zsh_prompt" ] && source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
+source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
-[ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
-[ -f "$XDG_CONFIG_HOME/lf/lf.zsh" ] && source "$XDG_CONFIG_HOME/lf/lf.zsh"
+source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-# 
-# zmodload zsh/nearcolor
-#
 # zprof
