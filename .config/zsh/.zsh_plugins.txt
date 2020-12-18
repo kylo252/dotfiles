@@ -9,3 +9,8 @@ softmoth/zsh-vim-mode
 # utils 
 lukechilds/zsh-nvm
 b4b4r07/enhancd
+
+# git
+wfxr/forgit
+kazhala/dotbare
+
