@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-export PATH=$HOME/local/bin;$HOME/.local/bin;$HOME/.scripts:$PATH
 
 # XDG Base Directory
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -13,10 +12,16 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GOPATH="$XDG_DATA_HOME/go"
 export HISTFILE="$XDG_DATA_HOME/shell/history"
+export JUNEST_HOME="$XDG_DATA_HOME/junest"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+PATH=$HOME/local/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
+PATH=$JUNEST_HOME:$PATH
+export PATH 
 
 # set locale for perl
 export LANG=en_US.UTF-8
