@@ -26,8 +26,6 @@ nnoremap <S-TAB> :bprevious<CR>
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
 nnoremap <C-Q> :wq!<CR>
-" Use control-c instead of escape
-" inoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -50,23 +48,9 @@ nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
-" Tab opening and closing
-nnoremap <leader><Insert> :tabnew<CR>
-nnoremap <leader><Delete> :tabclose<CR>
-
-nnoremap <leader>n :<C-u>NERDTreeToggle<CR>
-" Tab navigation like Firefox.
-" nnoremap <C-S-t> :tabprevious<CR>
-" nnoremap <Ci-t>   :tabnext<CR>
-" nnoremap <C-t>     :tabnew<CR>
-" inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-" inoremap <C-tab>   <Esc>:tabnext<CR>i
-" inoremap <C-t>     <Esc>:tabnew<CR>
-  
-map <leader>n :NERDTreeToggle<CR>
-
 " start merge mode
 nmap <leader>mt <plug>(MergetoolToggle) 
+
 " Search quickly
 nnoremap <C-p> :Files<CR>
 nnoremap <C-o> :Buffers<CR>

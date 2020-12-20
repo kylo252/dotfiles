@@ -16,30 +16,34 @@ call plug#begin("$XDG_DATA_HOME/nvim/autoload/plugged")
 if exists('g:vscode')
     Plug 'machakann/vim-highlightedyank'
 else
-    " Utils
-    Plug 'preservim/nerdtree' 
-    Plug 'junegunn/fzf'
-    Plug 'junegunn/fzf.vim'
-    Plug 'kassio/neoterm'
+    " LSP
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'jackguo380/vim-lsp-cxx-highlight'
-    " Plug 'morhetz/gruvbox'
-    Plug 'romgrk/doom-one.vim'
-    " Plug 'ptzz/lf.vim'
-    Plug 'ap/vim-css-color'
-    " Better tabline
-    Plug 'romgrk/barbar.nvim'
-    Plug 'kyazdani42/nvim-web-devicons'
+    
+    " layout and work-flow
+    Plug 'kassio/neoterm'
+    Plug 'moll/vim-bbye' " <- buffer management
+    Plug 'romgrk/barbar.nvim' " <- better tabline
     Plug 'itchyny/lightline.vim'
-    " Plug 'shinchu/lightline-gruvbox.vim'
-    " Plug 'mengelbrecht/lightline-bufferline'
     Plug 'mhinz/vim-startify'
-    " Plug 'tweekmonster/startuptime.vim'
-    Plug 'tpope/vim-fugitive'
-    Plug 'lambdalisue/gina.vim'
+    Plug 'justinmk/vim-dirvish'
+
+    " utils
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
     Plug 'tomtom/tcomment_vim'
-    Plug 'moll/vim-bbye'
     Plug 'unblevable/quick-scope'
+
+    " themes
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'romgrk/doom-one.vim'
+
+    " nice to have
+    Plug 'ap/vim-css-color'
+    Plug 'lambdalisue/gina.vim'
+    Plug 'tpope/vim-fugitive'
+    " Plug 'tweekmonster/startuptime.vim'
+
 endif 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
