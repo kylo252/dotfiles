@@ -2,31 +2,29 @@
 
 alias bashconf="$EDITOR ~/.bashrc.user"
 alias zshconf="$EDITOR ~/.zshrc.user"
+alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 
+alias cls='clear'
+alias dta='dotbare fadd'
+alias dtc='dotbare commit -m '
+alias dte='dotbare fedit'
+alias dtp='dotbare push'
+alias dts='dotbare fstat'
+alias htop='htop --user $USER'
 alias l='ls -CF --color=auto'
-alias ls='ls -FhN --color=auto --group-directories-first'
 alias la='ls -A --color=auto'
 alias ll='ls -laFq --color=auto'
-alias cls='clear'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias rmd='rm -rd'
+alias ls='ls -FhN --color=auto --group-directories-first'
+alias module='module --color=auto'
 alias paux='ps aux | rg'
-alias rcsrc=""
-alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
 alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
-alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
-alias dts='dtf status'
-alias dtc='dtf commit -m '
-alias dtp='dtf push'
-alias htop='htop --user $USER'
+alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
+alias rmd='rm -rd'
+alias vdir='vdir --color=auto'
+
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
     unalias rm
 fi
 
-#export HOMEBREW_PREFIX="$HOME/.linuxbrew"

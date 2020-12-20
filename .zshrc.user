@@ -12,20 +12,12 @@ if [ -z "$VIRTUAL_ENV" ]; then
    fi
 fi
 
-# disable the goddamn beep!
-unsetopt BEEP
-
 source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
 
 source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
 
 if [ ! -z $ZSH_INIT_COMMAND ]; then
     eval "$ZSH_INIT_COMMAND"
-fi
-
-# # load homebrew
-if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 fi
 
 # quick modules

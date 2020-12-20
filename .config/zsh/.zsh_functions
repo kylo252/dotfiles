@@ -12,9 +12,23 @@ lc_rec () {
     export LC_ALL=en_US.UTF-8
 }
 
-prep_dev () { source $DEV_SDK && unset PYTHONHOME }
+prep_dev () { 
+    source $DEV_SDK && unset PYTHONHOME 
+    export CONF_SDK_FLAGS='--target=arm-wrs-linux-gnueabi \
+        --host=arm-wrs-linux-gnueabi \
+        --build=x86_64-linux \
+        --with-libtool-sysroot=$SDKTARGETSYSROOT'
+}
 
 prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
+
+z_refresh () { source $ZDOTDIR/.zshrc.user }
+
+brew_lazy_load () {
+    if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
+      eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+    fi
+}
 
 # find-in-file - usage: fif <SEARCH_TERM>
 fif() {
@@ -22,7 +36,7 @@ fif() {
         echo "Need a string to search for!";
         return 1;
     fi
-    rg "$1" --vimgrep --color ansi | fzf --ansi --preview "rg --smart-case --pretty --context 10 '$1' {}"
+    rg "$1" "$2" --vimgrep --color ansi | fzf --ansi --preview "rg --smart-case --pretty --context 10 '$1' {}"
 }
 
 gif() {
