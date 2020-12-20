@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
-
 # XDG Base Directory
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
+export TCSH_MODULES="$MODULEPATH"
 
 # XDG PATH
 export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
@@ -12,18 +12,24 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GOPATH="$XDG_DATA_HOME/go"
 export HISTFILE="$XDG_DATA_HOME/shell/history"
+export HOMEBREW_PREFIX="$HOME/.linuxbrew"
 export JUNEST_HOME="$XDG_DATA_HOME/junest"
+export JUNEST_CORE_DIR="$XDG_DATA_HOME/junest-core"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-PATH=$HOME/local/bin:$PATH
 PATH=$HOME/.local/bin:$PATH
-PATH=$JUNEST_HOME:$PATH
+PATH=$HOME/local/bin:$PATH
 export PATH 
 
-# set locale for perl
+# set X11 settings when not in ssh
+if [ -z "$SSH_CONNECTION" ]; then
+    export DISPLAY=localhost:0.0
+fi
+
+# set locale (for perl mostly)
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
@@ -34,7 +40,6 @@ export SAVEHIST=10000
 setopt SHARE_HISTORY
 
 export EDITOR=nvim
-export ZSHRC="$ZDOTDIR/.zshrc.user"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_PAGER="less -RF"
@@ -54,18 +59,13 @@ export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down
 export DOTBARE_DIR="$HOME/.dtf.git"
 export DOTBARE_TREE="$HOME"
 
+# interactive search when using three dots
+export ENHANCD_DOT_ARG='...'
+
 # export NVM_NO_USE=true
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-
-# zsh vim mode
-export MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS"
-export MODE_CURSOR_SEARCH="steady underline"
-export MODE_CURSOR_VICMD="dark grey block"
-export MODE_CURSOR_VIINS="blinking bar"
-export MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-export MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#505050,italic,underline"
 export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
