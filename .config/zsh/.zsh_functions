@@ -1,18 +1,18 @@
 #!/usr/bin/env zsh
 
-cf() { rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r $EDITOR ;}
+function cf() { rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r $EDITOR ;}
 
-sf() { rg --files /repo/$USER/scripts ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard ;}
+function sf() { rg --files /repo/$USER/scripts ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard ;}
 
-ff() { rg --vimgrep "$0" | fzf }
+function ff() { rg --vimgrep "$0" | fzf }
 
-lc_rec () {
+function lc_rec () {
     export LANGUAGE=en_US.UTF-8
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 }
 
-prep_dev () { 
+function prep_dev () { 
     source $DEV_SDK && unset PYTHONHOME 
     export CONF_SDK_FLAGS='--target=arm-wrs-linux-gnueabi \
         --host=arm-wrs-linux-gnueabi \
@@ -21,24 +21,19 @@ prep_dev () {
 }
 
 
-prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
+function prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
 
-z_refresh () { source $ZDOTDIR/.zshrc.user }
+function z_refresh () { source $ZDOTDIR/.zshrc.user }
 
-_brew_lazy_load () {
-    if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
-        eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-    fi
-}
 
 # find-in-file - usage: fif <SEARCH_TERM>
-fif() {
+function fif() {
     [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
     rg "$1" "$2" --vimgrep --color ansi | fzf --ansi \
         --preview "rg --smart-case --pretty --context 10 '$1' {}"
 }
 
-mlf () {
+function mlf () {
     [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
     module --color=auto avail "$1" | fzf 
 }
@@ -51,7 +46,27 @@ function mvr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
 }
 
-function _env_reset() {
+function pprint () {
+    [ -z "$1" ] && echo "invalid argument" && return 1
+    echo "$1" | sed -e 's/\:/\n/g' | fzf 
+}
+
+function _brew_lazy_load () {
+    # if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
+    eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+    # fi
+}
+
+# HISTSIZE is somehow getting reset
+function _rhel_env_reset() {
+    export HISTSIZE=10000
     _brew_lazy_load 
     module restore batteries_included
+}
+
+function _vscode_env_reset() {
+    [ -z "$CURRENT_SDK" ] && echo "undefined SDK!!" && return 1
+    source "$CURRENT_SDK"
+    unset PYTHONPATH
+    module restore vscode_minimal 
 }

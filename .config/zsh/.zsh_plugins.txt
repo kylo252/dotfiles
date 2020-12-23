@@ -4,7 +4,7 @@ romkatv/powerlevel10k
 # productivity
 zsh-users/zsh-autosuggestions
 zdharma/fast-syntax-highlighting
-kylo252/zsh-vimto
+# kylo252/zsh-vimto
 
 # utils 
 lukechilds/zsh-nvm

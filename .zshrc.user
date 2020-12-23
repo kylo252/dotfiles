@@ -16,10 +16,6 @@ source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
 
 source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
 
-if [ ! -z $ZSH_INIT_COMMAND ]; then
-    eval "$ZSH_INIT_COMMAND"
-fi
-
 # quick modules
 fpath=("$XDG_CONFIG_HOME/zsh/modules" "${fpath[@]}")
 
@@ -28,12 +24,17 @@ autoload -Uz kp
 
 source <(antibody init)
 
+# antibody bundle 'romkatv/powerlevel10k'
 antibody bundle < ~/.config/zsh/.zsh_plugins.txt
 
 source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
-source "$XDG_CONFIG_HOME/lf/lf.zsh"
+# source "$XDG_CONFIG_HOME/lf/lf.zsh"
+
+# if [ -n "$ZSH_INIT_COMMAND" ]; then
+#     eval "$ZSH_INIT_COMMAND"
+# fi
 
 # zprof
