@@ -31,3 +31,18 @@ let bufferline.letters =
 
 " Sets the maximum padding width with which to surround each tab
 let bufferline.maximum_padding = 4
+
+" better buffer management
+nnoremap <Leader>q :BufferClose<CR>
+" nnoremap <Leader>qq :BufferWipeout<CR>
+
+" Magic buffer-picking mode
+nnoremap <Leader>j :BufferPick<CR>
+
+" Sort automatically by...
+nnoremap <Leader>bd :BufferOrderByDirectory<CR>
+nnoremap <Leader>bl :BufferOrderByLanguage<CR>
+
+" Move to previous/next
+nnoremap <TAB> :BufferNext<CR>
+nnoremap <S-TAB> :BufferPrevious<CR>
