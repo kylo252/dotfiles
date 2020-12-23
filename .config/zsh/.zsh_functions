@@ -20,30 +20,38 @@ prep_dev () {
         --with-libtool-sysroot=$SDKTARGETSYSROOT'
 }
 
+
 prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
 
 z_refresh () { source $ZDOTDIR/.zshrc.user }
 
-brew_lazy_load () {
+_brew_lazy_load () {
     if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
-      eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
+        eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
     fi
 }
 
 # find-in-file - usage: fif <SEARCH_TERM>
 fif() {
-    if [ ! "$#" -gt 0 ]; then
-        echo "Need a string to search for!";
-        return 1;
-    fi
-    rg "$1" "$2" --vimgrep --color ansi | fzf --ansi --preview "rg --smart-case --pretty --context 10 '$1' {}"
+    [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
+    rg "$1" "$2" --vimgrep --color ansi | fzf --ansi \
+        --preview "rg --smart-case --pretty --context 10 '$1' {}"
 }
 
-gif() {
-    if [ ! "$#" -gt 0 ]; then
-        echo "Need a string to search for!";
-        return 1;
-    fi
-    rg "$1" "$2" --vimgrep --color ansi | fzf --ansi # --preview "rg --smart-case --pretty --context 10 '$2' {}"
+mlf () {
+    [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
+    module --color=auto avail "$1" | fzf 
 }
 
+function cpr() {
+  rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
+} 
+
+function mvr() {
+  rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
+}
+
+function _env_reset() {
+    _brew_lazy_load 
+    module restore batteries_included
+}
