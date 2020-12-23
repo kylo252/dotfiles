@@ -18,11 +18,11 @@ if exists('g:vscode')
 else
     " LSP
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
+    Plug 'neovim/nvim-lspconfig'
+    " Plug 'jackguo380/vim-lsp-cxx-highlight'
     
     " layout and work-flow
     Plug 'kassio/neoterm'
-    Plug 'moll/vim-bbye' " <- buffer management
     Plug 'romgrk/barbar.nvim' " <- better tabline
     Plug 'itchyny/lightline.vim'
     Plug 'mhinz/vim-startify'

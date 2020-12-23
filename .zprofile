@@ -12,7 +12,7 @@ export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GOPATH="$XDG_DATA_HOME/go"
 export HISTFILE="$XDG_DATA_HOME/shell/history"
-export HOMEBREW_PREFIX="$HOME/.linuxbrew"
+export HOMEBREW_PREFIX="/local/workspace/share/linuxbrew"
 export JUNEST_HOME="$XDG_DATA_HOME/junest"
 export JUNEST_CORE_DIR="$XDG_DATA_HOME/junest-core"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -41,8 +41,9 @@ setopt SHARE_HISTORY
 
 export EDITOR=nvim
 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_PAGER="less -RF"
+# https://github.com/sharkdp/bat/issues/652
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse  --multi \
     --prompt='∼ ' --pointer='▶' --marker='✓' \
@@ -61,6 +62,9 @@ export DOTBARE_TREE="$HOME"
 
 # interactive search when using three dots
 export ENHANCD_DOT_ARG='...'
+
+# don't use system cURL
+export HOMEBREW_FORCE_BREWED_CURL="1"
 
 # export NVM_NO_USE=true
 export NVM_COMPLETION=true
