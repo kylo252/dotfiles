@@ -61,3 +61,9 @@ lua << EOF
 EOF
 
 endif
+
+" https://vi.stackexchange.com/a/25107
+augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver20-blinkon1
+augroup END
