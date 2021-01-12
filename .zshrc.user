@@ -3,6 +3,17 @@
 # zmodload zsh/zprof
 #
 
+# we should fix the path here instead of .zprofile
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/local/bin:$PATH
+export PATH 
+
+# fix for 'module unload' for default modules
+if [ -r /etc/redhat-release ]; then
+  # module restore rsw_updated
+  module restore batteries_included
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -31,10 +42,10 @@ source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
 
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
-# source "$XDG_CONFIG_HOME/lf/lf.zsh"
+source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-# if [ -n "$ZSH_INIT_COMMAND" ]; then
-#     eval "$ZSH_INIT_COMMAND"
-# fi
+if [ -n "$ZSH_INIT_COMMAND" ]; then
+    eval "$ZSH_INIT_COMMAND"
+fi
 
 # zprof
