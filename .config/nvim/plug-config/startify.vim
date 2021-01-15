@@ -7,7 +7,8 @@ let g:startify_lists = [
         \ ]
 
 let g:startify_bookmarks = [ 
-       \ {'c': '$MYVIMRC'},
+       \ {'i': '~/.config/nvim/init.vim'},
+       \ {'p': '~/.config/nvim/general/plug.vim'},
        \ {'z': '~/.zshrc.user'} 
        \]
 
