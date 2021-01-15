@@ -34,7 +34,7 @@ let bufferline.maximum_padding = 4
 
 " better buffer management
 nnoremap <Leader>q :BufferClose<CR>
-" nnoremap <Leader>qq :BufferWipeout<CR>
+nnoremap <Leader>qq :BufferWipeout<CR>
 
 " Magic buffer-picking mode
 nnoremap <Leader>j :BufferPick<CR>
