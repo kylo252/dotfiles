@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 alias where='type -a'
 alias l='ls -CF --color=auto'
