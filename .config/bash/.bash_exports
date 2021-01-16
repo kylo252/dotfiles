@@ -8,7 +8,7 @@ export EDITOR=nvim
 export BASHRC=~/.bashrc     
 export CDPATH='.:/repo/ekhhaga:~/local'
 
-export HISTCONTROL=ignoreboth after each command and, if necessary,
+export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 export HISTFILE="$XDG_DATA_HOME/shell/history"
 export SAVEHIST=100000
