@@ -19,6 +19,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZGEN_DIR="$XDG_DATA_HOME/zgenom"
 
 # set X11 settings when not in ssh
 if [ -z "$SSH_CONNECTION" ]; then

@@ -23,26 +23,17 @@ if [ -z "$VIRTUAL_ENV" ]; then
    fi
 fi
 
-source "$XDG_CONFIG_HOME/zsh/.zsh_aliases"
+source "$ZDOTDIR/.zsh_aliases"
 
-source "$XDG_CONFIG_HOME/zsh/.zsh_functions"
+source "$ZDOTDIR/.zsh_functions"
 
-# quick modules
-fpath=("$XDG_CONFIG_HOME/zsh/modules" "${fpath[@]}")
+source "$ZDOTDIR/.zsh_plugins"
 
-# load modules
-autoload -Uz kp
+source "$ZDOTDIR/.zsh_prompt"
 
-source <(antibody init)
+# source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
-# antibody bundle 'romkatv/powerlevel10k'
-antibody bundle < ~/.config/zsh/.zsh_plugins.txt
-
-source "$XDG_CONFIG_HOME/zsh/.zsh_prompt"
-
-source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
-
-source "$XDG_CONFIG_HOME/lf/lf.zsh"
+# source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 if [ -n "$ZSH_INIT_COMMAND" ]; then
     eval "$ZSH_INIT_COMMAND"
