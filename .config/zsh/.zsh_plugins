@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+# quick modules
+fpath=("$ZDOTDIR/modules" "${fpath[@]}")
+
+# load modules
+autoload -Uz kp
+
+source "$ZDOTDIR/.zgenom/zgenom.zsh"
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+
+    # bulk load
+    zgenom loadall <<EOPLUGINS
+        zdharma/fast-syntax-highlighting
+        zsh-users/zsh-autosuggestions
+        kazhala/dotbare
+        lukechilds/zsh-nvm
+        b4b4r07/enhancd
+        unixorn/autoupdate-zgen
+EOPLUGINS
+
+    # completions
+    zgenom load zsh-users/zsh-completions src
+
+    # prompt
+    zgenom load romkatv/powerlevel10k powerlevel10k
+
+    # save all to init script
+    zgenom save
+fi
