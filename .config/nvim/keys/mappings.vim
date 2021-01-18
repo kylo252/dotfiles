@@ -25,10 +25,10 @@ nnoremap <C-Q> :wq!<CR>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " easier splits navigation
-imap <C-h> <C-w>h
-imap <C-j> <C-w>j
-imap <C-k> <C-w>k
-imap <C-l> <C-w>l
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " press F9 to fold 
 inoremap <F9> <C-O>za
