@@ -50,7 +50,8 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse  --multi \
     --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
     --bind 'ctrl-v:execute(code {+})' "
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | xbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_PREVIEW_COMMAND="([[ -f {} ]] && (bat --style=numbers --color=always {} ||  tree -C {} || echo {} 2> /dev/null | head -200"
 export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
 
