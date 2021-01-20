@@ -73,3 +73,12 @@ function _prep_vscode_env() {
     _lc_rec
     module source ~/.config/modules/vscode_minimal
 }
+
+function ifzf() {
+    INITIAL_QUERY=""
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+      fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+          --ansi --phony --query "$INITIAL_QUERY" \
+          --height=50% --layout=reverse  --preview 'bat --style=numbers --color=always --line-range :500 {}'
+}
