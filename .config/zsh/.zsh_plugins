@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-# quick modules
-fpath=("$ZDOTDIR/modules" "${fpath[@]}")
-
-# load modules
-autoload -Uz kp
 
 source "$ZDOTDIR/.zgenom/zgenom.zsh"
 
@@ -19,6 +14,7 @@ if ! zgenom saved; then
         lukechilds/zsh-nvm
         b4b4r07/enhancd
         unixorn/autoupdate-zgen
+        wfxr/forgit
 EOPLUGINS
 
     # completions
@@ -30,3 +26,14 @@ EOPLUGINS
     # save all to init script
     zgenom save
 fi
+
+# quick modules
+fpath=("$ZDOTDIR/modules" "${fpath[@]}")
+
+# load modules
+autoload -Uz kp
+
+# enable completion for dotbare
+_dotbare_completion_cmd
+_dotbare_completion_git
+

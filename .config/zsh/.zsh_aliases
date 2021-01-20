@@ -2,13 +2,18 @@
 
 alias bashconf="$EDITOR ~/.bashrc.user"
 alias zshconf="$EDITOR ~/.zshrc.user"
-alias dtf='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
-
 alias cls='clear'
+
+# probably useful to retain default git
+alias dtg='git --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
+
+alias dtf='dotbare'
 alias dta='dotbare fadd'
 alias dtc='dotbare commit -m '
 alias dte='dotbare fedit'
+alias dtl='dotbare flog'
 alias dtp='dotbare push'
+alias dtr='dotbare checkout'
 alias dts='dotbare fstat'
 alias htop='htop --user $USER'
 alias l='ls -CF --color=auto'
