@@ -7,6 +7,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export TCSH_MODULES="$MODULEPATH"
 
 # XDG PATH
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
@@ -17,12 +18,17 @@ export JUNEST_CORE_DIR="$XDG_DATA_HOME/junest-core"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZGEN_DIR="$XDG_DATA_HOME/zgenom"
 
 # set X11 settings when not in ssh
 if [ -z "$SSH_CONNECTION" ]; then
-    export DISPLAY=localhost:0.0
+    # How to set up working X11 forwarding on WSL2 
+    # https://stackoverflow.com/a/61110604
+    DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+    export DISPLAY
+    export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # set locale (for perl mostly)
