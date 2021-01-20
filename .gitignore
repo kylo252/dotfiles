@@ -106,7 +106,11 @@
 !/.config/*
 .config/user*
 !/.config/bash/**
-#!/.config/zsh/**
+!/.config/zsh/**
+.config/zsh/.zcomp*
+.config/zsh/.zgenom
+.config/zsh/.p10k*
+.config/zsh/lmod/**
 !/.config/nvim/*
 !/.config/nvim/general/**
 !/.config/nvim/plug-config/**
