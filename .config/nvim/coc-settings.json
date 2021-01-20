@@ -16,6 +16,8 @@
                 "--shell=bash",
                 "-e",
                 "SC1090",
+                "-e",
+                "SC1091",
                 "--format",
                 "json",
                 "-"
@@ -65,44 +67,9 @@
             ]
         }
     },
-    "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [
-                "c",
-                "cpp",
-                "objc",
-                "objcpp"
-            ],
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/home/ekhhaga/.cache/ccls"
-                },
-                "index": {
-                    "initialBlacklist": [
-                        ".git",
-                        ".clangd",
-                        ".vscode",
-                        "external",
-                        "test",
-                        "build"
-                    ]
-                },
-                "highlight": {
-                    "lsRanges": true
-                }
-            }
-        }
-    },
     "suggest.enablePreselect": true,
     "suggest.enablePreview": true,
     "suggest.maxCompleteItemCount": 10,
-    "suggest.defaultSortMethod": "alphabetical"
+    "suggest.defaultSortMethod": "alphabetical",
+    "clangd.semanticHighlighting": true
 }
