@@ -35,5 +35,5 @@ autoload -Uz kp
 
 # enable completion for dotbare
 _dotbare_completion_cmd
-_dotbare_completion_git
+# _dotbare_completion_git
 

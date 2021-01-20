@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+# zmodload zsh/zprof
+#
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [ -z "$VIRTUAL_ENV" ]; then
+   if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+     source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+   fi
+fi
+
+# we should fix the path here instead of .zprofile
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/local/bin:$PATH
+export PATH 
+
+source "$ZDOTDIR/.zsh_aliases"
+
+source "$ZDOTDIR/.zsh_functions"
+
+source "$ZDOTDIR/.zsh_plugins"
+
+source "$ZDOTDIR/.zsh_prompt"
+
+source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+
+source "$XDG_CONFIG_HOME/lf/lf.zsh"
+
+# fix for 'module unload' for default modules
+if [ -r /etc/redhat-release ]; then
+  if [ -n "$TERM_PROGRAM" ]; then
+    _prep_vscode_env
+  else
+    module restore batteries_included # rsw_updated
+  fi 
+fi
+
+# zprof
