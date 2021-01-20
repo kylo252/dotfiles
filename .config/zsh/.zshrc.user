@@ -38,4 +38,8 @@ if [ -r /etc/redhat-release ]; then
   fi 
 fi
 
+# testing to run from here instead of .zprofile
+# since it seems to keep getting over-writtern
+setup_history; unset -f setup_history
+
 # zprof
