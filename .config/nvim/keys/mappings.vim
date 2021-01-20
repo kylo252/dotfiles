@@ -17,6 +17,10 @@ vnoremap <leader>P "+P
 inoremap <F2> <esc>:set paste!<cr>i
 nnoremap <F2> :set paste!<cr>
 
+" easy escape
+inoremap jk <esc>
+inoremap kj <esc>
+
 " Alternate way to save
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
@@ -39,3 +43,18 @@ vnoremap <F9> zf
 " start merge mode
 nmap <leader>mt <plug>(MergetoolToggle) 
 
+" Move selected line / block of text in visual mode
+" shift + k to move up
+" shift + j to move down
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
+  
+" Easy resize windows
+nnoremap <silent> <C-S-Up>    :resize -2<CR>
+nnoremap <silent> <C-S-Down>  :resize +2<CR>
+nnoremap <silent> <C-S-Left>  :vertical resize -2<CR>
+nnoremap <silent> <C-S-Right> :vertical resize +2<CR>
+
+" Easy indenting
+vnoremap < <gv
+vnoremap > >gv
