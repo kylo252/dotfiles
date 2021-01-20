@@ -11,7 +11,6 @@ export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GOPATH="$XDG_DATA_HOME/go"
-export HISTFILE="$XDG_DATA_HOME/shell/history"
 export HOMEBREW_PREFIX="/local/workspace/share/linuxbrew"
 export JUNEST_HOME="$XDG_DATA_HOME/junest"
 export JUNEST_CORE_DIR="$XDG_DATA_HOME/junest-core"
@@ -30,11 +29,6 @@ fi
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-export HISTFILESIZE=10000
-export HISTIGNORE="ls:ps:history"
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt SHARE_HISTORY
 
 export EDITOR=nvim
 
@@ -72,4 +66,20 @@ export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
 export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+setup_history() {
+    export HISTFILE="$XDG_DATA_HOME/shell/history"
+    export HISTSIZE=100000               # History size in memory
+    export SAVEHIST=1000000              # The number of histsize
+    export LISTMAX=50                    # The size of asking history
+    setopt EXTENDED_HISTORY              # Write the history file in the ":start:elapsed;command" format.
+    setopt INC_APPEND_HISTORY            # Write to the history file immediately, not when the shell exits.
+    setopt SHARE_HISTORY                 # Share history between all sessions.
+    setopt HIST_IGNORE_SPACE             # Do not record an entry starting with a space.
+    setopt HIST_REDUCE_BLANKS            # Remove superfluous blanks before recording entry.
+    setopt HIST_VERIFY                   # Do not execute immediately upon history expansion.
+    setopt HIST_BEEP                     # Beep when accessing nonexistent history.
+    # Do not add in root
+    [[ "$UID" == 0 ]] && unset HISTFILE && SAVEHIST=0
+}
 
