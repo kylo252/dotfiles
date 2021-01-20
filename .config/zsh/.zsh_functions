@@ -1,31 +1,18 @@
 #!/usr/bin/env zsh
 
-function cf() { rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r $EDITOR ;}
-
-function sf() { rg --files /repo/$USER/scripts ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard ;}
-
-function ff() { rg --vimgrep "$0" | fzf }
-
-function lc_rec () {
-    export LANGUAGE=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
+function cf() {
+    rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r "$EDITOR" 
 }
 
-function prep_dev () { 
-    source $DEV_SDK && unset PYTHONHOME 
-    export CONF_SDK_FLAGS='--target=arm-wrs-linux-gnueabi \
-        --host=arm-wrs-linux-gnueabi \
-        --build=x86_64-linux \
-        --with-libtool-sysroot=$SDKTARGETSYSROOT'
+function sf() {
+    rg --files "/repo/$USER/scripts" ~/.scripts --type sh --type py | fzf | tr -d '\n' | xclip -selection clipboard 
 }
 
+function ff() { 
+    rg --vimgrep "$0" | fzf 
+}
 
-function prep_latest() { source /proj/bidaas1/installed_sdk/air6449-nr-applic/env.sh && unset PYTHONHOME }     
-
-function z_refresh () { source $ZDOTDIR/.zshrc.user }
-
-
+     
 # find-in-file - usage: fif <SEARCH_TERM>
 function fif() {
     [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
@@ -64,9 +51,25 @@ function _rhel_env_reset() {
     module restore batteries_included
 }
 
-function _vscode_env_reset() {
-    [ -z "$CURRENT_SDK" ] && echo "undefined SDK!!" && return 1
-    source "$CURRENT_SDK"
-    unset PYTHONPATH
-    module restore vscode_minimal 
+function _lc_rec () {
+    export LANGUAGE=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+}
+
+function _prep_dev_env() { 
+    source "$DEV_SDK" 
+    unset PYTHONHOME 
+    export CONF_SDK_FLAGS='--target=arm-wrs-linux-gnueabi --host=arm-wrs-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=$SDKTARGETSYSROOT'
+}
+
+function _prep_default_env() { 
+    source /proj/bidaas1/installed_sdk/air6449-nr-applic-2/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi
+    unset PYTHONHOME 
+}
+
+function _prep_vscode_env() {
+    _prep_default_env
+    _lc_rec
+    module source ~/.config/modules/vscode_minimal
 }
