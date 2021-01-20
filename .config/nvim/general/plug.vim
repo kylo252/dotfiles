@@ -19,7 +19,7 @@ if exists('g:vscode')
 else
     " LSP
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'neovim/nvim-lspconfig'
+    " Plug 'neovim/nvim-lspconfig'
     Plug 'jackguo380/vim-lsp-cxx-highlight'
     
     " layout and work-flow

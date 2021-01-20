@@ -12,7 +12,7 @@ else
     "source $HOME/.config/nvim/keys/which-key.vim
     source $HOME/.config/nvim/plug-config/merge.vim
     source $HOME/.config/nvim/plug-config/neoterm.vim
-    " source $HOME/.config/nvim/plug-config/coc.vim
+    source $HOME/.config/nvim/plug-config/coc.vim
     source $HOME/.config/nvim/plug-config/fzf.vim
     source $HOME/.config/nvim/plug-config/barbar.vim
     source $HOME/.config/nvim/plug-config/startify.vim
