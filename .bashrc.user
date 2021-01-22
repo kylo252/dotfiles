@@ -2,8 +2,10 @@
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 
 if [ -r /etc/redhat-release ]; then
-    source "$XDG_CONFIG_HOME/rhel/project_bashrc"
+  source "$XDG_CONFIG_HOME/rhel/project_bashrc"
+  module restore minimal 
 fi
+
 
 [ -f "$XDG_CONFIG_HOME/bash/.bash_exports" ] && source "$XDG_CONFIG_HOME/bash/.bash_exports"
 
