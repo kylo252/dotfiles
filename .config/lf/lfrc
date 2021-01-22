@@ -10,7 +10,6 @@ set preview true
 set previewer ~/.config/lf/batlf.sh
 set ratios 1:1:3
 set scrolloff 10
-set reverse
 
 cmd open ${{
     case $(file --mime-type $f -b) in

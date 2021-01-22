@@ -63,3 +63,7 @@ export DOTBARE_TREE="$HOME"
 export ENHANCD_DOT_ARG='...'
 
 export PROMPT_COMMAND='history -a'
+
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/local/bin:$PATH
+export PATH 
