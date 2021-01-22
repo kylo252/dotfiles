@@ -3,6 +3,7 @@
 
 if [ -r /etc/redhat-release ]; then
   source "$XDG_CONFIG_HOME/rhel/project_bashrc"
+  source "$XDG_CONFIG_HOME/rhel/project_env"
   module restore minimal 
 fi
 

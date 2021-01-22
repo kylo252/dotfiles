@@ -79,4 +79,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
 export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-
+if [ -r /etc/redhat-release ] && [ -n "$ARCPROJECT" ]; then
+    source "$XDG_CONFIG_HOME/rhel/project_env"
+fi
