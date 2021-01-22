@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 source "$ZDOTDIR/.zgenom/zgenom.zsh"
 
 # if the init script doesn't exist
