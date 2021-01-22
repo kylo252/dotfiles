@@ -30,11 +30,11 @@ if [ -z "$SSH_CONNECTION" ]; then
         # How to set up working X11 forwarding on WSL2 
         # https://stackoverflow.com/a/61110604
         DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-        export LIBGL_ALWAYS_INDIRECT=1
     else
         DISPLAY=localhost:0
     fi
     export DISPLAY
+    export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # set locale (for perl mostly)
