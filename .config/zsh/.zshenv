@@ -86,8 +86,9 @@ __setup_functions=(
 ) 
 
 for func in "${__setup_functions[@]}"; do
-    "$func"
+    "$func"; unset -f "$func"
 done
+unset __setup_functions
 
 export BAT_PAGER="less -RF"
 # https://github.com/sharkdp/bat/issues/652
