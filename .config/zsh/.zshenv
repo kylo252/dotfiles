@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-env::setup_defaults(){
+function __setup_defaults(){
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_DATA_HOME="$HOME/.local/share"
@@ -16,7 +16,7 @@ env::setup_defaults(){
     export DOTBARE_TREE="$HOME"
 }
 
-env::setup_xdg(){
+function __setup_xdg(){
     export CARGO_HOME="$XDG_DATA_HOME/cargo"
     export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
     export GEM_HOME="$XDG_DATA_HOME/gem"
@@ -32,14 +32,14 @@ env::setup_xdg(){
     export ZGEN_DIR="$XDG_DATA_HOME/zgenom"
 }
 
-env::setup_history() {
+function __setup_history() {
     export HISTFILE="$XDG_DATA_HOME/shell/history"
     export HISTSIZE=100000               # History size in memory
     export SAVEHIST=1000000              # The number of histsize
     export LISTMAX=50                    # The size of asking history
 }
 
-env::setup_x11(){
+function __setup_x11(){
     if [ -z "$SSH_CONNECTION" ]; then
         # How to check if WSL1/2
         # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
@@ -55,7 +55,7 @@ env::setup_x11(){
     fi
 }
 
-env::setup_fzf(){
+function __setup_fzf(){
     export FZF_DEFAULT_OPTS="--height 40% --layout=reverse  --multi \
         --prompt='∼ ' --pointer='▶' --marker='✓' \
         --bind '?:toggle-preview' \
@@ -70,22 +70,24 @@ env::setup_fzf(){
     export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
 }
 
-env::setup_rhel_project(){
+function __setup_rhel_project(){
     if [ -r /etc/redhat-release ] && [ -n "$ARCPROJECT" ]; then
         source "$XDG_CONFIG_HOME/rhel/project_env"
     fi
 }
 
-foreach setup_function (
-    env::setup_defaults
-    env::setup_xdg
-    env::setup_history
-    env::setup_x11
-    env::setup_rhel_project
-    env::setup_fzf
-) {
-    $setup_function; unset -f $setup_function
-}
+__setup_functions=(
+    __setup_defaults
+    __setup_xdg
+    __setup_history
+    __setup_x11
+    __setup_rhel_project
+    __setup_fzf
+) 
+
+for func in "${__setup_functions[@]}"; do
+    "$func"
+done
 
 export BAT_PAGER="less -RF"
 # https://github.com/sharkdp/bat/issues/652
