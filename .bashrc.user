@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
+
 [ -f "$XDG_CONFIG_HOME/bash/.bash_exports" ] && source "$XDG_CONFIG_HOME/bash/.bash_exports"
 
 [ -f "$XDG_CONFIG_HOME/bash/.bash_aliases" ] && source "$XDG_CONFIG_HOME/bash/.bash_aliases"
