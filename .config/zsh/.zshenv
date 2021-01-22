@@ -24,11 +24,17 @@ export ZGEN_DIR="$XDG_DATA_HOME/zgenom"
 
 # set X11 settings when not in ssh
 if [ -z "$SSH_CONNECTION" ]; then
-    # How to set up working X11 forwarding on WSL2 
-    # https://stackoverflow.com/a/61110604
-    DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+    # How to check if WSL1/2
+    # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
+    if [ -d /run/WSL ]; then
+        # How to set up working X11 forwarding on WSL2 
+        # https://stackoverflow.com/a/61110604
+        DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+        export LIBGL_ALWAYS_INDIRECT=1
+    else
+        DISPLAY=localhost:0
+    fi
     export DISPLAY
-    export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # set locale (for perl mostly)
