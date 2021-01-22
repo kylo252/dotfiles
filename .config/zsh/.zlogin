@@ -1,14 +1,5 @@
 #!/usr/bin/env zsh
 
-function __setup_defaults() {
-    setopt NO_BEEP                 # disable the goddamn beep!
-    setopt CORRECT                 # Command auto-correction
-    setopt CORRECT_ALL             # Argument auto-correction
-    setopt IGNORE_EOF              # Prevent accidental C-d from exiting shell
-    setopt INTERACTIVE_COMMENTS    # Allow comments, even in interactive shells
-    setopt LIST_PACKED             # Make completion lists more densely packed
-}
-__setup_defaults; unset -f __setup_defaults
 
 function __setup_history() {
     setopt EXTENDED_HISTORY        # Write the history file in the ":start:elapsed;command" format.
@@ -23,16 +14,23 @@ function __setup_history() {
 }
 __setup_history; unset -f __setup_history
 
+function __setup_defaults() {
+    setopt NO_BEEP                 # disable the goddamn beep!
+    setopt CORRECT                 # Command auto-correction
+    setopt CORRECT_ALL             # Argument auto-correction
+    setopt IGNORE_EOF              # Prevent accidental C-d from exiting shell
+    setopt INTERACTIVE_COMMENTS    # Allow comments, even in interactive shells
+    setopt LIST_PACKED             # Make completion lists more densely packed
+}
+__setup_defaults; unset -f __setup_defaults
+
 function __setup_kemaps() {
 
-    bindkey -e
+    bindkey -v
 
     # Fix backspace not working after returning from cmd mode
     bindkey '^?' backward-delete-char
     bindkey '^h' backward-delete-char 
-
-    # Re-enable incremental search from emacs mode (it's useful)
-    bindkey '^r' history-incremental-search-backward
 
     # Edit line in vim buffer ctrl-v
     # autoload edit-command-line; zle -N edit-command-line
@@ -61,6 +59,8 @@ function __setup_kemaps() {
     }
     zle -N backward-kill-dir
     bindkey '^[^?' backward-kill-dir
+
+    bindkey '^[[1;5C' vi-forward-word
 
     # [muscle-memory] use alt+. to repeat argument
     bindkey '\e.' insert-last-word
