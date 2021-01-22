@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-[ -f "$XDG_CONFIG_HOME/zsh/.p10k.zsh" ] && source "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
+if [ -n "$TERM_PROGRAM" ]; then
+   source "$XDG_CONFIG_HOME/zsh/.p10k.pure.zsh"
+else
+   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
+fi
 
 bindkey -e
 
