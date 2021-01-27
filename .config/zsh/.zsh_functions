@@ -121,7 +121,7 @@ function set_fzf_multi() {
   fi
 }
 
-function grep_words() {
+function fuzzy_grep_words() {
   local FZF_DEFAULT_OPTS="
       $FZF_DEFAULT_OPTS
       --ansi
@@ -132,6 +132,23 @@ function grep_words() {
   set_fzf_multi "$2"
   rg --line-number . \
     | fzf --delimiter : --nth "${delimiter}".. --header="${header}" \
+        --preview "$XDG_CONFIG_HOME/fzf/helper/previewerV2.sh $PWD/{}" \
+    | awk -F ":" -v home="$PWD" '{
+        print home "/" $1 ":" $2
+      }'
+}
+
+function fuzzy_grep_words_w_type() {
+  local FZF_DEFAULT_OPTS="
+      $FZF_DEFAULT_OPTS
+      --ansi
+      --cycle
+      --exit-0"
+  local q_type="$1"
+  local delimiter="${2:-3}"
+  set_fzf_multi "$2"
+  rg --line-number -uu --type-add "$q_type:*.$q_type" -t$q_type . \
+    | fzf --delimiter : --nth "${delimiter}".. \
         --preview "$XDG_CONFIG_HOME/fzf/helper/previewerV2.sh $PWD/{}" \
     | awk -F ":" -v home="$PWD" '{
         print home "/" $1 ":" $2
