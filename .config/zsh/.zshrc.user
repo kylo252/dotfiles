@@ -42,5 +42,10 @@ PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/local/bin:$PATH
 export PATH 
 
+# reload by using F5
+function exec-zsh() { exec zsh <$TTY; }
+zle -N exec-zsh
+zmodload zsh/terminfo
+bindkey "${terminfo[kf5]}" exec-zsh
 
 # zprof

@@ -20,3 +20,9 @@
 	prune = true
 [diff]
 	colorMoved = zebra
+[mergetool "nvim"] 
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[merge]
+    tool = nvim
+[mergetool] # automatically launch merge tool without displaying a prompt
+    prompt = false
