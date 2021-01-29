@@ -30,7 +30,7 @@ source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 # fix for 'module unload' for default modules
 if [ -r /etc/redhat-release ]; then
-  if [ -n "$TERM_PROGRAM" ]; then
+  if [ -n "$TERM_PROGRAM" ] && [ -z "$TMUX" ]; then
     _prep_vscode_env
   else
     module restore minimal # rsw_updated
