@@ -21,6 +21,7 @@ function __setup_xdg(){
     export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
     export GEM_HOME="$XDG_DATA_HOME/gem"
     export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+    export GNUPGHOME="$XDG_DATA_HOME/gnupg"
     export GOPATH="$XDG_DATA_HOME/go"
     export HOMEBREW_PREFIX="/local/workspace/share/linuxbrew"
     export JUNEST_HOME="$XDG_DATA_HOME/junest"
