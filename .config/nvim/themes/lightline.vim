@@ -1,9 +1,17 @@
 " === Lightline options ===
 set laststatus=2
 set noshowmode " turn off extra -- INSERT --
-let g:lightline = {}
+" let g:lightline = {}
+let g:lightline = {
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+	\   'gitbranch': 'FugitiveHead'
+	\ },
+	\ }
 let g:lightline.colorscheme = 'one'
-
 " Change colors to be darker for status bar and tab bar
 let g:lightline.component_expand = {
       \  'buffers': 'lightline#bufferline#buffers',

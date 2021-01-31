@@ -1,5 +1,4 @@
 {
-    "npm.binPath": "$NVM_DIR/versions/node/v15.2.0/bin/npm",
     "json.format.enable": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "sh",
@@ -7,7 +6,6 @@
         "python"
     ],
     "python.formatting.provider": "yapf",
-    "python.formatting.yapfPath": "/home/ekhhaga/.local/bin/yapf",
     "diagnostic-languageserver.linters": {
         "shellcheck": {
             "command": "shellcheck",

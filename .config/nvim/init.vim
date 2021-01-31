@@ -16,6 +16,7 @@ else
     source $HOME/.config/nvim/plug-config/fzf.vim
     source $HOME/.config/nvim/plug-config/barbar.vim
     source $HOME/.config/nvim/plug-config/startify.vim
+    source $HOME/.config/nvim/plug-config/git-utils.vim
     source $HOME/.config/nvim/plug-config/wiki.vim
     source $HOME/.config/nvim/plug-config/nvimtree.vim
     source $HOME/.config/nvim/themes/lightline.vim
