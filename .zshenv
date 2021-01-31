@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-XDG_CONFIG_HOME="$HOME/.config"
-ZDOTDIR="$HOME/.config/zsh"
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZDOTDIR="$HOME/.config/zsh"
 
-source "$ZDOTDIR/.zshenv"
+source "$HOME/.config/zsh/.zshenv"

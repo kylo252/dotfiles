@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source "$ZDOTDIR/.zgenom/zgenom.zsh"
+source "$HOME/.local/share/zgenom/zgenom.zsh"
 
 # if the init script doesn't exist
 if ! zgenom saved; then
