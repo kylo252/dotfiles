@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -eu
+
+function __setup_defaults(){
+    export XDG_CACHE_HOME="$HOME/.cache"
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_DATA_HOME="$HOME/.local/share"
+
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
+
+    export EDITOR=nvim
+
+    export ZDOTDIR="$HOME/.config/zsh"
+
+    export DOTBARE_DIR="$HOME/.dtf.git"
+    export DOTBARE_TREE="$HOME"
+}
+
+
+function __setup_deps(){
+    [ -z "$XDG_DATA_HOME" ] && echo "environment init error" && return 1
+    echo "Fetchings dependencies.."
+    git clone https://github.com/kazhala/dotbare.git "$XDG_DATA_HOME/dotbare"
+    git clone https://github.com/jandamm/zgenom.git "$XDG_DATA_HOME/zgenom"
+    "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
+    echo 'Installing zsh plugins'
+    zsh -c "source $ZDOTDIR/init.zsh"    
+}
+
+function __upgrade_deps(){
+    echo 'Updating zgenom'
+    zsh -c "source $XDG_DATA_HOME/zgenom/zgen.zsh && zgen selfupdate"
+    
+    echo 'Updating zsh plugins'
+    zsh -c "source $XDG_DATA_HOME/zgenom/zgen.zsh && zgen update"
+
+    echo 'Recreate zsh plugins cache'
+    zsh -c "source $ZDOTDIR/init.zsh"    
+}
+
+if [ "$1" == "init" ]; then
+    __setup_defaults
+    __setup_deps
+elif [ "$1" == "update" ]; then
+    __setup_defaults
+    __upgrade_deps
+else
+    echo "unknown config"
+    return 1
+fi
+
+
+
+
