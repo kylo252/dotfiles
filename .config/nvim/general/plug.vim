@@ -15,7 +15,6 @@ call plug#begin("$XDG_DATA_HOME/nvim/autoload/plugged")
 " Declare the list of plugins.
 if exists('g:vscode')
     Plug 'machakann/vim-highlightedyank'
-    Plug 'vimwiki/vimwiki'
 else
     " LSP
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -40,12 +39,15 @@ else
     " themes
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/doom-one.vim'
-
-    " nice to have
     Plug 'ap/vim-css-color'
+
+    " git
     Plug 'lambdalisue/gina.vim'
+    Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
-    Plug 'vimwiki/vimwiki'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'junegunn/gv.vim'
+    Plug 'rhysd/git-messenger.vim'
     " Plug 'tweekmonster/startuptime.vim'
 
 endif 

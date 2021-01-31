@@ -9,7 +9,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [ 
        \ {'i': '~/.config/nvim/init.vim'},
        \ {'p': '~/.config/nvim/general/plug.vim'},
-       \ {'z': '~/.zshrc.user'} 
+       \ {'z': '~/.config/zsh/.zshenv'} 
        \]
 
 
