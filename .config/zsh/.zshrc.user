@@ -22,9 +22,9 @@ source "$ZDOTDIR/.zsh_aliases"
 
 source "$ZDOTDIR/.zsh_functions"
 
-source "$ZDOTDIR/.zsh_plugins"
+source "$ZDOTDIR/init.zsh"
 
-source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+# source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
