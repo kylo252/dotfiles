@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source "$HOME/.local/share/zgenom/zgenom.zsh"
+source "$XDG_DATA_HOME/zgenom/zgenom.zsh"
 
 # if the init script doesn't exist
 if ! zgenom saved; then
@@ -10,7 +10,7 @@ if ! zgenom saved; then
     zgenom load kazhala/dotbare
     zgenom load lukechilds/zsh-nvm
     zgenom load b4b4r07/enhancd
-    zgenom load unixorn/autoupdate-zgen
+    # zgenom load unixorn/autoupdate-zgen
     zgenom load wfxr/forgit
     zgenom load zdharma/fast-syntax-highlighting
 

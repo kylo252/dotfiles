@@ -18,11 +18,13 @@ else
    source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
 
-source "$ZDOTDIR/.zsh_aliases"
-
-source "$ZDOTDIR/.zsh_functions"
-
 source "$ZDOTDIR/init.zsh"
+
+source "$ZDOTDIR/aliases.zsh"
+
+source "$ZDOTDIR/functions.zsh"
+
+source "$ZDOTDIR/opts.zsh"
 
 # source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
