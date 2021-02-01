@@ -3,6 +3,7 @@
 set -eu
 
 function __setup_defaults(){
+    
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_DATA_HOME="$HOME/.local/share"
@@ -14,37 +15,51 @@ function __setup_defaults(){
 
     export ZDOTDIR="$HOME/.config/zsh"
 
-    export DOTBARE_DIR="$HOME/.dtf.git"
-    export DOTBARE_TREE="$HOME"
 }
 
 
 function __setup_deps(){
+
+    __setup_defaults
+
     [ -z "$XDG_DATA_HOME" ] && echo "environment init error" && return 1
+    
     echo "Fetchings dependencies.."
-    git clone https://github.com/kazhala/dotbare.git "$XDG_DATA_HOME/dotbare"
-    git clone https://github.com/jandamm/zgenom.git "$XDG_DATA_HOME/zgenom"
-    "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
+
+    if [ ! -d "$XDG_DATA_HOME/dotbare" ]; then
+
+        export DOTBARE_DIR="$HOME/.dtf.git"
+        export DOTBARE_TREE="$HOME"
+
+        git clone https://github.com/kazhala/dotbare.git "$XDG_DATA_HOME/dotbare"
+        
+        "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
+    fi
+
+    if [ ! -d "$XDG_DATA_HOME/zgenom" ]; then
+        git clone https://github.com/jandamm/zgenom.git "$XDG_DATA_HOME/zgenom"
+    fi
     echo 'Installing zsh plugins'
     zsh -c "source $ZDOTDIR/init.zsh"    
 }
 
 function __upgrade_deps(){
+    
+    __setup_defaults
+
     echo 'Updating zgenom'
-    zsh -c "source $XDG_DATA_HOME/zgenom/zgen.zsh && zgen selfupdate"
+    zsh -c "source $XDG_DATA_HOME/zgenom/zgenom.zsh && zgenom selfupdate"
     
     echo 'Updating zsh plugins'
-    zsh -c "source $XDG_DATA_HOME/zgenom/zgen.zsh && zgen update"
+    zsh -c "source $XDG_DATA_HOME/zgenom/zgenom.zsh && zgenom update"
 
     echo 'Recreate zsh plugins cache'
     zsh -c "source $ZDOTDIR/init.zsh"    
 }
 
 if [ "$1" == "init" ]; then
-    __setup_defaults
     __setup_deps
 elif [ "$1" == "update" ]; then
-    __setup_defaults
     __upgrade_deps
 else
     echo "unknown config"

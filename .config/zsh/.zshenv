@@ -30,7 +30,6 @@ function __setup_xdg(){
     export NVM_DIR="$XDG_DATA_HOME/nvm"
     export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
     export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-    export ZGEN_DIR="$XDG_DATA_HOME/zgenom"
 }
 
 function __setup_history() {

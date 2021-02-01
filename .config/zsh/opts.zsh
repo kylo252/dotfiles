@@ -26,7 +26,7 @@ __setup_defaults; unset -f __setup_defaults
 
 function __setup_kemaps() {
 
-    bindkey -v
+    bindkey -e
 
     # Fix backspace not working after returning from cmd mode
     bindkey '^?' backward-delete-char
