@@ -8,10 +8,11 @@ nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
 " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+" nnoremap <leader>p "+p
+" nnoremap <leader>P "+P
+" vnoremap <leader>p "+p
+" vnoremap <leader>P "+P
+" nmap <localleader>p o<ESC>p
 
 " Enabble paste mode 
 inoremap <F2> <esc>:set paste!<cr>i
@@ -25,6 +26,9 @@ inoremap kj <esc>
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
 nnoremap <C-Q> :wq!<CR>
+" Close current window
+nnoremap <leader>qw :hide<CR>
+
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -55,6 +59,5 @@ nnoremap <silent> <C-S-Down>  :resize +2<CR>
 nnoremap <silent> <C-S-Left>  :vertical resize -2<CR>
 nnoremap <silent> <C-S-Right> :vertical resize +2<CR>
 
-" Easy indenting
-vnoremap < <gv
 vnoremap > >gv
+vnoremap < <gv
