@@ -35,6 +35,8 @@ else
     Plug 'unblevable/quick-scope'
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
+    Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-unimpaired'
 
     " themes
     Plug 'kyazdani42/nvim-web-devicons'
