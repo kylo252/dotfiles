@@ -154,3 +154,11 @@ function fuzzy_grep_words_w_type() {
         print home "/" $1 ":" $2
       }'
 }
+
+# reload by using F5
+function exec-zsh() { exec zsh <$TTY; }
+zle -N exec-zsh
+zmodload zsh/terminfo
+bindkey "${terminfo[kf5]}" exec-zsh
+
+

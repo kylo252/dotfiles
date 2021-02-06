@@ -12,7 +12,7 @@ if [ -z "$VIRTUAL_ENV" ]; then
    fi
 fi
 
-if [ -n "$TERM_PROGRAM" ]; then
+if [ -n "$TMUX" ] || [ -n "$TERM_PROGRAM" ]; then
    source "$XDG_CONFIG_HOME/zsh/.p10k.pure.zsh"
 else
    source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
@@ -26,28 +26,14 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/opts.zsh"
 
-# source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+source "$ZDOTDIR/misc.zsh"
+
+source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
-
-# fix for 'module unload' for default modules
-if [ -r /etc/redhat-release ]; then
-  if [ -n "$TERM_PROGRAM" ] && [ -z "$TMUX" ]; then
-    _prep_vscode_env
-  else
-    module restore minimal # rsw_updated
-  fi 
-fi
-
 
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/local/bin:$PATH
 export PATH 
-
-# reload by using F5
-function exec-zsh() { exec zsh <$TTY; }
-zle -N exec-zsh
-zmodload zsh/terminfo
-bindkey "${terminfo[kf5]}" exec-zsh
 
 # zprof
