@@ -46,8 +46,8 @@ function __setup_utils() {
   echo "setting up fzf.."
   if [ ! -d "$XDG_DATA_HOME/fzf" ]; then
     git clone https://github.com/junegunn/fzf.git "$XDG_DATA_HOME/fzf"
-    ./"$XDG_DATA_HOME"/fzf/install --all --xdg --completion --no-update-rc
   fi
+  "$XDG_DATA_HOME"/fzf/install --all --xdg --completion --no-update-rc
 
 }
 
