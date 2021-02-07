@@ -1,28 +1,33 @@
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
-	ui = true
+    ui = true
 [color "diff-highlight"]
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-	oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+    oldNormal = red bold
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = 11
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [pull]
-	rebase = true
+    rebase = true
 [fetch]
-	prune = true
+    prune = true
 [diff]
-	colorMoved = zebra
+    colorMoved = zebra
 [mergetool "nvim"] 
     cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
     tool = nvim
 [mergetool] # automatically launch merge tool without displaying a prompt
     prompt = false
+[user]
+    email = 59826753+kylo252@users.noreply.github.com
+    name = kylo252
+[filter "spacify"]
+    clean = expand --tabs=4 --initial
