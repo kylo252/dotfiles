@@ -3,7 +3,7 @@
 --max-columns-preview
 
 # Always show hidden files
---hidden
+# --hidden
 
 # Add my 'zshrc' type
 --type-add=zshrc:*.zsh*
@@ -14,12 +14,12 @@
 --glob=!git/*
 
 # or
---glob
-!git/*
+# --glob
+# !git/*
 
 # Set the colors.
---colors=line:none
---colors=line:style:bold
+# --colors=line:none
+# --colors=line:style:bold
 
 # Because who cares about case!?
---smart-case
+--ignore-case

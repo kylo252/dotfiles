@@ -10,6 +10,7 @@ let g:fzf_action = {
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.cache/fzf/history'
 let g:fzf_buffers_jump = 1
+let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
@@ -38,7 +39,7 @@ let g:fzf_colors =
 "Get Files
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=default', '--inline-info']}, <bang>0)
-    " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
 
 " Make Ripgrep ONLY search file contents and not filenames
 " command! -bang -nargs=* Rg
@@ -50,7 +51,7 @@ command! -bang -nargs=? -complete=dir Files
 "
 " Ripgrep advanced
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --ignore-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -62,3 +63,14 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
 " command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+" example for using fzf#wrap
+" command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
+
+" See `man fzf-tmux` for available options
+if exists('$TMUX')
+  let g:fzf_layout = { 'tmux': '-p90%,60%' }
+else
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+  " let g:fzf_layout = { 'left': '30%' }
+endif
