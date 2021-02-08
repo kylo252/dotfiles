@@ -7,15 +7,15 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [ -z "$VIRTUAL_ENV" ]; then
-   if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-     source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
-   fi
+  if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
 fi
 
 if [ -n "$TMUX" ] || [ -n "$TERM_PROGRAM" ]; then
-   source "$XDG_CONFIG_HOME/zsh/.p10k.pure.zsh"
+  source "$XDG_CONFIG_HOME/zsh/.p10k.pure.zsh"
 else
-   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
+  source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
 
 source "$ZDOTDIR/init.zsh"
@@ -26,14 +26,18 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/opts.zsh"
 
-source "$ZDOTDIR/misc.zsh"
-
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/local/bin:$PATH
+PATH=$GOPATH/bin:$PATH
 export PATH 
+
+# fix for snaps
+if [  -n "$(uname -a | grep Ubuntu)" ]; then
+  emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+fi
 
 # zprof

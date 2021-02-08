@@ -45,7 +45,7 @@
     "diagnostic-languageserver.formatFiletypes": {
         // format `sh` (includes `bash`) files using formatter defined below
         "sh": "shfmt",
-        "zsh": "shellcheck"
+        "zsh": "shfmt"
     },
     "diagnostic-languageserver.formatters": {
         // define our formatter so that we can reference it from
@@ -59,9 +59,7 @@
             "args": [
                 "-i",
                 "2",
-                "-bn",
-                "-ci",
-                "-sr"
+                "-ci"
             ]
         }
     },

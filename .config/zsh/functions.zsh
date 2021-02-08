@@ -38,42 +38,6 @@ function pprint () {
     echo "$1" | sed -e 's/\:/\n/g' | fzf 
 }
 
-function _brew_lazy_load () {
-    # if [ -x "$HOMEBREW_PREFIX/bin/brew" ]; then
-    eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
-    # fi
-}
-
-# HISTSIZE is somehow getting reset
-function _rhel_env_reset() {
-    export HISTSIZE=10000
-    _brew_lazy_load 
-    module restore batteries_included
-}
-
-function _lc_rec () {
-    export LANGUAGE=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
-}
-
-function _prep_dev_env() { 
-    source "$DEV_SDK" 
-    unset PYTHONHOME 
-    export CONF_SDK_FLAGS='--target=arm-wrs-linux-gnueabi --host=arm-wrs-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=$SDKTARGETSYSROOT'
-}
-
-function _prep_default_env() { 
-    source /proj/bidaas1/installed_sdk/air6449-nr-applic-2/environment-setup-armv7a-vfp-neon-wrs-linux-gnueabi
-    unset PYTHONHOME 
-}
-
-function _prep_vscode_env() {
-    _prep_default_env
-    _lc_rec
-    module source ~/.config/modules/vscode_minimal
-}
-
 function ifzf() {
     INITIAL_QUERY=""
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
@@ -104,12 +68,12 @@ function fuzzy_search_open_file() {
 
 	local search="rg --hidden -l -i -F '$1'"
 	if [ "$depth" -ne -1 ]; then
-		search="$search --max-depth $depth"
+	  search="$search --max-depth $depth"
 	fi
 
 	file=$(eval "$search" 2>/dev/null | fzf -0 -1 --preview "$XDG_CONFIG_HOME/fzf/helper/previewer.sh '$1' '{}'" --multi) \
-		&& file=$(echo $file | tr '\n' ' ') \
-		&& eval "$editor $file"
+	  && file=$(echo $file | tr '\n' ' ') \
+	  && eval "$editor $file"
     }
 
 function set_fzf_multi() {
@@ -121,7 +85,7 @@ function set_fzf_multi() {
   fi
 }
 
-function fuzzy_grep_words() {
+function fz_rg() {
   local FZF_DEFAULT_OPTS="
       $FZF_DEFAULT_OPTS
       --ansi
@@ -138,7 +102,7 @@ function fuzzy_grep_words() {
       }'
 }
 
-function fuzzy_grep_words_w_type() {
+function fz_rg_t() {
   local FZF_DEFAULT_OPTS="
       $FZF_DEFAULT_OPTS
       --ansi
@@ -147,7 +111,7 @@ function fuzzy_grep_words_w_type() {
   local q_type="$1"
   local delimiter="${2:-3}"
   set_fzf_multi "$2"
-  rg --line-number -uu --type-add "$q_type:*.$q_type" -t$q_type . \
+  rg --line-number --type-add "$q_type:*.$q_type" -t$q_type . \
     | fzf --delimiter : --nth "${delimiter}".. \
         --preview "$XDG_CONFIG_HOME/fzf/helper/previewerV2.sh $PWD/{}" \
     | awk -F ":" -v home="$PWD" '{

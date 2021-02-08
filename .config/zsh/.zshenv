@@ -14,6 +14,7 @@ function __setup_defaults(){
 
     export DOTBARE_DIR="$HOME/.dtf.git"
     export DOTBARE_TREE="$HOME"
+    export SHELL
 }
 
 function __setup_xdg(){
@@ -69,18 +70,13 @@ function __setup_fzf(){
     export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
 }
 
-function __setup_rhel_project(){
-    if [ -r /etc/redhat-release ] && [ -n "$ARCPROJECT" ]; then
-        source "$XDG_CONFIG_HOME/rhel/project_env"
-    fi
-}
+
 
 __setup_functions=(
     __setup_defaults
     __setup_xdg
     __setup_history
     __setup_x11
-    __setup_rhel_project
     __setup_fzf
 ) 
 
