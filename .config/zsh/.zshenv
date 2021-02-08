@@ -57,7 +57,7 @@ function __setup_x11(){
 }
 
 function __setup_fzf(){
-    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse  --multi \
+    export FZF_DEFAULT_OPTS="--layout=reverse  --multi \
         --bind '?:toggle-preview' \
         --bind 'ctrl-a:select-all' \
         --bind 'ctrl-y:execute-silent(echo {+} | xcopy)' \

@@ -18,23 +18,13 @@ cmd open ${{
     esac
 }}
 
-cmd yank-dirname ${{
-    dirname -- "$f" | tr -d '\n' | xclip -i --clipboard
-}}
-
-cmd yank-path ${{
-    echo "$fx" | xclip -i --clipboard
-}}
-
-cmd yank-basename ${{
-    echo "$fx" |
-      xargs -r -d '\n' basename -a -- |
-      xclip -i --clipboard
-}}
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
 
 cmd yank-basename-without-extension ${{
     echo "$fx" |
-      xargs -r -d '\n' basename -a -- |
+      xargs -r -d '\n' basename -a |
       awk -e '{
         for (i=length($0); i > 0; i--) {
           if (substr($0, i, 1) == ".") {
@@ -47,7 +37,19 @@ cmd yank-basename-without-extension ${{
 
         if (i == 0)
           print $0
-      }' | xclip -i --clipboard
+      }' |
+      if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
+      xclip -i -selection clipboard
+}}
+
+cmd trash ${{
+    set -f
+    if gio trash 2>/dev/null; then
+        gio trash $fx
+    else
+        mkdir -p ~/.trash
+        mv -- $fx ~/.trash
+    fi
 }}
 
 # extract the current file with the right command
@@ -113,6 +115,7 @@ cmd fzf_jump ${{
 map <c-f> :fzf_jump
 
 map <c-t> $lf -remote "send $id select '$(fzf)'"
+
 # execute current file (must be executable)
 map x $$f
 map X !$f
@@ -129,16 +132,17 @@ map ee $$EDITOR "$f"
 map u $view "$f"
 
 # Basic Functions
+map <c-q> quit
+map <c-r> reload
 map <enter> open
-map o open_config
-map br $vimv $fx
+map C clear
 map F2 rename
 map H top
 map L bottom
-map <c-r> reload
-map C clear
 map U unselect
-map <c-q> quit
+map br $vimv $fx
+map o open_config
+map r push :rename<space>
 
 # UI utils
 map tR change_ratio
