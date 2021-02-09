@@ -47,8 +47,13 @@ function __setup_utils() {
   if [ ! -d "$XDG_DATA_HOME/fzf" ]; then
     git clone https://github.com/junegunn/fzf.git "$XDG_DATA_HOME/fzf"
   fi
-  "$XDG_DATA_HOME"/fzf/install --all --xdg --completion --no-update-rc
+  "$XDG_DATA_HOME/fzf/install" --all --xdg --completion --no-update-rc
 
+  echo "settings up tmux.."
+  local TPM_DIR=$XDG_CONFIG_HOME/tmux/plugins/tpm
+  if [ ! -d "$TPM_DIR" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  fi
 }
 
 function __upgrade_deps() {
