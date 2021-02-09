@@ -14,6 +14,7 @@ function __setup_defaults(){
 
     export DOTBARE_DIR="$HOME/.dtf.git"
     export DOTBARE_TREE="$HOME"
+    SHELL="$(command -v zsh)"
     export SHELL
 }
 
