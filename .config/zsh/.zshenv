@@ -96,9 +96,9 @@ export ENHANCD_DOT_ARG='...'
 export HOMEBREW_FORCE_BREWED_CURL="1"
 
 # export NVM_NO_USE=true
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+# export NVM_COMPLETION=true
+# export NVM_LAZY_LOAD=true
+# export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
 export ZSH_AUTOSUGGEST_USE_ASYNC="ON"

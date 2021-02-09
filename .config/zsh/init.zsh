@@ -5,17 +5,9 @@ source "$XDG_DATA_HOME/zgenom/zgenom.zsh"
 # if the init script doesn't exist
 if ! zgenom saved; then
 
-    # bulk load
     zgenom load zsh-users/zsh-autosuggestions
-    zgenom load kazhala/dotbare
-    zgenom load lukechilds/zsh-nvm
-    zgenom load b4b4r07/enhancd
-    # zgenom load unixorn/autoupdate-zgen
+    # zgenom load lukechilds/zsh-nvm
     zgenom load wfxr/forgit
-    zgenom load zdharma/fast-syntax-highlighting
-
-    zgenom load junegunn/fzf shell/completion.zsh 
-    zgenom load junegunn/fzf shell/key-bindings.zsh 
 
     # completions
     zgenom load zsh-users/zsh-completions src
@@ -23,6 +15,10 @@ if ! zgenom saved; then
     # prompt
     zgenom load romkatv/powerlevel10k powerlevel10k
 
+    zgenom load b4b4r07/enhancd
+    zgenom load kazhala/dotbare
+    # zgenom load unixorn/autoupdate-zgen
+    zgenom load zdharma/fast-syntax-highlighting
     # save all to init script
     zgenom save
 
