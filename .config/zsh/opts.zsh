@@ -39,10 +39,17 @@ function __setup_kemaps() {
     # autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
 
     # Fix Home/End
-    bindkey '^[[H' beginning-of-line
-    bindkey '^[[F' end-of-line
-
+    # it seems to read differently in tmux for some reason
+    if [ -z "$TMUX" ]; then
+        bindkey '^[[H' beginning-of-line
+        bindkey '^[[F' end-of-line
+    else
+        bindkey '^[OH' beginning-of-line
+        bindkey '^[OF' end-of-line
+    fi
+    
     # Fix Delete
+
     bindkey '^[[3~' delete-char
 
     # [muscle-memory] kill line-forward
