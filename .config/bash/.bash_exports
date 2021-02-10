@@ -5,12 +5,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export EDITOR=nvim
-export BASHRC=~/.bashrc     
+export BASHRC=~/.bashrc
 export CDPATH='.:/repo/ekhhaga:~/local'
 
 export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTFILE="$XDG_DATA_HOME/shell/history"
+export HISTFILE="$XDG_DATA_HOME/bash/history"
 export SAVEHIST=100000
 export HISTSIZE=100000
 export HISTFILESIZE=100000
@@ -33,7 +33,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # set X11 settings when not in ssh
 if [ -z "$SSH_CONNECTION" ]; then
-    export DISPLAY=localhost:0.0
+  export DISPLAY=localhost:0.0
 fi
 
 # set locale (for perl mostly)
@@ -66,4 +66,4 @@ export PROMPT_COMMAND='history -a'
 
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/local/bin:$PATH
-export PATH 
+export PATH

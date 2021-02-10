@@ -4,8 +4,6 @@
 function __setup_history() {
     setopt EXTENDED_HISTORY        # Write the history file in the ":start:elapsed;command" format.
     setopt HIST_FCNTL_LOCK         # Use  system’s fcntl call where available (better performance)
-    setopt HIST_FIND_NO_DUPS       # don't show dupes when searching
-    setopt HIST_IGNORE_DUPS        # do filter contiguous duplicates from history
     setopt HIST_IGNORE_SPACE       # Do not record an entry starting with a space.
     setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entry.
     setopt HIST_VERIFY             # Do not execute immediately upon history expansion.
