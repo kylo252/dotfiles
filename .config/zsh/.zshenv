@@ -5,6 +5,11 @@ function __setup_defaults(){
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_DATA_HOME="$HOME/.local/share"
 
+    PATH=$HOME/.local/bin:$PATH
+    PATH=$HOME/local/bin:$PATH
+    PATH=$GOPATH/bin:$PATH
+    export PATH 
+
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US.UTF-8
 
@@ -35,10 +40,10 @@ function __setup_xdg(){
 }
 
 function __setup_history() {
-    export HISTFILE="$XDG_DATA_HOME/shell/history"
-    export HISTSIZE=100000               # History size in memory
-    export SAVEHIST=1000000              # The number of histsize
-    export LISTMAX=50                    # The size of asking history
+    export HISTFILE="$XDG_DATA_HOME/zsh/history"
+    export HISTSIZE=100000                       # History size in memory
+    export SAVEHIST=1000000                      # The number of histsize
+    export LISTMAX=50                            # The size of asking history
 }
 
 function __setup_x11(){
