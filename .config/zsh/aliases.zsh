@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-alias bashconf="$EDITOR ~/.bashrc.user"
-alias zshconf="$EDITOR ~/.zshrc.user"
 alias cls='clear'
 
 # probably useful to retain default git
@@ -24,7 +22,7 @@ alias paux='ps aux | rg'
 alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
 alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
 alias rmd='rm -rd'
-alias vdir='vdir --color=auto'
+alias rn='ranger'
 
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
