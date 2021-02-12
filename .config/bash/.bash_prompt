@@ -11,3 +11,4 @@ else
     export PS1
 fi
 
+source "$XDG_CONFIG_HOME/bash/.bash_git" 
