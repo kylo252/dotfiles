@@ -37,7 +37,9 @@ else
     Plug 'plasticboy/vim-markdown'
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-unimpaired'
-
+    Plug 'vimwiki/vimwiki'
+    Plug 'michal-h21/vim-zettel'
+	
     " themes
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/doom-one.vim'
