@@ -28,8 +28,6 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/opts.zsh"
 
-source "$ZDOTDIR/completions.zsh"
-
 
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
