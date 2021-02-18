@@ -14,6 +14,8 @@ fi
 
 if [ -n "$TMUX" ] || [ -n "$TERM_PROGRAM" ]; then
   source "$XDG_CONFIG_HOME/zsh/.p10k.pure.zsh"
+elif [ -n "$SSH_CONNECTION" ]; then
+  source "$XDG_CONFIG_HOME/zsh/.p10k.remote.zsh"
 else
   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
@@ -33,6 +35,7 @@ source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
+source "$XDG_CONFIG_HOME/docker/settings.sh" 2>& /dev/null
 
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then

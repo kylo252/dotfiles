@@ -4,6 +4,7 @@ function __setup_defaults(){
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_DATA_HOME="$HOME/.local/share"
+    
 
     PATH=$HOME/.local/bin:$PATH
     PATH=$HOME/local/bin:$PATH
@@ -28,6 +29,7 @@ function __setup_defaults(){
 
 function __setup_xdg(){
     export CARGO_HOME="$XDG_DATA_HOME/cargo"
+    export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
     export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
     export GEM_HOME="$XDG_DATA_HOME/gem"
     export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
@@ -40,6 +42,7 @@ function __setup_xdg(){
     export NVM_DIR="$XDG_DATA_HOME/nvm"
     export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
     export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+    export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 }
 
 function __setup_history() {

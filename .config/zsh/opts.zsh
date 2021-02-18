@@ -33,7 +33,9 @@ function __setup_kemaps() {
     # bindkey '^v' edit-command-line
 
     # Enter vim buffer from normal mode
-    # autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
+    autoload -U edit-command-line 
+    zle -N edit-command-line
+    bindkey -M vicmd "^v" edit-command-line
 
     # Fix Home/End
     # it seems to read differently in tmux for some reason
