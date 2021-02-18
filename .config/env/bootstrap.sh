@@ -67,7 +67,7 @@ function __upgrade_deps() {
   zsh -c "source $XDG_DATA_HOME/zgenom/zgenom.zsh && zgenom update"
 
   echo 'Recreate zsh plugins cache'
-  zsh -c "source $ZDOTDIR/init.zsh"
+  zsh -c "source $ZDOTDIR/plugins.zsh"
 }
 
 if [ "$1" == "init" ]; then

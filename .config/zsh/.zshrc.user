@@ -18,7 +18,7 @@ else
   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
 
-source "$ZDOTDIR/init.zsh"
+source "$ZDOTDIR/plugins.zsh"
 
 source "$ZDOTDIR/aliases.zsh"
 
@@ -26,14 +26,17 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/opts.zsh"
 
+source "$ZDOTDIR/completions.zsh"
+
+
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 
 # fix for snaps
-if [  -n "$(uname -a | grep Ubuntu)" ]; then
-  emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
-fi
+# if [  -n "$(uname -a | grep Ubuntu)" ]; then
+#   emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+# fi
 
 # zprof

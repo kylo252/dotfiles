@@ -32,87 +32,26 @@
 #
 #     The following line causes Git to track this file.
 !/.gitignore
-#
-# --- Adding dotfiles:
-#
-#     To add dotfiles, let git scan each parent directory (note: this doesn't
-#     cause git to actually include files from it) like:
-#
-#         !/.config/
-#         !/.config/myapp/
-#
-#     The leading slash is important, as it forces the path matching to start
-#     at the root of the repository, not subdirectories too.
-#
-#     Then, after you've included the parent directories, you also need to
-#     include files from it, like:
-#
-#         !/.config/myapp/myapp.conf
-#
-#     You can also use wildcards, like:
-#
-#         !/.config/myapp/*.conf
-#
-#     Or include everything in the directory, like:
-#
-#         !/.config/myapp/*
-#
-#     Note that a wildcard like that only includes files. To also include
-#     subdirectories, you need to list them the same way as mentioned at the
-#     beginning of this section, like:
-#
-#         !/.config/myapp/*
-#         !/.config/myapp/stuff/*
-#
-#     Alternatively, you can include all subdirectories and their files
-#     recursively with something like:
-#
-#         !/.config/myapp/**
-#
-# --- Example:
-#
-#         !/.Xresources
-#         !/.config/
-#         !/.config/mpv/
-#         !/.config/mpv/**
-#         !/.config/i3
-#         !/.config/i3/config
-#
-# --- FAQ:
-#
-#   : Can I safely use `git reset`?
-#     Yes, you can. Even when using `git reset --hard`, the only files which
-#     will be touched by git are the ones listed here.
-#
-#   : How can I see which on-disk files may be touched by git?
-#     Use the command:
-#
-#         ( git status --short | grep '^?' | cut -d" " -f2- && git ls-files ) | sort -u`
-#
-#     That will list all files which git is currently aware of (i.e. files in
-#     the current commit + files being staged + files on disk).
-#
-#   : Will this be slow with a large home folder?
-#     No, it won't. This is because the `/**` ignore prevents git from even
-#     scanning the directories.
-#
-#   : Will this gitignore file interfere with my repositories?
-#     No.
-#
-# --- Add your entries below this line:
-!/.zshrc.user
-!/.bashrc.user
+# --- general config
 !/.config/
 !/.config/*
-.config/user*
+!/.config/**
+/.config/user*
+# --- bash
+!/.bashrc.user
+!/.config/bash/*
 !/.config/bash/**
+# --- zsh
+!/.zshrc.user
+!/.config/zsh/*
 !/.config/zsh/**
-.config/zsh/.zcomp*
-.config/zsh/.zgenom
-.config/zsh/.p10k*
-.config/zsh/lmod/**
+/.config/zsh/.zcomp*
+/.config/zsh/.zgenom
+# --- nvim
 !/.config/nvim/*
-!/.config/nvim/general/**
-!/.config/nvim/plug-config/**
-!/.config/nvim/keys/**
-!/.config/nvim/themes/**
+!/.config/nvim/**
+!/.config/nvim/general/*
+!/.config/nvim/plug-config/*
+!/.config/nvim/keys/*
+!/.config/nvim/themes/*
+/.config/coc/**

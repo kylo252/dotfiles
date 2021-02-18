@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 function __setup_history() {
     setopt EXTENDED_HISTORY        # Write the history file in the ":start:elapsed;command" format.
     setopt HIST_FCNTL_LOCK         # Use  system’s fcntl call where available (better performance)

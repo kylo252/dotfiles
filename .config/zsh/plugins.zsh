@@ -2,6 +2,7 @@
 # shellcheck disable
 
 autoload -U compinit
+
 # Initialize the completion system with a cache time of 24 hours.
 typeset -g zcompdump="$HOME/.local/share/zsh/zcompdump"
 typeset -g comp_files=($zcompdump(Nm-24))
@@ -13,7 +14,7 @@ if (( $#comp_files )) {
 
 unset zcompdump
 unset comp_files
-
+#
 source "$XDG_DATA_HOME/zgenom/zgenom.zsh"
 
 # if the init script doesn't exist
@@ -31,7 +32,7 @@ if ! zgenom saved; then
 
     zgenom load b4b4r07/enhancd
     zgenom load kazhala/dotbare
-    # zgenom load unixorn/autoupdate-zgen
+    zgenom load unixorn/autoupdate-zgen
     zgenom load zdharma/fast-syntax-highlighting
     # save all to init script
     zgenom save
@@ -48,9 +49,9 @@ fpath=("$ZDOTDIR/modules" "${fpath[@]}")
 autoload -Uz kp
 
 # enable completion for dotbare
-_dotbare_completion_cmd
+# _dotbare_completion_cmd
 # _dotbare_completion_git
-
+#
 # Colorize completions using default `ls` colors.
 zstyle ':completion:*' list-colors ''
 
