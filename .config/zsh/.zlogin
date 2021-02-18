@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
-eval "$(keychain --eval --quiet id_rsa ~/.ssh/mako_rsa)"
+eval "$(keychain --eval --quiet ~/.ssh/*_rsa)"
 
