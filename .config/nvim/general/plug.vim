@@ -35,7 +35,7 @@ else
     Plug 'unblevable/quick-scope'
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
-    Plug 'tpope/vim-sleuth'
+    Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-unimpaired'
     Plug 'vimwiki/vimwiki'
     Plug 'michal-h21/vim-zettel'
