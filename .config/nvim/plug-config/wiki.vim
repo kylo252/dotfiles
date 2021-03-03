@@ -23,8 +23,8 @@ let g:vimwiki_list = [{'path': '/tmp/notes',
 let g:vimwiki_tab_key = '<F7>'
 let g:vimwiki_shift_tab_key = '<F8>'
 
-nmap <Leader><Tab> <Plug>VimwikiNextLink
-nmap <Leader><S-Tab> <Plug>VimwikiPrevLink
+nmap <Leader>wn <Plug>VimwikiNextLink
+nmap <Leader>wN <Plug>VimwikiPrevLink
 
 let g:vim_markdown_folding_disabled = 1
 

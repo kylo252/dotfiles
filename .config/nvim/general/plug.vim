@@ -39,7 +39,9 @@ else
     Plug 'tpope/vim-unimpaired'
     Plug 'vimwiki/vimwiki'
     Plug 'michal-h21/vim-zettel'
-	
+    Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+    Plug 'christoomey/vim-tmux-navigator'
+
     " themes
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/doom-one.vim'
@@ -57,3 +59,4 @@ else
 endif 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
+
