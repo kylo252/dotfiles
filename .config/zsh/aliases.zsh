@@ -23,6 +23,7 @@ alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
 alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
 alias rmd='rm -rd'
 alias rn='ranger'
+alias nv='nvim'
 
 # workaround for interactive 'rm'
 if alias rm &> /dev/null

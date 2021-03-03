@@ -11,14 +11,12 @@ set mouse=a                             " Enable your mouse
 set ruler                               " Show the cursor position all the time
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
-" set t_Co=256                            " Support 256 colors
 set conceallevel=0                      " So that I can see `` in markdown files
 set tabstop=2                           " Insert 2 spaces for a tab
 set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
-" set autoindent                          " Good auto indent
 set number relativenumber               " Line numbers
 set showtabline=2                       " Always show tabs
 set nobackup                            " This is recommended by coc
@@ -31,8 +29,11 @@ set autochdir                           " Your working directory will alway be t
 set incsearch
 set ignorecase
 
-"au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-"
+" if you have vim >=8.0 or neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
 "" You can't stop me
 cmap w!! w !sudo tee %
 
@@ -46,5 +47,11 @@ augroup END
 augroup myvimrc    
   au!
   au BufWritePost init.vim,plug.vim ++nested so $MYVIMRC 
+augroup END
+
+" https://vi.stackexchange.com/a/25107
+augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver20-blinkon1
 augroup END
 
