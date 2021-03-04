@@ -25,32 +25,41 @@ function __setup_deps() {
 
   echo "Fetchings dependencies.."
 
+  export DOTBARE_DIR="$HOME/.dtf.git"
+  export DOTBARE_TREE="$HOME"
+
   if [ ! -d "$XDG_DATA_HOME/dotbare" ]; then
+    git clone https://github.com/kazhala/dotbare.git "$XDG_DATA_HOME/dotbare"
+  fi
 
-    export DOTBARE_DIR="$HOME/.dtf.git"
-    export DOTBARE_TREE="$HOME"
-
-    git clone https://github.com/junegunn/fzf.git "$XDG_DATA_HOME/dotbare"
-
+  if [ ! -d "$HOME/.dtf.git" ]; then
     "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
   fi
 
   if [ ! -d "$XDG_DATA_HOME/zgenom" ]; then
     git clone https://github.com/jandamm/zgenom.git "$XDG_DATA_HOME/zgenom"
   fi
+
   echo 'Installing zsh plugins'
+
   zsh -c "source $ZDOTDIR/init.zsh"
+
 }
 
 function __setup_utils() {
+
   echo "setting up fzf.."
+
   if [ ! -d "$XDG_DATA_HOME/fzf" ]; then
     git clone https://github.com/junegunn/fzf.git "$XDG_DATA_HOME/fzf"
   fi
+
   "$XDG_DATA_HOME/fzf/install" --all --xdg --completion --no-update-rc
 
   echo "settings up tmux.."
+
   local TPM_DIR=$XDG_CONFIG_HOME/tmux/plugins/tpm
+
   if [ ! -d "$TPM_DIR" ]; then
     git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
   fi
