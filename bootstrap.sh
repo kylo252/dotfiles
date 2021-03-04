@@ -42,7 +42,7 @@ function __setup_deps() {
 
   echo 'Installing zsh plugins'
 
-  zsh -c "source $ZDOTDIR/init.zsh"
+  zsh -c "source $ZDOTDIR/plugins.zsh"
 
 }
 
