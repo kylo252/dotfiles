@@ -33,8 +33,6 @@ source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-source "$XDG_CONFIG_HOME/docker/settings.sh" 2>& /dev/null
-
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then
 #   emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'

@@ -8,6 +8,7 @@ function __setup_defaults(){
 
     PATH=$HOME/.local/bin:$PATH
     PATH=$HOME/local/bin:$PATH
+    PATH=$HOME/bin:$PATH
     PATH=$GOPATH/bin:$PATH
     export PATH 
 
@@ -22,6 +23,8 @@ function __setup_defaults(){
     export DOTBARE_TREE="$HOME"
     
     export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
+
+    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
     SHELL="$(command -v zsh)"
     export SHELL

@@ -37,10 +37,6 @@ if ! zgenom saved; then
     zgenom load StackExchange/blackbox
     # save all to init script
     zgenom save
-
-    zgenom compile "$HOME/.zshenv"
-    zgenom compile "$XDG_CONFIG_HOME/zsh"
-    zgenom compile "$XDG_DATA_HOME/zsh/generated"
 fi
 
 # quick modules
