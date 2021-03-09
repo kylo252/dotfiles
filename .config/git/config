@@ -26,9 +26,6 @@
     tool = nvim
 [mergetool] # automatically launch merge tool without displaying a prompt
     prompt = false
-[user]
-    email = 59826753+kylo252@users.noreply.github.com
-    name = kylo252
 [filter "spacify"]
     clean = expand --tabs=4 --initial
 [alias]

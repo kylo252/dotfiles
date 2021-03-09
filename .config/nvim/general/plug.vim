@@ -26,7 +26,9 @@ else
     Plug 'romgrk/barbar.nvim' " <- better tabline
     Plug 'itchyny/lightline.vim'
     Plug 'mhinz/vim-startify'
-    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'ptzz/lf.vim'
+    Plug 'voldikss/vim-floaterm'
+    " Plug 'kyazdani42/nvim-tree.lua'
 
     " utils
     Plug 'junegunn/fzf'
