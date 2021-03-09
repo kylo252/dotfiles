@@ -15,7 +15,7 @@ else
     source $XDG_CONFIG_HOME/nvim/plug-config/git-utils.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/lsp_cpp.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/neoterm.vim
-    source $XDG_CONFIG_HOME/nvim/plug-config/nvimtree.vim
+    source $XDG_CONFIG_HOME/nvim/plug-config/lf.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/quickscope.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/startify.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/wiki.vim
