@@ -35,6 +35,7 @@ if ! zgenom saved; then
     zgenom load unixorn/autoupdate-zgen
     zgenom load zdharma/fast-syntax-highlighting
     zgenom load StackExchange/blackbox
+
     # save all to init script
     zgenom save
 fi
