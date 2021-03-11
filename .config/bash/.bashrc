@@ -11,12 +11,6 @@ source "$XDG_CONFIG_HOME/bash/.bash_exports"
 
 source "$XDG_CONFIG_HOME/bash/.bash_aliases"
 
-# If not running interactively, don't do anything
-case $- in
-  *i*) ;;
-    *) return;;
-esac
-
 # this for now managed by bash-it
 # source "$XDG_CONFIG_HOME/bash/.bash_prompt"
 
