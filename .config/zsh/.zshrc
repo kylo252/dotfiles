@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ -r /etc/redhat-release ]; then
-    source "$HOME/.config/rhel/settings.sh"
+if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
+    source "$XDG_CONFIG_HOME/rhel/settings.sh"
 else
     source "$ZDOTDIR/.zshrc.user"
 fi

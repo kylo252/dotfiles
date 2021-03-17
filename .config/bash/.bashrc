@@ -15,5 +15,6 @@ source "$XDG_CONFIG_HOME/bash/.bash_aliases"
 # source "$XDG_CONFIG_HOME/bash/.bash_prompt"
 
 # bash-it config
-source "$XDG_CONFIG_HOME/bash/settings.bash"
-
+if [ "$TERM_PROGRAM" != "vscode" ]; then
+  source "$XDG_CONFIG_HOME/bash/settings.bash"
+fi

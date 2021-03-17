@@ -25,6 +25,9 @@ alias rmd='rm -rd'
 alias rn='ranger'
 alias nv='nvim'
 
+# insert relevant xkcd
+alias archive='tar --create --gzip --verbose --file'
+
 # workaround for interactive 'rm'
 if alias rm &> /dev/null
 then
