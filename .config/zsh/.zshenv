@@ -6,12 +6,6 @@ function __setup_defaults(){
     export XDG_DATA_HOME="$HOME/.local/share"
     
 
-    PATH=$HOME/.local/bin:$PATH
-    PATH=$HOME/local/bin:$PATH
-    PATH=$HOME/bin:$PATH
-    PATH=$GOPATH/bin:$PATH
-    export PATH 
-
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US.UTF-8
 
