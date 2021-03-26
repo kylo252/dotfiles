@@ -35,3 +35,6 @@
     soft-reset = reset HEAD~1 --soft
     st = status
 
+[user]
+	email = 59826753+kylo252@users.noreply.github.com
+	name = kylo252
