@@ -18,15 +18,12 @@ function __setup_defaults(){
     
     export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
 
-    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-
     SHELL="$(command -v zsh)"
     export SHELL
 }
 
 function __setup_xdg(){
     export CARGO_HOME="$XDG_DATA_HOME/cargo"
-    export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
     export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
     export GEM_HOME="$XDG_DATA_HOME/gem"
     export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
