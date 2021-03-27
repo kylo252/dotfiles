@@ -33,6 +33,7 @@ else
     " utils
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'antoinemadec/coc-fzf'
     Plug 'tomtom/tcomment_vim'
     Plug 'unblevable/quick-scope'
     Plug 'godlygeek/tabular'
