@@ -13,7 +13,7 @@ __setup_history; unset -f __setup_history
 
 function __setup_defaults() {
     setopt NO_BEEP                 # disable the goddamn beep!
-    setopt CORRECT                 # Command auto-correction
+    # setopt CORRECT              # Command auto-correction
     setopt IGNORE_EOF              # Prevent accidental C-d from exiting shell
     setopt INTERACTIVE_COMMENTS    # Allow comments, even in interactive shells
     setopt LIST_PACKED             # Make completion lists more densely packed

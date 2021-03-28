@@ -124,5 +124,3 @@ function exec-zsh() { exec zsh <$TTY; }
 zle -N exec-zsh
 zmodload zsh/terminfo
 bindkey "${terminfo[kf5]}" exec-zsh
-
-

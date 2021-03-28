@@ -42,7 +42,7 @@ function __setup_deps() {
 
   echo 'Installing zsh plugins'
 
-  zsh -c "source $ZDOTDIR/plugins.zsh"
+  zsh -c "source $ZDOTDIR/utils.zsh"
 
 }
 
@@ -65,32 +65,8 @@ function __setup_utils() {
   fi
 }
 
-function __upgrade_deps() {
+__setup_deps
+__setup_utils
+unset -f __setup_deps
+unset -f __setup_utils
 
-  __setup_defaults
-
-  echo 'Updating zgenom'
-  zsh -c "source $XDG_DATA_HOME/zgenom/zgenom.zsh && zgenom selfupdate"
-
-  echo 'Updating zsh plugins'
-  zsh -c "source $XDG_DATA_HOME/zgenom/zgenom.zsh && zgenom update"
-
-  echo 'Recreate zsh plugins cache'
-  zsh -c "source $ZDOTDIR/plugins.zsh"
-}
-
-if [ "$1" == "init" ]; then
-  __setup_deps
-  __setup_utils
-  unset -f __setup_deps
-  unset -f __setup_utils
-elif [ "$1" == "update" ]; then
-  __upgrade_deps
-  unset -f __upgrade_deps
-elif [ "$1" == "utils" ]; then
-  __setup_utils
-  unset -f __setup_utils
-else
-  echo "unknown config"
-  return 1
-fi
