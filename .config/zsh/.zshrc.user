@@ -20,18 +20,9 @@ else
   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
 
-source "$ZDOTDIR/plugins.zsh"
-
-source "$ZDOTDIR/aliases.zsh"
-
-source "$ZDOTDIR/functions.zsh"
-
-source "$ZDOTDIR/opts.zsh"
-
-
-source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
-
-source "$XDG_CONFIG_HOME/lf/lf.zsh"
+if [ -d "$HOME/.ssh/keys" ]; then
+  eval "$(keychain --eval --quiet ~/.ssh/keys/*_rsa)"
+fi
 
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/local/bin:$PATH
@@ -39,6 +30,15 @@ PATH=$HOME/bin:$PATH
 PATH=$GOPATH/bin:$PATH
 export PATH 
 
+source "$ZDOTDIR/modules.zsh"
+
+source "$ZDOTDIR/utils.zsh"
+
+source "$ZDOTDIR/aliases.zsh"
+
+source "$ZDOTDIR/functions.zsh"
+
+source "$ZDOTDIR/opts.zsh"
 
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then
