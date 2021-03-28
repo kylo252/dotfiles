@@ -30,6 +30,8 @@ PATH=$HOME/bin:$PATH
 PATH=$GOPATH/bin:$PATH
 export PATH 
 
+source "$ZDOTDIR/opts.zsh"
+
 source "$ZDOTDIR/modules.zsh"
 
 source "$ZDOTDIR/utils.zsh"
@@ -37,8 +39,6 @@ source "$ZDOTDIR/utils.zsh"
 source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
-
-source "$ZDOTDIR/opts.zsh"
 
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then
