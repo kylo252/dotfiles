@@ -30,6 +30,9 @@ PATH=$HOME/bin:$PATH
 PATH=$GOPATH/bin:$PATH
 export PATH 
 
+SHELL="$(command -v zsh)"
+export SHELL
+
 source "$ZDOTDIR/opts.zsh"
 
 source "$ZDOTDIR/modules.zsh"

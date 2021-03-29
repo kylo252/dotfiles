@@ -38,6 +38,8 @@ fi
 # _dotbare_completion_cmd
 
 # TMUX plugin
+export ZSH_TMUX_AUTOSCONNECT=true
 export ZSH_TMUX_AUTOSTART=true
-export TERM=screen-256color
+export ZSH_TMUX_AUTOSTART_ONCE=false
+export ZSH_TMUX_FIXTERM=false
 export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"

@@ -18,8 +18,6 @@ function __setup_defaults(){
     
     export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
 
-    SHELL="$(command -v zsh)"
-    export SHELL
 }
 
 function __setup_xdg(){
