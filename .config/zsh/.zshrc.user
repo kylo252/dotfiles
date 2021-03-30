@@ -24,11 +24,20 @@ if [ -d "$HOME/.ssh/keys" ]; then
   eval "$(keychain --eval --quiet ~/.ssh/keys/*_rsa)"
 fi
 
-PATH=$HOME/.local/bin:$PATH
-PATH=$HOME/local/bin:$PATH
-PATH=$HOME/bin:$PATH
-PATH=$GOPATH/bin:$PATH
-export PATH 
+__bin_list=(
+  "$HOME/.local/bin"
+  "$HOME/local/bin"
+  "$HOME/bin"
+  "$GOPATH/bin"
+  "$CARGO_HOME/bin"
+  )
+
+for extra in "${__bin_list[@]}"; do
+  PATH=$extra:$PATH
+done
+
+export PATH
+unset __bin_list
 
 SHELL="$(command -v zsh)"
 export SHELL
