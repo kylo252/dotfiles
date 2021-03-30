@@ -2,6 +2,8 @@
     "json.format.enable": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "sh",
+        "bash",
+        "zsh",
         "json",
         "python"
     ],
@@ -68,5 +70,6 @@
     "suggest.enablePreview": true,
     "suggest.maxCompleteItemCount": 10,
     "suggest.defaultSortMethod": "alphabetical",
-    "clangd.semanticHighlighting": true
+    "clangd.semanticHighlighting": true,
+    "coc.preferences.floatActions": true
 }
