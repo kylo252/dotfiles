@@ -9,7 +9,9 @@ let g:startify_lists = [
 let g:startify_bookmarks = [ 
        \ {'i': '~/.config/nvim/init.vim'},
        \ {'p': '~/.config/nvim/general/plug.vim'},
-       \ {'z': '~/.config/zsh/.zshenv'} 
+       \ {'z': '~/.config/zsh/.zshenv'},
+       \ {'t': '~/.config/tmux/tmux.conf'},
+       \ {'s': '~/.ssh/config'}
        \]
 
 

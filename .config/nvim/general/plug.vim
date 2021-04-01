@@ -43,7 +43,10 @@ else
     Plug 'vimwiki/vimwiki'
     Plug 'michal-h21/vim-zettel'
     Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+    " tmux
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tmux-plugins/vim-tmux-focus-events'
 
     " themes
     Plug 'kyazdani42/nvim-web-devicons'
