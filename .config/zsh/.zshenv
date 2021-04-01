@@ -71,12 +71,32 @@ function __setup_fzf() {
   export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
 }
 
+function __setup_misc() {
+  if command -v fnm &>/dev/null; then
+    eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh 2 &>/dev/null)"
+  fi
+
+  export BAT_PAGER="less -RF"
+  # https://github.com/sharkdp/bat/issues/652
+  # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+  # interactive search when using three dots
+  export ENHANCD_DOT_ARG='...'
+
+  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
+  export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
+  export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+  export ENHANCED_LAZY_COMPLETION=true
+}
+
 __setup_functions=(
   __setup_defaults
   __setup_xdg
   __setup_history
   __setup_x11
   __setup_fzf
+  __setup_misc
 )
 
 for func in "${__setup_functions[@]}"; do
@@ -84,22 +104,3 @@ for func in "${__setup_functions[@]}"; do
   unset -f "$func"
 done
 unset __setup_functions
-
-export BAT_PAGER="less -RF"
-# https://github.com/sharkdp/bat/issues/652
-# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# interactive search when using three dots
-export ENHANCD_DOT_ARG='...'
-
-# don't use system cURL
-export HOMEBREW_FORCE_BREWED_CURL="1"
-
-# export NVM_NO_USE=true
-# export NVM_COMPLETION=true
-# export NVM_LAZY_LOAD=true
-# export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
-export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20

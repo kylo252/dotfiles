@@ -1,35 +1,17 @@
 #!/usr/bin/env zsh
-# shellcheck disable
-
-# custom modules
-
-if ! command -v fnm --version 2 &>/dev/null; then
-  eval "$(fnm env --fnm-dir=$XDG_DATA_HOME/fnm --shell=zsh 2 &>/dev/null)"
-  fnm completions --shell=zsh >"$ZDOTDIR/modules/_fnm"
-fi
-
-fpath=("$ZDOTDIR/modules" "${fpath[@]}")
-
-# load modules
-autoload -Uz kp
 
 autoload -U compinit
 
-# Initialize the completion system with a cache time of 24 hours.
-# typeset -g zcompdump="$HOME/.local/share/zsh/zcompdump"
-#
-# typeset -g comp_files=($zcompdump(Nm-24))
-#
-# if (( $#comp_files )) {
-#   compinit -i -C -d $zcompdump
-# } else {
-#   compinit -i -d $zcompdump
-# }
-
 compinit
 
-unset zcompdump
-unset comp_files
+compdef __dotbare_completion dotbare
+
+compdef _cd __enhancd::cd
+
+fpath=("$ZDOTDIR/modules" "${fpath[@]}")
+
+# load custom modules
+autoload -Uz kp
 
 # Colorize completions using default `ls` colors.
 zstyle ':completion:*' list-colors ''
