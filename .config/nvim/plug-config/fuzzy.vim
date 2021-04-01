@@ -12,9 +12,6 @@ let g:fzf_history_dir = '~/.cache/fzf/history'
 let g:fzf_buffers_jump = 1
 let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 
-nnoremap <C-p> :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <C-f> :BLines<CR>
 
 " Border color
 
@@ -46,16 +43,15 @@ let g:fzf_colors =
 
 "Get Files
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=default', '--inline-info']}, <bang>0)
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Make Ripgrep ONLY search file contents and not filenames
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-"   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
-"   \   <bang>0)
+command! -bang -nargs=* RgTest
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
+  \   <bang>0)
 "
 " Ripgrep advanced
 function! RipgrepFzf(query, fullscreen)
@@ -66,12 +62,15 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang RgAdvanced call RipgrepFzf(<q-args>, <bang>0)
 
+command! Dots call fzf#run(fzf#wrap({
+  \ 'source': 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"',
+  \ 'sink': 'e',
+  \ 'options': [ '--multi', '--preview', 'bat --style=numbers --color=always --pager=never --highlight-line=0 {}' ]
+  \ }))
 
-" https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
-" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-
-" example for using fzf#wrap
-" command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
-
+nnoremap <C-p> :Files<CR>
+nnoremap <C-f> :BLines<CR>
+nnoremap <leader>df :Dots<CR>
+nnoremap <leader>b :Buffers<CR>

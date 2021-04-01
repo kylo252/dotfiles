@@ -1,4 +1,4 @@
-" 
+
 "     ____      _ __        _
 "    /  _/___  (_) /__   __(_)___ ___
 "    / // __ \/ / __/ | / / / __ `__ \
@@ -20,7 +20,7 @@ else
     source $XDG_CONFIG_HOME/nvim/keys/which-key.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/barbar.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/coc.vim
-    source $XDG_CONFIG_HOME/nvim/plug-config/fzf.vim
+    source $XDG_CONFIG_HOME/nvim/plug-config/fuzzy.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/git-utils.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/lsp_cpp.vim
     source $XDG_CONFIG_HOME/nvim/plug-config/neoterm.vim
