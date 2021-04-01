@@ -26,6 +26,20 @@ map r push :rename<space>
 map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
 map .e $$EDITOR "$f"
 
+# create dir/file
+map ad push $mkdir<space>
+map af push $touch<space>
+
+cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
+cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
+
+# Tmux
+map sg &tmux split-window -h lf
+map sv &tmux split-window -v lf
+
+# show documentation
+map g? $lf -doc | less
+
 # check the terminal width on startup and set number of columns accordingly
 %{{
   w=$(tput cols)
@@ -106,5 +120,6 @@ map .vb push :!nvim<space>
 map gr cd /repo/ekhhaga
 map gc cd ~/.config
 map gs cd ~/.scripts
+map gd cd ~/.local/share
 map gl cd ~/local
 
