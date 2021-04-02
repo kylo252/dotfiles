@@ -48,9 +48,7 @@ source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
 
-source "$ZDOTDIR/utils.zsh"
-
-source "$ZDOTDIR/completions.zsh"
+source "$ZDOTDIR/plugins.zsh"
 
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then

@@ -1,12 +1,26 @@
 #!/usr/bin/env zsh
 
-autoload -U compinit
+source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
-compinit
+source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-compdef __dotbare_completion dotbare
+zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
 
-compdef _cd __enhancd::cd
+source "$XDG_DATA_HOME/znap/znap.zsh"
+
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-completions
+
+znap source zdharma/fast-syntax-highlighting
+
+znap source romkatv/powerlevel10k powerlevel10k
+
+znap source b4b4r07/enhancd
+znap source kazhala/dotbare
+
+znap source StackExchange/blackbox
+
+znap compdef dotbare '_dotbare_completion_cmd'
 
 fpath=("$ZDOTDIR/modules" "${fpath[@]}")
 

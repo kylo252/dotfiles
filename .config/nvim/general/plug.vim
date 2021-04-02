@@ -31,6 +31,7 @@ else
     " Plug 'kyazdani42/nvim-tree.lua'
 
     " utils
+    Plug 'brooth/far.vim'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'antoinemadec/coc-fzf'
