@@ -50,13 +50,13 @@ function __setup_deps() {
     "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
   fi
 
-  if [ ! -d "$XDG_DATA_HOME/zgenom" ]; then
-    git clone https://github.com/jandamm/zgenom "$XDG_DATA_HOME/zgenom"
+  if [ ! -d "$XDG_DATA_HOME/znap" ]; then
+    git clone https://github.com/marlonrichert/zsh-snap "$XDG_DATA_HOME/znap"
   fi
 
   echo 'Installing zsh plugins'
 
-  zsh -c "source $ZDOTDIR/utils.zsh"
+  zsh -c "source $ZDOTDIR/plugins.zsh"
 
 }
 
