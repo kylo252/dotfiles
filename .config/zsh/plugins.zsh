@@ -13,7 +13,7 @@ znap source zsh-users/zsh-completions
 
 znap source zdharma/fast-syntax-highlighting
 
-znap source romkatv/powerlevel10k powerlevel10k
+znap source romkatv/powerlevel10k
 
 znap source b4b4r07/enhancd
 znap source kazhala/dotbare
