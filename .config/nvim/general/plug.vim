@@ -53,6 +53,7 @@ else
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/doom-one.vim'
     Plug 'ap/vim-css-color'
+    Plug 'Yggdroot/indentLine'
 
     " git
     Plug 'lambdalisue/gina.vim'
