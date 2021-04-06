@@ -44,23 +44,18 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     status                  # exit code of the last command
+    background_jobs         # presence of background jobs
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    # direnv                  # direnv status (https://direnv.net/)
-    # asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    load                    # CPU load
+    # context               # context
+    # load                  # CPU load
     # disk_usage            # disk usage
-    ram                     # free RAM
+    # ram                   # free RAM
     # swap                  # used swap
-    time                  # current time
+    # time                  # current time
     # =========================[ Line #2 ]=========================
     newline                 # \n
-    # ip                    # ip address and bandwidth usage for a specified network interface
-    # public_ip             # public IP address
-    # proxy                 # system-wide http/https/ftp proxy
-    # battery               # internal battery
-    # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )
 
@@ -530,6 +525,44 @@
   typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=166
   # Custom icon.
   # typeset -g POWERLEVEL9K_LOAD_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ##################################[ context: user@hostname ]##################################
+  # Context color when running with privileges.
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=178
+  # Context color in SSH without privileges.
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=180
+  # Default context color (no privileges, no SSH).
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=180
+
+  # Context format when running with privileges: bold user@hostname.
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%B%n@%m'
+  # Context format when in SSH without privileges: user@hostname.
+  # typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
+  # Default context format (no privileges, no SSH): user@hostname.
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
+
+  # Don't show context unless running with privileges or in SSH.
+  # Tip: Remove the next line to always show context.
+  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
+
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Custom prefix.
+  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
+
+  ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
+  # Python virtual environment color.
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=37
+  # Don't show Python version next to the virtual environment name.
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  # If set to "false", won't show virtualenv if pyenv is already shown.
+  # If set to "if-different", won't show virtualenv if it's the same as pyenv.
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
+  # Separate environment name from Python version only with a space.
+  typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
   ####################################[ time: current time ]####################################
   # Current time color.
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=66
