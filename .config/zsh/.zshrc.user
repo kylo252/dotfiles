@@ -20,9 +20,6 @@ else
   source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
 fi
 
-if [ -d "$HOME/.ssh/keys" ]; then
-  eval "$(keychain --eval --quiet ~/.ssh/keys/*_rsa)"
-fi
 
 __bin_list=(
   "$HOME/.local/bin"
