@@ -74,7 +74,7 @@ function __setup_fzf() {
 
 function __setup_misc() {
   if command -v fnm &>/dev/null; then
-    eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh 2 &>/dev/null)"
+    eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)"
   fi
 
   export BAT_PAGER="less -RF"
