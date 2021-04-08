@@ -9,6 +9,10 @@ if ( \
   tmux new-session -s 'default' && exit 0
 }
 
+if [ -d "$HOME/.ssh/keys" ]; then
+  eval "$(keychain --eval --quiet ~/.ssh/keys/*)"
+fi
+
 # Asynchronously zcompile .zcompdump file.
 {
   typeset -g zcompdump="$HOME/.local/share/zsh/zcompdump"
