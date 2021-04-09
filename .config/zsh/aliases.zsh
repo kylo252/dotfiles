@@ -13,14 +13,13 @@ alias dtl='dotbare flog'
 alias dtp='dotbare push'
 alias dtr='dotbare fcheckout'
 alias dts='dotbare fstat'
-alias htop='htop --user $USER'
 alias l='ls -CF --color=auto'
 alias la='ls -A --color=auto'
 alias ll='ls -laFq --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 alias paux='ps aux | rg'
 alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
-alias potm='git push origin HEAD:refs/for/master' # used as 'potm'
+alias potm='git push origin HEAD:refs/for/master'    # used as 'potm'
 alias rmd='rm -rd'
 alias rn='ranger'
 alias nv='nvim'
@@ -29,8 +28,6 @@ alias nv='nvim'
 alias archive='tar --create --gzip --verbose --file'
 
 # workaround for interactive 'rm'
-if alias rm &> /dev/null
-then
-    unalias rm
+if alias rm &>/dev/null; then
+  unalias rm
 fi
-
