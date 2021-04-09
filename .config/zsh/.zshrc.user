@@ -48,6 +48,11 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/plugins.zsh"
 
+if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
+  source "$XDG_CONFIG_HOME/rhel/project_zshrc"
+  source "$XDG_CONFIG_HOME/rhel/settings.sh"
+fi
+
 # fix for snaps
 # if [  -n "$(uname -a | grep Ubuntu)" ]; then
 #   emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
