@@ -1,0 +1,16 @@
+gui:
+  scrollHeight: 2
+  theme:
+    activeBorderColor:
+    - green
+    - bold
+    inactiveBorderColor:
+    - gray
+    optionsTextColor:
+    - cyan
+  returnImmediately: false
+  wrapMainPanel: false
+reporting: "off"
+oS:
+  openCommand: bash -c "nvim {{filename}} >/dev/null"
+  openLinkCommand: bash -c "nvim {{link}} >/dev/null"
