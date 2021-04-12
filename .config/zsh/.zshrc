@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 # zmodload zsh/zprof
-#
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -49,8 +48,7 @@ source "$ZDOTDIR/functions.zsh"
 source "$ZDOTDIR/plugins.zsh"
 
 if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
-  source "$XDG_CONFIG_HOME/rhel/project_zshrc"
-  source "$XDG_CONFIG_HOME/rhel/settings.sh"
+  source "$XDG_CONFIG_HOME/rhel/settings.zsh"
 fi
 
 # fix for snaps

@@ -19,6 +19,7 @@ export HISTIGNORE="ls:ps:history"
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
