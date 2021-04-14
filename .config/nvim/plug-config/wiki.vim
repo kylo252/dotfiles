@@ -28,4 +28,6 @@ nmap <Leader>wN <Plug>VimwikiPrevLink
 
 let g:vim_markdown_folding_disabled = 1
 
-let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always "
+" let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always "
+
+nmap <Leader>zf :ZettelOpen<CR>
