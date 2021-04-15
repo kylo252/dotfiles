@@ -1,18 +1,26 @@
 #!/usr/bin/env zsh
 
 # Auto-attach tmux.
-if ( \
-  (( $+commands[tmux] )) \
-  && ([[ $TMUX == '' ]] && [[ $SUDO_USER == '' ]])
-) {
-  tmux attach-session -t 'default' 2>/dev/null && exit 0
-  tmux new-session -s 'default' && exit 0
+function _start_tmux_session() {
+ if command -v smug >/dev/null; then
+   smug start $1
+ else
+   tmux new-session -s $1
+ fi
 }
+  
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+ tmux attach-session -t 'default' 2>/dev/null && exit 0
+ _start_tmux_session default
+fi
+
+unset -f _start_tmux_session
 
 if [ -d "$HOME/.ssh/keys" ]; then
   eval "$(keychain --eval --quiet ~/.ssh/keys/*)"
 fi
 
+# shellcheck disable
 # Asynchronously zcompile .zcompdump file.
 {
   typeset -g zcompdump="$HOME/.local/share/zsh/zcompdump"
