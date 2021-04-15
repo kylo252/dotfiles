@@ -56,11 +56,8 @@ else
     Plug 'Yggdroot/indentLine'
 
     " git
-    Plug 'lambdalisue/gina.vim'
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'junegunn/gv.vim'
     Plug 'rhysd/git-messenger.vim'
     " Plug 'tweekmonster/startuptime.vim'
 
