@@ -39,9 +39,8 @@ return require('packer').startup(function(use)
     use 'RyanMillerC/better-vim-tmux-resizer'
     use 'christoomey/vim-tmux-navigator'
 
-    use {
-        'hrsh7th/nvim-compe',
-    }
+    use { 'hrsh7th/nvim-compe' }
+    use { 'hrsh7th/vim-vsnip' }
 
     use 'kevinhwang91/nvim-bqf'
 
