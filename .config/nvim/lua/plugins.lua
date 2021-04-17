@@ -83,11 +83,13 @@ return require('packer').startup(function(use)
 
 	--Git suppport
 	use { 'lewis6991/gitsigns.nvim' }
-    use { 
+    use {
 		'TimUntersberger/neogit',
-		requires = {'nvim-lua/plenary.nvim'}
+		requires = {'nvim-lua/plenary.nvim'},
 	}
 
+    use { 'chrisbra/Colorizer' }
+	
   end
 )
 
