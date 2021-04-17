@@ -35,6 +35,12 @@
             bits: 1,
         ),
     ),
+    toggle_workarea: (
+        code: Char('w'),
+        modifiers: (
+            bits: 0,
+        ),
+    ),
     focus_right: (
         code: Right,
         modifiers: (
@@ -205,6 +211,12 @@
     ),
     stashing_toggle_index: (
         code: Char('i'),
+        modifiers: (
+            bits: 0,
+        ),
+    ),
+    stash_apply: (
+        code: Char('a'),
         modifiers: (
             bits: 0,
         ),

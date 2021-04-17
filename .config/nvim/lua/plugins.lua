@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = 'require("plugin_settings.treesitter")',
     }
 
     -- brackets maps
@@ -42,7 +41,6 @@ return require('packer').startup(function(use)
 
     use {
         'hrsh7th/nvim-compe',
-        config = 'require("plugin_settings.compe")',
     }
 
     use 'kevinhwang91/nvim-bqf'
@@ -51,47 +49,45 @@ return require('packer').startup(function(use)
     use {
         'AckslD/nvim-whichkey-setup.lua',
         requires = {'liuchengxu/vim-which-key'},
-        config = 'require("plugin_settings.whichkey")',
     }
 
---    use {
---      'hoob3rt/lualine.nvim',
---        requires = {'kyazdani42/nvim-web-devicons'},
---        config = 'require("plugin_settings.statusline")'
---    }
+   use {
+	   'Famiu/feline.nvim',
+	   requires = {'kyazdani42/nvim-web-devicons'},
+   }
 
-    -- comment with gcc
-    use 'tpope/vim-commentary'
 
        -- tree (view files)
     use {
         'kyazdani42/nvim-tree.lua',
         requires = {'kyazdani42/nvim-web-devicons'}, -- for file icons
-        config = 'require("plugin_settings.tree")',
     }
 
     -- telescope
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-        config = 'require("plugin_settings.telescope")',
     }
 
     -- LF
     use {
-        'ptzz/lf.vim', 
+        'ptzz/lf.vim',
         requires = {'voldikss/vim-floaterm'},
     }
 
-    use {
-        'romgrk/barbar.nvim',
-        config = 'require("plugin_settings.barbar")',
-    }
+	use { 'romgrk/barbar.nvim' }
+	use { 'glepnir/dashboard-nvim' }
 
-    use {
-        'glepnir/dashboard-nvim',
-        config = 'require("plugin_settings.dashboard")'
-    }
+	--comments
+	use { 'terrortylor/nvim-comment' }
+
+	--Git suppport
+	use { 'lewis6991/gitsigns.nvim' }
+    use { 
+		'TimUntersberger/neogit',
+		requires = {'nvim-lua/plenary.nvim'}
+	}
 
   end
 )
+

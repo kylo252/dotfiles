@@ -35,3 +35,5 @@ local keymap = {
     b = {'<Cmd>lua require("gitsigns").blame_line()<CR>', 'blame'},
 }
 wk.register_keymap('leader', {h = keymap})
+
+require('neogit').setup()
