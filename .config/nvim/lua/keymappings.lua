@@ -5,6 +5,9 @@ local function set_keymap(mode, opts, keymaps)
 end
 
 
+vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+vim.g.mapleader = ' '
+
 -- normal {{{1
 set_keymap('n', {noremap=true, silent=true}, {
     -- remap leader keys to noop
@@ -34,13 +37,12 @@ set_keymap('n', {noremap=true, silent=true}, {
     -- Navigate buffers
     {'<Tab>', ':bnext<CR>'},
     {'<S-Tab>', ':bprevious<CR>'},
-	
-	-- no hl
-	{'<Leader>h', ':set hlsearch!<CR>'},
+    -- no hl
+    {'<Leader>h', ':set hlsearch!<CR>'},
 
-	-- explorer
-	{'<Leader>e', ':NvimTreeToggle<CR>'},
-	{'<Leader>f', ':Lf'},
+    -- explorer
+    {'<Leader>e', ':NvimTreeToggle<CR>'},
+    {'<Leader>f', ':Lf'},
 })
 
 -- visual {{{1
@@ -90,11 +92,6 @@ set_keymap('t', {noremap=true, silent=true}, {
     {'<A-h>', [[<C-\><C-N>gT]]},
     {'<A-l>', [[<C-\><C-N>gt]]},
 })
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-vim.g.mapleader = ' '
-
-
-
 
 -- vim.api.nvim_set_keymap('i', '<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true})
 

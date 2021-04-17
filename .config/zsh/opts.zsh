@@ -72,12 +72,12 @@ function __setup_kemaps() {
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word
 
-  function expand-alias() {
-    zle _expand_alias
-    zle self-insert
-  }
-  zle -N expand-alias
-  bindkey -M main ' ' expand-alias
+#  function expand-alias() {
+#    zle _expand_alias
+#    zle self-insert
+#  }
+#  zle -N expand-alias
+#  bindkey -M main ' ' expand-alias
 }
 __setup_kemaps
 unset -f __setup_kemaps

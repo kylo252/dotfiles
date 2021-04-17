@@ -1,47 +1,42 @@
+vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
+vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
+vim.cmd('set inccommand=split') -- Make substitution work in realtime
+vim.o.hidden = O.hidden_files -- Required to keep multiple buffers open multiple buffers
+vim.o.title = true
 TERMINAL = vim.fn.expand('$TERMINAL')
+vim.cmd('let &titleold="'..TERMINAL..'"')
+vim.o.titlestring="%<%F%=%l/%L - nvim"
+vim.wo.wrap = O.wrap_lines -- Display long lines as just one line
+vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
+vim.cmd('syntax on') -- move to next line with theses keys
+vim.o.pumheight = 10 -- Makes popup menu smaller
+vim.o.fileencoding = "utf-8" -- The encoding written to file
+vim.o.cmdheight = 2 -- More space for displaying messages
+vim.cmd('set colorcolumn=99999') -- fix indentline for now
+vim.o.mouse = "a" -- Enable your mouse
+vim.o.splitbelow = true -- Horizontal splits will automatically be below
+vim.o.termguicolors = true -- set term giu colors most terminals support this
+vim.o.splitright = true -- Vertical splits will automatically be to the right
+vim.o.t_Co = "256" -- Support 256 colors
+vim.o.conceallevel = 0 -- So that I can see `` in markdown files
+vim.cmd('set ts=4') -- Insert 2 spaces for a tab
+vim.cmd('set sw=4') -- Change the number of space characters inserted for indentation
+vim.bo.expandtab = true -- Converts tabs to spaces
+vim.bo.smartindent = true -- Makes indenting smart
+vim.wo.number = O.number -- set numbered lines
+vim.wo.relativenumber = O.relative_number -- set relative number
+vim.wo.cursorline = true -- Enable highlighting of the current line
+vim.o.showtabline = 2 -- Always show tabs
+vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
+vim.o.backup = false -- This is recommended by coc
+vim.o.writebackup = false -- This is recommended by coc
+vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+vim.o.updatetime = 300 -- Faster completion
+vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms
+vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+-- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
+-- vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
+-- vim.o.guifont = "SauceCodePro Nerd Font:h17"
+vim.o.guifont = "FiraCode Nerd Font:h17"
 
--- temporary workaround until https://github.com/neovim/neovim/pull/13479 is finished
-
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-
-local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= 'o' then scopes['o'][key] = value end
-end
-
-local indent = 2
-
-vim.g.mapleader = ' '
-opt('b', 'expandtab', true)                           -- Use spaces instead of tabs
-opt('b', 'shiftwidth', indent)                        -- Size of an indent
-opt('b', 'smartindent', true)                         -- Insert indents automatically
-opt('b', 'tabstop', indent)                           -- Number of spaces tabs count for
-
-opt('o', 'clipboard', 'unnamedplus')                  -- Share system clipboard
-opt('o', 'conceallevel', 0)
-opt('o', 'hidden', true)                              -- Enable modified buffers in background
-opt('o', 'ignorecase', true)                          -- Ignore case with capitals
-opt('o', 'joinspaces', false)                         -- No double spaces with join after a dot
-opt('o', 'mouse', 'a')																-- Enable mouse support for all modes
-opt('o', 'scrolloff', 4 )                             -- Lines of context
-opt('o', 'showmode', false)                           -- No need to show --insert--
-opt('o', 'shiftround', true)                          -- Round indent
-opt('o', 'sidescrolloff', 8 )                         -- Columns of context
-opt('o', 'splitbelow', true)                          -- Put new windows below current
-opt('o', 'splitright', true)                          -- Put new windows right of current
-opt('o', 'updatetime', 300)														-- Faster completion
-opt('o', 'termguicolors', true)                       -- True color support
-opt('o', 'title', true)
-opt('o', 'titlestring', "%<%F%=%l/%L - nvim")
-opt('o', 'wildmode', 'longest:full,full')             -- Command-line completion mode
-
-opt('w', 'list', true)                                -- Show some invisible characters (tabs...)
-opt('w', 'number', true)                              -- Print line number
-opt('w', 'relativenumber', true)                      -- Relative line numbers
-opt('w', 'wrap', false)                               -- Disable line wrap
-
--- vim.o.pumheight = 10 -- Makes popup menu smaller
--- vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms
--- vim.wo.cursorline = true -- Enable highlighting of the current line
---
-vim.o.guifont = "Droid Sans Mono Nerd Font"
+-- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"

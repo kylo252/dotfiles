@@ -22,6 +22,7 @@ alias la='ls -A --color=auto'
 alias ll='ls -laFq --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 
+alias lazydots='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias lzd='lazydocker'
 alias lzg='lazygit'
 
