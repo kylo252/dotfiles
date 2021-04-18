@@ -11,84 +11,55 @@ end
 return require('packer').startup(function(use)
 
     -- packer can manage itself as an optional plugin
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
 
-  -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
-    -- lsp
+    -- LSP
     use { 'neovim/nvim-lspconfig' }
     use { 'glepnir/lspsaga.nvim' }
-
-     use {
-      'kabouzeid/nvim-lspinstall',
-      requires = {'neovim/nvim-lspconfig'},
-    }
+    use { 'kabouzeid/nvim-lspinstall',
+		requires = {'neovim/nvim-lspconfig'} }
 
     -- treesitter
-
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-    }
-
-    -- brackets maps
-    use 'tpope/vim-unimpaired'
-    use 'romgrk/doom-one.vim'
-    use 'kyazdani42/nvim-web-devicons'
+    use { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate' }
 
     -- TMUX
-    use 'RyanMillerC/better-vim-tmux-resizer'
-    use 'christoomey/vim-tmux-navigator'
+    use { 'RyanMillerC/better-vim-tmux-resizer' }
+    use { 'christoomey/vim-tmux-navigator' }
+	use { 'tmux-plugins/vim-tmux-focus-events' }
 
     use { 'hrsh7th/nvim-compe' }
     use { 'hrsh7th/vim-vsnip' }
-
-    use 'kevinhwang91/nvim-bqf'
-
-    -- which key?
-    use {
-        'AckslD/nvim-whichkey-setup.lua',
-        requires = {'liuchengxu/vim-which-key'},
-    }
-
-   use {
-	   'Famiu/feline.nvim',
-	   requires = {'kyazdani42/nvim-web-devicons'},
-   }
-
-
-       -- tree (view files)
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons'}, -- for file icons
-    }
+    use { 'kevinhwang91/nvim-bqf' }
 
     -- telescope
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    }
+    use { 'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
 
-    -- LF
-    use {
-        'ptzz/lf.vim',
-        requires = {'voldikss/vim-floaterm'},
-    }
-
-	use { 'romgrk/barbar.nvim' }
+	-- UI
 	use { 'glepnir/dashboard-nvim' }
+    use { 'romgrk/doom-one.vim' }
+	use { 'romgrk/barbar.nvim' } 	--tabs
+    use { 'Famiu/feline.nvim', 		--statusline
+		requires = {'kyazdani42/nvim-web-devicons'}}
+    use { 'chrisbra/Colorizer' }    --hex colorizer
 
-	--comments
-	use { 'terrortylor/nvim-comment' }
+    -- file viewers (managers)
+    use { 'kyazdani42/nvim-tree.lua',
+		requires = {'kyazdani42/nvim-web-devicons'} }
+	use { 'ptzz/lf.vim',
+        requires = {'voldikss/vim-floaterm'} }
 
 	--Git suppport
 	use { 'lewis6991/gitsigns.nvim' }
-    use {
-		'TimUntersberger/neogit',
-		requires = {'nvim-lua/plenary.nvim'},
-	}
+    use { 'TimUntersberger/neogit',
+		requires = {'nvim-lua/plenary.nvim'} }
 
-    use { 'chrisbra/Colorizer' }
-	
+	-- utils
+	use { 'terrortylor/nvim-comment' }
+    use { 'tpope/vim-unimpaired' }
+    use { 'AckslD/nvim-whichkey-setup.lua',
+        requires = {'liuchengxu/vim-which-key'} }
   end
 )
 
