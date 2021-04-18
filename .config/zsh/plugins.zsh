@@ -41,3 +41,7 @@ zstyle ':completion:*' group-name ''
 # Enable keyboard navigation of completions in menu
 # (not just tab/shift-tab but cursor keys as well):
 zstyle ':completion:*' menu select
+
+# expand alias just with <TAB> 
+# TODO: keep a lookout for performance penalties or clashes with `autosuggestions`
+zstyle ':completion:*' completer _expand_alias _complete _ignored
