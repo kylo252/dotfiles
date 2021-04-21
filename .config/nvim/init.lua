@@ -8,7 +8,6 @@ require('keymappings')
 require('colorscheme')
 require('config')
 
--- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 ---- LSP

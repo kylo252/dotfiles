@@ -34,6 +34,7 @@
     reuse-msg = commit --reuse-message=ORIG_HEAD
     soft-reset = reset HEAD~1 --soft
     st = status
+    smu = submodule update --init --recursive
     dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME"
 [user]
 	email = 59826753+kylo252@users.noreply.github.com

@@ -41,8 +41,8 @@ set_keymap('n', {noremap=true, silent=true}, {
     {'<Leader>h', ':set hlsearch!<CR>'},
 
     -- explorer
-    {'<Leader>e', ':NvimTreeToggle<CR>'},
-    {'<Leader>f', ':Lf'},
+    --{'<Leader>e', ':NvimTreeToggle<CR>'},
+    --{'<Leader>lf', ':Lf<CR>'},
 })
 
 -- visual {{{1

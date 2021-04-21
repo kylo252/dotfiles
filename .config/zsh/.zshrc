@@ -24,6 +24,7 @@ _bin_list=(
   "$HOME/bin"
   "$CARGO_HOME/bin"
   "$GEM_HOME/bin"
+  "$NPM_HOME/bin"
   "$GOPATH/bin"
   )
 

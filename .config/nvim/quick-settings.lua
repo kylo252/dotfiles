@@ -15,7 +15,7 @@ O.wrap_lines = false
 O.number = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
-O.treesitter.ensure_installed = "all"
+O.treesitter.ensure_installed = "maintained"
 O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
 

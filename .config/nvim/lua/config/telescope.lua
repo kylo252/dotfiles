@@ -13,6 +13,7 @@ local keymap = {
         c = {'<Cmd>Telescope commands<CR>', 'commands'},
         h = {'<Cmd>Telescope command_history<CR>', 'history'},
     },
+    r = {'<Cmd>Telescope oldfiles<CR>', 'oldfiles'},
     q = {'<Cmd>Telescope quickfix<CR>', 'quickfix'},
     g = {
         name = '+git',
@@ -32,6 +33,7 @@ local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
         find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
+        vimgrep_arguments = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
         prompt_position = "top",
         prompt_prefix = " ",
         selection_caret = " ",

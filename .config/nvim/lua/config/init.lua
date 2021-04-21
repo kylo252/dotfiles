@@ -9,3 +9,5 @@ require('config.telescope')
 require('config.tree')
 require('config.treesitter')
 require('config.whichkey')
+
+require('spectre').setup()

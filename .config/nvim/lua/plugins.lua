@@ -60,6 +60,8 @@ return require('packer').startup(function(use)
     use { 'tpope/vim-unimpaired' }
     use { 'AckslD/nvim-whichkey-setup.lua',
         requires = {'liuchengxu/vim-which-key'} }
+	use { 'windwp/nvim-spectre',
+		requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-lua/popup.nvim'} } }
   end
 )
 
