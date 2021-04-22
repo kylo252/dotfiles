@@ -40,5 +40,4 @@ vim.o.smartcase = true
 -- vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 -- vim.o.guifont = "SauceCodePro Nerd Font:h17"
 vim.o.guifont = "FiraCode Nerd Font:h17"
-
 -- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"

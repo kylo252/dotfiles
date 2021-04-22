@@ -1,11 +1,19 @@
+-- create a symlink If built manually
+-- `ln -s ./bin/Linux/lua-language-server .`
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-DATA_PATH = vim.fn.stdpath('data')
 
-local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
-local sumneko_binary = sumneko_root_path .. "/sumneko-lua-language-server"
+local sumneko_cmd
+
+if vim.fn.executable("lua-language-server") == 1 then
+  sumneko_cmd = {"lua-language-server"}
+else
+  local sumneko_root_path = DATA_PATH.."/lspinstall/lua"
+  sumneko_cmd = {sumneko_root_path.."/bin/Linux/lua-language-server", "-E", sumneko_root_path.."/main.lua" }
+end
 
 require'lspconfig'.sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    cmd = sumneko_cmd,
+	autostart = true,
     on_attach = require'lsp'.common_on_attach,
     settings = {
         Lua = {
@@ -20,7 +28,7 @@ require'lspconfig'.sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
+                globals = {'vim', 'DATA_PATH', 'O'}
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
@@ -30,3 +38,4 @@ require'lspconfig'.sumneko_lua.setup {
         }
     }
 }
+

@@ -22,6 +22,10 @@ local keymap = {
         b = {'<Cmd>Telescope git_branches<CR>', 'branches'},
         s = {'<Cmd>Telescope git_status<CR>', 'status'},
     },
+	d = {
+		name = '+diagonstics',
+		d = {'<Cmd>Telescope lsp_workspace_diagnostics<CR>', 'diagonstics'},
+	},
 }
 
 wk.register_keymap('leader', {f = keymap})

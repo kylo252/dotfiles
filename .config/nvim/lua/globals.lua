@@ -61,6 +61,8 @@ O = {
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 }
 
-DATA_PATH = vim.fn.stdpath('data')
-CACHE_PATH = vim.fn.stdpath('cache')
+DATA_PATH = vim.fn.getenv("HOME").."/.local/share/nvim"
+CACHE_PATH = vim.fn.getenv("HOME").."/.cache/nvim"
+-- DATA_PATH = vim.fn.stdpath('data')
+-- CACHE_PATH = vim.fn.stdpath('cache')
 

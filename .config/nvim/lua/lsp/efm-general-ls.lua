@@ -1,11 +1,10 @@
 -- Example configuations here: https://github.com/mattn/efm-langserver
 -- TODO this file needs to be refactored eache lang should be it's own file
 -- python
-local python_arguments = {}
 
 -- TODO replace with path argument
 local flake8 = {
-    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+	LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"}
 }
@@ -14,6 +13,8 @@ local isort = {formatCommand = "isort --quiet -", formatStdin = true}
 
 local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
 local black = {formatCommand = "black --quiet --stdin-filename ", formatStdin = true}
+
+local python_arguments = {yapf}
 
 if O.python.linter == 'flake8' then table.insert(python_arguments, flake8) end
 
@@ -26,16 +27,15 @@ elseif O.python.formatter == 'black' then
 end
 
 -- lua
-local lua_arguments = {}
 local luaFormat = {
     formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
     formatStdin = true
 }
+local lua_arguments = {luaFormat}
 
 if O.lua.formatter == 'lua-format' then table.insert(lua_arguments, luaFormat) end
 
 -- sh
-local sh_arguments = {}
 
 local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
 
@@ -43,6 +43,7 @@ local shellcheck = {
     LintCommand = 'shellcheck -f gcc -x',
     lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
 }
+local sh_arguments = {shellcheck, shfmt}
 
 if O.sh.formatter == 'shfmt' then table.insert(sh_arguments, shfmt) end
 
