@@ -15,9 +15,20 @@ function __setup_defaults() {
   export DOTBARE_DIR="$HOME/.dtf.git"
   export DOTBARE_TREE="$HOME"
 
-  # export ZGEN_INIT="$ZDOTDIR/init.zsh"
+	# export ZGEN_INIT="$ZDOTDIR/init.zsh"
   export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
   export ZGEN_AUTOLOAD_COMPINIT=1
+}
+
+function __setup_cli_colors(){
+  export CLICOLOR=1  
+  export LESS_TERMCAP_mb=$(print -P "%F{cyan}")
+  export LESS_TERMCAP_md=$(print -P "%B%F{red}")
+  export LESS_TERMCAP_me=$(print -P "%f%b")
+  export LESS_TERMCAP_so=$(print -P "%F{magenta}")
+  export LESS_TERMCAP_se=$(print -P "%K{black}")
+  export LESS_TERMCAP_us=$(print -P "%U%F{green}")
+  export LESS_TERMCAP_ue=$(print -P "%f%u")
 }
 
 function __setup_xdg() {
@@ -94,6 +105,7 @@ function __setup_misc() {
 
 __setup_functions=(
   __setup_defaults
+	__setup_cli_colors
   __setup_xdg
   __setup_history
   __setup_x11
