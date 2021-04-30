@@ -55,7 +55,7 @@ local wk = require('which-key')
 wk.register({
   ["<leader>"] = {
 	e = {':NvimTreeToggle<CR>',   'toggle tree'},
-	l = {':Lf<CR>', 'toggle lf'},
+	L = {':Lf<CR>', 'toggle lf'},
 	n = {':Dashboard<CR>', 'dashboard'},
    },
 })

@@ -4,12 +4,8 @@
 
 local sumneko_cmd
 
-if vim.fn.executable("lua-language-server") == 1 then
-  sumneko_cmd = {"lua-language-server"}
-else
-  local sumneko_root_path = DATA_PATH.."/lspinstall/lua"
-  sumneko_cmd = {sumneko_root_path.."/bin/Linux/lua-language-server", "-E", sumneko_root_path.."/main.lua" }
-end
+local sumneko_root_path = DATA_PATH.."/lspinstall/lua"
+sumneko_cmd = {sumneko_root_path.."/sumneko-lua-language-server", "-E", sumneko_root_path.."/main.lua" }
 
 require'lspconfig'.sumneko_lua.setup {
     cmd = sumneko_cmd,

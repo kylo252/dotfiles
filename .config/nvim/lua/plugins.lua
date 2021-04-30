@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
     use { 'glepnir/lspsaga.nvim' }
     use { 'kabouzeid/nvim-lspinstall',
 		requires = {'neovim/nvim-lspconfig'} }
+	use { 'folke/lsp-trouble.nvim' }
 
     -- treesitter
     use { 'nvim-treesitter/nvim-treesitter',
@@ -59,14 +60,11 @@ return require('packer').startup(function(use)
 	-- utils
 	use { 'terrortylor/nvim-comment' }
     use { 'tpope/vim-unimpaired' }
-    -- use { 'AckslD/nvim-whichkey-setup.lua',
-    --     requires = {'liuchengxu/vim-which-key'} }
-
-    use { 'folke/which-key.nvim '}
+    use { 'folke/which-key.nvim' }
 	use { 'windwp/nvim-spectre',
 		requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-lua/popup.nvim'} } }
 
-	use { 'mhartington/formatter.nvim' } 
+	use { 'mhartington/formatter.nvim' }
   end
 )
 

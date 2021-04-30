@@ -9,5 +9,6 @@ require('config.tree')
 require('config.treesitter')
 require('config.whichkey')
 require('config.formatter')
+require('config.lsp-trouble')
 
 require('spectre').setup()
