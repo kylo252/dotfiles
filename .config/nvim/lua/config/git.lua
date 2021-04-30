@@ -24,7 +24,7 @@ require('gitsigns').setup {
     },
 }
 
-local wk = require('whichkey_setup')
+local wk = require('which-key')
 local keymap = {
     name = '+hunk',
     s = {'<Cmd>lua require("gitsigns").stage_hunk()<CR>', 'stage'},
@@ -34,6 +34,7 @@ local keymap = {
     p = {'<Cmd>lua require("gitsigns").preview_hunk()<CR>', 'preview'},
     b = {'<Cmd>lua require("gitsigns").blame_line()<CR>', 'blame'},
 }
-wk.register_keymap('leader', {h = keymap})
+
+wk.register(keymap, { prefix = "<leader>g"})
 
 require('neogit').setup()

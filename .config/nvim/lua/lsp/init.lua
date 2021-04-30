@@ -1,3 +1,5 @@
+local wk = require('which-key')
+
 -- TODO figure out why this don't work
 vim.fn.sign_define(
     "LspDiagnosticsSignError",
@@ -31,6 +33,28 @@ vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
 vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
+local keymap = { 
+	l = {
+        name = "+LSP",
+        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
+        A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
+        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
+        D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
+        f = {"<cmd>LspFormatting<cr>", "Format"},
+        i = {"<cmd>LspInfo<cr>", "Info"},
+        l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
+        L = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
+        p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
+        q = {"<cmd>Telescope quickfix<cr>", "Quickfix"},
+        r = {"<cmd>Lspsaga rename<cr>", "Rename"},
+        t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
+        x = {"<cmd>cclose<cr>", "Close Quickfix"},
+        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
+        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
+    },
+}
+
+wk.register(keymap, { prefix = "<leader>" })
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {

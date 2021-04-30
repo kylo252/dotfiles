@@ -29,15 +29,7 @@ vim.g.nvim_tree_icons = {
 local opts = {silent=true, noremap=true}
 -- vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 
-local wk = require('whichkey_setup')
-
-local keymap = {
-    --name = '+navigation',
-    --f = {':NvimTreeFindFile<CR>', 'find file'},
-    e = {':NvimTreeToggle<CR>',   'toggle tree'},
-	l = {':Lf<CR>', 'toggle lf'}
-}
-
 vim.g.lf_map_keys = 0
 
-wk.register_keymap('leader', keymap)
+
+

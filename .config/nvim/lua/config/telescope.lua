@@ -1,20 +1,27 @@
-local wk = require('whichkey_setup')
+local wk = require('which-key')
 
 local opts = {silent=true, noremap=true}
 vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>Telescope find_files<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-f>', '<Cmd>Telescope live_grep<CR>', opts)
 
 local keymap = {
-    name = '+find',
-    b = {'<Cmd>Telescope buffers<CR>', 'buffers'},
-    h = {'<Cmd>Telescope help_tags<CR>', 'help tags'},
-    c = {
+    f = {
+		name = '+Find',
+		b = {'<Cmd>Telescope buffers<CR>', 'buffers'},
+		h = {'<Cmd>Telescope help_tags<CR>', 'help tags'},
+        c = {"<cmd>Telescope colorscheme<CR>", "Colorscheme"},
+        f = {"<cmd>Telescope find_files<CR>", "Find File"},
+        m = {"<cmd>Telescope marks<CR>", "Marks"},
+        M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
+        r = {"<cmd>Telescope oldfiles<CR>", "Open Recent File"},
+        R = {"<cmd>Telescope registers<CR>", "Registers"},
+        g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
+    },   
+	c = {
         name = '+commands',
         c = {'<Cmd>Telescope commands<CR>', 'commands'},
         h = {'<Cmd>Telescope command_history<CR>', 'history'},
     },
-    r = {'<Cmd>Telescope oldfiles<CR>', 'oldfiles'},
-    q = {'<Cmd>Telescope quickfix<CR>', 'quickfix'},
     g = {
         name = '+git',
         g = {'<Cmd>Telescope git_commits<CR>', 'commits'},
@@ -22,13 +29,10 @@ local keymap = {
         b = {'<Cmd>Telescope git_branches<CR>', 'branches'},
         s = {'<Cmd>Telescope git_status<CR>', 'status'},
     },
-	d = {
-		name = '+diagonstics',
-		d = {'<Cmd>Telescope lsp_workspace_diagnostics<CR>', 'diagonstics'},
-	},
-}
+} 
 
-wk.register_keymap('leader', {f = keymap})
+wk.register(keymap, { prefix = "<leader>" })
+
 
 local actions = require('telescope.actions')
 -- Global remapping

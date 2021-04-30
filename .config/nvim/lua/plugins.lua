@@ -39,6 +39,7 @@ return require('packer').startup(function(use)
 	-- UI
 	use { 'glepnir/dashboard-nvim' }
     use { 'romgrk/doom-one.vim' }
+	use { 'folke/tokyonight.nvim' }
 	use { 'romgrk/barbar.nvim' } 	--tabs
     use { 'Famiu/feline.nvim', 		--statusline
 		requires = {'kyazdani42/nvim-web-devicons'}}
@@ -58,8 +59,10 @@ return require('packer').startup(function(use)
 	-- utils
 	use { 'terrortylor/nvim-comment' }
     use { 'tpope/vim-unimpaired' }
-    use { 'AckslD/nvim-whichkey-setup.lua',
-        requires = {'liuchengxu/vim-which-key'} }
+    -- use { 'AckslD/nvim-whichkey-setup.lua',
+    --     requires = {'liuchengxu/vim-which-key'} }
+
+    use { 'folke/which-key.nvim '}
 	use { 'windwp/nvim-spectre',
 		requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-lua/popup.nvim'} } }
 

@@ -15,7 +15,8 @@ if O.json.autoformat then table.insert(auto_formatters, json_format) end
 vim.api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.sh,*.lua FormatWrite
+  autocmd BufWritePost *.sh FormatWrite
+  "autocmd BufWritePost *.sh,*.lua FormatWrite
 augroup END
 ]], true)
 
