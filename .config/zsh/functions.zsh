@@ -3,7 +3,7 @@
 # ChrisTitusTech/zsh/blob/master/aliasrc
 # ex - archive extractor
 # usage: ex <file>
-ex() {
+function ex() {
   if [ -f "$1" ]; then
     case $1 in
       *.tar.bz2) tar xjf "$1" ;;
@@ -149,3 +149,9 @@ function exec-zsh() { exec zsh <$TTY; }
 zle -N exec-zsh
 zmodload zsh/terminfo
 bindkey "${terminfo[kf5]}" exec-zsh
+
+
+function luamake() {
+		"$XDG_DATA_HOME"/nvim/lspinstall/lua/3rd/luamake/luamake "$@"
+}
+
