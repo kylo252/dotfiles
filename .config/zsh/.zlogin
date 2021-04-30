@@ -19,9 +19,6 @@
 
 # unset -f _start_tmux_session
 
-if [ -d "$HOME/.ssh/keys" ]; then
-  eval "$(keychain --eval --quiet ~/.ssh/keys/*)"
-fi
 
 # shellcheck disable
 # Asynchronously zcompile .zcompdump file.

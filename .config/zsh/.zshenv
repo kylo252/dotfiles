@@ -54,23 +54,6 @@ function __setup_history() {
   export LISTMAX=50       # The size of asking history
 }
 
-function __setup_x11() {
-  if [ -z "$SSH_CONNECTION" ]; then
-    # How to check if WSL1/2
-    # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
-    if [ -d /run/WSL ]; then
-      # How to set up working X11 forwarding on WSL2
-      # https://stackoverflow.com/a/61110604
-      # DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-      DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
-    else
-      DISPLAY=localhost:0
-    fi
-    export DISPLAY
-    export LIBGL_ALWAYS_INDIRECT=1
-  fi
-}
-
 function __setup_fzf() {
   export FZF_DEFAULT_OPTS="--layout=reverse  --multi \
         --bind '?:toggle-preview' \
@@ -105,10 +88,9 @@ function __setup_misc() {
 
 __setup_functions=(
   __setup_defaults
-	__setup_cli_colors
+  __setup_cli_colors
   __setup_xdg
   __setup_history
-  __setup_x11
   __setup_fzf
   __setup_misc
 )

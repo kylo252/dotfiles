@@ -39,6 +39,26 @@ unset _bin_list
 SHELL="$(command -v zsh)"
 export SHELL
 
+function __setup_x11() {
+  if [ -z "$SSH_CONNECTION" ]; then
+    # How to check if WSL1/2
+    # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
+    if [ -d /run/WSL ]; then
+      # How to set up working X11 forwarding on WSL2
+      # https://stackoverflow.com/a/61110604
+      # DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+      DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+	  source "$ZDOTDIR/utils/ssh-agent.zsh"
+    else
+      DISPLAY=localhost:0
+    fi
+    export DISPLAY
+    export LIBGL_ALWAYS_INDIRECT=1
+  fi
+}
+
+__setup_x11
+
 source "$ZDOTDIR/opts.zsh"
 
 source "$ZDOTDIR/aliases.zsh"
