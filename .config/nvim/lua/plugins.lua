@@ -62,6 +62,8 @@ return require('packer').startup(function(use)
         requires = {'liuchengxu/vim-which-key'} }
 	use { 'windwp/nvim-spectre',
 		requires = { { 'nvim-lua/plenary.nvim' }, { 'nvim-lua/popup.nvim'} } }
+
+	use { 'mhartington/formatter.nvim' } 
   end
 )
 

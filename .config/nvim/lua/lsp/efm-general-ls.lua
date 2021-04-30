@@ -33,7 +33,7 @@ local luaFormat = {
 }
 local lua_arguments = {luaFormat}
 
-if O.lua.formatter == 'lua-format' then table.insert(lua_arguments, luaFormat) end
+table.insert(lua_arguments, luaFormat)
 
 -- sh
 
@@ -45,9 +45,8 @@ local shellcheck = {
 }
 local sh_arguments = {shellcheck, shfmt}
 
-if O.sh.formatter == 'shfmt' then table.insert(sh_arguments, shfmt) end
-
-if O.sh.linter == 'shellcheck' then table.insert(sh_arguments, shellcheck) end
+table.insert(sh_arguments, shfmt)
+table.insert(sh_arguments, shellcheck)
 
 -- tsserver/web javascript react, vue, json, html, css, yaml
 local prettier = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
@@ -106,3 +105,5 @@ require"lspconfig".efm.setup {
 
 -- Also find way to toggle format on save
 -- maybe this will help: https://superuser.com/questions/439078/how-to-disable-autocmd-or-augroup-in-vim
+
+
