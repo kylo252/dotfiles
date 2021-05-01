@@ -36,11 +36,12 @@ function __setup_default_exports() {
   export DOTBARE_TREE="$HOME"
 }
 
-function __setup_deps() {
+function __setup_dotfiles() {
 
+  __check_reqs
   __setup_default_exports
 
-  echo "Fetchings dependencies.."
+  echo "Fetching dependencies.."
 
   if [ ! -d "$XDG_DATA_HOME/dotbare" ]; then
     git clone https://github.com/kazhala/dotbare "$XDG_DATA_HOME/dotbare"
@@ -50,17 +51,13 @@ function __setup_deps() {
     "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
   fi
 
+  echo 'Installing zsh plugins'
+
   if [ ! -d "$XDG_DATA_HOME/znap" ]; then
     git clone https://github.com/marlonrichert/zsh-snap "$XDG_DATA_HOME/znap"
   fi
 
-  echo 'Installing zsh plugins'
-
   zsh -c "source $ZDOTDIR/plugins.zsh"
-
-}
-
-function __setup_utils() {
 
   echo "setting up fzf.."
 
@@ -72,18 +69,13 @@ function __setup_utils() {
 
   echo "setting up tmux.."
 
-  local TPM_DIR=$XDG_CONFIG_HOME/tmux/plugins/tpm
-
   if [ ! -d "$TPM_DIR" ]; then
-    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    git clone https://github.com/tmux-plugins/tpm "$XDG_DATA_HOME/tpm"
   fi
 }
 
-__check_reqs
-__setup_deps
-__setup_utils
+__setup_dotfiles
 
 unset -f __check_reqs
 unset -f __setup_deps
-unset -f __setup_utils
 unset -f __setup_default_exports
