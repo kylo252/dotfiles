@@ -34,6 +34,8 @@ function __setup_default_exports() {
   export DOTBARE_DIR="$HOME/.dtf.git"
 
   export DOTBARE_TREE="$HOME"
+
+  export TPM_DIR="$XDG_DATA_HOME/tmux/plugins/tpm"
 }
 
 function __setup_dotfiles() {
@@ -70,12 +72,12 @@ function __setup_dotfiles() {
   echo "setting up tmux.."
 
   if [ ! -d "$TPM_DIR" ]; then
-    git clone https://github.com/tmux-plugins/tpm "$XDG_DATA_HOME/tpm"
+    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
   fi
 }
 
 __setup_dotfiles
 
 unset -f __check_reqs
-unset -f __setup_deps
+unset -f __setup_dotfiles
 unset -f __setup_default_exports
