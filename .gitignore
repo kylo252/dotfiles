@@ -43,15 +43,16 @@
 !/.config/bash/**
 # --- zsh
 !/.zshrc.user
-!/.config/zsh/*
 !/.config/zsh/**
 /.config/zsh/.zcomp*
-/.config/zsh/.zgenom
+/.config/zsh/*.zwc
 # --- nvim
-!/.config/nvim/*
 !/.config/nvim/**
-!/.config/nvim/general/*
-!/.config/nvim/plug-config/*
-!/.config/nvim/keys/*
-!/.config/nvim/themes/*
-/.config/coc/**
+!/.config/nvim/lua/**
+# --- misc
+/.config/gatsby
+/.config/configstore
+/.config/containers
+/.config/geany
+# --- don't track reproducible scripts
+/.config/fzf/fzf.*
