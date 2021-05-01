@@ -49,8 +49,6 @@ return require('packer').startup(function(use)
     -- file viewers (managers)
     use { 'kyazdani42/nvim-tree.lua',
 		requires = {'kyazdani42/nvim-web-devicons'} }
-	use { 'ptzz/lf.vim',
-        requires = {'voldikss/vim-floaterm'} }
 
 	--Git suppport
 	use { 'lewis6991/gitsigns.nvim' }

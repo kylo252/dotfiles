@@ -7,7 +7,7 @@ require('formatter').setup({
         return {
           exe = "shfmt",
           args = {"-i 2 -ci"},
-          stdin = true
+          stdin = false
         }
       end
     },

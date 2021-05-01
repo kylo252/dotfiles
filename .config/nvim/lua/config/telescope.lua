@@ -16,7 +16,7 @@ local keymap = {
         r = {"<cmd>Telescope oldfiles<CR>", "Open Recent File"},
         R = {"<cmd>Telescope registers<CR>", "Registers"},
         g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
-    },   
+    },
 	c = {
         name = '+commands',
         c = {'<Cmd>Telescope commands<CR>', 'commands'},
@@ -29,7 +29,7 @@ local keymap = {
         b = {'<Cmd>Telescope git_branches<CR>', 'branches'},
         s = {'<Cmd>Telescope git_status<CR>', 'status'},
     },
-} 
+}
 
 wk.register(keymap, { prefix = "<leader>" })
 
