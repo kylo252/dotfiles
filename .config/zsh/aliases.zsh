@@ -28,9 +28,6 @@ alias lzg='lazygit'
 
 alias paux='ps aux | rg'
 
-alias potd='git push origin HEAD:refs/drafts/master' # used as 'potd'
-alias potm='git push origin HEAD:refs/for/master'    # used as 'potm'
-
 alias rd='rm -rd'
 
 alias rn='ranger'
