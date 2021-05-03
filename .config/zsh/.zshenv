@@ -68,10 +68,6 @@ function __setup_fzf() {
 }
 
 function __setup_misc() {
-  if command -v fnm &>/dev/null; then
-    eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)"
-  fi
-
   export BAT_PAGER="less -RF"
   # https://github.com/sharkdp/bat/issues/652
   # export MANPAGER="sh -c 'col -bx | bat -l man -p'"

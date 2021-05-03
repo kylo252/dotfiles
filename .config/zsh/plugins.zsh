@@ -45,3 +45,8 @@ zstyle ':completion:*' menu select
 # expand alias just with <TAB> 
 # TODO: keep a lookout for performance penalties or clashes with `autosuggestions`
 zstyle ':completion:*' completer _expand_alias _complete _ignored
+
+# https://github.com/Schniz/fnm/issues/419 
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)"
+fi
