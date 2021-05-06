@@ -68,6 +68,7 @@ function __setup_kemaps() {
   bindkey '^[^?' backward-kill-dir
 
   bindkey '^[[1;5C' vi-forward-word
+  bindkey '^ ' vi-forward-word
 
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word
