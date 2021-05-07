@@ -34,8 +34,8 @@ cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
 cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
 
 # Tmux
-map sg &tmux split-window -h lf
-map sv &tmux split-window -v lf
+map tv &tmux split-window -h lf
+map tb &tmux split-window -v lf
 
 # show documentation
 map g? $lf -doc | less

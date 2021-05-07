@@ -18,8 +18,6 @@ znap source romkatv/powerlevel10k
 znap source b4b4r07/enhancd
 znap source kazhala/dotbare
 
-znap source StackExchange/blackbox
-
 znap compdef dotbare '_dotbare_completion_cmd'
 
 fpath=("$ZDOTDIR/modules" "${fpath[@]}")
@@ -46,6 +44,7 @@ zstyle ':completion:*' menu select
 # TODO: keep a lookout for performance penalties or clashes with `autosuggestions`
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 
+# TODO: see if znap can layzload this
 # https://github.com/Schniz/fnm/issues/419 
 if command -v fnm &>/dev/null; then
   eval "$(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)"

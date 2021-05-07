@@ -20,10 +20,8 @@ local keymap = {
 		h = {"<cmd>Telescope help_tags<CR>", "help tags"},
         m = {"<cmd>Telescope marks<CR>", "Marks"},
         M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
-		n = {"<cmd>lua require\"config.telescope\".edit_neovim_dotfiles()<CR>", "Open neovim config"},
         r = {"<cmd>Telescope oldfiles<CR>", "Open Recent File"},
         R = {"<cmd>Telescope registers<CR>", "Registers"},
-		z = {"<cmd>lua require\"config.telescope\".edit_zsh_dotfiles()<CR>", "Open ZSH config"},
     },
 	c = {
         name = "+commands",
@@ -36,6 +34,11 @@ local keymap = {
         c = {"<cmd>Telescope git_bcommits<CR>", "bcommits"},
         b = {"<cmd>Telescope git_branches<CR>", "branches"},
         s = {"<cmd>Telescope git_status<CR>", "status"},
+    },
+    z = {
+		p = {"<cmd>lua require\"config.telescope\".edit_project_files()<CR>", "Open project files"},
+		n = {"<cmd>lua require\"config.telescope\".edit_neovim_dotfiles()<CR>", "Open neovim config"},
+		z = {"<cmd>lua require\"config.telescope\".edit_zsh_dotfiles()<CR>", "Open ZSH config"},
     },
 }
 
@@ -102,6 +105,7 @@ local quickSnipes = {}
 function quickSnipes.edit_neovim_dotfiles()
   require("telescope.builtin").find_files {
     prompt_title = "~ dotfiles (neovim) ~",
+    find_command = {"fd", "-uu"},
     cwd = "~/.config/nvim",
 	shorten_path = false,
     layout_strategy = "flex",
@@ -121,8 +125,8 @@ function quickSnipes.edit_zsh_dotfiles()
     prompt_title = "~ dotfiles (zsh) ~",
     cwd = "~/.config/zsh",
 	shorten_path = false,
+    find_command = {"fd", "-uu", "-E", "*.zwc"},
     layout_strategy = "flex",
-    file_ignore_patterns = {"**/*.zwc"},
     layout_config = {
       horizontal = {
         preview_width = 120,
@@ -134,7 +138,7 @@ function quickSnipes.edit_zsh_dotfiles()
   }
 end
 
-quickSnipes.project_files = function()
+function quickSnipes.edit_project_files()
   local opts = {} -- define here if you want to define something
   local ok = pcall(require"telescope.builtin".git_files, opts)
   if not ok then require"telescope.builtin".find_files(opts) end
