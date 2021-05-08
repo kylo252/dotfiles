@@ -46,13 +46,18 @@
 !/.config/zsh/**
 /.config/zsh/.zcomp*
 /.config/zsh/*.zwc
+/.config/zsh/**/*.zwc
 # --- nvim
 !/.config/nvim/**
 !/.config/nvim/lua/**
-# --- misc
+/.config/nvim/plugin/packer_compiled.vim #hard-coded paths... smh
+# --- misc (either non-static or reproducible)
 /.config/gatsby
 /.config/configstore
 /.config/containers
 /.config/geany
-# --- don't track reproducible scripts
-/.config/fzf/fzf.*
+/.config/fzf
+/.config/htop/htoprc
+/.config/gh/hosts.yml
+/.config/nix/nix.conf
+/.config/gopass/config.yml
