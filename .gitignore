@@ -50,7 +50,8 @@
 # --- nvim
 !/.config/nvim/**
 !/.config/nvim/lua/**
-/.config/nvim/plugin/packer_compiled.vim #hard-coded paths... smh
+/.config/nvim/plugin/packer_compiled.vim 
+
 # --- misc (either non-static or reproducible)
 /.config/gatsby
 /.config/configstore
@@ -61,3 +62,4 @@
 /.config/gh/hosts.yml
 /.config/nix/nix.conf
 /.config/gopass/config.yml
+
