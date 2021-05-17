@@ -15,7 +15,8 @@ local keymap = {
 		name = "+Find",
 		b = {"<cmd>Telescope buffers<CR>", "buffers"},
         c = {"<cmd>Telescope colorscheme<CR>", "Colorscheme"},
-        f = {"<cmd>Telescope find_files<CR>", "Find File"},
+        f = {"<cmd>Telescope find_files<CR>", "Find Files"},
+        p = {"<cmd>Telescope git_files<CR>", "Find Project Files"},
         g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
 		h = {"<cmd>Telescope help_tags<CR>", "help tags"},
         m = {"<cmd>Telescope marks<CR>", "Marks"},
@@ -46,8 +47,8 @@ wk.register(keymap, { prefix = "<leader>" })
 
 require("telescope").setup {
     defaults = {
-        find_command = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
         vimgrep_arguments = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
+        find_command = {"rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case"},
         -- file_sorter = sorters.get_fuzzy_file,
         file_ignore_patterns = {},
         -- generic_sorter = sorters.get_generic_fuzzy_sorter,
@@ -85,14 +86,14 @@ require("telescope").setup {
 	},
 	extensions = {
 		fzf = {
-		  override_generic_sorter = true,
-		  override_file_sorter = true,
+		  override_generic_sorter = false,
+		  override_file_sorter = false,
 	      case_mode = "smart_case"
 		}
 	},
 }
 
-require("telescope").load_extension("fzf") -- superfast sorter
+-- require("telescope").load_extension("fzf") -- superfast sorter
 
 local quickSnipes = {}
 --[[
