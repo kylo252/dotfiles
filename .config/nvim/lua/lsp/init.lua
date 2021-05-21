@@ -1,5 +1,19 @@
 local wk = require('which-key')
 
+-- Set Default Prefix.
+-- Note: You can set a prefix per lsp server in the globals.lua file
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- virtual_text = {
+      -- prefix = "",
+      -- spacing = 0,
+    -- },
+    virtual_text = false,
+    signs = true,
+    underline = true,
+  }
+)
+
 -- TODO figure out why this don't work
 vim.fn.sign_define(
     "LspDiagnosticsSignError",
@@ -97,6 +111,8 @@ local function documentHighlight(client, bufnr)
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+        autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
       augroup END
     ]],
             false
