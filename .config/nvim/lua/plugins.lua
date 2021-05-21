@@ -37,6 +37,7 @@ return require("packer").startup(function(use)
         requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}} }
 
 	use { "nvim-telescope/telescope-fzf-native.nvim",  run = 'make' }
+    use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
 
 	-- UI
 	-- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved

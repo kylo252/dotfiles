@@ -89,7 +89,11 @@ require("telescope").setup {
 		  override_generic_sorter = false,
 		  override_file_sorter = false,
 	      case_mode = "smart_case"
-		}
+		},
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
 	},
 }
 
