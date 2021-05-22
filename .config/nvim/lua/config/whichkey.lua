@@ -1,3 +1,9 @@
+-- Disable some operators
+local presets = require("which-key.plugins.presets")
+presets.operators["v"] = nil
+presets.operators["d"] = nil
+
+-- these are mostly the default values
 require("which-key").setup {
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
@@ -34,6 +40,10 @@ require("which-key").setup {
     show_help = true -- show help message on the command line when the popup is visible
 }
 
+-- Set leader
+vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+vim.g.mapleader = ' '
+
 local opts = {
     mode = "n", -- NORMAL mode
     -- prefix: use "<leader>f" for example for mapping everything related to finding files
@@ -45,18 +55,12 @@ local opts = {
     nowait = false -- use `nowait` when creating keymaps
 }
 
--- Set leader
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-vim.g.mapleader = ' '
-
-
 local wk = require('which-key')
 
-wk.register({
-  ["<leader>"] = {
-	e = {':NvimTreeToggle<CR>',   'toggle tree'},
-	L = {':Lf<CR>', 'toggle lf'},
-	n = {':Dashboard<CR>', 'dashboard'},
-   },
-})
+local mappings = {
+    e = {':NvimTreeToggle<CR>', 'toggle tree'},
+    n = {':Dashboard<CR>', 'dashboard'},
+}
+
+wk.register(mappings, opts)
 
