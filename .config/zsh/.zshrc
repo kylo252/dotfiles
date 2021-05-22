@@ -12,11 +12,7 @@ if [ -z "$VIRTUAL_ENV" ] && [ -n "$TMUX" ]; then
   fi
 fi
 
-if [ -n "$TMUX" ] || [ -n "$TERM_PROGRAM" ]; then
-  source "$XDG_CONFIG_HOME/zsh/.p10k.lean.zsh"
-else
-  source "$XDG_CONFIG_HOME/zsh/.p10k.default.zsh"
-fi
+source "$XDG_CONFIG_HOME/zsh/.p10k.lean.zsh"
 
 _bin_list=(
   "$HOME/.local/bin"
