@@ -28,9 +28,9 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # set X11 settings when not in ssh
-if [ -z "$SSH_CONNECTION" ]; then
-  export DISPLAY="localhost:0.0"
-fi
+# if [ -z "$SSH_CONNECTION" ]; then
+  # export DISPLAY="localhost:0.0"
+# fi
 
 # set locale (for perl mostly)
 export LANG=en_US.UTF-8

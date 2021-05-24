@@ -36,6 +36,9 @@ SHELL="$(command -v zsh)"
 export SHELL
 
 function __setup_x11() {
+  if apt-get -v &> /dev/null; then
+    return 
+  fi
   if [ -z "$SSH_CONNECTION" ]; then
     # How to check if WSL1/2
     # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
