@@ -20,12 +20,15 @@ znap source kazhala/dotbare
 
 znap compdef dotbare "_dotbare_completion_cmd"
 
-znap eval fnm-env "fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh"
+znap eval pip-completion "source <(pip3 completion --zsh)"
 
-znap eval pip-completion "pip completion --zsh"
-
+znap eval kitty-completion "kitty + complete setup zsh | source /dev/stdin"
 
 fpath=("$ZDOTDIR/modules" "${fpath[@]}")
+
+source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
+
+test -d /home/linuxbrew/.linuxbrew && znap eval homebrew-env "/home/linuxbrew/.linuxbrew/bin/brew shellenv"
 
 # load custom modules
 autoload -Uz kp
