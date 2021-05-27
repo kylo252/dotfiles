@@ -1,16 +1,5 @@
 local utils = require('utils')
 
-local auto_formatters = {            }
-
-local python_autoformat = {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.python.autoformat then table.insert(auto_formatters, python_autoformat) end
-
-local lua_format = {'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lua.autoformat then table.insert(auto_formatters, lua_format) end
-
-local json_format = {'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.json.autoformat then table.insert(auto_formatters, json_format) end
-
 -- testing format on save
 vim.api.nvim_exec([[
 augroup FormatAutogroup

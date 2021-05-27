@@ -130,7 +130,7 @@ table.insert(gls.right, {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '
 table.insert(gls.right, {
     TreesitterIcon = {
         provider = function()
-            if next(vim.treesitter.highlighter.active) ~= nil then return ' ' end
+            if next(vim.treesitter.highlighter.active) ~= nil then return '   ' end
             return ''
         end,
         separator = ' ',

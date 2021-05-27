@@ -39,3 +39,4 @@ vim.o.smartcase = true
 vim.o.autochdir = true -- Let vim follow you
 -- vim.cmd('syntax sync minlines=10000') -- Attempt to fix freeze in Markdown files
 vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
+vim.cmd('colorscheme ' .. 'doom-one')

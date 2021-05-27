@@ -2,29 +2,12 @@
 -- TODO this file needs to be refactored eache lang should be it's own file
 -- python
 
--- TODO replace with path argument
-local flake8 = {
-	LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
-    lintStdin = true,
-    lintFormats = {"%f:%l:%c: %m"}
-}
-
-local isort = {formatCommand = "isort --quiet -", formatStdin = true}
-
 local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
-local black = {formatCommand = "black --quiet --stdin-filename ", formatStdin = true}
 
 local python_arguments = {yapf}
 
-if O.python.linter == 'flake8' then table.insert(python_arguments, flake8) end
+table.insert(python_arguments, yapf)
 
-if O.python.isort then table.insert(python_arguments, isort) end
-
-if O.python.formatter == 'yapf' then
-    table.insert(python_arguments, yapf)
-elseif O.python.formatter == 'black' then
-    table.insert(python_arguments, black)
-end
 
 -- lua
 local luaFormat = {
@@ -36,7 +19,6 @@ local lua_arguments = {luaFormat}
 table.insert(lua_arguments, luaFormat)
 
 -- sh
-
 local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
 
 local shellcheck = {
@@ -64,9 +46,9 @@ local eslint = {
 
 local tsserver_args = {}
 
-if O.tsserver.formatter == 'prettier' then table.insert(tsserver_args, prettier) end
+table.insert(tsserver_args, prettier)
 
-if O.tsserver.linter == 'eslint' then table.insert(tsserver_args, eslint) end
+table.insert(tsserver_args, eslint)
 
 -- local markdownlint = {
 --     -- TODO default to global lintrc

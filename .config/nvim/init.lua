@@ -2,15 +2,12 @@ require('plugins')
 require('globals')
 require('utils')
 
-vim.cmd('luafile ~/.config/nvim/quick-settings.lua')
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 require('autocmds')
 require('settings')
 require('keymappings')
-require('colorscheme')
 require('config')
-
 
 ---- LSP
 require('lsp')
