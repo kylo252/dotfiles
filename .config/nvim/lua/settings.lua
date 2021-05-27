@@ -37,5 +37,5 @@ vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.autochdir = true -- Let vim follow you
-vim.cmd('syntax sync minlines=10000') -- Attempt to fix freeze in Markdown files
+-- vim.cmd('syntax sync minlines=10000') -- Attempt to fix freeze in Markdown files
 vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"

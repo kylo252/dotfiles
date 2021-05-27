@@ -46,8 +46,7 @@ return require("packer").startup(function(use)
     use { "romgrk/doom-one.vim" }
 	use { "folke/tokyonight.nvim" }
 	use { "romgrk/barbar.nvim" } 	--tabs
-    use { "Famiu/feline.nvim", 		--statusline
-		requires = {"kyazdani42/nvim-web-devicons"}}
+    use { "glepnir/galaxyline.nvim" }
     use { "chrisbra/Colorizer" }    --hex colorizer
 
     -- file viewers (managers)
@@ -65,7 +64,7 @@ return require("packer").startup(function(use)
     use { "folke/which-key.nvim" }
 	use { "windwp/nvim-spectre",
 		requires = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim"} } }
-
+    use { "junegunn/vim-easy-align", opt = true }
 	use { "mhartington/formatter.nvim" }
 	use { "glepnir/indent-guides.nvim" }
   end
