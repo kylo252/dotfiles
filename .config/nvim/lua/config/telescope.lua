@@ -5,6 +5,7 @@ local action_state = require("telescope.actions.state")
 local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 local themes = require("telescope.themes")
+local trouble = require("trouble.providers.telescope")
 
 local opts = {silent=true, noremap=true}
 vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", opts)
@@ -66,7 +67,7 @@ require("telescope").setup {
                 -- So, to not map "<C-n>", just put
                 -- ["<c-x>"] = false,
                 ["<esc>"] = actions.close,
-
+                ["<c-t>"] = trouble.open_with_trouble,
                 -- Otherwise, just set the mapping to the function that you want it to be.
                 -- ["<C-i>"] = actions.select_horizontal,
 
@@ -80,6 +81,7 @@ require("telescope").setup {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                ["<c-t>"] = trouble.open_with_trouble,
                 -- ["<C-i>"] = my_cool_custom_action,
             }
         },

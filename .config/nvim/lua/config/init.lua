@@ -11,7 +11,7 @@ require('config.treesitter')
 require('config.whichkey')
 
 -- TODO: figure out if this is the one causing the slow down
--- require('config.lsp-trouble')
+require('config.trouble')
 
 require('spectre').setup()
 require('indent_guides').setup()

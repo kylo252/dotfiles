@@ -18,7 +18,7 @@ return require("packer").startup(function(use)
     use { "glepnir/lspsaga.nvim" }
     use { "kabouzeid/nvim-lspinstall",
 		requires = {"neovim/nvim-lspconfig"} }
-	-- use { "folke/lsp-trouble.nvim" }
+	use { "folke/trouble.nvim" }
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter",

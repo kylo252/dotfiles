@@ -1,6 +1,6 @@
-local nv_utils = {}
+local utils = {}
 
-function nv_utils.define_augroups(definitions) -- {{{1
+function utils.define_augroups(definitions) -- {{{1
     -- Create autocommand groups based on the passed definitions
     --
     -- The key will be the name of the group, and each definition
@@ -24,159 +24,159 @@ end
 
 -- lsp
 
-function nv_utils.add_to_workspace_folder()
+function utils.add_to_workspace_folder()
     vim.lsp.buf.add_workspace_folder()
 end
 
-function nv_utils.clear_references()
+function utils.clear_references()
     vim.lsp.buf.clear_references()
 end
 
-function nv_utils.code_action()
+function utils.code_action()
     vim.lsp.buf.code_action()
 end
 
-function nv_utils.declaration()
+function utils.declaration()
     vim.lsp.buf.declaration()
     vim.lsp.buf.clear_references()
 end
 
-function nv_utils.definition()
+function utils.definition()
     vim.lsp.buf.definition()
     vim.lsp.buf.clear_references()
 end
 
-function nv_utils.document_highlight()
+function utils.document_highlight()
     vim.lsp.buf.document_highlight()
 end
 
-function nv_utils.document_symbol()
+function utils.document_symbol()
     vim.lsp.buf.document_symbol()
 end
 
-function nv_utils.formatting()
+function utils.formatting()
     vim.lsp.buf.formatting()
 end
 
-function nv_utils.formatting_sync()
+function utils.formatting_sync()
     vim.lsp.buf.formatting_sync()
 end
 
-function nv_utils.hover()
+function utils.hover()
     vim.lsp.buf.hover()
 end
 
-function nv_utils.implementation()
+function utils.implementation()
     vim.lsp.buf.implementation()
 end
 
-function nv_utils.incoming_calls()
+function utils.incoming_calls()
     vim.lsp.buf.incoming_calls()
 end
 
-function nv_utils.list_workspace_folders()
+function utils.list_workspace_folders()
     vim.lsp.buf.list_workspace_folders()
 end
 
-function nv_utils.outgoing_calls()
+function utils.outgoing_calls()
     vim.lsp.buf.outgoing_calls()
 end
 
-function nv_utils.range_code_action()
+function utils.range_code_action()
     vim.lsp.buf.range_code_action()
 end
 
-function nv_utils.range_formatting()
+function utils.range_formatting()
     vim.lsp.buf.range_formatting()
 end
 
-function nv_utils.references()
+function utils.references()
     vim.lsp.buf.references()
     vim.lsp.buf.clear_references()
 end
 
-function nv_utils.remove_workspace_folder()
+function utils.remove_workspace_folder()
     vim.lsp.buf.remove_workspace_folder()
 end
 
-function nv_utils.rename()
+function utils.rename()
     vim.lsp.buf.rename()
 end
 
-function nv_utils.signature_help()
+function utils.signature_help()
     vim.lsp.buf.signature_help()
 end
 
-function nv_utils.type_definition()
+function utils.type_definition()
     vim.lsp.buf.type_definition()
 end
 
-function nv_utils.workspace_symbol()
+function utils.workspace_symbol()
     vim.lsp.buf.workspace_symbol()
 end
 
 -- diagnostic
 
-function nv_utils.get_all()
+function utils.get_all()
     vim.lsp.diagnostic.get_all()
 end
 
-function nv_utils.get_next()
+function utils.get_next()
     vim.lsp.diagnostic.get_next()
 end
 
-function nv_utils.get_prev()
+function utils.get_prev()
     vim.lsp.diagnostic.get_prev()
 end
 
-function nv_utils.goto_next()
+function utils.goto_next()
     vim.lsp.diagnostic.goto_next()
 end
 
-function nv_utils.goto_prev()
+function utils.goto_prev()
     vim.lsp.diagnostic.goto_prev()
 end
 
-function nv_utils.show_line_diagnostics()
+function utils.show_line_diagnostics()
     vim.lsp.diagnostic.show_line_diagnostics()
 end
 
 -- git signs
 
-function nv_utils.next_hunk()
+function utils.next_hunk()
     require('gitsigns').next_hunk()
 end
 
-function nv_utils.prev_hunk()
+function utils.prev_hunk()
     require('gitsigns').prev_hunk()
 end
 
-function nv_utils.stage_hunk()
+function utils.stage_hunk()
     require('gitsigns').stage_hunk()
 end
 
-function nv_utils.undo_stage_hunk()
+function utils.undo_stage_hunk()
     require('gitsigns').undo_stage_hunk()
 end
 
-function nv_utils.reset_hunk()
+function utils.reset_hunk()
     require('gitsigns').reset_hunk()
 end
 
-function nv_utils.reset_buffer()
+function utils.reset_buffer()
     require('gitsigns').reset_buffer()
 end
 
-function nv_utils.preview_hunk()
+function utils.preview_hunk()
     require('gitsigns').preview_hunk()
 end
 
-function nv_utils.blame_line()
+function utils.blame_line()
     require('gitsigns').blame_line()
 end
 
 -- misc
-function nv_utils.file_exists(name)
+function utils.file_exists(name)
     local f = io.open(name, "r")
     if f ~= nil then
         io.close(f)
@@ -186,5 +186,5 @@ function nv_utils.file_exists(name)
     end
 end
 
-return nv_utils
+return utils
 
