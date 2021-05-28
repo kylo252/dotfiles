@@ -41,8 +41,6 @@ end
 -- }}}
 
 
--- }}}
-
 -- {{{ Autostart windowless processes
 
 -- This function will run once every time Awesome is started
@@ -52,12 +50,7 @@ local function run_once(cmd_arr)
     end
 end
 
--- run_once({ "picom --vsync", "unclutter -root" }) -- comma-separated entries
-run_once({ "unclutter -root" }) -- comma-separated entries
-
--- Autostart
--- awful.spawn.with_shell("picom")
--- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/wallpapers")
+run_once({ "picom --vsync", "unclutter -root" }) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
 --[[
@@ -135,6 +128,7 @@ awful.util.tasklist_buttons = mytable.join(
 )
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/custom-theme.lua", os.getenv("HOME"), chosen_theme))
+-- beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 -- {{{ Screen
 
