@@ -37,14 +37,16 @@ return require("packer").startup(function(use)
         requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}} }
 
 	use { "nvim-telescope/telescope-fzf-native.nvim",  run = 'make' }
-    use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
+    use { "nvim-telescope/telescope-fzy-native.nvim" }
 
 	-- UI
 	-- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
 	-- use { "glepnir/dashboard-nvim" }
 	use { "ChristianChiarulli/dashboard-nvim", opt = false }
     use { "romgrk/doom-one.vim" }
-	use { "folke/tokyonight.nvim" }
+    use { 'navarasu/onedark.nvim' }
+    use { "folke/tokyonight.nvim" }
+
 	use { "romgrk/barbar.nvim" } 	--tabs
     use { "glepnir/galaxyline.nvim" }
     use { "chrisbra/Colorizer" }    --hex colorizer
@@ -67,6 +69,7 @@ return require("packer").startup(function(use)
     use { "junegunn/vim-easy-align", opt = true }
 	use { "mhartington/formatter.nvim" }
 	use { "glepnir/indent-guides.nvim" }
+    use { "christoomey/vim-sort-motion" }
   end
 )
 

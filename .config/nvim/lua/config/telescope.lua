@@ -6,24 +6,61 @@ local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 local themes = require("telescope.themes")
 local trouble = require("trouble.providers.telescope")
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
 
-local opts = {silent=true, noremap=true}
-vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Telescope live_grep<CR>", opts)
+
+
+-- Dropdown list theme using a builtin theme definitions :
+local custom_center_list_view = require'telescope.themes'.get_dropdown({
+  -- winblend = 10,
+  -- width = 0.5,
+  prompt = ">> ",
+  results_height = 15,
+  previewer = false,
+})
+
+local custom_inline_list_view = require'telescope.themes'.get_ivy({
+  -- winblend = 10,
+  -- width = 0.5,
+  previewer = false,
+  sorting_strategy = "ascending",
+  layout_strategy = "bottom_pane",
+  layout_config = {
+    height = 5,
+  },
+  prompt = ">> ",
+})
+
+-- Settings for with preview option
+local custom_preview_list = require'telescope.themes'.get_dropdown({
+  winblend = 10,
+  show_line = false,
+  prompt = ">>",
+  results_title = false,
+  preview_title = false,
+  layout_config = {
+    preview_width = 0.5,
+  },
+})
+
+vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Telescope grep_string<CR>", {silent=true, noremap=true})
 
 local keymap = {
     f = {
 		name = "+Find",
 		b = {"<cmd>Telescope buffers<CR>", "buffers"},
+		d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
+		h = {"<cmd>Telescope help_tags<CR>", "help tags"},
+        M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
+        R = {"<cmd>Telescope registers<CR>", "Registers"},
         c = {"<cmd>Telescope colorscheme<CR>", "Colorscheme"},
         f = {"<cmd>Telescope find_files<CR>", "Find Files"},
-        p = {"<cmd>Telescope git_files<CR>", "Find Project Files"},
         g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
-		h = {"<cmd>Telescope help_tags<CR>", "help tags"},
         m = {"<cmd>Telescope marks<CR>", "Marks"},
-        M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
+        p = {"<cmd>Telescope git_files<CR>", "Find Project Files"},
         r = {"<cmd>Telescope oldfiles<CR>", "Open Recent File"},
-        R = {"<cmd>Telescope registers<CR>", "Registers"},
     },
 	c = {
         name = "+commands",
@@ -37,51 +74,35 @@ local keymap = {
         b = {"<cmd>Telescope git_branches<CR>", "branches"},
         s = {"<cmd>Telescope git_status<CR>", "status"},
     },
-    z = {
-		p = {"<cmd>lua require\"config.telescope\".edit_project_files()<CR>", "Open project files"},
-		n = {"<cmd>lua require\"config.telescope\".edit_neovim_dotfiles()<CR>", "Open neovim config"},
-		z = {"<cmd>lua require\"config.telescope\".edit_zsh_dotfiles()<CR>", "Open ZSH config"},
-    },
 }
 
-wk.register(keymap, { prefix = "<leader>" })
+wk.register(keymap, { prefix = "<leader>", silent=true, noremap=true })
 
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
         find_command = {"rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case"},
-        file_sorter = sorters.get_fzy_sorter,
-        file_ignore_patterns = {},
-        -- generic_sorter = sorters.get_generic_fuzzy_sorter,
+        file_sorter = sorters.fzy_native,
+        generic_sorter = sorters.fzy_native,
         -- shorten_path = true,
         -- border = {},
         set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
 
         mappings = {
             i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["Q"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<C-q>"] = actions.close,
-                -- To disable a keymap, put [map] = false
-                -- So, to not map "<C-n>", just put
-                -- ["<c-x>"] = false,
-                ["<esc>"] = actions.close,
-                ["<c-t>"] = trouble.open_with_trouble,
-                -- Otherwise, just set the mapping to the function that you want it to be.
-                -- ["<C-i>"] = actions.select_horizontal,
-
-                -- Add up multiple actions
-                ["<CR>"] = actions.select_default + actions.center
-
-                -- You can perform as many actions in a row as you like
-                -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
+                ["<C-c>"] = actions.close,
+                ["<S-Up>"] = actions.preview_scrolling_up,
+                ["<S-Down>"] = actions.preview_scrolling_down,
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                ["<C-s>"] = trouble.open_with_trouble,
+                -- ["<C-i>"] = my_cool_custom_action,
             },
             n = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-c>"] = actions.close,
+                ["<S-Up>"] = actions.preview_scrolling_up,
+                ["<S-Down>"] = actions.preview_scrolling_down,
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<c-t>"] = trouble.open_with_trouble,
+                ["<C-s>"] = trouble.open_with_trouble,
                 -- ["<C-i>"] = my_cool_custom_action,
             }
         },
@@ -93,15 +114,17 @@ require("telescope").setup {
 	      case_mode = "smart_case"
 		},
         fzy_native = {
-            override_generic_sorter = false,
+            override_generic_sorter = true,
             override_file_sorter = true,
+            case_mode = "smart_case"
         }
 	},
 }
 
 -- require("telescope").load_extension("fzf") -- superfast sorter
+require('telescope').load_extension('fzy_native')
 
-local quickSnipes = {}
+local _M = {}
 --[[
 	call via:
 	:lua require"telescope-config".edit_neovim()
@@ -109,48 +132,28 @@ local quickSnipes = {}
 	example keymap:
 	vim.api.nvim_set_keymap("n", "<Leader>nn", "<CMD>lua require\"telescope-config\".edit_neovim()<CR>", {noremap = true, silent = true})
 --]]
-function quickSnipes.edit_neovim_dotfiles()
-  require("telescope.builtin").find_files {
-    prompt_title = "~ dotfiles (neovim) ~",
-    find_command = {"fd", "-uu"},
-    cwd = "~/.config/nvim",
-	shorten_path = false,
-    layout_strategy = "flex",
-    layout_config = {
-      horizontal = {
-        preview_width = 120,
-      },
-      vertical = {
-        preview_height = 0.75,
-      },
-    },
-  }
+function _M.grep_neovim_dotfiles()
+  require("telescope.builtin").live_grep{
+    search_dirs = "~/.config/nvim",
+    hidden = true,
+   }
 end
 
-function quickSnipes.edit_zsh_dotfiles()
-  require("telescope.builtin").find_files {
-    prompt_title = "~ dotfiles (zsh) ~",
-    cwd = "~/.config/zsh",
-	shorten_path = false,
-    find_command = {"fd", "-uu", "-E", "*.zwc"},
-    layout_strategy = "flex",
-    layout_config = {
-      horizontal = {
-        preview_width = 120,
-      },
-      vertical = {
-        preview_height = 0.75,
-      },
-    },
-  }
+function _M.find_dotfiles()
+  local _opts = vim.deepcopy(custom_inline_list_view)
+  _opts.prompt_title = "~ dotfiles ~"
+  _opts.cwd = "~"
+  _opts.find_command = {"git", "dots", "ls-files"}
+  -- _opts.layout_strategy = "flex"
+  require'telescope.builtin'.find_files(_opts)
 end
 
-function quickSnipes.edit_project_files()
-  local opts = {} -- define here if you want to define something
-  local ok = pcall(require"telescope.builtin".git_files, opts)
-  if not ok then require"telescope.builtin".find_files(opts) end
+function _M.edit_project_files()
+  local _opts = {} -- define here if you want to define something
+  local ok = pcall(require"telescope.builtin".git_files, _opts)
+  if not ok then require"telescope.builtin".find_files(_opts) end
 end
 
-return quickSnipes
+return _M
 
 
