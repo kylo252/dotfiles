@@ -11,16 +11,16 @@ require('formatter').setup({
         }
       end
     },
-  --   lua = {
-  --       -- luafmt
-  --       function()
-  --         return {
-  --           exe = "luafmt",
-  --           args = {"--indent-count", 2, "--stdin"},
-  --           stdin = true
-  --         }
-  --       end
-  --     }
+    lua = {
+        -- luafmt
+        function()
+          return {
+            exe = "lua-format",
+            args = {"--indent-width=2", "--no-use-tab", "--in-place", "--no-keep-simple-function-one-line", "--column-limit=120"},
+            stdin = true
+          }
+        end
+      }
   }
 })
 

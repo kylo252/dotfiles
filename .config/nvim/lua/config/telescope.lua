@@ -52,6 +52,8 @@ local keymap = {
 		name = "+Find",
 		b = {"<cmd>Telescope buffers<CR>", "buffers"},
 		d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
+		F = {"<cmd>lua require\"config.telescope\".find_project_files()<CR>", "Open dotfiles"},
+		G = {"<cmd>lua require\"config.telescope\".grep_project_files()<CR>", "Open dotfiles"},
 		h = {"<cmd>Telescope help_tags<CR>", "help tags"},
         M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
         R = {"<cmd>Telescope registers<CR>", "Registers"},
@@ -82,12 +84,9 @@ require("telescope").setup {
     defaults = {
         vimgrep_arguments = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
         find_command = {"rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case"},
-        file_sorter = sorters.fzy_native,
-        generic_sorter = sorters.fzy_native,
-        -- shorten_path = true,
+        shorten_path = true,
         -- border = {},
         set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
-
         mappings = {
             i = {
                 ["<C-c>"] = actions.close,
@@ -109,20 +108,13 @@ require("telescope").setup {
 	},
 	extensions = {
 		fzf = {
-		  override_generic_sorter = false,
-		  override_file_sorter = false,
+		  override_generic_sorter = true,
+		  override_file_sorter = true,
 	      case_mode = "smart_case"
 		},
-        fzy_native = {
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case"
-        }
 	},
 }
-
--- require("telescope").load_extension("fzf") -- superfast sorter
-require('telescope').load_extension('fzy_native')
+require("telescope").load_extension("fzf")
 
 local _M = {}
 --[[
@@ -148,12 +140,16 @@ function _M.find_dotfiles()
   require'telescope.builtin'.find_files(_opts)
 end
 
-function _M.edit_project_files()
-  local _opts = {} -- define here if you want to define something
+function _M.find_project_files()
+  local _opts = vim.deepcopy(custom_center_list_view)
   local ok = pcall(require"telescope.builtin".git_files, _opts)
   if not ok then require"telescope.builtin".find_files(_opts) end
 end
 
+function _M.grep_project_files()
+  local _opts = vim.deepcopy(custom_center_list_view)
+  require"telescope.builtin".grep_string(_opts)
+end
 return _M
 
 
