@@ -17,6 +17,7 @@ znap source romkatv/powerlevel10k
 
 znap source b4b4r07/enhancd
 znap source kazhala/dotbare
+znap source bigH/git-fuzzy bin
 
 znap compdef dotbare "_dotbare_completion_cmd"
 
@@ -28,7 +29,7 @@ fpath=("$ZDOTDIR/modules" "${fpath[@]}")
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
-test -d /home/linuxbrew/.linuxbrew && znap eval homebrew-env "/home/linuxbrew/.linuxbrew/bin/brew shellenv"
+# test -d /home/linuxbrew/.linuxbrew && znap eval homebrew-env "/home/linuxbrew/.linuxbrew/bin/brew shellenv"
 
 # load custom modules
 autoload -Uz kp

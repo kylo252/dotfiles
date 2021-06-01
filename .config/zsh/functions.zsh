@@ -25,6 +25,19 @@ function ex() {
   fi
 }
 
+function ta() {
+  if [ -n "$1" ]; then TARGET="-t $1"; fi
+  tmux attach $TARGET
+}
+
+function ts() {
+  TARGET="default"
+  if [ -n "$1" ]; then
+    TARGET="$1"
+  fi
+  smug start $TARGET --attach
+}
+
 function cf() {
   rg --files ~/.config --type zshrc --type sh --type vim | fzf | xargs -r "$EDITOR"
 }

@@ -44,6 +44,8 @@ function __setup_xdg() {
   export NPM_HOME="$XDG_DATA_HOME/npm"
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+  # this is just a workaround: http://hiphish.github.io/blog/2020/12/29/making-luarocks-xdg-compliant/
+  export LUAROCKS_HOME="$XDG_DATA_HOME/luarocks"
 }
 
 function __setup_history() {
@@ -79,6 +81,10 @@ function __setup_misc() {
   export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
   export ENHANCED_LAZY_COMPLETION=true
+
+  if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  fi 
 }
 
 __setup_functions=(

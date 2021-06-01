@@ -22,6 +22,7 @@ _bin_list=(
   "$GEM_HOME/bin"
   "$NPM_HOME/bin"
   "$GOPATH/bin"
+  "$LUAROCKS_HOME/bin"
   )
 
 for extra in "${_bin_list[@]}"; do
@@ -58,11 +59,12 @@ function __setup_x11() {
 
 __setup_x11
 
-source "$ZDOTDIR/opts.zsh"
 
 source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
+
+source "$ZDOTDIR/opts.zsh"
 
 source "$ZDOTDIR/plugins.zsh"
 

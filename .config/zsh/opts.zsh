@@ -30,14 +30,9 @@ function __setup_kemaps() {
   bindkey '^?' backward-delete-char
   bindkey '^h' backward-delete-char
 
-  # Edit line in vim buffer ctrl-v
-  # autoload edit-command-line; zle -N edit-command-line
-  # bindkey '^v' edit-command-line
-
-  # Enter vim buffer from normal mode
-  autoload -U edit-command-line
-  zle -N edit-command-line
-  bindkey -M vicmd "^v" edit-command-line
+  # Edit line in vim buffer alt-v
+  autoload edit-command-line; zle -N edit-command-line
+  bindkey '^[v' edit-command-line
 
   # Fix Home/End
   # it seems to read differently in tmux for some reason
