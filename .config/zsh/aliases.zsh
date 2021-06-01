@@ -42,7 +42,7 @@ if alias rm &>/dev/null; then
   unalias rm
 fi
 
-alias -g L='| less -Rf'
-alias -g B='| bat'
-alias -g M='| bat --language man'
+alias -g LSR='| less -Rf'
+alias -g BT='| bat'
+alias -g MN='| bat --language man'
 alias -g FZ='| fzf'
