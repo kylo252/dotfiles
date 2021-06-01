@@ -19,7 +19,7 @@ local lua_arguments = {luaFormat}
 table.insert(lua_arguments, luaFormat)
 
 -- sh
-local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
+local shfmt = {formatCommand = 'shfmt -i 2 -ci', formatStdin = true}
 
 local shellcheck = {
     LintCommand = 'shellcheck -f gcc -x',

@@ -39,6 +39,7 @@ function __setup_xdg() {
   export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
   export GNUPGHOME="$XDG_DATA_HOME/gnupg"
   export GOPATH="$XDG_DATA_HOME/go"
+  export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
   export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
   export NPM_HOME="$XDG_DATA_HOME/npm"
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"

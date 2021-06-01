@@ -1,65 +1,123 @@
 #!/usr/bin/env bash
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
+function __setup_defaults() {
+  export XDG_CACHE_HOME="$HOME/.cache"
+  export XDG_CONFIG_HOME="$HOME/.config"
+  export XDG_DATA_HOME="$HOME/.local/share"
 
-export EDITOR=nvim
-export BASHRC=~/.bashrc
-export CDPATH='.:/repo/ekhhaga:~/local'
+  export LANG=en_US.UTF-8
+  export LANGUAGE=en_US.UTF-8
 
-export HISTCONTROL=ignoreboth
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export HISTFILE="$XDG_DATA_HOME/bash/history"
-export SAVEHIST=100000
-export HISTSIZE=100000
-export HISTFILESIZE=100000
-export HISTIGNORE="ls:ps:history"
+  export EDITOR=nvim
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+  export DOTBARE_DIR="$HOME/.dtf.git"
+  export DOTBARE_TREE="$HOME"
+}
 
-export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
-export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
-export GEM_HOME="$XDG_DATA_HOME/gem"
-export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
-export GOPATH="$XDG_DATA_HOME/go"
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+function __setup_cli_colors() {
+  export CLICOLOR=1
+  export LESS_TERMCAP_mb=$'\E[0;103m' # begin blinking
+  export LESS_TERMCAP_md=$'\E[0;93m'  # begin bold
+  export LESS_TERMCAP_me=$'\E[0m'     # end mode
+  export LESS_TERMCAP_se=$'\E[0m'     # end standout-mode
+  export LESS_TERMCAP_so=$(
+    tput bold
+    tput setaf 8
+    tput setab 3
+  )                                   # begin standout-mode - info box
+  export LESS_TERMCAP_ue=$'\E[0m'     # end underline
+  export LESS_TERMCAP_us=$'\E[04;32m' # begin underline
+  export LESS_TERMCAP_mr=$(tput rev)
+  export LESS_TERMCAP_mh=$(tput dim)
+  export LESS_TERMCAP_ZN=$(tput ssubm)
+  export LESS_TERMCAP_ZV=$(tput rsubm)
+  export LESS_TERMCAP_ZO=$(tput ssupm)
+  export LESS_TERMCAP_ZW=$(tput rsupm)
+  export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+}
 
-# set X11 settings when not in ssh
-# if [ -z "$SSH_CONNECTION" ]; then
-  # export DISPLAY="localhost:0.0"
-# fi
+function __setup_xdg() {
+  export CARGO_HOME="$XDG_DATA_HOME/cargo"
+  export ENHANCD_DIR="$XDG_DATA_HOME/enhancd"
+  export FNM_DIR="$XDG_DATA_HOME/fnm"
+  export GEM_HOME="$XDG_DATA_HOME/gem"
+  export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+  export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+  export GOPATH="$XDG_DATA_HOME/go"
+  export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+  export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+  export NPM_HOME="$XDG_DATA_HOME/npm"
+  export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
+  export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+}
 
-# set locale (for perl mostly)
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
+function __setup_history() {
+  export HISTCONTROL=ignoreboth
+  export HISTFILE="$XDG_DATA_HOME/bash/history"
+  export HISTFILESIZE=100000
+  export HISTIGNORE="ls:ps:history"NIT=1
+  export HISTSIZE=100000 # History size in memory
+  export HISTTIMEFORMAT="%h %d %H:%M:%S "
+  export LISTMAX=50       # The size of asking history
+  export SAVEHIST=1000000 # The number of histsize
+}
 
-export BAT_PAGER="less -RF"
-# https://github.com/sharkdp/bat/issues/652
-# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+function __setup_fzf() {
+  export FZF_DEFAULT_OPTS="--layout=reverse  --multi \
+        --bind '?:toggle-preview' \
+        --bind 'ctrl-a:select-all' \
+        --bind 'ctrl-y:execute-silent(echo {+} | xcopy)' \
+        --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
+        --bind 'ctrl-v:execute(code {+})' "
+  export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | xbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
+  # export FZF_DEFAULT_COMMAND='rg --files --hidden'
+  export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
+}
 
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse  --multi \
-    --prompt='∼ ' --pointer='▶' --marker='✓' \
-    --bind '?:toggle-preview' \
-    --bind 'ctrl-a:select-all' \
-    --bind 'ctrl-y:execute-silent(echo {+} | xcopy)' \
-    --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
-    --bind 'ctrl-v:execute(code {+})' "
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | xbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_PREVIEW_COMMAND="([[ -f {} ]] && (bat --style=numbers --color=always {} ||  tree -C {} || echo {} 2> /dev/null | head -200"
-export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
+function __setup_misc() {
+  export BAT_PAGER="less -RF"
+  # https://github.com/sharkdp/bat/issues/652
+  # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export DOTBARE_DIR="$HOME/.dtf.git"
-export DOTBARE_TREE="$HOME"
+  # interactive search when using three dots
+  export ENHANCD_DOT_ARG='...'
 
-# interactive search when using three dots
-export ENHANCD_DOT_ARG='...'
+  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
+  export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
+  export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-export PROMPT_COMMAND='history -a'
+  export ENHANCED_LAZY_COMPLETION=true
+}
 
-PATH=$HOME/.local/bin:$PATH
-PATH=$HOME/local/bin:$PATH
+__setup_functions=(
+  __setup_defaults
+  __setup_cli_colors
+  __setup_xdg
+  __setup_history
+  __setup_fzf
+  __setup_misc
+)
+
+for func in "${__setup_functions[@]}"; do
+  "$func"
+  unset -f "$func"
+done
+unset __setup_functions
+
+_bin_list=(
+  "$HOME/.local/bin"
+  "$HOME/local/bin"
+  "$HOME/bin"
+  "$CARGO_HOME/bin"
+  "$GEM_HOME/bin"
+  "$NPM_HOME/bin"
+  "$GOPATH/bin"
+)
+
+for extra in "${_bin_list[@]}"; do
+  PATH=$extra:$PATH
+done
 export PATH
+unset _bin_list
