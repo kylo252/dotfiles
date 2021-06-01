@@ -43,3 +43,7 @@ vim.cmd('colorscheme ' .. 'doom-one')
 
 -- from antoinemadec/FixCursorHold.nvim
 vim.cmd('let g:cursorhold_updatetime = 1000')
+-- vim.cmd('colorscheme ' .. 'doom-one')
+-- vim.cmd('colorscheme ' .. 'onedark')
+require('onedark').setup()
+

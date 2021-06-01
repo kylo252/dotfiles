@@ -1,6 +1,6 @@
-vim.cmd('highlight link GitSignsAdd Title')
-vim.cmd('highlight link GitSignsDelete WarningMsg')
-vim.cmd('highlight link GitSignsChange ModeMsg')
+-- vim.cmd('highlight link GitSignsAdd Title')
+-- vim.cmd('highlight link GitSignsDelete WarningMsg')
+-- vim.cmd('highlight link GitSignsChange ModeMsg')
 
 require('gitsigns').setup {
     signs = {
