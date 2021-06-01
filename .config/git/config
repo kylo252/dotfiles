@@ -38,6 +38,7 @@
     dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME"
 	potd = push origin HEAD:refs/drafts/master
 	potm = push origin HEAD:refs/for/master
+	ro = rebase origin/master
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252
