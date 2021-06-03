@@ -114,6 +114,11 @@ cmd fzf_jump ${{
 map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
 
+cmd nvr_send ${{
+nvr --serverlist | xargs -i nvr --servername {} "$fx"
+}}
+
+map E nvr_send
 map .vb push :!nvim<space>
 
 # Semi Bookmarks

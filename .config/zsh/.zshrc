@@ -23,6 +23,7 @@ _bin_list=(
   "$NPM_HOME/bin"
   "$GOPATH/bin"
   "$LUAROCKS_HOME/bin"
+  "$XDG_CONFIG_HOME/rofi/bin"
   )
 
 for extra in "${_bin_list[@]}"; do

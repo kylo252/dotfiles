@@ -23,8 +23,6 @@ znap compdef dotbare "_dotbare_completion_cmd"
 
 znap eval pip-completion "source <(pip3 completion --zsh)"
 
-znap eval kitty-completion "kitty + complete setup zsh | source /dev/stdin"
-
 fpath=("$ZDOTDIR/modules" "${fpath[@]}")
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
