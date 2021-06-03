@@ -15,19 +15,19 @@ require'compe'.setup {
     documentation = true,
 
     source = {
+        nvim_lsp = {kind = "  "},
+        nvim_lua = {kind = "  "},
+        tmux = {kind = "  "},
         path = {kind = "  "},
         buffer = {kind = "  "},
         calc = {kind = "  "},
         vsnip = {kind = "  "},
-        nvim_lsp = {kind = "  "},
-        -- nvim_lua = {kind = "  "},
-		nvim_lua = false,
         spell = {kind = "  "},
         tags = false,
         vim_dadbod_completion = true,
         -- snippets_nvim = {kind = "  "},
         -- ultisnips = {kind = "  "},
-        -- treesitter = {kind = "  "},
+        treesitter = {kind = "  "},
         emoji = {kind = " ﲃ ", filetypes={"markdown", "text"}}
         -- for emoji press : (idk if that in compe tho)
     }
