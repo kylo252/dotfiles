@@ -3,6 +3,7 @@ require('globals')
 require('utils')
 
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
+vim.cmd('source ~/.config/nvim/vimscript/visual-multi.vim')
 
 require('autocmds')
 require('settings')

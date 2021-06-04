@@ -18,7 +18,7 @@ return require("packer").startup(function(use)
     use { "glepnir/lspsaga.nvim" }
     use { "kabouzeid/nvim-lspinstall",
 		requires = {"neovim/nvim-lspconfig"} }
-	use { "folke/trouble.nvim" }
+    use { "folke/trouble.nvim" }
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter",
@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
 	-- UI
 	-- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
 	-- use { "glepnir/dashboard-nvim" }
-	use { "ChristianChiarulli/dashboard-nvim", opt = false }
+	use { "ChristianChiarulli/dashboard-nvim" }
     use { "romgrk/doom-one.vim" }
     use { 'navarasu/onedark.nvim' }
     use { "folke/tokyonight.nvim" }
@@ -66,10 +66,11 @@ return require("packer").startup(function(use)
     use { "folke/which-key.nvim" }
 	use { "windwp/nvim-spectre",
 		requires = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim"} } }
-    use { "junegunn/vim-easy-align", opt = true }
+  use { "junegunn/vim-easy-align" }
 	use { "mhartington/formatter.nvim" }
 	use { "glepnir/indent-guides.nvim" }
-    use { "christoomey/vim-sort-motion" }
+  use { "christoomey/vim-sort-motion" }
+  use { "mg979/vim-visual-multi" }
   end
 )
 
