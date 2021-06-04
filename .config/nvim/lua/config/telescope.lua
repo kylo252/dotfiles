@@ -20,6 +20,15 @@ local custom_center_list_view = require'telescope.themes'.get_dropdown({
   previewer = false,
 })
 
+-- Dropdown list theme using a builtin theme definitions :
+local custom_center_list_view = require'telescope.themes'.get_dropdown({
+  -- winblend = 10,
+  -- width = 0.5,
+  prompt = ">> ",
+  results_height = 15,
+  previewer = false,
+})
+
 local custom_inline_list_view = require'telescope.themes'.get_ivy({
   -- winblend = 10,
   -- width = 0.5,
@@ -33,7 +42,7 @@ local custom_inline_list_view = require'telescope.themes'.get_ivy({
 })
 
 -- Settings for with preview option
-local custom_preview_list = require'telescope.themes'.get_dropdown({
+local custom_preview_list_view = require'telescope.themes'.get_dropdown({
   winblend = 10,
   show_line = false,
   prompt = ">>",
@@ -48,6 +57,7 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", {silent=t
 vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Telescope grep_string<CR>", {silent=true, noremap=true})
 
 local keymap = {
+    E = { "<cmd>lua require\"config.telescope\".scope_browser()<CR>", "Open scope browser" },
     f = {
 		name = "+Find",
 		b = {"<cmd>Telescope buffers<CR>", "buffers"},
@@ -144,6 +154,11 @@ function _M.find_project_files()
   local _opts = vim.deepcopy(custom_center_list_view)
   local ok = pcall(require"telescope.builtin".git_files, _opts)
   if not ok then require"telescope.builtin".find_files(_opts) end
+end
+
+function _M.scope_browser()
+  local _opts = vim.deepcopy(custom_preview_list_view)
+  require"telescope.builtin".file_browser(_opts)
 end
 
 function _M.grep_project_files()
