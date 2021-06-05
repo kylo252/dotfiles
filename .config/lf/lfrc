@@ -7,7 +7,7 @@ set ignorecase true
 set info size:time
 set period 1
 set preview true
-set previewer ~/.config/lf/batlf.sh
+set previewer ~/.config/lf/preview
 set ratios 1:1:3
 set scrolloff 10
 
@@ -115,7 +115,9 @@ map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
 
 cmd nvr_send ${{
-nvr --serverlist | xargs -i nvr --servername {} "$fx"
+  # nvr --serverlist | xargs -i nvr --servername {} "$fx"
+  VMUX_NOT_SELECT_PANE=1 vmux "$fx"
+  quit
 }}
 
 map E nvr_send
