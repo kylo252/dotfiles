@@ -1,11 +1,18 @@
 #!/usr/bin/env zsh
 
+fpath=("$ZDOTDIR/modules" "${fpath[@]}")
+# load custom modules
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
+autoload -Uz compinit 
+autoload -Uz kp 
 
+# FIXME: figure out the correct workflow. this breaks znap
+compinit
+
+zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
 source "$XDG_DATA_HOME/znap/znap.zsh"
 
 znap source zsh-users/zsh-autosuggestions
@@ -23,14 +30,8 @@ znap compdef dotbare "_dotbare_completion_cmd"
 
 znap eval pip-completion "source <(pip3 completion --zsh)"
 
-fpath=("$ZDOTDIR/modules" "${fpath[@]}")
-
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
-# test -d /home/linuxbrew/.linuxbrew && znap eval homebrew-env "/home/linuxbrew/.linuxbrew/bin/brew shellenv"
-
-# load custom modules
-autoload -Uz kp
 
 # Colorize completions using default `ls` colors.
 zstyle ':completion:*' list-colors ''
