@@ -18,8 +18,8 @@ else
     while [ $rc -eq 129 ]; do
         tmux popup \
             -d "#{pane_current_path}" \
-            -w "${popup_width:-"50%"}" \
-            -h "${popup_height:-"50%"}" \
+            -w "${popup_width:-"80%"}" \
+            -h "${popup_height:-"80%"}" \
             -x "${popup_x:-"C"}" \
             -y "${popup_y:-"C"}" \
             -E "${exec_cmd:-"lf"}"
