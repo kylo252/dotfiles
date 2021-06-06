@@ -64,13 +64,14 @@ require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml", "markdown"},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "zsh", "html", "css", "json", "yaml", "markdown"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
             python = python_arguments,
             lua = lua_arguments,
             sh = sh_arguments,
+            zsh = sh_arguments,
             javascript = tsserver_args,
             javascriptreact = tsserver_args,
             html = {prettier},
