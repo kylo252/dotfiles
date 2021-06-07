@@ -1,5 +1,8 @@
-set shell bash
-set shellopts '-eu'
+# set shellopts '-eu'
+
+# push mw
+# map q push 'w:quit<enter>
+# map Q push :quit<enter>
 
 set hidden true
 set icons true
@@ -10,6 +13,29 @@ set preview true
 set previewer ~/.config/lf/preview
 set ratios 1:1:3
 set scrolloff 10
+
+# TODO: figure out why zle-cd is broken..
+cmd zle-cd %printf 'cd %q && zle reset-prompt\n' "$PWD" >&$ZLE_FIFO
+
+cmd zle-insert-relative %{{
+  for f in $fx; do
+    printf 'LBUFFER+="${LBUFFER:+ }${(q)$(realpath %q --relative-to=$PWD)}"\n' "$f" >&$ZLE_FIFO
+  done
+}}
+
+cmd zle-insert-absolute %{{
+  for f in $fx; do
+    printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
+  done
+}}
+
+cmd zle-init :{{
+  map - zle-cd
+  map a zle-insert-relative
+  map A zle-insert-absolute
+}}
+
+&[[ -n "$ZLE_FIFO" ]] && lf -remote "send $id zle-init"
 
 # emulating local-leader by appending '.'
 
@@ -24,11 +50,11 @@ map U unselect
 map br $vimv $fx
 map r push :rename<space>
 map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
-map .e $$EDITOR "$f"
+# map .e $$EDITOR "$f"
 
 # create dir/file
-map ad push $mkdir<space>
-map af push $touch<space>
+# map ad push $mkdir<space>
+# map af push $touch<space>
 
 cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
 cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
@@ -68,8 +94,8 @@ cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
 cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
 
 map <c-y> yank-path
-map .yd yank-dirname
-map .yf yank-basename
+# map .yd yank-dirname
+# map .yf yank-basename
 
 # make sure trash folder exists
 %mkdir -p ~/.trash
@@ -99,7 +125,7 @@ map DT delete
 cmd bulkrename ${{
 /bin/sh -c "vimv $(echo -e "$fx" | xargs -i echo "\\'{}\\'" | xargs echo)"
 }}
-map .br bulkrename
+# map .br bulkrename
 
 # fzf integration
 cmd fzf_jump ${{
@@ -121,7 +147,7 @@ cmd nvr_send ${{
 }}
 
 map E nvr_send
-map .vb push :!nvim<space>
+# map .vb push :!nvim<space>
 
 # Semi Bookmarks
 map gr cd /repo/ekhhaga

@@ -68,6 +68,12 @@ function __setup_kemaps() {
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word
 
+  # bindkey -s '^[o' 'lc\n'  # zsh
+
+  zle -N _zlf
+  zle -N _zlf_handler
+  bindkey '^o' _zlf
+
 }
 __setup_kemaps
 unset -f __setup_kemaps

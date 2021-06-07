@@ -6,7 +6,12 @@ source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
+LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
+[ -f "$LFCD" ] &&  source "$LFCD"
+
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
 source "$XDG_DATA_HOME/znap/znap.zsh"
 
 znap source zsh-users/zsh-autosuggestions
@@ -19,6 +24,7 @@ znap source romkatv/powerlevel10k
 znap source b4b4r07/enhancd
 znap source kazhala/dotbare
 
+znap source Aloxaf/fzf-tab
 # path=( ~[bigH/git-fuzzy]/bin $path )
 
 fpath=( "$ZDOTDIR/modules" $fpath )
@@ -54,3 +60,4 @@ zstyle ':completion:*' completer _expand_alias _complete _ignored
 if command -v vivid >/dev/null; then
   export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
 fi
+

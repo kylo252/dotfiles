@@ -11,8 +11,8 @@ table.insert(python_arguments, yapf)
 
 -- lua
 local luaFormat = {
-    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
-    formatStdin = true
+  formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
+  formatStdin = true
 }
 local lua_arguments = {luaFormat}
 
@@ -22,8 +22,8 @@ table.insert(lua_arguments, luaFormat)
 local shfmt = {formatCommand = 'shfmt -i 2 -ci', formatStdin = true}
 
 local shellcheck = {
-    LintCommand = 'shellcheck -f gcc -x',
-    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
+  LintCommand = 'shellcheck -f gcc -x',
+  lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
 }
 local sh_arguments = {shellcheck, shfmt}
 
