@@ -13,6 +13,9 @@ return require("packer").startup(function(use)
   -- packer can manage itself as an optional plugin
   use {"wbthomason/packer.nvim"}
 
+  -- https://github.com/neovim/neovim/issues/12587
+  use {"antoinemadec/FixCursorHold.nvim"}
+
   -- LSP
   use {"neovim/nvim-lspconfig"}
   use {"glepnir/lspsaga.nvim"}
