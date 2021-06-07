@@ -29,16 +29,17 @@
 [filter "spacify"]
     clean = expand --tabs=4 --initial
 [alias]
+    dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME"
     amend = commit --amend
-    quick-amend = commit --amend --no-edit
     reuse-msg = commit --reuse-message=ORIG_HEAD
     soft-reset = reset HEAD~1 --soft
+    quick-amend = commit --amend --no-edit
+    qa = commit --amend --no-edit
     st = status
+	ro = rebase origin/master
     smu = submodule update --init --recursive
-    dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME"
 	potd = push origin HEAD:refs/drafts/master
 	potm = push origin HEAD:refs/for/master
-	ro = rebase origin/master
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252
