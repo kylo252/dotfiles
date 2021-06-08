@@ -1,8 +1,4 @@
-# set shellopts '-eu'
-
-# push mw
-# map q push 'w:quit<enter>
-# map Q push :quit<enter>
+set shellopts '-eu'
 
 set hidden true
 set icons true
@@ -18,53 +14,77 @@ set scrolloff 10
 cmd zle-cd %printf 'cd %q && zle reset-prompt\n' "$PWD" >&$ZLE_FIFO
 
 cmd zle-insert-relative %{{
-  for f in $fx; do
+  for f in "$fx"; do
     printf 'LBUFFER+="${LBUFFER:+ }${(q)$(realpath %q --relative-to=$PWD)}"\n' "$f" >&$ZLE_FIFO
   done
 }}
 
 cmd zle-insert-absolute %{{
-  for f in $fx; do
+  for f in "$fx"; do
     printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
   done
 }}
 
 cmd zle-init :{{
-  map - zle-cd
-  map a zle-insert-relative
-  map A zle-insert-absolute
+  map . zle-cd
+  map x zle-insert-relative
+  map X zle-insert-absolute
 }}
 
-&[[ -n "$ZLE_FIFO" ]] && lf -remote "send $id zle-init"
+# fzf integration
+cmd fzf_jump ${{
+  res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"                                                       
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
 
-# emulating local-leader by appending '.'
+cmd open ${{
+  case $(file --mime-type "$f" -b) in
+    text/*) $EDITOR "$fx";;
+    *) for f in "$fx"; do setsid $OPENER "$f" > /dev/null 2> /dev/null & done;;
+  esac
+}}
 
-# Basic Functions
-map <c-q> quit
-map <c-r> reload
-map <enter> open
-map C clear
-map H top
-map L bottom
-map U unselect
-map br $vimv $fx
-map r push :rename<space>
-map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
-# map .e $$EDITOR "$f"
+cmd vmux_send ${{
+  # nvr --serverlist | xargs -i nvr --servername {} "$fx"
+  VMUX_NOT_SELECT_PANE=1 vmux "$fx"
+  quit
+}}
 
-# create dir/file
-# map ad push $mkdir<space>
-# map af push $touch<space>
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- "$fx" | head -c-1 | xclip -i -selection clipboard
 
 cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
 cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
 
-# Tmux
-map tv &tmux split-window -h lf
-map tb &tmux split-window -v lf
+cmd trash ${{
+  set -f
+  if gio trash 2>/dev/null; then
+    gio trash "$fx"
+  else
+    mkdir -p ~/.trash
+    mv -- "$fx" ~/.local/share/Trash
+  fi
+}}
 
-# show documentation
-map g? $lf -doc | less
+# define a custom 'delete' command
+cmd delete ${{
+  set -f
+  printf "$fx\n"
+  printf "delete?[y/n]"
+  read ans
+  [ $ans = "y" ] && rm -rf "$fx"
+}}
+
+# FIXME: not working currently
+cmd bulkrename ${{
+  bash -c "vimv $fx"
+}}
 
 # check the terminal width on startup and set number of columns accordingly
 %{{
@@ -78,76 +98,54 @@ map g? $lf -doc | less
   fi
 }}
 
-cmd open ${{
-  case $(file --mime-type $f -b) in
-    text/*) $EDITOR $fx;;
-    *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
-  esac
-}}
+# start an lf server for ZLE integration
+&[[ -n "$ZLE_FIFO" ]] && lf -remote "send $id zle-init"
+
+# make sure trash folder exists
+%mkdir -p ~/.local/share/Trash
+
+# Basic Functions
+push mw
+map q push 'w:quit<enter>
+map <esc> quit
+map <c-q> quit
+map <c-r> reload
+map <enter> open
+map C clear
+map H top
+map L bottom
+map u unselect
+map br bulkrename
+map r push :rename<space>
+map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
+
+# create dir/file
+map Xad push $mkdir<space>
+map Xaf push $touch<space>
+
+# Tmux
+map tv &tmux split-window -h zsh
+map tb &tmux split-window -v zsh
+map t+ &tmux split-window -h zsh
+map t- &tmux split-window -v zsh
 
 map d cut 
 map y copy
 map p paste
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
-
 map <c-y> yank-path
-# map .yd yank-dirname
-# map .yf yank-basename
+map Yd yank-dirname
+map Yb yank-basename
 
-# make sure trash folder exists
-%mkdir -p ~/.trash
-
-cmd trash ${{
-  set -f
-  if gio trash 2>/dev/null; then
-		gio trash $fx
-  else
-		mkdir -p ~/.trash
-		mv -- $fx ~/.trash
-  fi
-}}
-
-# define a custom 'delete' command
-cmd delete ${{
-  set -f
-  printf "$fx\n"
-  printf "delete?[y/n]"
-  read ans
-  [ $ans = "y" ] && rm -rf $fx
-}}
-
+map Dd trash
 map Dt trash
 map DT delete
 
-cmd bulkrename ${{
-/bin/sh -c "vimv $(echo -e "$fx" | xargs -i echo "\\'{}\\'" | xargs echo)"
-}}
-# map .br bulkrename
-
-# fzf integration
-cmd fzf_jump ${{
-  res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location')"
-  if [ -f "$res" ]; then
-    cmd="select"
-  elif [ -d "$res" ]; then
-    cmd="cd"                                                       
-  fi
-  lf -remote "send $id $cmd \"$res\""
-}}
 map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
 
-cmd nvr_send ${{
-  # nvr --serverlist | xargs -i nvr --servername {} "$fx"
-  VMUX_NOT_SELECT_PANE=1 vmux "$fx"
-  quit
-}}
-
-map E nvr_send
-# map .vb push :!nvim<space>
+map E vmux_send
+map Xvp push :!nvim<space>
 
 # Semi Bookmarks
 map gr cd /repo/ekhhaga
@@ -155,4 +153,6 @@ map gc cd ~/.config
 map gs cd ~/.scripts
 map gd cd ~/.local/share
 map gl cd ~/local
+# show documentation
+map g? $lf -doc | bat -l man
 
