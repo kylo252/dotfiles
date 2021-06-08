@@ -10,7 +10,6 @@ LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
 [ -f "$LFCD" ] &&  source "$LFCD"
 
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 source "$XDG_DATA_HOME/znap/znap.zsh"
 
@@ -37,6 +36,17 @@ source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
 # autoload -Uz compinit 
 autoload -Uz kp 
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # Colorize completions using default `ls` colors.
 zstyle ':completion:*' list-colors ''
