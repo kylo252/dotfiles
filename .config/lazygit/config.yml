@@ -1,9 +1,9 @@
 gui:
   # stuff relating to the UI
-  scrollHeight: 2 # how many lines you scroll by
-  scrollPastBottom: true # enable scrolling past the bottom
+  scrollHeight: 3 # how many lines you scroll by
+  scrollPastBottom: false # enable scrolling past the bottom
   sidePanelWidth: 0.3333 # number from 0 to 1
-  expandFocusedSidePanel: true
+  expandFocusedSidePanel: false
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
   theme:
     lightTheme: false # For terminals with a light background
@@ -30,7 +30,7 @@ gui:
 git:
   paging:
     colorArg: always
-    useConfig: true
+    pager: delta --paging=never
   merging:
     # only applicable to unix users
     manualCommit: false
@@ -49,15 +49,16 @@ refresher:
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often an update is checked for
-reporting: 'undetermined' # one of: 'on' | 'off' | 'undetermined'
-confirmOnQuit: false
+reporting: 'off' # one of: 'on' | 'off' | 'undetermined'
+confirmOnQuit: true
 # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
 quitOnTopLevelReturn: false
 disableStartupPopups: false
-notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip'
+notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 keybinding:
   universal:
-    quit: '<c-q>'
+    quit: 'q'
+    quit-alt1: '<c-q>'
     return: '<esc>' # return to previous menu, will quit if there's nowhere to return
     quitWithoutChangingDirectory: 'Q'
     togglePanel: '<tab>' # goto the next panel
@@ -108,17 +109,16 @@ keybinding:
     submitEditorText: '<enter>'
     appendNewline: '<tab>'
   status:
-    checkForUpdate: 'u'
+    checkForUpdate: 'r'
     recentRepos: '<enter>'
   files:
     commitChanges: 'c'
-    commitChangesWithoutHook: 'w' # commit changes without pre-commit hook
     amendLastCommit: 'A'
     commitChangesWithEditor: 'C'
     ignoreFile: 'i'
-    refreshFiles: 'R'
+    refreshFiles: 'r'
     stashAllChanges: 's'
-    viewStashOptions: 'S'
+    viewStashOptions: '<c-s>'
     toggleStagedAll: 'a' # stage/unstage all
     viewResetOptions: 'D'
     fetch: 'f'
@@ -167,5 +167,8 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
-
-
+customCommands:
+  - key: '<c-R>'
+    command: "git smu" # maybe it's not necessary
+    context: 'global'
+    loadingText: 'Updating all submodules'
