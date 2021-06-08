@@ -1,4 +1,3 @@
-vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
@@ -18,8 +17,8 @@ vim.o.splitbelow = true -- Horizontal splits will automatically be below
 vim.o.termguicolors = true -- set term giu colors most terminals support this
 vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files
-vim.cmd('set ts=2') -- Insert 2 spaces for a tab
-vim.cmd('set sw=2') -- Change the number of space characters inserted for indentation
+vim.cmd('set ts=4') -- Insert 2 spaces for a tab
+vim.cmd('set sw=4') -- Change the number of space characters inserted for indentation
 vim.cmd('set expandtab') -- Converts tabs to spaces
 vim.o.smartindent = true -- Makes indenting smart
 vim.wo.number = true -- set numbered lines
