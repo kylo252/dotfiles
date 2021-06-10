@@ -36,16 +36,18 @@ return require("packer").startup(function(use)
 
   -- telescope
   use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}}
-
   use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+  use {"nvim-telescope/telescope-frecency.nvim", requires = {"tami5/sql.nvim"}}
+
+  -- snap
+  use { "camspiers/snap" }
 
   -- UI
   -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
   -- use { "glepnir/dashboard-nvim" }
   use {"ChristianChiarulli/dashboard-nvim"}
-  use {"romgrk/doom-one.vim"}
-  use {'navarasu/onedark.nvim'}
-  use {"folke/tokyonight.nvim"}
+  use {'kylo252/onedark.nvim'}
+  use {'folke/tokyonight.nvim'}
 
   use {"romgrk/barbar.nvim"} -- tabs
   use {"glepnir/galaxyline.nvim"}

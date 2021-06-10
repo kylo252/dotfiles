@@ -106,7 +106,7 @@ local function documentHighlight(client, bufnr)
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+        autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({focusable = false})
         autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
       augroup END
     ]],

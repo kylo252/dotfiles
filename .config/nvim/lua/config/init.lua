@@ -9,6 +9,7 @@ require('config.telescope')
 require('config.tree')
 require('config.treesitter')
 require('config.whichkey')
+require('config.snap')
 
 -- TODO: figure out if this is the one causing the slow down
 require('config.trouble')
