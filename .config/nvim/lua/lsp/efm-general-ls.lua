@@ -11,7 +11,7 @@ table.insert(python_arguments, yapf)
 
 -- lua
 local luaFormat = {
-  formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
+  formatCommand = "lua-format -i --indent-width=2 --no-use-tab --no-keep-simple-function-one-line --column-limit=120",
   formatStdin = true
 }
 local lua_arguments = {luaFormat}

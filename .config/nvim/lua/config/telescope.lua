@@ -10,16 +10,16 @@ local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 
 -- Dropdown list theme using a builtin theme definitions :
-local custom_center_list_view = require'telescope.themes'.get_dropdown({
+local center_list_w_preview = themes.get_dropdown({
   -- winblend = 10,
   -- width = 0.5,
   prompt = ">> ",
   results_height = 15,
-  previewer = false
+  previewer = true
 })
 
 -- Dropdown list theme using a builtin theme definitions :
-local custom_center_list_view = require'telescope.themes'.get_dropdown({
+local center_list = themes.get_dropdown({
   -- winblend = 10,
   -- width = 0.5,
   prompt = ">> ",
@@ -27,7 +27,7 @@ local custom_center_list_view = require'telescope.themes'.get_dropdown({
   previewer = false
 })
 
-local custom_inline_list_view = require'telescope.themes'.get_ivy({
+local inline_list = themes.get_ivy({
   -- winblend = 10,
   -- width = 0.5,
   previewer = false,
@@ -38,25 +38,27 @@ local custom_inline_list_view = require'telescope.themes'.get_ivy({
 })
 
 -- Settings for with preview option
-local custom_preview_list_view = require'telescope.themes'.get_dropdown({
+local files_list_w_preview = themes.get_dropdown({
   winblend = 10,
+  prompt_position = 'top',
   show_line = false,
   prompt = ">>",
-  results_title = false,
+  results_title = "\\ Files //",
   preview_title = false,
+  layout_strategy = "flex",
   layout_config = {preview_width = 0.5}
 })
 
-vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>Telescope grep_string<CR>", {silent = true, noremap = true})
+local global_keys = {
+  ["<C-p>"] = {"<cmd>Telescope find_files<CR>", "Open project files"},
+  ["<C-f>"] = {"<cmd>Telescope live_grep<CR>", "Grep project files"},
+}
 
 local keymap = {
   E = {"<cmd>lua require\"config.telescope\".scope_browser()<CR>", "Open scope browser"},
   f = {
     name = "+Find",
     b = {"<cmd>Telescope buffers<CR>", "buffers"},
-    F = {"<cmd>lua require\"config.telescope\".find_project_files()<CR>", "Open project files"},
-    G = {"<cmd>lua require\"config.telescope\".grep_project_files()<CR>", "Grep project files"},
     h = {"<cmd>Telescope help_tags<CR>", "help tags"},
     M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
     R = {"<cmd>Telescope registers<CR>", "Registers"},
@@ -69,8 +71,8 @@ local keymap = {
     d = {
       name = "+dotfiles",
       d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
-      s = {"<cmd>edit ~/.config/nvim/lua/settings.lua<cr>", "Edit nvim settings"},
-      p = {"<cmd>edit ~/.config/nvim/lua/settings.lua<cr>", "Edit Packer plugins"}
+      s = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings"},
+      p = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit Packer plugins"}
     }
   },
   c = {
@@ -88,6 +90,7 @@ local keymap = {
 }
 
 wk.register(keymap, {prefix = "<leader>", silent = true, noremap = true})
+wk.register(global_keys, {silent = true, noremap = true})
 
 require("telescope").setup {
   defaults = {
@@ -132,7 +135,7 @@ function _M.grep_neovim_dotfiles()
 end
 
 function _M.find_dotfiles()
-  local _opts = vim.deepcopy(custom_inline_list_view)
+  local _opts = vim.deepcopy(inline_list)
   _opts.prompt_title = "~ dotfiles ~"
   _opts.cwd = "~"
   _opts.find_command = {"git", "dots", "ls-files"}
@@ -141,19 +144,31 @@ function _M.find_dotfiles()
 end
 
 function _M.find_project_files()
-  local _opts = vim.deepcopy(custom_center_list_view)
+  local _opts = vim.deepcopy(center_list_w_preview)
   local ok = pcall(require"telescope.builtin".git_files, _opts)
   if not ok then require"telescope.builtin".find_files(_opts) end
 end
 
-function _M.scope_browser()
-  local _opts = vim.deepcopy(custom_preview_list_view)
-  require"telescope.builtin".file_browser(_opts)
-end
-
 function _M.grep_project_files()
-  local _opts = vim.deepcopy(custom_center_list_view)
+  local _opts = vim.deepcopy(center_list_w_preview)
   require"telescope.builtin".grep_string(_opts)
 end
+
+function _M.scope_browser()
+  require('telescope.builtin').file_browser {
+    layout_config = {preview_width = 0.7},
+    layout_strategy = "horizontal",
+    preview_title = false,
+    prompt_position = 'top',
+    sorting_strategy = 'ascending',
+    prompt_title = ' File Browser',
+    results_title = false,
+    shorten_path = smart,
+    show_line = false,
+    width = 0.15,
+    winblend = 10,
+  }
+end
+
 return _M
 
