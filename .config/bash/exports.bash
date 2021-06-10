@@ -16,23 +16,6 @@ function __setup_defaults() {
 
 function __setup_cli_colors() {
   export CLICOLOR=1
-  export LESS_TERMCAP_mb=$'\E[0;103m' # begin blinking
-  export LESS_TERMCAP_md=$'\E[0;93m'  # begin bold
-  export LESS_TERMCAP_me=$'\E[0m'     # end mode
-  export LESS_TERMCAP_se=$'\E[0m'     # end standout-mode
-  export LESS_TERMCAP_so=$(
-    tput bold
-    tput setaf 8
-    tput setab 3
-  )                                   # begin standout-mode - info box
-  export LESS_TERMCAP_ue=$'\E[0m'     # end underline
-  export LESS_TERMCAP_us=$'\E[04;32m' # begin underline
-  export LESS_TERMCAP_mr=$(tput rev)
-  export LESS_TERMCAP_mh=$(tput dim)
-  export LESS_TERMCAP_ZN=$(tput ssubm)
-  export LESS_TERMCAP_ZV=$(tput rsubm)
-  export LESS_TERMCAP_ZO=$(tput ssupm)
-  export LESS_TERMCAP_ZW=$(tput rsupm)
   export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 }
 
