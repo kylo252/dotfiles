@@ -50,9 +50,7 @@ cmd open ${{
 }}
 
 cmd vmux_send ${{
-  # nvr --serverlist | xargs -i nvr --servername {} "$fx"
-  VMUX_NOT_SELECT_PANE=1 vmux "$fx"
-  quit
+  VMUX_NOT_SELECT_PANE=1 vmux "$fx" 
 }}
 
 cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
