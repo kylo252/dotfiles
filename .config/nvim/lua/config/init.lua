@@ -16,3 +16,7 @@ require('config.trouble')
 
 require('spectre').setup()
 require('indent_guides').setup()
+require('neoscroll').setup(
+  {
+    respect_scrolloff = true
+})

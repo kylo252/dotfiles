@@ -52,6 +52,7 @@ return require("packer").startup(function(use)
   use {"romgrk/barbar.nvim"} -- tabs
   use {"glepnir/galaxyline.nvim"}
   use {"chrisbra/Colorizer"} -- hex colorizer
+  use {"karb94/neoscroll.nvim"}
 
   -- file viewers (managers)
   use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
