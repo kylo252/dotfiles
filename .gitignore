@@ -53,21 +53,24 @@
 /.config/nvim/plugin/packer_compiled.vim 
 
 # --- misc (either non-static or reproducible)
-/.config/gatsby
+/.config/Code
+/.config/ccache
 /.config/configstore
 /.config/containers
-/.config/geany
 /.config/fzf
-/.config/htop/htoprc
-/.config/nix/nix.conf
-/.config/gopass
+/.config/gatsby
 /.config/gconf
+/.config/geany
 /.config/gh
+/.config/gopass
+/.config/htop/htoprc
 /.config/lazygit
 /.config/libreoffice
-/.config/rhel
-/.config/monitors.xml
+/.config/lnav
 /.config/mimeapps.list
-/.config/pulse
 /.config/modules
-/.config/ccache
+/.config/monitors.xml
+/.config/nix/nix.conf
+/.config/pulse
+/.config/rhel
+/.config/smug
