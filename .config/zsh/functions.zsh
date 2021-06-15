@@ -38,6 +38,25 @@ function ts() {
   smug start $TARGET --attach
 }
 
+# an alias is not enough since we can only pass `depth` flag as a git command
+function grc() {
+  [ -n "$1" ] || echo "argument missing" || exit 1
+  set -x
+  gh repo clone "$1" -- --depth=1
+}
+
+function nf-download() {
+  set -x
+  local FONTS_DIR="$HOME/.local/share/fonts"
+  local REQ_FONT_DIR="$FONTS_DIR/$1"
+  mkdir -p "$REQ_FONT_DIR"
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/"$1".zip -O "$REQ_FONT_DIR"/"$1".zip || exit 1
+  cd "$REQ_FONT_DIR"
+  unzip "$1".zip -d "$REQ_FONT_DIR" || exit 1
+  fd 'Windows' -x rm 2</dev/null
+  fc-cache -fv
+}
+
 function cpr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
 }

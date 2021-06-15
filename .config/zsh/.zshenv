@@ -46,6 +46,7 @@ function __setup_xdg() {
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
   # this is just a workaround: http://hiphish.github.io/blog/2020/12/29/making-luarocks-xdg-compliant/
   export LUAROCKS_HOME="$XDG_DATA_HOME/luarocks"
+  export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
 }
 
 function __setup_history() {
