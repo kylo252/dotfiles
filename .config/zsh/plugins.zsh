@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 # load custom modules
 source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
@@ -26,7 +25,12 @@ znap source kazhala/dotbare
 znap source Aloxaf/fzf-tab
 # path=( ~[bigH/git-fuzzy]/bin $path )
 
-fpath=( "$ZDOTDIR/modules" $fpath )
+# https://git-annex.branchable.com/bugs/zsh_completions_installed_to_location_not_in_fpath/
+fpath=( 
+  /usr/share/zsh/vendor-completions
+  "$ZDOTDIR"/modules
+  $fpath
+)
 
 znap compdef dotbare "_dotbare_completion_cmd"
 
