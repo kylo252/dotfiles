@@ -15,7 +15,6 @@ function __setup_defaults() {
   export DOTBARE_DIR="$HOME/.dtf.git"
   export DOTBARE_TREE="$HOME"
 
-	# export ZGEN_INIT="$ZDOTDIR/init.zsh"
   export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
   export ZGEN_AUTOLOAD_COMPINIT=1
 }
@@ -86,6 +85,8 @@ function __setup_misc() {
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
   fi 
+
+  export VMUX_REALEDITOR_NVIM="$(which nvim)"
 }
 
 __setup_functions=(

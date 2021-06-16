@@ -32,6 +32,7 @@ alias paux='ps aux | rg'
 alias rd='rm -rd'
 
 alias rn='ranger'
+alias v='vmux'
 alias nv='nvim'
 
 # insert relevant xkcd
