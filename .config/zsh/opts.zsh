@@ -74,6 +74,13 @@ function __setup_kemaps() {
   zle -N _zlf_handler
   bindkey '^o' _zlf
 
+  tmux-kill-popup() {
+    BUFFER="tmux display-popup -C"
+    zle accept-line
+  }
+  zle -N tmux-kill-popup
+  bindkey '^[q' tmux-kill-popup
+
 }
 __setup_kemaps
 unset -f __setup_kemaps
