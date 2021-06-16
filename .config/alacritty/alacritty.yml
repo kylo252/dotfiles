@@ -64,32 +64,36 @@ font:
   size: 11.0
 
 colors:
-  # COLORSCHEME: pastel.yaml
-  # Default colors
+  # onedark Alacritty Colors
   primary:
-    background: '#1f2430'
-    foreground: '#eaeaea'
+    background: '0x282c34'
+    foreground: '0xabb2bf'
+
+  # Normal colors
   normal:
-    black: '#191e2a'
-    red: '#ed8274'
-    green: '#a6cc70'
-    yellow: '#fad07b'
-    blue: '#6dcbfa'
-    magenta: '#cfbafa'
-    cyan: '#90e1c6'
-    white: '#c7c7c7'
+    black:   '0x20232A'
+    red:     '0xe86671'
+    green:   '0x98c379'
+    yellow:  '0xe0af68'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0x798294'
 
   # Bright colors
   bright:
-    black: '#686868'
-    red: '#f28779'
-    green: '#bae67e'
-    yellow: '#ffd580'
-    blue: '#73d0ff'
-    magenta: '#d4bfff'
-    cyan: '#95e6cb'
-    white: '#ffffff'
+    black:   '0x21252b'
+    red:     '0xe86671'
+    green:   '0x98c379'
+    yellow:  '0xe0af68'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
 
+  indexed_colors:
+    - { index: 16, color: '0xd19a66' }
+    - { index: 17, color: '0xf65866' }
   # Cursor colors
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
@@ -106,7 +110,7 @@ colors:
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 # env:
-#   TERM: screen-256color
+  # TERM: alacritty
 
 window:
   # Window padding (changes require restart)
