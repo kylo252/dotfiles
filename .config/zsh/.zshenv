@@ -15,8 +15,7 @@ function __setup_defaults() {
   export DOTBARE_DIR="$HOME/.dtf.git"
   export DOTBARE_TREE="$HOME"
 
-  export ZGEN_SOURCE="$XDG_DATA_HOME/zgenom"
-  export ZGEN_AUTOLOAD_COMPINIT=1
+  export FONTCONFIG_PATH=/etc/fonts
 }
 
 function __setup_cli_colors(){

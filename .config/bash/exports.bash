@@ -12,6 +12,8 @@ function __setup_defaults() {
 
   export DOTBARE_DIR="$HOME/.dtf.git"
   export DOTBARE_TREE="$HOME"
+
+  export FONTCONFIG_PATH=/etc/fonts
 }
 
 function __setup_cli_colors() {

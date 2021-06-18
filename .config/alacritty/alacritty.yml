@@ -332,7 +332,7 @@ hints:
 #
 # - `mods` (see key bindings)
 mouse_bindings:
-  - {mouse: Middle, action: PasteSelection}
+  - {mouse: Right, action: PasteSelection}
 
 # Key bindings
 #
