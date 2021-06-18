@@ -8,9 +8,9 @@ source "$XDG_CONFIG_HOME/lf/lf.zsh"
 LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
 [ -f "$LFCD" ] &&  source "$LFCD"
 
-zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
+# zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME/znap/sources"
 
-source "$XDG_DATA_HOME/znap/znap.zsh"
+source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
