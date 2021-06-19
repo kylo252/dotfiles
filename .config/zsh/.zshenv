@@ -16,6 +16,10 @@ function __setup_defaults() {
   export DOTBARE_TREE="$HOME"
 
   export FONTCONFIG_PATH=/etc/fonts
+
+  if [ -r "/etc/wsl.conf" ]; then
+    export TERM="xterm-256color"
+  fi
 }
 
 function __setup_cli_colors(){
