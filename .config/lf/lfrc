@@ -102,8 +102,6 @@ cmd bulkrename ${{
 %mkdir -p ~/.local/share/Trash
 
 # Basic Functions
-push mw
-map q push 'w:quit<enter>
 map <esc> quit
 map <c-q> quit
 map <c-r> reload
