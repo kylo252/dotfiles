@@ -26,9 +26,8 @@ return require("packer").startup(function(use)
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
   -- TMUX
-  use {"RyanMillerC/better-vim-tmux-resizer"}
-  use {"christoomey/vim-tmux-navigator"}
-  use {'andersevenrud/compe-tmux'}
+  use {"aserowy/tmux.nvim"}
+  use {"andersevenrud/compe-tmux"}
 
   use {"hrsh7th/nvim-compe"}
   use {"hrsh7th/vim-vsnip"}
