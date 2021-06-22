@@ -51,8 +51,8 @@ set_keymap('x', {noremap=true, silent=true}, {
     {'#', ':<C-u>lua require("funcs.search").visual_selection("?")<CR>?<C-r>=@/<CR><CR>'},
 
     -- move selected line(s)
-    {'<A-Up>', ':move \'<-2<CR>gv-gv'},
-    {'<A-Down>', ':move \'>+1<CR>gv-gv'},
+    {'K', ':move \'<-2<CR>gv-gv'},
+    {'J', ':move \'>+1<CR>gv-gv'},
 })
 
 -- insert {{{1
