@@ -1,7 +1,7 @@
 vim.g.dashboard_default_executive = 'telescope'
 
 vim.g.dashboard_custom_section = {
-    a = {description = {'  Recently Used Files'}, command = 'Telescope frecency'},
+    a = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
     b = {description = {'  Find File          '}, command = 'Telescope find_files'},
     c = {description = {'  DotFiles           '}, command = 'lua require\"config.telescope\".find_dotfiles()'},
     d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
