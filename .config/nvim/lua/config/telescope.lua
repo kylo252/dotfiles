@@ -73,7 +73,7 @@ local keymap = {
       name = "+dotfiles",
       d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
       s = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings"},
-      p = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit Packer plugins"}
+      p = {"<cmd>edit ~/.config/nvim/lua/plugins.lua<CR>", "Edit Packer plugins"}
     }
   },
   c = {

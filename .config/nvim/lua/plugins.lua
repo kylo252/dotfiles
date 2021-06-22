@@ -55,13 +55,14 @@ return require("packer").startup(function(use)
 
   -- file viewers (managers)
   use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
+  use {"ahmedkhalf/lsp-rooter.nvim"} -- with this nvim-tree will follow you
 
   -- Git suppport
   use {"lewis6991/gitsigns.nvim"}
   use {"TimUntersberger/neogit", requires = {"nvim-lua/plenary.nvim"}}
 
   -- utils
-  use {"terrortylor/nvim-comment"}
+	use {"b3nj5m1n/kommentary"}
   use {"tpope/vim-unimpaired"}
   use {"folke/which-key.nvim"}
   -- find-and-replace

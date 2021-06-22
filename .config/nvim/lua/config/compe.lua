@@ -1,19 +1,6 @@
 vim.o.completeopt = "menuone,noselect"
 
 require'compe'.setup {
-    enabled = O.auto_complete,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = 'enable',
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-
     source = {
         nvim_lsp = {kind = "  "},
         nvim_lua = {kind = "  "},
@@ -24,12 +11,8 @@ require'compe'.setup {
         vsnip = {kind = "  "},
         spell = {kind = "  "},
         tags = false,
-        vim_dadbod_completion = true,
-        -- snippets_nvim = {kind = "  "},
-        -- ultisnips = {kind = "  "},
         treesitter = {kind = "  "},
         emoji = {kind = " ﲃ ", filetypes={"markdown", "text"}}
-        -- for emoji press : (idk if that in compe tho)
     }
 }
 
@@ -100,3 +83,6 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+vim.cmd('inoremap <silent><expr> <C-Space> compe#complete()')
+vim.cmd("inoremap <silent><expr> <CR>      compe#confirm('<CR>')")
