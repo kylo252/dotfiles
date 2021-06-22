@@ -8,7 +8,7 @@ function __setup_defaults() {
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 
-  export EDITOR=nvim
+  export EDITOR="$(command -v vmx 2>/dev/null || echo nvim)"
 
   export ZDOTDIR="$HOME/.config/zsh"
 
