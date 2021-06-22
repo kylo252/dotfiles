@@ -38,6 +38,8 @@ znap eval pip-completion "source <(pip3 completion --zsh)"
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
+eval "$(zoxide init zsh)"
+
 # autoload -Uz compinit 
 autoload -Uz kp 
 
@@ -53,19 +55,19 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # Colorize completions using default `ls` colors.
-zstyle ':completion:*' list-colors ''
+# zstyle ':completion:*' list-colors ''
 
 # $CDPATH is overpowered (can allow us to jump to 100s of directories) so tends
 # to dominate completion; exclude path-directories from the tag-order so that
 # they will only be used as a fallback if no completions are found.
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
 
-# Categorize completion suggestions with headings:
-zstyle ':completion:*' group-name ''
-
-# Enable keyboard navigation of completions in menu
-# (not just tab/shift-tab but cursor keys as well):
-zstyle ':completion:*' menu select
+# # Categorize completion suggestions with headings:
+# zstyle ':completion:*' group-name ''
+# 
+# # Enable keyboard navigation of completions in menu
+# # (not just tab/shift-tab but cursor keys as well):
+# zstyle ':completion:*' menu select
 
 # expand alias just with <TAB> 
 # TODO: keep a lookout for performance penalties or clashes with `autosuggestions`

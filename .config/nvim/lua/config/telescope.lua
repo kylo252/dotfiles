@@ -123,6 +123,7 @@ require("telescope").setup {
     frecency = {
       show_scores = false,
       show_unindexed = true,
+      show_fiter_column = true,
       ignore_patterns = {"*.git/*", "*/tmp/*"},
       workspaces = {
         ["nvim"] = os.getenv("HOME") .. "/.config/nvim",
