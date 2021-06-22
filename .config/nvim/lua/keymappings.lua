@@ -10,76 +10,76 @@ vim.g.mapleader = ' '
 -- normal {{{1
 set_keymap('n', {noremap=true, silent=true}, {
 
-    -- set leader key
-    {'<Space>', '<NOP>' },
+  -- set leader key
+  {'<Space>', '<NOP>' },
 
-    -- Jump list
-    {'[j', '<C-o>'},
-    {']j', '<C-i>'},
+  -- Jump list
+  {'[j', '<C-o>'},
+  {']j', '<C-i>'},
 
-    -- save file
-	{'<C-c>', '<Esc>'},
-	{'<C-s>', ':w<CR>'},
+  -- save file
+  {'<C-c>', '<Esc>'},
+  {'<C-s>', ':w<CR>'},
 
-    -- Page down/up
-    {'[d', '<PageUp>'},
-    {']d', '<PageDown>'},
+  -- Page down/up
+  {'[d', '<PageUp>'},
+  {']d', '<PageDown>'},
 
-    -- Navigate buffers
-    {'<Tab>', ':bnext<CR>'},
-    {'<S-Tab>', ':bprevious<CR>'},
+  -- Navigate buffers
+  {'<Tab>', ':bnext<CR>'},
+  {'<S-Tab>', ':bprevious<CR>'},
 
-    -- no hl
-    {'<Leader>h', ':set hlsearch!<CR>'},
+  -- no hl
+  {'<Leader>h', ':set hlsearch!<CR>'},
 
-    -- explorer
-    --{'<Leader>e', ':NvimTreeToggle<CR>'},
-    --{'<Leader>lf', ':Lf<CR>'},
+  -- explorer
+  --{'<Leader>e', ':NvimTreeToggle<CR>'},
+  --{'<Leader>lf', ':Lf<CR>'},
 })
 
 -- visual {{{1
 set_keymap('x', {noremap=true, silent=true}, {
-    -- Allow pasting same thing many times
-    {'p', '""p:let @"=@0<CR>'},
+  -- Allow pasting same thing many times
+  {'p', '""p:let @"=@0<CR>'},
 
-    -- better indent
-    {'>', '<gv'},
-    {'<', '>gv'},
+  -- better indent
+  {'>', '<gv'},
+  {'<', '>gv'},
 
-    -- Visual mode pressing * or # searches for the current selection
-    {'*', ':<C-u>lua require("funcs.search").visual_selection("/")<CR>/<C-r>=@/<CR><CR>'},
-    {'#', ':<C-u>lua require("funcs.search").visual_selection("?")<CR>?<C-r>=@/<CR><CR>'},
+  -- Visual mode pressing * or # searches for the current selection
+  {'*', ':<C-u>lua require("funcs.search").visual_selection("/")<CR>/<C-r>=@/<CR><CR>'},
+  {'#', ':<C-u>lua require("funcs.search").visual_selection("?")<CR>?<C-r>=@/<CR><CR>'},
 
-    -- move selected line(s)
-    {'K', ':move \'<-2<CR>gv-gv'},
-    {'J', ':move \'>+1<CR>gv-gv'},
+  -- move selected line(s)
+  {'K', ':move \'<-2<CR>gv-gv'},
+  {'J', ':move \'>+1<CR>gv-gv'},
 })
 
 -- insert {{{1
 set_keymap('i', {noremap=true, silent=true}, {
-    -- Smart way to move between tabs
-    {'<A-p>', [[<C-\><C-n>gT]]},
-    {'<A-n>', [[<C-\><C-n>gt]]},
+  -- Smart way to move between tabs
+  {'<A-p>', [[<C-\><C-n>gT]]},
+  {'<A-n>', [[<C-\><C-n>gt]]},
 
-    -- alternative esc
-    {'<C-c>', '<Esc>'},
-    {'jk', '<Esc>'},
-    {'kj', '<Esc>'},
+  -- alternative esc
+  {'<C-c>', '<Esc>'},
+  {'jk', '<Esc>'},
+  {'kj', '<Esc>'},
 
-    -- save file
+  -- save file
 	{'<C-s>', ':w<CR>'},
 
     -- insert special carachters
-    {'<C-b>', '<C-k>'},
+  {'<C-b>', '<C-k>'},
 })
 
 -- terminal {{{1
 set_keymap('t', {noremap=true, silent=true}, {
-    -- escape in terminal
-    {'<Esc>', [[<C-\><C-n>]]},
-    {'<C-c>', '<Esc>'},
-    {'jk', '<Esc>'},
-    {'kj', '<Esc>'},
+  -- escape in terminal
+  {'<Esc>', [[<C-\><C-n>]]},
+  {'<C-c>', '<Esc>'},
+  {'jk', '<Esc>'},
+  {'kj', '<Esc>'},
 })
 
 -- vim.api.nvim_set_keymap('i', '<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true})

@@ -64,10 +64,13 @@ return require("packer").startup(function(use)
   use {"terrortylor/nvim-comment"}
   use {"tpope/vim-unimpaired"}
   use {"folke/which-key.nvim"}
-  use {"windwp/nvim-spectre", requires = {{"nvim-lua/plenary.nvim"}, {"nvim-lua/popup.nvim"}}}
-  use {"junegunn/vim-easy-align"}
+  -- find-and-replace
+  use {"windwp/nvim-spectre",
+    requires = {
+        {"nvim-lua/plenary.nvim"}, {"nvim-lua/popup.nvim"}}}
   use {"mhartington/formatter.nvim"}
-  use {"glepnir/indent-guides.nvim"}
+  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+  -- use {"glepnir/indent-guides.nvim"}
   use {"christoomey/vim-sort-motion"}
   use {"mg979/vim-visual-multi"}
 end)

@@ -1,6 +1,4 @@
-require('config.barbar')
 require('config.formatter')
-require('config.comments')
 require('config.compe')
 require('config.dashboard')
 require('config.git')
@@ -10,27 +8,29 @@ require('config.tree')
 require('config.treesitter')
 require('config.whichkey')
 require('config.snap')
-
+require('config.spectre')
 -- TODO: figure out if this is the one causing the slow down
 require('config.trouble')
+require('config.tmux')
 
-require('spectre').setup()
-require('indent_guides').setup()
+require('nvim_comment').setup()
 require('neoscroll').setup({respect_scrolloff = true})
+vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'Q', ':BufferClose<CR>', {noremap = true, silent = true})
 
-require("tmux").setup({
-  navigation = {
-    -- cycles to opposite pane while navigating into the border
-    cycle_navigation = true,
-
-    -- enables default keybindings (C-hjkl) for normal mode
-    enable_default_keybindings = true,
-
-    -- prevents unzoom tmux when navigating beyond vim border
-    persist_zoom = true
-  },
-  resize = {
-    -- enables default keybindings (A-hjkl) for normal mode
-    enable_default_keybindings = true
-  }
-})
+-- " better buffer management
+-- nnoremap <Leader>q :BufferClose<CR>
+-- nnoremap <Leader>qq :BufferWipeout<CR>
+-- 
+-- " Magic buffer-picking mode
+-- nnoremap <Leader>j :BufferPick<CR>
+-- 
+-- " Sort automatically by...
+-- nnoremap <Leader>bd :BufferOrderByDirectory<CR>
+-- nnoremap <Leader>bl :BufferOrderByLanguage<CR>
+-- 
+-- " Move to previous/next
+-- nnoremap <TAB> :BufferNext<CR>
+-- nnoremap <S-TAB> :BufferPrevious<CR>
+vim.g["indentLine_fileTypeExclude"] = 'dashboard'
