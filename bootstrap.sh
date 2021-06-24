@@ -12,7 +12,7 @@ function __check_reqs() {
   for req in "${__reqs[@]}"; do
     if ! command -v "$req"; then
       echo ">>> ERROR: missing requirement: $req"
-      echo ">>> please install and re-run the script again"
+      echo ">>> please install and re-run the script again" && exit 1
     fi
   done
   unset __reqs
@@ -55,8 +55,9 @@ function __setup_dotfiles() {
 
   echo 'Installing zsh plugins'
 
-  if [ ! -d "$XDG_DATA_HOME/znap" ]; then
-    git clone https://github.com/marlonrichert/zsh-snap "$XDG_DATA_HOME/znap"
+  local ZNAP_DIR="$XDG_DATA_HOME/zsh/plugins/znap"
+  if [ ! -d "$ZNAP_DIR" ]; then
+    git clone https://github.com/marlonrichert/zsh-snap "$ZNAP_DIR"
   fi
 
   zsh -c "source $ZDOTDIR/plugins.zsh"
