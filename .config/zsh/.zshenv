@@ -20,6 +20,9 @@ function __setup_defaults() {
   if [ -r "/etc/wsl.conf" ]; then
     export TERM="xterm-256color"
   fi
+
+  # https://github.com/romkatv/powerlevel10k/issues/1428
+  export GITSTATUS_LOG_LEVEL=DEBUG
 }
 
 function __setup_cli_colors(){

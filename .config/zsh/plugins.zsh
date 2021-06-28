@@ -34,7 +34,7 @@ fpath=(
 
 znap compdef dotbare "_dotbare_completion_cmd"
 
-znap eval pip-completion "source <(pip3 completion --zsh)"
+# znap eval pip-completion "source <(pip3 completion --zsh)"
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
