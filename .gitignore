@@ -48,7 +48,9 @@
 /.config/zsh/*.zwc
 /.config/zsh/**/*.zwc
 # --- nvim
+!/.config/nvim/*
 !/.config/nvim/**
+!/.config/nvim/lua/*
 !/.config/nvim/lua/**
 /.config/nvim/plugin/packer_compiled.vim 
 
