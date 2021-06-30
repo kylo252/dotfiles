@@ -13,6 +13,7 @@ require('config.spectre')
 -- TODO: figure out if this is the one causing the slow down
 require('config.trouble')
 require('config.tmux')
+require('config.lightspeed')
 require('lsp-rooter').setup()
 -- require('nvim_comment').setup()
 require('kommentary.config').use_extended_mappings()

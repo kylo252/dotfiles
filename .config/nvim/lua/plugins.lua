@@ -65,6 +65,7 @@ return require("packer").startup(function(use)
 	use {"b3nj5m1n/kommentary"}
   use {"tpope/vim-unimpaired"}
   use {"folke/which-key.nvim"}
+  use {"ggandor/lightspeed.nvim"}
   -- find-and-replace
   use {"windwp/nvim-spectre",
     requires = {
