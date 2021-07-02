@@ -1,13 +1,8 @@
 local wk = require("which-key")
 
 local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-local sorters = require("telescope.sorters")
-local previewers = require("telescope.previewers")
 local themes = require("telescope.themes")
 local trouble = require("trouble.providers.telescope")
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
 
 -- Dropdown list theme using a builtin theme definitions :
 local center_list_w_preview = themes.get_dropdown({
@@ -121,7 +116,7 @@ require("telescope").setup {
   },
   extensions = {
     fzf = {override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case"},
-    frecency = {
+    --[[ frecency = {
       show_scores = false,
       show_unindexed = true,
       show_fiter_column = true,
@@ -132,12 +127,12 @@ require("telescope").setup {
         ["config"] = os.getenv("HOME") .. "/.config",
         ["data"] = os.getenv("HOME") .. "/.local/share",
       }
-    }
+    } ]]
   }
 }
 
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("frecency")
+-- require("telescope").load_extension("frecency")
 
 local _M = {}
 --[[

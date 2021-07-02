@@ -1,7 +1,6 @@
-local wk = require("which-key")
 local snap = require("snap")
 
-local fzf = snap.get 'consumer.fzf'
+--[[ local fzf = snap.get 'consumer.fzf'
 local limit = snap.get 'consumer.limit'
 local producer_file = snap.get 'producer.ripgrep.file'
 local producer_vimgrep = snap.get 'producer.ripgrep.vimgrep'
@@ -10,20 +9,18 @@ local producer_oldfile = snap.get 'producer.vim.oldfile'
 local select_file = snap.get 'select.file'
 local select_vimgrep = snap.get 'select.vimgrep'
 local preview_file = snap.get 'preview.file'
-local preview_vimgrep = snap.get 'preview.vimgrep'
+local preview_vimgrep = snap.get 'preview.vimgrep' ]]
 
-local keymap = {
-  s = {
-    name = "+Snap",
-    g = {"<cmd>lua require\"config.snap\".grep()<CR>", "grep"},
-    f = {"<cmd>lua require\"config.snap\".files()<CR>", "files"},
-    s = {"<cmd>lua require\"config.snap\".oldfiles()<CR>", "old files"}
-  }
-}
+local layout = snap.get"layout".bottom
+local file = snap.config.file:with{consumer = "fzf", layout = layout}
+local vimgrep = snap.config.vimgrep:with{layout = layout}
 
-wk.register(keymap, {prefix = "<leader>", silent = true, noremap = true})
+snap.register.command("find_files", file {producer = "ripgrep.file"})
+snap.register.command("buffers", file {producer = "vim.buffer"})
+snap.register.command("oldfiles", file {producer = "vim.oldfile"})
+snap.register.command("live_grep", vimgrep {})
 
-local s = {}
+--[[ local s = {}
 
 s.files = function()
   snap.run({
@@ -65,4 +62,4 @@ s.oldfiles = function()
   })
 end
 
-return s
+return s ]]

@@ -2,14 +2,10 @@
 require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 
 require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { "cpp", "c", "bash", "lua", "yaml", "regex", "json", "jsonc", "go", "rust", "ruby", "toml"},
-    --ensure_installed = { "all" }, 
-    -- O.treesitter.ensure_installed, -- one of "all", "maintained" (parsers with maintainers), or a list  of languages
-    ignore_install = {},
-    highlight = {
-        enable = true -- false will disable the whole extension
-    },
+    ensure_installed = { "bash", "lua" },
+    highlight = { enable = true },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     indent = {enable = true},
     autotag = {enable = true},
+    rainbow = {enable = false}
 }

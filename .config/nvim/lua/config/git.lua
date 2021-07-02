@@ -1,7 +1,6 @@
 -- vim.cmd('highlight link GitSignsAdd Title')
 -- vim.cmd('highlight link GitSignsDelete WarningMsg')
 -- vim.cmd('highlight link GitSignsChange ModeMsg')
-
 require('gitsigns').setup {
     signs = {
         add          = {hl = 'GitSignsAdd'   , text = '│'},
@@ -37,4 +36,5 @@ local keymap = {
 
 wk.register(keymap, { prefix = "<leader>g"})
 
-require('neogit').setup()
+-- require('neogit').setup()
+

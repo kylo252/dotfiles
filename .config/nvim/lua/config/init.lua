@@ -1,21 +1,4 @@
-require('config.bufferline')
-require('config.formatter')
-require('config.compe')
-require('config.dashboard')
-require('config.git')
-require('config.statusline')
-require('config.telescope')
-require('config.tree')
 require('config.treesitter')
 require('config.whichkey')
-require('config.snap')
-require('config.spectre')
--- TODO: figure out if this is the one causing the slow down
-require('config.trouble')
-require('config.tmux')
-require('config.lightspeed')
-require('lsp-rooter').setup()
--- require('nvim_comment').setup()
-require('kommentary.config').use_extended_mappings()
-require('neoscroll').setup({respect_scrolloff = true})
-vim.g["indentLine_fileTypeExclude"] = 'dashboard'
+
+

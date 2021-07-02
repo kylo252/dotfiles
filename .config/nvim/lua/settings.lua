@@ -1,3 +1,4 @@
+vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
@@ -7,7 +8,7 @@ vim.cmd('let &titleold="'..TERMINAL..'"')
 vim.o.titlestring="%<%F%=%l/%L - nvim"
 vim.wo.wrap = false -- Display long lines as just one line
 vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
-vim.cmd('syntax on') -- move to next line with theses keys
+-- vim.cmd('syntax on') -- move to next line with theses keys
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.cmdheight = 2 -- More space for displaying messages
@@ -35,6 +36,9 @@ vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.swapfile = false -- Do not write any swp files
+vim.o.undodir = CACHE_PATH .. '/undo' -- Set undo directory
+-- vim.cmd('filetype plugin on') -- filetype detection
 -- vim.o.autochdir = true -- incomptaible with nvim-tree
 -- vim.cmd('syntax sync minlines=10000') -- Attempt to fix freeze in Markdown files
 vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
@@ -43,5 +47,5 @@ vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 vim.cmd('let g:cursorhold_updatetime = 1000')
 -- vim.cmd('colorscheme ' .. 'doom-one')
 -- vim.cmd('colorscheme ' .. 'onedark')
-require('onedark').setup()
+-- require('onedark').setup()
 

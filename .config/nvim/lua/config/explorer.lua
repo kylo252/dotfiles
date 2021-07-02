@@ -34,7 +34,7 @@ local opts = {silent=true, noremap=true}
 
 
 local mappings = {
-  ['<leader>e'] = {"<cmd>lua require\"config.tree\".toggle_tree()<CR>", "Open nvim-tree"},
+  ['<leader>e'] = {"<cmd>lua require\"config.explorer\".toggle_tree()<CR>", "Open nvim-tree"},
 }
 
 wk.register(mappings, opts)

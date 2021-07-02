@@ -8,71 +8,150 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute "packadd packer.nvim"
 end
 
+--[[
+FIXME: figure out why this is breaking barbar and indent-line and requires neovim restart
+see [#401](https://github.com/wbthomason/packer.nvim/issues/401)
+and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
+]]
+execute "packadd packer.nvim"
+execute "autocmd BufWritePost plugins.lua PackerCompile"
+
 return require("packer").startup(function(use)
 
   -- packer can manage itself as an optional plugin
   use {"wbthomason/packer.nvim"}
 
-  -- https://github.com/neovim/neovim/issues/12587
-  use {"antoinemadec/FixCursorHold.nvim"}
+  -- LSP and linting
+  use {
+    {"neovim/nvim-lspconfig"},
+    {"glepnir/lspsaga.nvim", event = "BufRead"},
+    {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"},
+    {
+      "hrsh7th/nvim-compe",
+      event = "InsertEnter *",
+      config = [[require('config.compe')]]
+    },
+    {
+      "mhartington/formatter.nvim",
+      cmd = "Format",
+      config = [[require('config.formatter')]]
+    },
+    {"nvim-treesitter/nvim-treesitter"},
+    {
+      "b3nj5m1n/kommentary",
+      event = "BufRead",
+      config = function()
+        require('kommentary.config').use_extended_mappings()
+      end
+    }
+  }
 
-  -- LSP
-  use {"neovim/nvim-lspconfig"}
-  use {"glepnir/lspsaga.nvim"}
-  use {"kabouzeid/nvim-lspinstall", requires = {"neovim/nvim-lspconfig"}}
-  use {"folke/trouble.nvim"}
+  -- Helpers
+  -- use {"folke/which-key.nvim", config = [[require('config.whichkey')]]}
+  use {"folke/which-key.nvim"}
+  use {"nvim-lua/popup.nvim"}
+  use {"nvim-lua/plenary.nvim"}
 
-  -- treesitter
-  use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+  -- Search
+  use {
+    {
+      "folke/trouble.nvim",
+      config = [[require('config.trouble')]],
+      after = "dashboard-nvim",
+      event = "BufRead"
+    },
+    {
+      "nvim-telescope/telescope.nvim",
+      config = [[require('config.telescope')]],
+      cmd = "Telescope"
+    },
+    {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+    {"camspiers/snap", cmd = "Snap", config = [[require('config.snap')]]},
+    {
+      "ggandor/lightspeed.nvim",
+      event = "BufRead",
+      config = [[require('config.lightspeed')]]
+    },
+    {
+      "windwp/nvim-spectre",
+      event = "BufWinEnter",
+      config = [[require('config.spectre')]],
+    },
+  }
 
   -- TMUX
-  use {"aserowy/tmux.nvim"}
-  use {"andersevenrud/compe-tmux"}
-
-  use {"hrsh7th/nvim-compe"}
-  use {"hrsh7th/vim-vsnip"}
-  use {"kevinhwang91/nvim-bqf"}
-
-  -- telescope
-  use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}}
-  use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
-  use {"nvim-telescope/telescope-frecency.nvim", requires = {"tami5/sql.nvim"}}
-
-  -- snap
-  use { "camspiers/snap" }
+  use {
+    {
+      "aserowy/tmux.nvim",
+      event = "BufRead",
+      config = [[require('config.tmux')]]
+    },
+    {"andersevenrud/compe-tmux", event = "InsertEnter *"}
+  }
 
   -- UI
-  -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
-  -- use { "glepnir/dashboard-nvim" }
-  use {"ChristianChiarulli/dashboard-nvim"}
-  use {'kylo252/onedark.nvim'}
-  use {'folke/tokyonight.nvim'}
-
-  use {"romgrk/barbar.nvim"} -- tabs
-  use {"glepnir/galaxyline.nvim"}
-  use {"chrisbra/Colorizer"} -- hex colorizer
-  use {"karb94/neoscroll.nvim"}
-
-  -- file viewers (managers)
-  use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
-  use {"ahmedkhalf/lsp-rooter.nvim"} -- with this nvim-tree will follow you
-
-  -- Git suppport
-  use {"lewis6991/gitsigns.nvim"}
-  use {"TimUntersberger/neogit", requires = {"nvim-lua/plenary.nvim"}}
+  use {
+    {
+      "kylo252/onedark.nvim",
+      config = function()
+        require('onedark').setup()
+      end
+    },
+    {"kyazdani42/nvim-web-devicons"},
+    {
+      "kyazdani42/nvim-tree.lua",
+      cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile"},
+      event = "BufWinEnter",
+      config = [[require('config.explorer')]]
+    },
+    {
+      "ahmedkhalf/lsp-rooter.nvim", -- with this nvim-tree will follow you
+      event = "BufRead",
+      config = function()
+        require('lsp-rooter').setup()
+      end
+    },
+    {"romgrk/barbar.nvim", event = "BufRead"},
+    {
+      "glepnir/galaxyline.nvim",
+      event = "BufRead",
+      config = [[require('config.statusline')]]
+    },
+    {
+      "karb94/neoscroll.nvim",
+      event = "BufRead",
+      config = function()
+        require('neoscroll').setup({respect_scrolloff = true})
+      end
+    },
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      branch = "lua",
+      event = "BufRead",
+      config = [[require('config.indent')]]
+    },
+    {
+      "lewis6991/gitsigns.nvim",
+      event = "BufRead",
+      config = [[require('config.git')]]
+    },
+    -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
+    -- use { "glepnir/dashboard-nvim" }
+    {
+      "ChristianChiarulli/dashboard-nvim",
+      event = 'BufWinEnter',
+      cmd = {"Dashboard", "DashboardNewFile", "DashboardJumpMarks"},
+      config = [[require('config.dashboard')]],
+      opt = true
+    }
+  }
 
   -- utils
-	use {"b3nj5m1n/kommentary"}
-  use {"tpope/vim-unimpaired"}
-  use {"folke/which-key.nvim"}
-  use {"ggandor/lightspeed.nvim"}
-  -- find-and-replace
-  use {"windwp/nvim-spectre",
-    requires = {
-        {"nvim-lua/plenary.nvim"}, {"nvim-lua/popup.nvim"}}}
-  use {"mhartington/formatter.nvim"}
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
-  -- use {"glepnir/indent-guides.nvim"}
-  use {"christoomey/vim-sort-motion"}
-  use {"mg979/vim-visual-multi"}
+  use {"tpope/vim-unimpaired", event = "BufRead"}
+  use {"kevinhwang91/nvim-bqf", event = "BufRead"}
+
+  -- misc
+  -- https://github.com/neovim/neovim/issues/12587
+  use {"antoinemadec/FixCursorHold.nvim", event = "BufRead"}
+  use {"chrisbra/Colorizer", cmd = "ColorToggle", opt = true} -- hex colorizer
 end)
