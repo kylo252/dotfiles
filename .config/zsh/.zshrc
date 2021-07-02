@@ -47,8 +47,8 @@ function __setup_x11() {
     if [ -d /run/WSL ]; then
       # How to set up working X11 forwarding on WSL2
       # https://stackoverflow.com/a/61110604
-      # DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-      DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+      DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+      # DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
 	  source "$ZDOTDIR/utils/ssh-agent.zsh"
     else
       DISPLAY=localhost:0
