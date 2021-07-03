@@ -4,7 +4,8 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+  execute("!git clone https://github.com/wbthomason/packer.nvim " ..
+              install_path)
   execute "packadd packer.nvim"
 end
 
@@ -75,18 +76,31 @@ return require("packer").startup(function(use)
     {
       "windwp/nvim-spectre",
       event = "BufWinEnter",
-      config = [[require('config.spectre')]],
-    },
+      config = [[require('config.spectre')]]
+    }
   }
 
-  -- TMUX
+  -- TMUX and session management
   use {
     {
       "aserowy/tmux.nvim",
       event = "BufRead",
       config = [[require('config.tmux')]]
     },
-    {"andersevenrud/compe-tmux", event = "InsertEnter *"}
+    {"andersevenrud/compe-tmux", event = "InsertEnter *"},
+    {
+      "rmagatti/auto-session",
+      cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
+      event = "BufRead"
+    },
+    {
+      "rmagatti/session-lens",
+      cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
+      event = "BufRead",
+      config = function()
+        require('session-lens').setup({ --[[your custom config--]] })
+      end
+    }
   }
 
   -- UI

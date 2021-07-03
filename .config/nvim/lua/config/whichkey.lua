@@ -67,6 +67,7 @@ local global_mappings = {
   ['<tab>'] = {'<cmd>BufferNext<cr>', 'jump to next buffer'},
   ['<s-tab>'] = {'<cmd>BufferPrevious<cr>', 'jump to prev buffer'}
 }
+wk.register(global_mappings, global_opts)
 
 -- TODO: move all the mappings here
 local mappings = {
@@ -114,8 +115,10 @@ local mappings = {
     f = {"<cmd>Snap find_files<CR>", "files"},
     s = {"<cmd>Snap oldfiles<CR>", "old files"},
     b = {"<cmd>Snap buffers<CR>", "buffers"}
+  },
+  S = {
+    s = {"<cmd>lua require('session-lens').search_session(), search sessions"}
   }
 }
 
-wk.register(global_mappings, global_opts)
 wk.register(mappings, opts)
