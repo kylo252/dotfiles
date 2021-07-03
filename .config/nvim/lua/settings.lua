@@ -1,51 +1,59 @@
-vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
-vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
-vim.cmd('set inccommand=split') -- Make substitution work in realtime
-vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
-vim.o.title = true
-TERMINAL = vim.fn.expand('$TERMINAL')
-vim.cmd('let &titleold="'..TERMINAL..'"')
-vim.o.titlestring="%<%F%=%l/%L - nvim"
-vim.wo.wrap = false -- Display long lines as just one line
-vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
--- vim.cmd('syntax on') -- move to next line with theses keys
-vim.o.pumheight = 10 -- Makes popup menu smaller
-vim.o.fileencoding = "utf-8" -- The encoding written to file
-vim.o.cmdheight = 2 -- More space for displaying messages
-vim.cmd('set colorcolumn=99999') -- fix indentline for now
-vim.o.mouse = "a" -- Enable your mouse
-vim.o.splitbelow = true -- Horizontal splits will automatically be below
-vim.o.termguicolors = true -- set term giu colors most terminals support this
-vim.o.splitright = true -- Vertical splits will automatically be to the right
-vim.o.conceallevel = 0 -- So that I can see `` in markdown files
-vim.cmd('set ts=4') -- Insert 2 spaces for a tab
-vim.cmd('set sw=4') -- Change the number of space characters inserted for indentation
-vim.cmd('set expandtab') -- Converts tabs to spaces
-vim.o.smartindent = true -- Makes indenting smart
-vim.wo.number = true -- set numbered lines
-vim.wo.relativenumber = true -- set relative number
-vim.wo.cursorline = true -- Enable highlighting of the current line
-vim.o.showtabline = 2 -- Always show tabs
-vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
-vim.o.backup = false -- This is recommended by coc
-vim.o.writebackup = false -- This is recommended by coc
-vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-vim.o.updatetime = 300 -- Faster completion
--- vim.o.completeopt = "menuone,noselect"
-vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
-vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.swapfile = false -- Do not write any swp files
-vim.o.undodir = CACHE_PATH .. '/undo' -- Set undo directory
--- vim.cmd('filetype plugin on') -- filetype detection
--- vim.o.autochdir = true -- incomptaible with nvim-tree
--- vim.cmd('syntax sync minlines=10000') -- Attempt to fix freeze in Markdown files
-vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 
--- from antoinemadec/FixCursorHold.nvim
-vim.cmd('let g:cursorhold_updatetime = 1000')
--- vim.cmd('colorscheme ' .. 'doom-one')
--- vim.cmd('colorscheme ' .. 'onedark')
--- require('onedark').setup()
+---  HELPERS  ---
+
+
+local cmd = vim.cmd
+local opt = vim.opt
+
+
+---  VIM ONLY COMMANDS  ---
+
+
+TERMINAL = vim.fn.expand('$TERMINAL')
+cmd('filetype plugin on')               -- filetype detection
+cmd('let &titleold="'.. TERMINAL ..'"')
+cmd('set inccommand=split')             -- show what you are substituting in real time
+cmd('set iskeyword+=-')                 -- treat dash as a separate word
+cmd('set whichwrap+=<,>,[,],h,l')       -- move to next line with theses keys
+
+
+---  SETTINGS  ---
+
+
+opt.backup          = false                     -- creates a backup file
+opt.clipboard       = "unnamedplus"             -- allows neovim to access the system clipboard
+opt.cmdheight       = 2                         -- more space in the neovim command line for displaying messages
+opt.colorcolumn     = "99999"                   -- fix indentline for now
+opt.completeopt     = {'menuone', 'noselect'}
+opt.conceallevel    = 0                         -- so that `` is visible in markdown files
+opt.cursorline      = true                      -- highlight the current line
+opt.expandtab       = true                      -- convert tabs to spaces
+opt.fileencoding    = "utf-8"                   -- the encoding written to a file
+opt.guifont         = "monospace:h17"           -- the font used in graphical neovim applications
+opt.hidden          = true                      -- required to keep multiple buffers and open multiple buffers
+opt.ignorecase      = true                      -- ignore case in search patterns
+opt.mouse           = "a"                       -- allow the mouse to be used in neovim
+opt.number          = true                      -- set numbered lines
+opt.pumheight       = 10                        -- pop up menu height
+opt.relativenumber  = true                      -- set relative numbered lines
+opt.shiftwidth      = 4                         -- the number of spaces inserted for each indentation
+opt.shortmess:append("c")                       -- don't pass messages to |ins-completion-menu|
+opt.showmode        = false                     -- we don't need to see things like -- INSERT -- anymore
+opt.showtabline     = 2                         -- always show tabs
+opt.signcolumn      = "yes"                     -- always show the sign column, otherwise it would shift the text each time
+opt.smartcase       = true                      -- smart case
+opt.smartindent     = true                      -- make indenting smarter again
+opt.splitbelow      = true                      -- force all horizontal splits to go below current window
+opt.splitright      = true                      -- force all vertical splits to go to the right of current window
+opt.swapfile        = false                     -- creates a swapfile
+opt.tabstop         = 4                         -- insert 4 spaces for a tab
+opt.termguicolors   = true                      -- set term gui colors (most terminals support this)
+opt.timeoutlen      = 500                       -- time to wait for a mapped sequence to complete (in milliseconds)
+opt.title           = true                      -- set the title of window to the value of the titlestring
+opt.titlestring     = "%<%F%=%l/%L - nvim"      -- what the title of the window will be set to
+opt.undodir         = CACHE_PATH .. '/undo'     -- set an undo directory
+opt.undofile        = true                      -- enable persisten undo
+opt.updatetime      = 300                       -- faster completion
+opt.wrap            = false                     -- display lines as one long line
+opt.writebackup     = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 

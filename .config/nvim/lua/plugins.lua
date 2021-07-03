@@ -111,11 +111,13 @@ return require("packer").startup(function(use)
         require('onedark').setup()
       end
     },
+    {"romgrk/barbar.nvim", event = "BufRead"},
     {"kyazdani42/nvim-web-devicons"},
     {
       "kyazdani42/nvim-tree.lua",
       cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile"},
       event = "BufWinEnter",
+      after = "barbar.nvim",
       config = [[require('config.explorer')]]
     },
     {
@@ -125,7 +127,6 @@ return require("packer").startup(function(use)
         require('lsp-rooter').setup()
       end
     },
-    {"romgrk/barbar.nvim", event = "BufRead"},
     {
       "glepnir/galaxyline.nvim",
       event = "BufRead",
@@ -140,7 +141,6 @@ return require("packer").startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      branch = "lua",
       event = "BufRead",
       config = [[require('config.indent')]]
     },
@@ -166,6 +166,11 @@ return require("packer").startup(function(use)
 
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
-  use {"antoinemadec/FixCursorHold.nvim", event = "BufRead"}
+  use {
+        "antoinemadec/FixCursorHold.nvim", 
+        event = "BufRead",
+        config =  function ()
+	        vim.g.cursorhold_updatetime=1000
+        end}
   use {"chrisbra/Colorizer", cmd = "ColorToggle", opt = true} -- hex colorizer
 end)
