@@ -9,7 +9,7 @@ cmd('let &titleold="'.. TERMINAL ..'"')
 cmd('set inccommand=split')             -- show what you are substituting in real time
 cmd('set iskeyword+=-')                 -- treat dash as a separate word
 cmd('set whichwrap+=<,>,[,],h,l')       -- move to next line with theses keys
-
+cmd('set syntax=off')
 
 ---  SETTINGS  ---
 opt.backup          = false                     -- creates a backup file
@@ -44,8 +44,7 @@ opt.timeoutlen      = 500                       -- time to wait for a mapped seq
 opt.title           = true                      -- set the title of window to the value of the titlestring
 opt.titlestring     = "%<%F%=%l/%L - nvim"      -- what the title of the window will be set to
 opt.undodir         = CACHE_PATH .. '/undo'     -- set an undo directory
-opt.undofile        = true                      -- enable persisten undo
+opt.undofile        = false                     -- enable persisten undo
 opt.updatetime      = 300                       -- faster completion
 opt.wrap            = false                     -- display lines as one long line
 opt.writebackup     = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-
