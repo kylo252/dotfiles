@@ -57,7 +57,9 @@ local global_opts = {
 local global_mappings = {
   Q = {'<cmd>BufferClose<cr>', 'close buffer'},
   ['<tab>'] = {'<cmd>BufferNext<cr>', 'jump to next buffer'},
-  ['<s-tab>'] = {'<cmd>BufferPrevious<cr>', 'jump to prev buffer'}
+  ['<s-tab>'] = {'<cmd>BufferPrevious<cr>', 'jump to prev buffer'},
+  ["<C-p>"] = {"<cmd>Telescope find_files<CR>", "Open project files"},
+  ["<M-f>"] = {"<cmd>Telescope live_grep<CR>", "Grep project files"},
 }
 
 wk.register(global_mappings, global_opts)
@@ -68,6 +70,40 @@ opts.prefix = "<leader>"
 
 local mappings = {
   j = {'<cmd>BufferPick<cr>', 'magic buffer-picking mode'},
+  e = {"<cmd>lua require\"config.explorer\".toggle_tree()<CR>", "Open nvim-tree"},
+  E = {"<cmd>lua require\"config.telescope\".scope_browser()<CR>", "Open scope browser"},
+  f = {
+    name = "+Find",
+    b = {"<cmd>Telescope buffers<CR>", "buffers"},
+    h = {"<cmd>Telescope help_tags<CR>", "help tags"},
+    M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
+    c = {"<cmd>Telescope colorscheme<CR>", "Colorscheme"},
+    f = {"<cmd>Telescope find_files<CR>", "Find Files"},
+    g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
+    m = {"<cmd>Telescope marks<CR>", "Marks"},
+    p = {"<cmd>Telescope git_files<CR>", "Find Project Files"},
+    r = {"<cmd>Telescope oldfiles<CR>", "Find Recenct Files"},
+    R = {"<Cmd>lua require\"config.telescope\".open_recent()<CR>", "Frecency"},
+    ["'"] = {"<cmd>Telescope registers<CR>", "Registers"},
+    d = {
+      name = "+dotfiles",
+      d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
+      s = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings"},
+      p = {"<cmd>edit ~/.config/nvim/lua/plugins.lua<CR>", "Edit Packer plugins"}
+    }
+  },
+  c = {
+    name = "+commands",
+    c = {"<cmd>Telescope commands<CR>", "commands"},
+    h = {"<cmd>Telescope command_history<CR>", "history"}
+  },
+  g = {
+    name = "+git",
+    g = {"<cmd>Telescope git_commits<CR>", "commits"},
+    c = {"<cmd>Telescope git_bcommits<CR>", "bcommits"},
+    B = {"<cmd>Telescope git_branches<CR>", "branches"},
+    S = {"<cmd>Telescope git_status<CR>", "status"}
+  },
   l = {
     name = "LSP",
     a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
@@ -114,28 +150,21 @@ local mappings = {
   },
   r = {
     name = "Replace",
-      f = {
-        "<cmd>lua require('spectre').open_file_search()<cr>", "Current File"
-      },
+      f = {"<cmd>lua require('spectre').open_file_search()<cr>", "Current File"},
       p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
     },
   S = {
     s = {"<cmd>lua require('session-lens').search_session(), search sessions"}
-  }
+  },
+  P = {
+    name = "+packer",
+    s = {"<cmd>PackerSync<CR>", "Packer Sync"},
+    c = {"<cmd>PackerCompile<CR>", "Packer Compile"},
+    t = {"<cmd>PackerStatus<CR>", "Packer Status"},
+    C = {"<cmd>PackerClean<CR>", "Packer Clean"},
+    l = {"<cmd>PackerLoad<CR>", "Packer Load"}
+  },
 }
 
 wk.register(mappings, opts)
-
-local visual_opts = vim.deepcopy(opts)
-visual_opts.mode = "x"
-
-local visual_mappings = {
-l = {
-    name = "LSP",
-    f = {"<cmd>lua vim.lsp.buf.formatting()<CR>", "Format with LSP"},
-    F = {"<cmd>Format<CR>", "Format"},
-    }
-}
-
--- wk.register(visual_mappings, visual_opts)
 

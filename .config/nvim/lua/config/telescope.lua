@@ -44,49 +44,6 @@ local files_list_w_preview = themes.get_dropdown({
   layout_config = {preview_width = 0.5}
 })
 
-local global_keys = {
-  ["<C-p>"] = {"<cmd>Telescope find_files<CR>", "Open project files"},
-  ["<M-f>"] = {"<cmd>Telescope live_grep<CR>", "Grep project files"},
-}
-
-local keymap = {
-  E = {"<cmd>lua require\"config.telescope\".scope_browser()<CR>", "Open scope browser"},
-  f = {
-    name = "+Find",
-    b = {"<cmd>Telescope buffers<CR>", "buffers"},
-    h = {"<cmd>Telescope help_tags<CR>", "help tags"},
-    M = {"<cmd>Telescope man_pages<CR>", "Man Pages"},
-    c = {"<cmd>Telescope colorscheme<CR>", "Colorscheme"},
-    f = {"<cmd>Telescope find_files<CR>", "Find Files"},
-    g = {"<cmd>Telescope live_grep<CR>", "Live Grep"},
-    m = {"<cmd>Telescope marks<CR>", "Marks"},
-    p = {"<cmd>Telescope git_files<CR>", "Find Project Files"},
-    r = {"<cmd>Telescope oldfiles<CR>", "Find Recenct Files"},
-    R = {"<Cmd>lua require\"config.telescope\".open_recent()<CR>", "Frecency"},
-    ["'"] = {"<cmd>Telescope registers<CR>", "Registers"},
-    d = {
-      name = "+dotfiles",
-      d = {"<cmd>lua require\"config.telescope\".find_dotfiles()<CR>", "Open dotfiles"},
-      s = {"<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings"},
-      p = {"<cmd>edit ~/.config/nvim/lua/plugins.lua<CR>", "Edit Packer plugins"}
-    }
-  },
-  c = {
-    name = "+commands",
-    c = {"<cmd>Telescope commands<CR>", "commands"},
-    h = {"<cmd>Telescope command_history<CR>", "history"}
-  },
-  g = {
-    name = "+git",
-    g = {"<cmd>Telescope git_commits<CR>", "commits"},
-    c = {"<cmd>Telescope git_bcommits<CR>", "bcommits"},
-    B = {"<cmd>Telescope git_branches<CR>", "branches"},
-    S = {"<cmd>Telescope git_status<CR>", "status"}
-  }
-}
-
-wk.register(keymap, {prefix = "<leader>", silent = true, noremap = true})
-wk.register(global_keys, {silent = true, noremap = true})
 
 require("telescope").setup {
   defaults = {

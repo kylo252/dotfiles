@@ -1,4 +1,3 @@
-local wk = require('which-key')
 local view = require'nvim-tree.view'
 
 vim.g.nvim_tree_auto_open = 1
@@ -11,6 +10,7 @@ vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_tab_open = 1
 vim.g.nvim_tree_width_allow_resize  = 1
 vim.g.nvim_tree_disable_window_picker = 1
+vim.g.nvim_tree_update_cwd = 1
 vim.g.nvim_tree_icons = {
     default = '',
     symlink = '',
@@ -29,15 +29,6 @@ vim.g.nvim_tree_icons = {
         symlink = "",
     }
 }
-
-local opts = {silent=true, noremap=true}
-
-
-local mappings = {
-  ['<leader>e'] = {"<cmd>lua require\"config.explorer\".toggle_tree()<CR>", "Open nvim-tree"},
-}
-
-wk.register(mappings, opts)
 
 local _M = {}
 _M.toggle_tree = function()
