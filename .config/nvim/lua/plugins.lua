@@ -63,22 +63,22 @@ packer.startup(function(use)
   }
 
   -- Helpers
-  -- use {"folke/which-key.nvim", config = [[require('config.whichkey')]]}
   use {"folke/which-key.nvim"}
-  --[[ use {"nvim-lua/popup.nvim"}
-  use {"nvim-lua/plenary.nvim"}
-  use {"tjdevries/astronauta.nvim"} ]]
 
   -- Search
   use {
     {
       "folke/trouble.nvim",
       config = [[require('config.trouble')]],
-      event = "BufWinEnter"
+      -- event = "BufWinEnter"
     },
     {
       "nvim-telescope/telescope.nvim",
-      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"tjdevries/astronauta.nvim"}};
+      requires = {
+        {"nvim-lua/popup.nvim"},
+        {"nvim-lua/plenary.nvim"},
+        {"tjdevries/astronauta.nvim"}
+      },
       config = [[require('config.telescope')]],
       cmd = "Telescope"
     },
@@ -107,12 +107,10 @@ packer.startup(function(use)
     {
       "rmagatti/auto-session",
       cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
-      event = "BufRead"
     },
     {
       "rmagatti/session-lens",
       cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
-      event = "BufRead",
       config = function()
         require('session-lens').setup({ --[[your custom config--]] })
       end
@@ -127,15 +125,16 @@ packer.startup(function(use)
         require('onedark').setup()
       end
     },
-    {"romgrk/barbar.nvim"},
-    {"kyazdani42/nvim-web-devicons"},
+    {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}, event = "WinEnter"},
     {
       "kyazdani42/nvim-tree.lua",
+      requires = {"kyazdani42/nvim-web-devicons"},
       cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile"},
       event = "BufWinEnter",
       after = "barbar.nvim",
       config = [[require('config.explorer')]]
     },
+
     {
       "ahmedkhalf/lsp-rooter.nvim", -- with this nvim-tree will follow you
       event = "BufRead",
@@ -145,7 +144,7 @@ packer.startup(function(use)
     },
     {
       "glepnir/galaxyline.nvim",
-      event = "BufRead",
+      event = "WinEnter",
       config = [[require('config.statusline')]]
     },
     {
@@ -183,10 +182,11 @@ packer.startup(function(use)
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
   use {
-        "antoinemadec/FixCursorHold.nvim",
-        event = "BufRead",
-        config =  function ()
-	        vim.g.cursorhold_updatetime=1000
-        end}
+    "antoinemadec/FixCursorHold.nvim",
+    event = "BufRead",
+    config = function()
+      vim.g.cursorhold_updatetime = 1000
+    end
+  }
   use {"chrisbra/Colorizer", cmd = "ColorToggle", opt = true} -- hex colorizer
 end)
