@@ -65,9 +65,9 @@ packer.startup(function(use)
   -- Helpers
   -- use {"folke/which-key.nvim", config = [[require('config.whichkey')]]}
   use {"folke/which-key.nvim"}
-  use {"nvim-lua/popup.nvim"}
+  --[[ use {"nvim-lua/popup.nvim"}
   use {"nvim-lua/plenary.nvim"}
-  use {"tjdevries/astronauta.nvim"}
+  use {"tjdevries/astronauta.nvim"} ]]
 
   -- Search
   use {
@@ -78,6 +78,7 @@ packer.startup(function(use)
     },
     {
       "nvim-telescope/telescope.nvim",
+      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"tjdevries/astronauta.nvim"}};
       config = [[require('config.telescope')]],
       cmd = "Telescope"
     },

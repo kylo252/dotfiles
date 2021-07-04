@@ -4,6 +4,6 @@ require('plugins')
 require('settings')
 require('autocmds')
 require('keymappings')
-require('config')
-
+require('config.treesitter')
+require('config.whichkey')
 require('lsp')
