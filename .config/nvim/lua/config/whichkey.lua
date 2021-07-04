@@ -53,23 +53,19 @@ local global_opts = {
   nowait = false -- use `nowait` when creating keymaps
 }
 
-local opts = {
-  prefix = "<leader>",
-  mode = "n", -- normal mode
-  buffer = nil, -- global mappings. specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false -- use `nowait` when creating keymaps
-}
 
 local global_mappings = {
   Q = {'<cmd>BufferClose<cr>', 'close buffer'},
   ['<tab>'] = {'<cmd>BufferNext<cr>', 'jump to next buffer'},
   ['<s-tab>'] = {'<cmd>BufferPrevious<cr>', 'jump to prev buffer'}
 }
+
 wk.register(global_mappings, global_opts)
 
 -- TODO: move all the mappings here
+local opts = vim.deepcopy(global_opts)
+opts.prefix = "<leader>"
+
 local mappings = {
   j = {'<cmd>BufferPick<cr>', 'magic buffer-picking mode'},
   l = {
@@ -78,7 +74,7 @@ local mappings = {
     A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
     d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
     D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-    f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
+    f = {"<cmd>lua vim.lsp.buf.formatting()<CR>", "Format"},
     h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
     i = {"<cmd>LspInfo<cr>", "Info"},
     l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
@@ -89,7 +85,7 @@ local mappings = {
     t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
     x = {"<cmd>cclose<cr>", "Close Quickfix"},
     s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-    S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
+    S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"},
   },
   t = {
     name = '+trouble',
@@ -116,9 +112,30 @@ local mappings = {
     s = {"<cmd>Snap oldfiles<CR>", "old files"},
     b = {"<cmd>Snap buffers<CR>", "buffers"}
   },
+  r = {
+    name = "Replace",
+      f = {
+        "<cmd>lua require('spectre').open_file_search()<cr>", "Current File"
+      },
+      p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
+    },
   S = {
     s = {"<cmd>lua require('session-lens').search_session(), search sessions"}
   }
 }
 
 wk.register(mappings, opts)
+
+local visual_opts = vim.deepcopy(opts)
+visual_opts.mode = "x"
+
+local visual_mappings = {
+l = {
+    name = "LSP",
+    f = {"<cmd>lua vim.lsp.buf.formatting()<CR>", "Format with LSP"},
+    F = {"<cmd>Format<CR>", "Format"},
+    }
+}
+
+-- wk.register(visual_mappings, visual_opts)
+

@@ -8,5 +8,6 @@ require'lspconfig'.yamlls.setup{
 				['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = 'docker-compose.yml'
 			}
 		}
-	}
+  }
 }
+vim.cmd("setl ts=2 sw=2 ts=2 ai et")

@@ -3,7 +3,9 @@
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
-    update_in_insert = false
+    update_in_insert = false,
+    signs = true,
+    underline = true
   }
 )
 
@@ -32,10 +34,9 @@ vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
 vim.cmd("nnoremap <silent> ca :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
 -- vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
--- vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
--- vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")
+
 -- scroll down hover doc or scroll in definition preview
--- vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
+vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
 -- scroll up hover doc
 vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
@@ -89,6 +90,7 @@ local function documentHighlight(client, bufnr)
         )
     end
 end
+
 local lsp_config = {}
 
 function lsp_config.common_on_attach(client, bufnr)
@@ -100,9 +102,11 @@ function lsp_config.tsserver_on_attach(client, bufnr)
     client.resolved_capabilities.document_formatting = false
 end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
--- local servers = {"pyright", "tsserver"}
--- for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
+require('utils').define_augroups({
+    _general_lsp = {
+        {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},
+    }
+})
+
 return lsp_config
 

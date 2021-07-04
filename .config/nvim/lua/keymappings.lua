@@ -1,7 +1,7 @@
 local function set_keymap(mode, opts, keymaps)
-    for _, keymap in ipairs(keymaps) do
-        vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
-    end
+  for _, keymap in ipairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  end
 end
 
 
@@ -9,7 +9,6 @@ vim.g.mapleader = ' '
 
 -- normal {{{1
 set_keymap('n', {noremap=true, silent=true}, {
-
   -- set leader key
   {'<Space>', '<NOP>' },
 
@@ -32,9 +31,6 @@ set_keymap('n', {noremap=true, silent=true}, {
   -- no hl
   {'<Leader>h', ':set hlsearch!<CR>'},
 
-  -- explorer
-  --{'<Leader>e', ':NvimTreeToggle<CR>'},
-  --{'<Leader>lf', ':Lf<CR>'},
 })
 
 -- visual {{{1
@@ -53,21 +49,22 @@ set_keymap('x', {noremap=true, silent=true}, {
   -- move selected line(s)
   {'K', ':move \'<-2<CR>gv-gv'},
   {'J', ':move \'>+1<CR>gv-gv'},
+
+  -- Format in visual mode
+  {'<leader>lf', '<cmd>Format<CR>'},
+
+  {'<leader>lF', "<cmd>lua vim.lsp.buf.formatting()<CR>"}
 })
 
 -- insert {{{1
 set_keymap('i', {noremap=true, silent=true}, {
-  -- Smart way to move between tabs
-  {'<A-p>', [[<C-\><C-n>gT]]},
-  {'<A-n>', [[<C-\><C-n>gt]]},
-
   -- alternative esc
   {'<C-c>', '<Esc>'},
   {'jk', '<Esc>'},
   {'kj', '<Esc>'},
 
   -- save file
-	{'<C-s>', ':w<CR>'},
+  {'<C-s>', ':w<CR>'},
 
     -- insert special carachters
   {'<C-b>', '<C-k>'},
@@ -82,11 +79,3 @@ set_keymap('t', {noremap=true, silent=true}, {
   {'kj', '<Esc>'},
 })
 
--- vim.api.nvim_set_keymap('i', '<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true})
-
--- vim.cmd([[
--- map p <Plug>(miniyank-autoput)
--- map P <Plug>(miniyank-autoPut)
--- map <leader>n <Plug>(miniyank-cycle)
--- map <leader>N <Plug>(miniyank-cycleback)
--- ]])

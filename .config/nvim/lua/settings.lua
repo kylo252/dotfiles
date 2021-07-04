@@ -1,15 +1,9 @@
-
 ---  HELPERS  ---
-
-
 local cmd = vim.cmd
 local opt = vim.opt
 
 
 ---  VIM ONLY COMMANDS  ---
-
-
-TERMINAL = vim.fn.expand('$TERMINAL')
 cmd('filetype plugin on')               -- filetype detection
 cmd('let &titleold="'.. TERMINAL ..'"')
 cmd('set inccommand=split')             -- show what you are substituting in real time
@@ -18,8 +12,6 @@ cmd('set whichwrap+=<,>,[,],h,l')       -- move to next line with theses keys
 
 
 ---  SETTINGS  ---
-
-
 opt.backup          = false                     -- creates a backup file
 opt.clipboard       = "unnamedplus"             -- allows neovim to access the system clipboard
 opt.cmdheight       = 2                         -- more space in the neovim command line for displaying messages

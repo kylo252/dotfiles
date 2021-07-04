@@ -4,26 +4,41 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute("!git clone https://github.com/wbthomason/packer.nvim " ..
-              install_path)
+  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
   execute "packadd packer.nvim"
 end
+
+local packer_ok, packer = pcall(require, "packer")
+if not packer_ok then return end
+
+packer.init {
+    -- compile_path = vim.fn.stdpath('data')..'/site/pack/loader/start/packer.nvim/plugin/packer_compiled.vim',
+    compile_path = require("packer.util").join_paths(vim.fn.stdpath('config'),
+                                                     'plugin',
+                                                     'packer_compiled.vim'),
+    git = {clone_timeout = 300},
+    display = {
+        open_fn = function()
+            return require("packer.util").float {border = "single"}
+        end
+    }
+}
 
 --[[
 FIXME: figure out why this is breaking barbar and indent-line and requires neovim restart
 see [#401](https://github.com/wbthomason/packer.nvim/issues/401)
 and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
 ]]
-execute "packadd packer.nvim"
-execute "autocmd BufWritePost plugins.lua PackerCompile"
+vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
-return require("packer").startup(function(use)
+packer.startup(function(use)
 
   -- packer can manage itself as an optional plugin
   use {"wbthomason/packer.nvim"}
 
   -- LSP and linting
   use {
+    {"nvim-treesitter/nvim-treesitter"},
     {"neovim/nvim-lspconfig"},
     {"glepnir/lspsaga.nvim", event = "BufRead"},
     {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"},
@@ -35,9 +50,9 @@ return require("packer").startup(function(use)
     {
       "mhartington/formatter.nvim",
       cmd = "Format",
-      config = [[require('config.formatter')]]
+      config = [[require('config.formatter')]],
+      disable = true
     },
-    {"nvim-treesitter/nvim-treesitter"},
     {
       "b3nj5m1n/kommentary",
       event = "BufRead",
@@ -52,14 +67,14 @@ return require("packer").startup(function(use)
   use {"folke/which-key.nvim"}
   use {"nvim-lua/popup.nvim"}
   use {"nvim-lua/plenary.nvim"}
+  use {"tjdevries/astronauta.nvim"}
 
   -- Search
   use {
     {
       "folke/trouble.nvim",
       config = [[require('config.trouble')]],
-      after = "dashboard-nvim",
-      event = "BufRead"
+      event = "BufWinEnter"
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -75,7 +90,7 @@ return require("packer").startup(function(use)
     },
     {
       "windwp/nvim-spectre",
-      event = "BufWinEnter",
+      event = "BufRead",
       config = [[require('config.spectre')]]
     }
   }
@@ -111,7 +126,7 @@ return require("packer").startup(function(use)
         require('onedark').setup()
       end
     },
-    {"romgrk/barbar.nvim", event = "BufRead"},
+    {"romgrk/barbar.nvim"},
     {"kyazdani42/nvim-web-devicons"},
     {
       "kyazdani42/nvim-tree.lua",
@@ -149,10 +164,10 @@ return require("packer").startup(function(use)
       event = "BufRead",
       config = [[require('config.git')]]
     },
-    -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
-    -- use { "glepnir/dashboard-nvim" }
     {
-      "ChristianChiarulli/dashboard-nvim",
+      "glepnir/dashboard-nvim",
+      -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
+      -- "ChristianChiarulli/dashboard-nvim",
       event = 'BufWinEnter',
       cmd = {"Dashboard", "DashboardNewFile", "DashboardJumpMarks"},
       config = [[require('config.dashboard')]],
@@ -167,7 +182,7 @@ return require("packer").startup(function(use)
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
   use {
-        "antoinemadec/FixCursorHold.nvim", 
+        "antoinemadec/FixCursorHold.nvim",
         event = "BufRead",
         config =  function ()
 	        vim.g.cursorhold_updatetime=1000

@@ -1,24 +1,27 @@
 version: 2
-# log-file: /tmp/efm-output.log
-# log-level: 1
+log-file: /tmp/efm-output.log
+log-level: 1
 tools:
-  sh-shellcheck: &sh-shellcheck
+  shellcheck: &shellcheck
     lint-command: 'shellcheck -f gcc -x'
     lint-source: 'shellcheck'
     lint-formats:
       - '%f:%l:%c: %trror: %m'
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
-  sh-shfmt: &sh-shfmt
+  shfmt: &shfmt
     format-command: 'shfmt -i 2 -ci'
     format-stdin: true  
-  lua-lua-format: &lua-lua-format
-    format-command: 'lua-format -i --no-keep-simple-function-one-line --column-limit=120'
+  luaformat: &luaformat
+    format-command: "lua-format --chop-down-table --indent-width=2 --no-use-tab --in-place --no-keep-simple-function-one-line --column-limit=80"
     format-stdin: true
 
 languages:
   lua:
-    - <<: *lua-lua-format
+    - <<: *luaformat
   sh:
-    - <<: *sh-shellcheck
-    - <<: *sh-shfmt
+    - <<: *shellcheck
+    - <<: *shfmt
+  zsh:
+    - <<: *shellcheck
+    - <<: *shfmt
