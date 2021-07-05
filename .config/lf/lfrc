@@ -61,14 +61,13 @@ cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
 cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
 
 cmd trash ${{
-  set -f
-  if gio trash 2>/dev/null; then
-    gio trash "$fx"
-  else
-    mkdir -p ~/.local/share/Trash
-    mv "$fx" ~/.local/share/Trash
-  fi
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ $ans = "y" ] && gio trash $fx
 }}
+
 
 # define a custom 'delete' command
 cmd delete ${{
