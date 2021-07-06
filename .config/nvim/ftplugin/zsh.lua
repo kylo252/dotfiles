@@ -5,8 +5,4 @@ require'lspconfig'.bashls.setup {
     filetypes = { "zsh" }
 }
 
-require"lspconfig".efm.setup {
-    cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
-    init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"zsh"},
-}
+require("lsp.efm-general-ls").generic_setup({"zsh"})

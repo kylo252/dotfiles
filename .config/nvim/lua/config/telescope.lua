@@ -133,6 +133,7 @@ function _M.scope_browser()
     layout_config = {preview_width = 0.7},
     layout_strategy = "horizontal",
     preview_title = false,
+    hidden = false,
     prompt_position = 'top',
     sorting_strategy = 'ascending',
     prompt_title = ' File Browser',

@@ -26,3 +26,6 @@ if O.lang.json.autoformat then
         }
     })
 end
+
+
+require("lsp.efm-general-ls").generic_setup({"json"})

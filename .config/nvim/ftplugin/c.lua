@@ -14,3 +14,5 @@ require'lspconfig'.clangd.setup {
         })
     }
 }
+
+--require("lsp.efm-general-ls").generic_setup({"c", "cpp"})
