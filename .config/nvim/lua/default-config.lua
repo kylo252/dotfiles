@@ -13,9 +13,6 @@ O = {
   efm_conf_path = EFM_CONF_PATH,
   lang = {
     python = {
-      linter = '',
-      -- @usage can be 'yapf', 'black'
-      formatter = '',
       autoformat = false,
       isort = false,
       diagnostics = {
@@ -30,8 +27,6 @@ O = {
       }
     },
     lua = {
-      -- @usage can be 'lua-format'
-      formatter = '',
       autoformat = false,
       diagnostics = {
         virtual_text = {spacing = 0, prefix = ""},
@@ -40,10 +35,6 @@ O = {
       }
     },
     sh = {
-      -- @usage can be 'shellcheck'
-      linter = '',
-      -- @usage can be 'shfmt'
-      formatter = '',
       autoformat = false,
       diagnostics = {
         virtual_text = {spacing = 0, prefix = ""},
@@ -52,8 +43,6 @@ O = {
       }
     },
     json = {
-      -- @usage can be 'prettier'
-      formatter = '',
       autoformat = false,
       diagnostics = {
         virtual_text = {spacing = 0, prefix = ""},
@@ -71,8 +60,6 @@ O = {
       header_insertion = 'never'
     },
     rust = {
-      linter = '',
-      formatter = '',
       autoformat = false,
       diagnostics = {
         virtual_text = {spacing = 0, prefix = ""},

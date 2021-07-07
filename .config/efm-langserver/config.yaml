@@ -165,7 +165,7 @@ tools:
     format-stdin: true
 
   luacheck: &luacheck
-    lint-command: 'luacheck --globals vim --filename ${INPUT} --formatter plain -'
+    lint-command: 'luacheck --std lua51 --globals vim --filename ${INPUT} --formatter visual_studio -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m'
@@ -229,7 +229,8 @@ languages:
 
   lua:
     - <<: *lua-stylua-format
-    # - <<: *luacheck
+    # - <<: *luaformat
+    - <<: *luacheck
 
   _:
     - <<: *any-excitetranslate
