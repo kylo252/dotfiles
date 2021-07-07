@@ -10,3 +10,4 @@ pager: less -Rf
 aliases:
     co: pr checkout
     rc: repo clone
+    repo-delete: api -X DELETE "repos/$1"
