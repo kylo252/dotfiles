@@ -12,14 +12,4 @@ require'lspconfig'.yamlls.setup{
 }
 vim.cmd("setl ts=2 sw=2 ts=2 ai et")
 
-require("lspconfig").efm.setup({
-	cmd = {
-		DATA_PATH .. "/lspinstall/efm/efm-langserver",
-		"-c",
-		O.efm_conf_path,
-	},
-	init_options = { documentFormatting = true, codeAction = false },
-	filetypes = { "yaml" },
-})
-
-
+require("lsp.efm-general-ls").generic_setup("yaml")

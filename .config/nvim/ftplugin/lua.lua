@@ -1,5 +1,4 @@
-vim.cmd("set sw=2")
-vim.cmd("set ts=2")
+vim.cmd "setl ts=2 sw=2"
 
 local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
 sumneko_cmd = { sumneko_root_path .. "/sumneko-lua-language-server", "-E", sumneko_root_path .. "/main.lua" }

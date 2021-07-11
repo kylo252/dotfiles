@@ -12,10 +12,6 @@ local packer_ok, packer = pcall(require, "packer")
 if not packer_ok then return end
 
 packer.init {
-    -- compile_path = vim.fn.stdpath('data')..'/site/pack/loader/start/packer.nvim/plugin/packer_compiled.vim',
-    compile_path = require("packer.util").join_paths(vim.fn.stdpath('config'),
-                                                     'plugin',
-                                                     'packer_compiled.vim'),
     git = {clone_timeout = 300},
     display = {
         open_fn = function()
@@ -29,7 +25,7 @@ FIXME: figure out why this is breaking barbar and indent-line and requires neovi
 see [#401](https://github.com/wbthomason/packer.nvim/issues/401)
 and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
 ]]
-vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
+-- vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
 packer.startup(function(use)
 
@@ -39,13 +35,14 @@ packer.startup(function(use)
   -- LSP and linting
   use {
     {"nvim-treesitter/nvim-treesitter"},
+    {"nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead"},
     {"neovim/nvim-lspconfig"},
-    {"glepnir/lspsaga.nvim", event = "BufRead"},
     {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"},
     {
       "hrsh7th/nvim-compe",
       event = "InsertEnter *",
-      config = [[require('config.compe')]]
+      config = [[require('config.compe')]],
+      -- disable = true
     },
     {
       "mhartington/formatter.nvim",
@@ -70,7 +67,7 @@ packer.startup(function(use)
     {
       "folke/trouble.nvim",
       config = [[require('config.trouble')]],
-      -- event = "BufWinEnter"
+      event = "BufWinEnter"
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -80,7 +77,9 @@ packer.startup(function(use)
         {"tjdevries/astronauta.nvim"}
       },
       config = [[require('config.telescope')]],
-      cmd = "Telescope"
+      -- cmd = "Telescope",
+      event = "BufWinEnter",
+      -- after = "trouble.nvim"
     },
     {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     {"camspiers/snap", cmd = "Snap", config = [[require('config.snap')]]},
@@ -145,7 +144,7 @@ packer.startup(function(use)
     {
       "glepnir/galaxyline.nvim",
       event = "WinEnter",
-      config = [[require('config.statusline')]]
+      config = [[require('config.statusline')]],
     },
     {
       "karb94/neoscroll.nvim",

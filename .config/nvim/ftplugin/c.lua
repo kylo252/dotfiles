@@ -1,4 +1,8 @@
-local clangd_flags = {"--enable-config"};
+if require("utils").check_lsp_client_active "clangd" then
+  return
+end
+
+local clangd_flags = {"--enable-config", "--clang-tidy"};
 
 require'lspconfig'.clangd.setup {
     -- cmd = {DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",  unpack(clangd_flags)},
@@ -9,7 +13,7 @@ require'lspconfig'.clangd.setup {
             virtual_text = O.lang.clang.diagnostics.virtual_text,
             signs = O.lang.clang.diagnostics.signs,
             underline = O.lang.clang.diagnostics.underline,
-            update_in_insert = true
+            update_in_insert = false
 
         })
     }

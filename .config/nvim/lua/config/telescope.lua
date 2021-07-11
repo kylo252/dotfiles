@@ -49,7 +49,6 @@ require("telescope").setup {
   defaults = {
     vimgrep_arguments = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
     find_command = {"rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case"},
-    shorten_path = true,
     -- border = {},
     set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
     mappings = {
