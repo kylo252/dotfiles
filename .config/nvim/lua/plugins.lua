@@ -67,7 +67,6 @@ packer.startup(function(use)
     {
       "folke/trouble.nvim",
       config = [[require('config.trouble')]],
-      event = "BufWinEnter"
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -79,7 +78,7 @@ packer.startup(function(use)
       config = [[require('config.telescope')]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
-      -- after = "trouble.nvim"
+      after = "trouble.nvim"
     },
     {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     {"camspiers/snap", cmd = "Snap", config = [[require('config.snap')]]},
@@ -170,7 +169,6 @@ packer.startup(function(use)
       event = 'BufWinEnter',
       cmd = {"Dashboard", "DashboardNewFile", "DashboardJumpMarks"},
       config = [[require('config.dashboard')]],
-      opt = true
     }
   }
 
