@@ -539,7 +539,9 @@ mouse_bindings:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Return,   mods: Control|Shift,      action: SpawnNewInstance }
+  - { key: Tab,      mods: Control,            command: { program: "tmux", args: ["select-window", "-t", "+"] }}
+  - { key: Tab,      mods: Shift|Control,      command: { program: "tmux", args: ["select-window", "-t", "-"] }}
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
