@@ -33,47 +33,70 @@
 #     The following line causes Git to track this file.
 !/.gitignore
 # --- general config
-!/.config/
+!/.config
 !/.config/*
 !/.config/**
 /.config/user*
 # --- bash
 !/.bashrc.user
+!/.config/bash
 !/.config/bash/*
 !/.config/bash/**
 # --- zsh
 !/.zshrc.user
+!/.config/zsh
+!/.config/zsh/*
 !/.config/zsh/**
 /.config/zsh/.zcomp*
 /.config/zsh/*.zwc
 /.config/zsh/**/*.zwc
 # --- nvim
+!/.config/nvim
 !/.config/nvim/*
 !/.config/nvim/**
 !/.config/nvim/lua/*
 !/.config/nvim/lua/**
 /.config/nvim/plugin/packer_compiled.vim 
-
-# --- misc (either non-static or reproducible)
-/.config/Code
-/.config/ccache
-/.config/configstore
-/.config/containers
-/.config/fzf
-/.config/gatsby
-/.config/gconf
-/.config/geany
-/.config/gh
-/.config/gopass
-/.config/htop/htoprc
-/.config/lazygit
-/.config/libreoffice
-/.config/lnav
-/.config/mimeapps.list
-/.config/modules
-/.config/monitors.xml
-/.config/nix/nix.conf
-/.config/pulse
-/.config/rhel
-/.config/smug
-/.config/rclone
+# --- tmux
+# --- tmux
+!/.config/tmux
+# # --- misc (either non-static or reproducible)
+# /.config/Code
+# /.config/ccache
+# /.config/configstore
+# /.config/containers
+# /.config/fzf
+# /.config/gatsby
+# /.config/gconf
+# /.config/geany
+# /.config/gh
+# /.config/gopass
+# /.config/htop/htoprc
+# /.config/lazygit
+# /.config/libreoffice
+# /.config/lnav
+# /.config/mimeapps.list
+# /.config/modules
+# /.config/monitors.xml
+# /.config/nix/nix.conf
+# /.config/pulse
+# /.config/rhel
+# /.config/smug
+# /.config/rclone
+# /.config/Bitwarden
+# /.config/Element
+# /.config/Logseq
+# /.config/Mailspring
+# /.config/Microsoft/Microsoft Teams
+# /.config/chromium
+# /.config/discord
+# /.config/elx
+# /.config/evolution
+# /.config/gtk-3.0/bookmarks
+# /.config/lxqt
+# /.config/microsoft-edge-beta
+# /.config/systemd/user
+# /.config/teams
+# /.config/teams (deleted)/SkypeRT
+# /.config/teams-for-linux
+# /.config/viewnior
