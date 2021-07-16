@@ -4,6 +4,7 @@ function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
+  export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
 
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
