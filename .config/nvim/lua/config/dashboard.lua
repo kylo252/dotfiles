@@ -10,7 +10,7 @@ vim.g.dashboard_custom_section = {
     m = {description = {'  Marks              '}, command = 'Telescope marks'},
 }
 
-vim.g.dashboard_session_directory = '~/.cache/nvim/session'
+vim.g.dashboard_session_directory = O.sessions_dir
 -- vim.cmd("let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))")
 
 -- vim.api.nvim_exec([[

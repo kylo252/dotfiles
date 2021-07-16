@@ -114,7 +114,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>FormatWrite<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     j = { "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>", "Next Diagnostic" },
     k = { "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>", "Prev Diagnostic" },
@@ -152,12 +152,12 @@ local mappings = {
     b = {"<cmd>Snap buffers<CR>", "buffers"}
   },
   r = {
-    name = "Replace",
-      f = {"<cmd>lua require('spectre').open_file_search()<cr>", "Current File"},
-      p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
+    name = "+replace",
+      f = {"<cmd>lua require('replacer').run()<cr>", "Run replacer"},
     },
   S = {
-    s = {"<cmd>lua require('session-lens').search_session(), search sessions"}
+    name = "+sessions",
+    s = {"<cmd>lua require('session-lens').search_session()<cr>", "search sessions"}
   },
   P = {
     name = "+packer",

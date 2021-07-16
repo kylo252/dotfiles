@@ -88,6 +88,7 @@ require("telescope").setup {
 }
 
 require("telescope").load_extension("fzf")
+-- require("telescope").load_extension("session-lens")
 -- require("telescope").load_extension("frecency")
 
 local _M = {}

@@ -10,6 +10,7 @@ if vim.fn.empty(vim.fn.glob(EFM_CONF_PATH)) > 0 then
 end
 
 O = {
+  sessions_dir =  os.getenv("HOME") .. "/.cache/nvim/sessions",
   efm_conf_path = EFM_CONF_PATH,
   lang = {
     python = {

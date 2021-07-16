@@ -104,15 +104,17 @@ packer.startup(function(use)
     {"andersevenrud/compe-tmux", event = "InsertEnter *"},
     {
       "rmagatti/auto-session",
-      cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
+      event = "BufWinEnter",
+      -- event = "VimEnter",
+      config = [[require('config.sessions')]],
     },
     {
       "rmagatti/session-lens",
-      cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
+      event = "BufWinEnter",
       config = function()
-        require('session-lens').setup({ --[[your custom config--]] })
-      end
-    }
+        require("session-lens").setup()
+      end,
+    },
   }
 
   -- UI
@@ -120,17 +122,17 @@ packer.startup(function(use)
     {
       "kylo252/onedark.nvim",
       config = function()
-        require('onedark').setup()
-      end
+        require("onedark").setup()
+      end,
     },
-    {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}, event = "WinEnter"},
+    { "romgrk/barbar.nvim", requires = { "kyazdani42/nvim-web-devicons" } },
     {
       "kyazdani42/nvim-tree.lua",
-      requires = {"kyazdani42/nvim-web-devicons"},
-      cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile"},
+      -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       event = "BufWinEnter",
       after = "barbar.nvim",
-      config = [[require('config.explorer')]]
+      commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
+      config = [[require('config.explorer')]],
     },
 
     {
@@ -179,11 +181,16 @@ packer.startup(function(use)
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
   use {
-    "antoinemadec/FixCursorHold.nvim",
-    event = "BufRead",
-    config = function()
-      vim.g.cursorhold_updatetime = 1000
-    end
+    {
+      "antoinemadec/FixCursorHold.nvim",
+      event = "BufRead",
+      config = function()
+        vim.g.cursorhold_updatetime = 1000
+      end
+    },
+    {
+      "gabrielpoca/replacer.nvim",
+    },
+    { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
   }
-  use {"chrisbra/Colorizer", cmd = "ColorToggle", opt = true} -- hex colorizer
 end)
