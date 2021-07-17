@@ -48,7 +48,7 @@ packer.startup(function(use)
     {
       "mhartington/formatter.nvim",
       cmd = "Format",
-      config = [[require('config.formatter')]],
+      config = [[require('core.formatter')]],
       disable = true,
     },
     {
@@ -67,7 +67,8 @@ packer.startup(function(use)
   use {
     {
       "folke/trouble.nvim",
-      config = [[require('config.trouble')]],
+      config = [[require('core.trouble')]],
+      -- event = "BufWinEnter"
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -82,16 +83,16 @@ packer.startup(function(use)
       after = "trouble.nvim"
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    { "camspiers/snap", cmd = "Snap", config = [[require('config.snap')]] },
+    { "camspiers/snap", cmd = "Snap", config = [[require('core.snap')]] },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
-      config = [[require('config.lightspeed')]],
+      config = [[require('core.lightspeed')]],
     },
     {
       "windwp/nvim-spectre",
       event = "BufRead",
-      config = [[require('config.spectre')]],
+      config = [[require('core.spectre')]],
     },
   }
 
@@ -100,7 +101,7 @@ packer.startup(function(use)
     {
       "aserowy/tmux.nvim",
       event = "BufRead",
-      config = [[require('config.tmux')]],
+      config = [[require('core.tmux')]],
     },
     { "andersevenrud/compe-tmux", event = "InsertEnter *" },
     {
@@ -146,7 +147,7 @@ packer.startup(function(use)
     {
       "glepnir/galaxyline.nvim",
       event = "WinEnter",
-      config = [[require('config.statusline')]],
+      config = [[require('core.statusline')]],
     },
     {
       "karb94/neoscroll.nvim",
@@ -158,12 +159,12 @@ packer.startup(function(use)
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufRead",
-      config = [[require('config.indent')]],
+      config = [[require('core.indent')]],
     },
     {
       "lewis6991/gitsigns.nvim",
       event = "BufRead",
-      config = [[require('config.git')]],
+      config = [[require('core.git')]],
     },
     {
       "glepnir/dashboard-nvim",

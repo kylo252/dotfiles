@@ -69,8 +69,8 @@ opts.prefix = "<leader>"
 
 local mappings = {
   j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
-  e = { '<cmd>lua require"config.explorer".toggle_tree()<CR>', "Open nvim-tree" },
-  E = { '<cmd>lua require"config.telescope".scope_browser()<CR>', "Open scope browser" },
+  e = { '<cmd>lua require"core.explorer".toggle_tree()<CR>', "Open nvim-tree" },
+  E = { '<cmd>lua require"core.telescope".scope_browser()<CR>', "Open scope browser" },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
@@ -82,11 +82,11 @@ local mappings = {
     m = { "<cmd>Telescope marks<CR>", "Marks" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles<CR>", "Find Recenct Files" },
-    R = { '<Cmd>lua require"config.telescope".open_recent()<CR>', "Frecency" },
+    R = { '<Cmd>lua require"core.telescope".open_recent()<CR>', "Frecency" },
     ["'"] = { "<cmd>Telescope registers<CR>", "Registers" },
     d = {
       name = "+dotfiles",
-      d = { '<cmd>lua require"config.telescope".find_dotfiles()<CR>', "Open dotfiles" },
+      d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Open dotfiles" },
       s = { "<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings" },
       p = { "<cmd>edit ~/.config/nvim/lua/plugins.lua<CR>", "Edit Packer plugins" },
     },

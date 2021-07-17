@@ -12,8 +12,8 @@ local preview_file = snap.get 'preview.file'
 local preview_vimgrep = snap.get 'preview.vimgrep' ]]
 
 local layout = snap.get("layout").bottom
-local file = snap.config.file:with { consumer = "fzf", layout = layout }
-local vimgrep = snap.config.vimgrep:with { layout = layout }
+local file = snap.core.file:with { consumer = "fzf", layout = layout }
+local vimgrep = snap.core.vimgrep:with { layout = layout }
 
 snap.register.command("find_files", file { producer = "ripgrep.file" })
 snap.register.command("buffers", file { producer = "vim.buffer" })
