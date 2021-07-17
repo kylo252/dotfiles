@@ -1,8 +1,8 @@
 -- npm install -g dockerfile-language-server-nodejs
-require'lspconfig'.dockerls.setup {
-    cmd = {DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver", "--stdio"},
-    on_attach = require'lsp'.common_on_attach,
-	root_dir = vim.loop.cwd
+require("lspconfig").dockerls.setup {
+  cmd = { DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver", "--stdio" },
+  on_attach = require("lsp").common_on_attach,
+  root_dir = vim.loop.cwd,
 }
 
-require("lsp.efm-general-ls").generic_setup({"dockerfile"})
+require("lsp.efm-general-ls").generic_setup { "dockerfile" }

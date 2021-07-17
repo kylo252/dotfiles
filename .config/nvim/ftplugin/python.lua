@@ -25,8 +25,8 @@ require("lspconfig").pyright.setup {
 }
 
 if O.plugin.debug.active and O.plugin.dap_install.active then
-  local dap_install = require("dap-install")
+  local dap_install = require "dap-install"
   dap_install.config("python_dbg", {})
 end
 
-require("lsp.efm-general-ls").generic_setup({"python"})
+require("lsp.efm-general-ls").generic_setup { "python" }

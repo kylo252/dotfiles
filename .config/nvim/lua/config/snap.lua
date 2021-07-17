@@ -1,4 +1,4 @@
-local snap = require("snap")
+local snap = require "snap"
 
 --[[ local fzf = snap.get 'consumer.fzf'
 local limit = snap.get 'consumer.limit'
@@ -11,13 +11,13 @@ local select_vimgrep = snap.get 'select.vimgrep'
 local preview_file = snap.get 'preview.file'
 local preview_vimgrep = snap.get 'preview.vimgrep' ]]
 
-local layout = snap.get"layout".bottom
-local file = snap.config.file:with{consumer = "fzf", layout = layout}
-local vimgrep = snap.config.vimgrep:with{layout = layout}
+local layout = snap.get("layout").bottom
+local file = snap.config.file:with { consumer = "fzf", layout = layout }
+local vimgrep = snap.config.vimgrep:with { layout = layout }
 
-snap.register.command("find_files", file {producer = "ripgrep.file"})
-snap.register.command("buffers", file {producer = "vim.buffer"})
-snap.register.command("oldfiles", file {producer = "vim.oldfile"})
+snap.register.command("find_files", file { producer = "ripgrep.file" })
+snap.register.command("buffers", file { producer = "vim.buffer" })
+snap.register.command("oldfiles", file { producer = "vim.oldfile" })
 snap.register.command("live_grep", vimgrep {})
 
 --[[ local s = {}

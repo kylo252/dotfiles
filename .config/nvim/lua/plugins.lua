@@ -1,7 +1,7 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
   execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
@@ -9,7 +9,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 local packer_ok, packer = pcall(require, "packer")
-if not packer_ok then return end
+if not packer_ok then
+  return
+end
 
 packer.init {
     git = {clone_timeout = 300},
@@ -28,9 +30,8 @@ and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
 -- vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
 packer.startup(function(use)
-
   -- packer can manage itself as an optional plugin
-  use {"wbthomason/packer.nvim"}
+  use { "wbthomason/packer.nvim" }
 
   -- LSP and linting
   use {
@@ -48,19 +49,19 @@ packer.startup(function(use)
       "mhartington/formatter.nvim",
       cmd = "Format",
       config = [[require('config.formatter')]],
-      disable = true
+      disable = true,
     },
     {
       "b3nj5m1n/kommentary",
       event = "BufRead",
       config = function()
-        require('kommentary.config').use_extended_mappings()
-      end
-    }
+        require("kommentary.config").use_extended_mappings()
+      end,
+    },
   }
 
   -- Helpers
-  use {"folke/which-key.nvim"}
+  use { "folke/which-key.nvim" }
 
   -- Search
   use {
@@ -71,27 +72,27 @@ packer.startup(function(use)
     {
       "nvim-telescope/telescope.nvim",
       requires = {
-        {"nvim-lua/popup.nvim"},
-        {"nvim-lua/plenary.nvim"},
-        {"tjdevries/astronauta.nvim"}
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
+        { "tjdevries/astronauta.nvim" },
       },
       config = [[require('config.telescope')]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
       after = "trouble.nvim"
     },
-    {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-    {"camspiers/snap", cmd = "Snap", config = [[require('config.snap')]]},
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "camspiers/snap", cmd = "Snap", config = [[require('config.snap')]] },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
-      config = [[require('config.lightspeed')]]
+      config = [[require('config.lightspeed')]],
     },
     {
       "windwp/nvim-spectre",
       event = "BufRead",
-      config = [[require('config.spectre')]]
-    }
+      config = [[require('config.spectre')]],
+    },
   }
 
   -- TMUX and session management
@@ -99,9 +100,9 @@ packer.startup(function(use)
     {
       "aserowy/tmux.nvim",
       event = "BufRead",
-      config = [[require('config.tmux')]]
+      config = [[require('config.tmux')]],
     },
-    {"andersevenrud/compe-tmux", event = "InsertEnter *"},
+    { "andersevenrud/compe-tmux", event = "InsertEnter *" },
     {
       "rmagatti/auto-session",
       event = "BufWinEnter",
@@ -139,8 +140,8 @@ packer.startup(function(use)
       "ahmedkhalf/lsp-rooter.nvim", -- with this nvim-tree will follow you
       event = "BufRead",
       config = function()
-        require('lsp-rooter').setup()
-      end
+        require("lsp-rooter").setup()
+      end,
     },
     {
       "glepnir/galaxyline.nvim",
@@ -151,32 +152,32 @@ packer.startup(function(use)
       "karb94/neoscroll.nvim",
       event = "BufRead",
       config = function()
-        require('neoscroll').setup({respect_scrolloff = true})
-      end
+        require("neoscroll").setup { respect_scrolloff = true }
+      end,
     },
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufRead",
-      config = [[require('config.indent')]]
+      config = [[require('config.indent')]],
     },
     {
       "lewis6991/gitsigns.nvim",
       event = "BufRead",
-      config = [[require('config.git')]]
+      config = [[require('config.git')]],
     },
     {
       "glepnir/dashboard-nvim",
       -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
       -- "ChristianChiarulli/dashboard-nvim",
-      event = 'BufWinEnter',
-      cmd = {"Dashboard", "DashboardNewFile", "DashboardJumpMarks"},
+      event = "BufWinEnter",
+      cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('config.dashboard')]],
     }
   }
 
   -- utils
-  use {"tpope/vim-unimpaired", event = "BufRead"}
-  use {"kevinhwang91/nvim-bqf", event = "BufRead"}
+  use { "tpope/vim-unimpaired", event = "BufRead" }
+  use { "kevinhwang91/nvim-bqf", event = "BufRead" }
 
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
