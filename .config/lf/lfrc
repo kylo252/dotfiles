@@ -18,7 +18,6 @@ cmd zle-insert-relative %{{
     printf 'LBUFFER+="${LBUFFER:+ }${(q)$(realpath %q --relative-to=$PWD)}"\n' "$f" >&$ZLE_FIFO
   done
 }}
-
 cmd zle-insert-absolute %{{
   for f in "$fx"; do
     printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
@@ -41,6 +40,11 @@ cmd fzf_jump ${{
   fi
   lf -remote "send $id $cmd \"$res\""
 }}
+
+# zoxide integration https://github.com/gokcehan/lf/issues/540
+cmd zjump %lf -remote "send $id cd '$(zoxide query $1)'"
+map <c-e> push :zjump<space>
+
 
 cmd open ${{
   case $(file --mime-type "$f" -b) in
@@ -114,8 +118,8 @@ map r push :rename<space>
 map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
 
 # create dir/file
-map Xad push $mkdir<space>
-map Xaf push $touch<space>
+map ad push $mkdir<space>
+map af push $touch<space>
 
 # Tmux
 map tv &tmux split-window -h zsh
