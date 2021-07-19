@@ -119,6 +119,15 @@ packer.startup(function(use)
     },
   }
 
+  use {
+    "akinsho/nvim-toggleterm.lua",
+    event = "BufWinEnter",
+    config = function()
+      require("core.terminal").setup()
+    end,
+  }
+
+
   -- UI
   use {
     {
