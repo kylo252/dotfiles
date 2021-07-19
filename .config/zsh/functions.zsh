@@ -89,9 +89,14 @@ function ifzf() {
 }
 
 # reload by using F5
-function reset-zsh() {  
-  znap restart 
+function reset-zsh() {
+  fd "$ZDOT_DIR" --hidden -e zwc -x rm || exit 1
+  fd . "$XDG_CACHE_HOME/zsh" --type file --hidden -x rm || exit 1
+  znap clean || exit 1
+  znap compile || exit 1
+  znap restart
 }
+
 zle -N reset-zsh
 bindkey "${terminfo[kf5]}" reset-zsh
 

@@ -5,6 +5,14 @@ source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
+# https://git-annex.branchable.com/bugs/zsh_completions_installed_to_location_not_in_fpath/
+fpath=( 
+  /usr/share/zsh/vendor-completions
+  /usr/share/zsh/site-functions
+  "$ZDOTDIR"/modules
+  $fpath
+)
+
 LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
 [ -f "$LFCD" ] &&  source "$LFCD"
 
@@ -13,34 +21,28 @@ LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
 source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
 znap source zsh-users/zsh-autosuggestions
-znap source zsh-users/zsh-completions
+# znap source zsh-users/zsh-completions
 
 znap source zdharma/fast-syntax-highlighting
 
 znap source romkatv/powerlevel10k
 
-znap source b4b4r07/enhancd
 znap source kazhala/dotbare
 
 znap source Aloxaf/fzf-tab
-# path=( ~[bigH/git-fuzzy]/bin $path )
 
-# https://git-annex.branchable.com/bugs/zsh_completions_installed_to_location_not_in_fpath/
-fpath=( 
-  /usr/share/zsh/vendor-completions
-  "$ZDOTDIR"/modules
-  $fpath
-)
-
-znap compdef dotbare "_dotbare_completion_cmd"
-
-# znap eval pip-completion "source <(pip3 completion --zsh)"
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 
 eval "$(zoxide init zsh)"
 
+# znap compdef dotbare "_dotbare_completion_cmd"
+# znap compdef fd "_fd"
+
+# znap eval pip-completion "source <(pip3 completion --zsh)"
+
 # autoload -Uz compinit 
+
 autoload -Uz kp 
 
 # disable sort when completing `git checkout`
