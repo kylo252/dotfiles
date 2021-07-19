@@ -42,7 +42,7 @@ packer.startup(function(use)
     {
       "hrsh7th/nvim-compe",
       event = "InsertEnter *",
-      config = [[require('config.compe')]],
+      config = [[require('core.compe')]],
       -- disable = true
     },
     {
@@ -77,7 +77,7 @@ packer.startup(function(use)
         { "nvim-lua/plenary.nvim" },
         { "tjdevries/astronauta.nvim" },
       },
-      config = [[require('config.telescope')]],
+      config = [[require('core.telescope')]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
       after = "trouble.nvim"
@@ -108,7 +108,7 @@ packer.startup(function(use)
       "rmagatti/auto-session",
       event = "BufWinEnter",
       -- event = "VimEnter",
-      config = [[require('config.sessions')]],
+      config = [[require('core.sessions')]],
     },
     {
       "rmagatti/session-lens",
@@ -143,7 +143,7 @@ packer.startup(function(use)
       event = "BufWinEnter",
       after = "barbar.nvim",
       commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-      config = [[require('config.explorer')]],
+      config = [[require('core.explorer')]],
     },
 
     {
@@ -181,7 +181,7 @@ packer.startup(function(use)
       -- "ChristianChiarulli/dashboard-nvim",
       event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
-      config = [[require('config.dashboard')]],
+      config = [[require('core.dashboard')]],
     }
   }
 

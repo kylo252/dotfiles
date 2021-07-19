@@ -5,7 +5,7 @@ local function set_keymap(mode, opts, keymaps)
 end
 
 vim.g.mapleader = " "
-
+vim.api.nvim_set_keymap("t", "<leader>t", ":lua require('FTerm').toggle()<CR>", {silent = true})
 -- normal {{{1
 set_keymap("n", { noremap = true, silent = true }, {
   -- set leader key

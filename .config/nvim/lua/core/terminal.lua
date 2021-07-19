@@ -35,20 +35,6 @@ M.config = {
 
 M.setup = function()
   local terminal = require "toggleterm"
-
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>Gg",
-    "<cmd>lua require('core.terminal')._lazygit_toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>Lf",
-    "<cmd>lua require('core.terminal')._lf_toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  -- O.plugin.which_key.mappings["gg"] = "LazyGit"
   terminal.setup(M.config)
 end
 
@@ -76,4 +62,16 @@ M._lf_toggle = function()
   local lazygit = Terminal:new { cmd = "lf", hidden = true }
   lazygit:toggle()
 end
+
+M._ranger_toggle = function()
+  if is_installed "ranger" ~= true then
+    print "Please install lf. Check documentation for more information"
+    return
+  end
+  local Terminal = require("toggleterm.terminal").Terminal
+  local lazygit = Terminal:new { cmd = "ranger", hidden = true }
+  lazygit:toggle()
+end
+
+
 return M
