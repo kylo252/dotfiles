@@ -112,7 +112,7 @@ packer.startup(function(use)
     },
     {
       "rmagatti/session-lens",
-      event = "BufWinEnter",
+      cmd = "Telescope",
       config = function()
         require("session-lens").setup()
       end,
@@ -140,9 +140,8 @@ packer.startup(function(use)
     {
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
-      event = "BufWinEnter",
+      -- event = "BufWinEnter",
       after = "barbar.nvim",
-      commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
       config = [[require('core.explorer')]],
     },
 

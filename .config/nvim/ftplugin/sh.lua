@@ -1,4 +1,5 @@
 -- npm i -g bash-language-server
+vim.cmd "set sw=2 ts=2"
 local ft = { "sh", "bash" }
 
 require("lspconfig").bashls.setup {
