@@ -32,4 +32,10 @@ function utils.define_augroups(definitions) -- {{{1
   end
 end
 
+function utils.get_lsp_caps()
+  vim.fn. print(vim.inspect(vim.lsp.get_active_clients().resolved_capabilities))
+end
+
 return utils
+
+

@@ -9,3 +9,8 @@ require "core.treesitter"
 require "core.whichkey"
 require "lsp"
 -- require'plenary.profile'.stop()
+--
+--[[ lv_utils.add_keymap_normal_mode({noremap = true},
+  {"<leader>G", "<cmd>lua require('lv_utils').get_lsp_caps()<cr>"}) ]]
+
+

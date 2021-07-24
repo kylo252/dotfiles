@@ -49,7 +49,6 @@ packer.startup(function(use)
       "mhartington/formatter.nvim",
       cmd = "Format",
       config = [[require('core.formatter')]],
-      disable = true,
     },
     {
       "b3nj5m1n/kommentary",
@@ -141,7 +140,6 @@ packer.startup(function(use)
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       -- event = "BufWinEnter",
-      after = "barbar.nvim",
       config = [[require('core.explorer')]],
     },
 
