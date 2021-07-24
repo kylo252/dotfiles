@@ -12,4 +12,4 @@ require("lspconfig").yamlls.setup {
 }
 vim.cmd("setl ts=2 sw=2 ts=2 ai et")
 
-require("lsp.efm-general-ls").generic_setup("yaml")
+require("lsp.efm-general-ls").generic_setup { "yaml" }
