@@ -60,6 +60,13 @@ local global_mappings = {
 	["<C-p>"] = { "<cmd>Telescope find_files<CR>", "Open project files" },
 	["<M-f>"] = { "<cmd>Telescope live_grep<CR>", "Grep project files" },
 	["<S-k>"] = { "<cmd>lua vim.lsp.buf.signature_help({focusable = false})<CR>", "Signature Help" },
+	g = {
+		-- LSP
+		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
+		D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to decleration" },
+		r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Go to references" },
+		i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation" },
+	},
 }
 
 wk.register(global_mappings, global_opts)
@@ -69,7 +76,16 @@ local opts = vim.deepcopy(global_opts)
 opts.prefix = "<leader>"
 
 local mappings = {
-	j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
+	b = {
+		name = "+barbar",
+	  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
+		q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
+		e = { "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer" },
+		h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
+		l = { "<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right" },
+		d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
+		L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
+	},
 	e = { '<cmd>lua require"core.explorer".toggle_tree()<CR>', "Open nvim-tree" },
 	E = { '<cmd>lua require"core.telescope".scope_browser()<CR>', "Open scope browser" },
 	f = {
@@ -97,17 +113,29 @@ local mappings = {
 		c = { "<cmd>Telescope commands<CR>", "commands" },
 		h = { "<cmd>Telescope command_history<CR>", "history" },
 	},
+
 	g = {
-		-- LSP
-		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
-		D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to decleration" },
-		r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Go to references" },
-		i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation" },
-	},
-	G = {
 		name = "+git",
 		g = { "<cmd>Telescope git_commits<CR>", "commits" },
-		c = { "<cmd>Telescope git_bcommits<CR>", "bcommits" },
+
+		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+		u = {
+			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+			"Undo Stage Hunk",
+		},
+		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+		C = {
+			"<cmd>Telescope git_bcommits<cr>",
+			"Checkout commit(for current file)",
+		},
 		B = { "<cmd>Telescope git_branches<CR>", "branches" },
 		S = { "<cmd>Telescope git_status<CR>", "status" },
 	},
@@ -149,15 +177,6 @@ local mappings = {
 		l = { "<cmd>Trouble loclist<CR>", "toggle loclist" },
 		r = { "<cmd>Trouble lsp_references<CR>", "toggle references" },
 		q = { "<cmd>Trouble quickfix<CR>", "toggle quickfix" },
-	},
-	q = {
-		name = "+barbar",
-		q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
-		e = { "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer" },
-		h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
-		l = { "<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right" },
-		d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
-		L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
 	},
 	s = {
 		name = "+snap",

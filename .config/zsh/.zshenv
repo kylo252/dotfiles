@@ -21,6 +21,7 @@ function __setup_defaults() {
 
   if [ -r "/etc/wsl.conf" ]; then
     export TERM="xterm-256color"
+    export BROWSER="wslview"
   fi
 
   # https://github.com/romkatv/powerlevel10k/issues/1428
