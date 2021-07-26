@@ -178,13 +178,6 @@ local mappings = {
 		r = { "<cmd>Trouble lsp_references<CR>", "toggle references" },
 		q = { "<cmd>Trouble quickfix<CR>", "toggle quickfix" },
 	},
-	s = {
-		name = "+snap",
-		g = { "<cmd>Snap live_grep<CR>", "grep" },
-		f = { "<cmd>Snap find_files<CR>", "files" },
-		s = { "<cmd>Snap oldfiles<CR>", "old files" },
-		b = { "<cmd>Snap buffers<CR>", "buffers" },
-	},
 	r = {
 		name = "+replace",
 		f = { "<cmd>lua require('replacer').run()<cr>", "Run replacer" },

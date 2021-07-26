@@ -82,7 +82,6 @@ packer.startup(function(use)
       after = "trouble.nvim"
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    { "camspiers/snap", cmd = "Snap", config = [[require('core.snap')]] },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
