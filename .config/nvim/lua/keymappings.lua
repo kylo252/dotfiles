@@ -6,14 +6,15 @@ end
 
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap("t", "<leader>t", ":lua require('FTerm').toggle()<CR>", { silent = true })
+
 -- normal {{{1
 set_keymap("n", { noremap = true, silent = true }, {
 	-- set leader key
 	{ "<Space>", "<NOP>" },
 
 	-- Jump list
-	{ "[j", "<C-o>" },
-	{ "]j", "<C-i>" },
+	{ "[j", "<cmd>cprev<CR>" },
+	{ "]j", "<cmd>cnext<CR>" },
 
 	-- save file
 	{ "<C-c>", "<Esc>" },
@@ -24,12 +25,11 @@ set_keymap("n", { noremap = true, silent = true }, {
 	{ "]d", "<PageDown>" },
 
 	-- Navigate buffers
-	{ "<Tab>", "<cmd>bnext<CR>" },
-	{ "<S-Tab>", "<cmd>bprevious<CR>" },
+	{ "<Tab>", "<cmd>BufferNext<CR>" },
+	{ "<S-Tab>", "<cmd>BufferPrevious<CR>" },
 
 	-- no hl
 	{ "<Leader>h", "<cmd>set hlsearch!<CR>" },
-
 })
 
 -- visual {{{1
@@ -65,8 +65,11 @@ set_keymap("i", { noremap = true, silent = true }, {
 	-- save file
 	{ "<C-s>", ":w<CR>" },
 
-	-- insert special carachters
-	{ "<C-b>", "<C-k>" },
+  -- move the cursor
+	{ "<A-h>", "<Left>" },
+	{ "<A-j>", "<Down>" },
+	{ "<A-k>", "<Up>" },
+	{ "<A-l>", "<Right>" },
 })
 
 -- terminal {{{1
@@ -77,3 +80,5 @@ set_keymap("t", { noremap = true, silent = true }, {
 	{ "jk", "<Esc>" },
 	{ "kj", "<Esc>" },
 })
+
+

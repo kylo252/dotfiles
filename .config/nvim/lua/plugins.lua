@@ -183,7 +183,6 @@ packer.startup(function(use)
   }
 
   -- utils
-  use { "tpope/vim-unimpaired", event = "BufRead" }
   use { "kevinhwang91/nvim-bqf", event = "BufRead" }
 
   -- misc

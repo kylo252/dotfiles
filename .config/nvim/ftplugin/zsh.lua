@@ -5,4 +5,4 @@ require("lspconfig").bashls.setup {
   filetypes = { "zsh" },
 }
 
-require("lsp.efm-general-ls").generic_setup { "zsh" }
+-- require("lsp.efm-general-ls").generic_setup { "zsh" }

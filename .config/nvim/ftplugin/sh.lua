@@ -11,4 +11,4 @@ require("lspconfig").bashls.setup {
   filetypes = ft,
 }
 
-require("lsp.efm-general-ls").generic_setup(ft)
+-- require("lsp.efm-general-ls").generic_setup(ft)

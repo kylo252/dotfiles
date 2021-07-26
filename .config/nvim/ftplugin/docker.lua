@@ -5,4 +5,3 @@ require("lspconfig").dockerls.setup {
   root_dir = vim.loop.cwd,
 }
 
-require("lsp.efm-general-ls").generic_setup { "dockerfile" }

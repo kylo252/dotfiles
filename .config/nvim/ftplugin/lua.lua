@@ -1,9 +1,9 @@
 vim.cmd "setl ts=2 sw=2"
 
 local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
-sumneko_cmd = { sumneko_root_path .. "/sumneko-lua-language-server", "-E", sumneko_root_path .. "/main.lua" }
+local sumneko_cmd = { sumneko_root_path .. "/sumneko-lua-language-server", "-E", sumneko_root_path .. "/main.lua" }
 
-require("lspconfig").sumneko_lua.setup {
+local opts = {
   cmd = sumneko_cmd,
   autostart = true,
   on_attach = require("lsp").common_on_attach,
@@ -33,6 +33,7 @@ require("lspconfig").sumneko_lua.setup {
   },
 }
 
+require("lspconfig").sumneko_lua.setup (opts)
 if O.lang.lua.autoformat then
   require("utils").define_augroups {
     _lua_autoformat = {
@@ -45,4 +46,4 @@ if O.lang.lua.autoformat then
   }
 end
 
-require("lsp.efm-general-ls").generic_setup { "lua" }
+-- require("lsp.efm-general-ls").generic_setup { "lua" }
