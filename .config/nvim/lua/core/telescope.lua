@@ -46,8 +46,8 @@ local files_list_w_preview = themes.get_dropdown {
 
 require("telescope").setup {
   defaults = {
-    vimgrep_arguments = {"rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case"},
-    find_command = {"rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case"},
+    vimgrep_arguments = { "rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+    find_command = { "rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case" },
     -- border = {},
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     mappings = {
@@ -86,7 +86,7 @@ require("telescope").setup {
   },
 }
 
-require("telescope").load_extension("fzf")
+require("telescope").load_extension "fzf"
 -- require("telescope").load_extension("session-lens")
 -- require("telescope").load_extension("frecency")
 

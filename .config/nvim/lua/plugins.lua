@@ -14,12 +14,12 @@ if not packer_ok then
 end
 
 packer.init {
-    git = {clone_timeout = 300},
-    display = {
-        open_fn = function()
-            return require("packer.util").float {border = "single"}
-        end
-    }
+  git = { clone_timeout = 300 },
+  display = {
+    open_fn = function()
+      return require("packer.util").float { border = "single" }
+    end,
+  },
 }
 
 --[[
@@ -35,10 +35,10 @@ packer.startup(function(use)
 
   -- LSP and linting
   use {
-    {"nvim-treesitter/nvim-treesitter"},
-    {"nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead"},
-    {"neovim/nvim-lspconfig"},
-    {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"},
+    { "nvim-treesitter/nvim-treesitter" },
+    { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
+    { "neovim/nvim-lspconfig" },
+    { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
     {
       "hrsh7th/nvim-compe",
       event = "InsertEnter *",
@@ -79,7 +79,7 @@ packer.startup(function(use)
       config = [[require('core.telescope')]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
-      after = "trouble.nvim"
+      after = "trouble.nvim",
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     {
@@ -124,7 +124,6 @@ packer.startup(function(use)
       require("core.terminal").setup()
     end,
   }
-
 
   -- UI
   use {
@@ -178,7 +177,7 @@ packer.startup(function(use)
       event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
-    }
+    },
   }
 
   -- utils
@@ -192,11 +191,11 @@ packer.startup(function(use)
       event = "BufRead",
       config = function()
         vim.g.cursorhold_updatetime = 1000
-      end
+      end,
     },
     {
       "gabrielpoca/replacer.nvim",
     },
-    { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
+    { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
   }
 end)

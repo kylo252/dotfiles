@@ -1,7 +1,7 @@
 -- vim.cmd('highlight link GitSignsAdd Title')
 -- vim.cmd('highlight link GitSignsDelete WarningMsg')
 -- vim.cmd('highlight link GitSignsChange ModeMsg')
-require("gitsigns").setup {  
+require("gitsigns").setup {
   signs = {
     add = { hl = "GitSignsAdd", text = "│" },
     change = { hl = "GitSignsChange", text = "│" },
