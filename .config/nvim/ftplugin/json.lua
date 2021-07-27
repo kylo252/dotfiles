@@ -1,12 +1,15 @@
 -- npm install -g vscode-json-languageserver
-require("lspconfig").jsonls.setup {
-  cmd = {
-    "node",
-    DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
-    "--stdio",
-  },
-  on_attach = require("lsp").common_on_attach,
+local provider = "vscode-json-languageserver"
 
+if vim.fn.executable(provider) ~= 1 then
+  provider = "node"
+    .. DATA_PATH
+    .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js"
+end
+
+local opts = {
+  cmd = { provider, "--stdio" },
+  on_attach = require("lsp").common_on_attach,
   commands = {
     Format = {
       function()
@@ -16,16 +19,6 @@ require("lspconfig").jsonls.setup {
   },
 }
 
-if O.lang.json.autoformat then
-  require("utils").define_augroups {
-    _json_format = {
-      {
-        "BufWritePre",
-        "*.json",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-      },
-    },
-  }
-end
+require("lspconfig").jsonls.setup(opts)
 
 -- require("lsp.efm-general-ls").generic_setup { "json" }

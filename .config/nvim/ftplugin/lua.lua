@@ -1,10 +1,11 @@
 vim.cmd "setl ts=2 sw=2"
 
-local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
-local sumneko_cmd = {
-  sumneko_root_path .. "/sumneko-lua-language-server",
+local provider_root_path = DATA_PATH .. "/lspinstall/lua"
+
+local provider_cmd = {
+  provider_root_path .. "/sumneko-lua-language-server",
   "-E",
-  sumneko_root_path .. "/main.lua"
+  provider_root_path .. "/main.lua",
 }
 
 local function resolve_caps(client, bufnr)
@@ -16,7 +17,7 @@ local function resolve_caps(client, bufnr)
 end
 
 local opts = {
-  cmd = sumneko_cmd,
+  cmd = provider_cmd,
   autostart = true,
   on_init = resolve_caps,
   on_attach = require("lsp").common_on_attach,
@@ -46,5 +47,4 @@ local opts = {
   },
 }
 
-
-require("lspconfig").sumneko_lua.setup (opts)
+require("lspconfig").sumneko_lua.setup(opts)

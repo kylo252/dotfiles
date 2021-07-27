@@ -1,4 +1,5 @@
 --require('plenary.profile').start("profile.log")
+
 require "utils"
 require "default-config"
 require "plugins"
@@ -8,6 +9,7 @@ require "keymappings"
 require "core.treesitter"
 require "core.whichkey"
 require "lsp"
+
 -- require'plenary.profile'.stop()
 --
 --[[ lv_utils.add_keymap_normal_mode({noremap = true},

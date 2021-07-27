@@ -1,6 +1,12 @@
 -- npm install -g yaml-language-server
-require("lspconfig").yamlls.setup {
-  cmd = { DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server", "--stdio" },
+local provider = "yaml-language-server"
+
+if vim.fn.executable(provider) ~= 1 then
+  provider = DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/" .. provider
+end
+
+local opts = {
+  cmd = { provider, "--stdio" },
   on_attach = require("lsp").common_on_attach,
   settings = {
     yaml = {
@@ -10,5 +16,7 @@ require("lspconfig").yamlls.setup {
     },
   },
 }
-vim.cmd("setl ts=2 sw=2 ts=2 ai et")
 
+require("lspconfig").yamlls.setup(opts)
+
+vim.cmd "setl ts=2 sw=2 ts=2 ai et"
