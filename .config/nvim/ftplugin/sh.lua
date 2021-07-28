@@ -19,3 +19,4 @@ local opts = {
 require("lspconfig").bashls.setup(opts)
 
 -- require("lsp.efm-general-ls").generic_setup(ft)
+require("lsp.null-ls").setup("sh")

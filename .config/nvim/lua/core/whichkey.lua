@@ -76,6 +76,7 @@ local opts = vim.deepcopy(global_opts)
 opts.prefix = "<leader>"
 
 local mappings = {
+  ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
   b = {
     name = "+barbar",
     j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },

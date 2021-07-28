@@ -36,4 +36,17 @@ function utils.get_lsp_caps()
   vim.fn.print(vim.inspect(vim.lsp.get_active_clients().resolved_capabilities))
 end
 
+function utils.add_keymap(mode, opts, keymaps)
+  for _, keymap in ipairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  end
+end
+
+function utils.add_buf_keymap(mode, opts, keymaps)
+  for _, keymap in ipairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  end
+end
+
+
 return utils
