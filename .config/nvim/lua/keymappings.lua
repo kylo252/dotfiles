@@ -18,11 +18,6 @@ u.add_keymap("n", { noremap = true, silent = true }, {
   -- Page down/up
   { "[d", "<PageUp>" },
   { "]d", "<PageDown>" },
-
-  -- Navigate buffers
-  { "<Tab>", "<cmd>BufferNext<CR>" },
-  { "<S-Tab>", "<cmd>BufferPrevious<CR>" },
-
 })
 
 -- visual {{{1
