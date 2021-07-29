@@ -61,7 +61,7 @@ packer.startup(function(use)
 
   -- Helpers
   use { "folke/which-key.nvim" }
-  use { "folke/lua-dev.nvim", ft = "lua" }
+  use { "folke/lua-dev.nvim" }
 
   -- Search
   use {
