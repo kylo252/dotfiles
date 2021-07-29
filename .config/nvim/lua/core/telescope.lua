@@ -1,5 +1,3 @@
-local wk = require "which-key"
-
 local actions = require "telescope.actions"
 local themes = require "telescope.themes"
 local trouble = require "trouble.providers.telescope"
