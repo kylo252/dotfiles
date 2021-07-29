@@ -131,17 +131,19 @@ end
 
 function _M.scope_browser()
   require("telescope.builtin").file_browser {
-    layout_config = { preview_width = 0.7 },
+    layout_config = {
+      preview_width = 0.7,
+      -- width = 0.15,
+      prompt_position = "top",
+    },
     layout_strategy = "horizontal",
     preview_title = false,
     hidden = false,
-    prompt_position = "top",
     sorting_strategy = "ascending",
     prompt_title = " File Browser",
     results_title = false,
     shorten_path = smart,
     show_line = false,
-    width = 0.15,
     winblend = 10,
   }
 end
