@@ -53,8 +53,10 @@ cmd open ${{
   esac
 }}
 
+# https://github.com/gokcehan/lf/issues/177
 cmd vmux_send ${{
-  VMUX_NOT_SELECT_PANE=1 vmux "$fx" 
+  # bash -c "VMUX_NOT_SELECT_PANE=1 vmux $fx" &lf -remote 'send quit'
+  bash -c "VMUX_NOT_SELECT_PANE=1 vmux $fx; tmux display-popup -C" &lf -remote 'send quit'
 }}
 
 cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard

@@ -14,16 +14,12 @@ if [ -n "$split_direction" ]; then
 else
   IFS=, read popup_width popup_height <<< "$(get_option "@lf_popup_size")"
   IFS=, read popup_x popup_y <<< "$(get_option "@lf_popup_position")"
-  rc=129
-  while [ $rc -eq 129 ]; do
-    tmux popup \
+  tmux popup \
       -d "#{pane_current_path}" \
       -w "${popup_width:-"80%"}" \
       -h "${popup_height:-"50%"}" \
       -x "${popup_x:-"C"}" \
       -y "${popup_y:-"C"}" \
-      -E "${exec_cmd:-"lf"}"
-      rc=$?
-  done
-  exit $rc
+      -E "${exec_cmd:-"lf -single"}"
+  exit 0
 fi
