@@ -18,6 +18,7 @@ M.global_mappings = {
 }
 
 M.mappings = {
+  ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
   b = {
     name = "+barbar",
