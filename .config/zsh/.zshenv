@@ -66,16 +66,27 @@ function __setup_history() {
 }
 
 function __setup_fzf() {
-  export FZF_DEFAULT_OPTS="--layout=reverse  --multi \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-y:execute-silent(echo {+} | xcopy)' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
-        --bind 'ctrl-v:execute(code {+})' "
-  export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | xbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-  # export FZF_DEFAULT_COMMAND='rg --files --hidden'
-  export FZF_DEFAULT_COMMAND='fd --type f'
-  export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
+  export FZF_DEFAULT_COMMAND="fd --type f"
+  export FZF_DEFAULT_OPTS=" \
+    --layout=reverse  --multi \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-y:execute-silent(echo {+} | xclip)' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+    --bind 'ctrl-x:execute(code {+})' "
+  export FZF_CTRL_R_OPTS=" \
+    --preview 'echo {}' \
+    --preview-window down:3:hidden:wrap \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip)+abort' \
+    --header 'Press CTRL-Y to copy command into clipboard'\
+    --border"
+  export FZF_PREVIEW_DEFAULT_SETTING=" \
+    --sync \
+    --height='80%' \
+    --preview-window='down:60%' \
+    --expect='ctrl-space' \
+    --header='C-Space: continue fzf completion'"
 }
 
 function __setup_misc() {
