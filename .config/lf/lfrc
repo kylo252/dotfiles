@@ -42,8 +42,7 @@ cmd fzf_jump ${{
 }}
 
 # zoxide integration https://github.com/gokcehan/lf/issues/540
-cmd zjump %lf -remote "send $id cd '$(zoxide query $1)'"
-map <c-e> push :zjump<space>
+cmd zoxide %lf -remote "send $id cd '$(zoxide query $1)'"
 
 
 cmd open ${{
@@ -118,6 +117,7 @@ map u unselect
 map br bulkrename
 map r push :rename<space>
 map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
+map <c-e> push :zoxide<space>
 
 # create dir/file
 map ad push $mkdir<space>

@@ -108,6 +108,7 @@ function __setup_misc() {
   fi 
 
   export VMUX_REALEDITOR_NVIM="$(which nvim)"
+  export VMUX_NVIM_SESSION_DIR="$XDG_CACHE_HOME/nvim/nvim_sessions"
 }
 
 __setup_functions=(
