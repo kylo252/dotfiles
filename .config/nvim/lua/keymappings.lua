@@ -46,7 +46,7 @@ u.add_keymap("i", { noremap = true, silent = true }, {
   { "kj", "<Esc>" },
 
   -- save file
-  { "<C-s>", ":w<CR>" },
+  { "<C-s>", "<cmd>w<CR>" },
 
   -- move the cursor
   { "<A-h>", "<Left>" },
