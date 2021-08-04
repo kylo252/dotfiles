@@ -144,13 +144,6 @@ packer.startup(function(use)
     },
 
     {
-      "ahmedkhalf/lsp-rooter.nvim", -- with this nvim-tree will follow you
-      event = "BufRead",
-      config = function()
-        require("lsp-rooter").setup()
-      end,
-    },
-    {
       "glepnir/galaxyline.nvim",
       event = "WinEnter",
       config = [[require('core.statusline')]],

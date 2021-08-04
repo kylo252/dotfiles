@@ -122,6 +122,7 @@ end
 function lsp_config.common_on_attach(client, bufnr)
   setup_lsp_handlers()
   documentHighlight(client)
+  vim.api.nvim_set_current_dir(client.config.root_dir)
   setup_lsp_keybindings()
 end
 
