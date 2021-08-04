@@ -1,11 +1,21 @@
 #!/usr/bin/env zsh
 
+function __setup_wsl() {
+
+  export TERM="xterm-256color"
+  export BROWSER="wslview"
+  PULSE_SERVER=tcp:$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+  DISPLAY=$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0      #GWSL
+  export PULSE_SERVER
+  export DISPLAY
+}
+
 function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
-  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)" 
+  [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
@@ -20,16 +30,15 @@ function __setup_defaults() {
   export FONTCONFIG_PATH=/etc/fonts
 
   if [ -r "/etc/wsl.conf" ]; then
-    export TERM="xterm-256color"
-    export BROWSER="wslview"
+    __setup_wsl
   fi
 
   # https://github.com/romkatv/powerlevel10k/issues/1428
   export GITSTATUS_LOG_LEVEL=DEBUG
 }
 
-function __setup_cli_colors(){
-  export CLICOLOR=1  
+function __setup_cli_colors() {
+  export CLICOLOR=1
   export LESS_TERMCAP_mb=$(print -P "%F{cyan}")
   export LESS_TERMCAP_md=$(print -P "%B%F{red}")
   export LESS_TERMCAP_me=$(print -P "%f%b")
@@ -105,7 +114,7 @@ function __setup_misc() {
 
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-  fi 
+  fi
 
   export VMUX_REALEDITOR_NVIM="$(which nvim)"
   export VMUX_NVIM_SESSION_DIR="$XDG_CACHE_HOME/nvim/nvim_sessions"
