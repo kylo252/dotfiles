@@ -28,10 +28,12 @@ lvim.keys.normal_mode["gL"] = ":BufferNext<cr>"
 lvim.keys.normal_mode["gH"] = ":BufferPrev<cr>"
 lvim.keys.normal_mode["<space><space>"] = "<cmd>BufferNext<cr>"
 lvim.keys.normal_mode["<leader>Lc"] = ":e ~/.config/lvim/config.lua<cr>"
-lvim.keys.normal_mode["<leader>Li"] =
-	"<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_display()<cr>"
-vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select': v:true })", { expr = true })
+lvim.builtin.which_key.mappings["Li"] = {
+	"<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_display(vim.bo.filetype)<cr>",
+	"Toggle LunarVim Info",
+}
 
+vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select': v:true })", { expr = true })
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -51,7 +53,6 @@ lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
-
 -- Additional Plugins
 lvim.plugins = {
 	{
@@ -60,31 +61,31 @@ lvim.plugins = {
 			require("harpoon").setup()
 		end,
 	},
-  { "folke/tokyonight.nvim" },
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("lsp_signature").on_attach()
-    end,
-    event = "InsertEnter",
-  },
-  {
-    "folke/trouble.nvim",
-    config = [[require('user.core.trouble')]],
-    -- event = "BufWinEnter"
-  },
-  { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+	{ "folke/tokyonight.nvim" },
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").on_attach()
+		end,
+		event = "InsertEnter",
+	},
+	{
+		"folke/trouble.nvim",
+		config = [[require('user.core.trouble')]],
+		-- event = "BufWinEnter"
+	},
+	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 }
 
 lvim.builtin.which_key.mappings["lh"] = {
-  function()
-    local buf = vim.api.nvim_get_current_buf()
-    local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-    if ft == "c" or ft == "cpp" then
-      vim.cmd [[ClangdSwitchSourceHeader]]
-    end
-  end,
-  "Go To Header",
+	function()
+		local buf = vim.api.nvim_get_current_buf()
+		local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+		if ft == "c" or ft == "cpp" then
+			vim.cmd([[ClangdSwitchSourceHeader]])
+		end
+	end,
+	"Go To Header",
 }
 
 lvim.builtin.which_key.mappings["H"] = {
@@ -96,17 +97,16 @@ lvim.builtin.which_key.mappings["H"] = {
 require("user.core.telescope")
 -- set a formatter if you want to override the default lsp one (if it exists)
 local prettier_config = {
-  exe = "prettier",
+	exe = "prettier",
 }
 
 local eslint_config = {
-  exe = "eslint",
+	exe = "eslint",
 }
 
 local eslint_d_config = {
-  exe = "eslint_d",
+	exe = "eslint_d",
 }
-
 
 -- generic LSP settings
 lvim.lang.sh.formatters = { { exe = "shfmt" } }
@@ -116,7 +116,6 @@ lvim.lang.python.linters = { { exe = "flake8" } }
 lvim.lang.python.formatters = { { exe = "black" } }
 
 lvim.lang.lua.formatters = { { exe = "stylua" } }
-lvim.lang.lua.linters = { { exe = "luacheck" } }
 
 -- set an additional linter
 lvim.lang.javascript.formatters = { prettier_config }
@@ -128,4 +127,5 @@ lvim.lang.typescriptreact.formatters = { eslint_d_config }
 lvim.lang.typescriptreact.linters = { eslint_d_config }
 
 -- require "user.keymappings"
--- require "user.core.telescope"
+lvim.builtin.which_key.mappings = require("user.core.whichkey").mappings
+require("user.core.telescope")

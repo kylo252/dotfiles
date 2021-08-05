@@ -30,7 +30,7 @@ M.mappings = {
 		d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
 		L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
 	},
-	e = { '<cmd>lua require"core.explorer".toggle_tree()<CR>', "Open nvim-tree" },
+	e = { '<cmd>lua require"core.nvimtree".toggle_tree()<CR>', "Open nvim-tree" },
 	E = { '<cmd>lua require"core.telescope".scope_browser()<CR>', "Open scope browser" },
 	f = {
 		name = "+Find",

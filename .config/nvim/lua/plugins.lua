@@ -60,8 +60,7 @@ packer.startup(function(use)
   }
 
   -- Helpers
-  use { "folke/which-key.nvim" , 
-  config = [[require("core.whichkey").setup() ]] }
+  use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
   use { "folke/lua-dev.nvim" }
 
   -- Search
@@ -140,7 +139,7 @@ packer.startup(function(use)
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       -- event = "BufWinEnter",
-      config = [[require('core.explorer')]],
+      config = [[require('core.nvimtree')]],
     },
 
     {
