@@ -54,6 +54,9 @@ packer.startup(function(use)
     },
   }
 
+  use	{ "nanotee/zoxide.vim", cmd = "Z"}
+
+
   -- Helpers
   use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
   use { "folke/lua-dev.nvim" }

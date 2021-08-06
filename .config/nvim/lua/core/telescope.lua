@@ -114,6 +114,15 @@ function _M.find_dotfiles()
   require("telescope.builtin").find_files(_opts)
 end
 
+function _M.find_lunarvim_files()
+  local _opts = vim.deepcopy(inline_list)
+  _opts.prompt_title = "~ LunarVim ~"
+  _opts.cwd = "~/.local/share/lunarvim/lvim"
+  _opts.find_command = { "git", "ls-files" }
+  -- _opts.layout_strategy = "flex"
+  require("telescope.builtin").find_files(_opts)
+end
+
 function _M.find_project_files()
   local _opts = vim.deepcopy(center_list_w_preview)
   local ok = pcall(require("telescope.builtin").git_files, _opts)

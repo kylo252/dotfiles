@@ -32,7 +32,14 @@ lvim.builtin.which_key.mappings["Li"] = {
   "<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_display(vim.bo.filetype)<cr>",
   "Toggle LunarVim Info",
 }
+-- Allow pasting same thing many times
+lvim.keys.visual_mode["p"] = '""p:let @"=@0<CR>'
+lvim.keys.visual_block_mode["p"] = '""p:let @"=@0<CR>'
 
+lvim.builtin.which_key.mappings["lt"] = {
+  "<cmd>lua print(vim.inspect(require('lsp').get_ls_capabilities(1)))<cr>",
+  "Toggle LS Capabilities Info",
+}
 vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select': v:true })", { expr = true })
 
 -- TODO: User Config for predefined plugins
@@ -55,12 +62,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
-  {
-    "ThePrimeagen/harpoon",
-    config = function()
-      require("harpoon").setup()
-    end,
-  },
   { "folke/tokyonight.nvim" },
   {
     "ray-x/lsp_signature.nvim",
@@ -75,6 +76,7 @@ lvim.plugins = {
     -- event = "BufWinEnter"
   },
   { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+  { "nanotee/zoxide.vim", cmd = "Z" },
 }
 
 lvim.builtin.which_key.mappings["lh"] = {
@@ -96,17 +98,6 @@ lvim.builtin.which_key.mappings["H"] = {
 
 require "user.core.telescope"
 -- set a formatter if you want to override the default lsp one (if it exists)
-local prettier_config = {
-  exe = "prettier",
-}
-
-local eslint_config = {
-  exe = "eslint",
-}
-
-local eslint_d_config = {
-  exe = "eslint_d",
-}
 
 -- generic LSP settings
 lvim.lang.sh.formatters = { { exe = "shfmt" } }
@@ -119,13 +110,13 @@ lvim.lang.lua.formatters = { { exe = "stylua" } }
 -- lvim.lang.lua.linters = { { exe = "luacheck" } }
 
 -- set an additional linter
-lvim.lang.javascript.formatters = { prettier_config }
-lvim.lang.javascript.linters = { eslint_d_config }
+lvim.lang.javascript.formatters = { { exe = "prettier" } }
+lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 
-lvim.lang.typescript.formatters = { prettier_config }
-lvim.lang.typescript.linters = { eslint_d_config }
-lvim.lang.typescriptreact.formatters = { eslint_d_config }
-lvim.lang.typescriptreact.linters = { eslint_d_config }
+lvim.lang.typescript.formatters = { { exe = "prettier" }, { exe = "prettierd" } }
+lvim.lang.typescript.linters = { { exe = "eslint_d" } }
+lvim.lang.typescriptreact.formatters = { { exe = "prettier" } }
+lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
 
 -- require "user.keymappings"
 lvim.builtin.which_key.mappings = require("user.core.whichkey").mappings
