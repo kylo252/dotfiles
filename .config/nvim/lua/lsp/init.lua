@@ -51,7 +51,7 @@ local function setup_lsp_handlers(test)
       underline = true,
       virtual_text = false,
       signs = true,
-      update_in_insert = false,
+      update_in_insert = true,
     }
     local uri = params.uri
     local bufnr = vim.uri_to_bufnr(uri)

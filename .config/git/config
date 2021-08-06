@@ -22,7 +22,8 @@
 [filter "spacify"]
     clean = expand --tabs=4 --initial
 [alias]
-    dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME"
+    dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/"
+    add-dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/ add -f"
     amend = commit --amend
     reuse-msg = commit --reuse-message=ORIG_HEAD
     soft-reset = reset HEAD~1 --soft
