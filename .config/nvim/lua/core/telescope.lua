@@ -2,50 +2,54 @@ local actions = require "telescope.actions"
 local themes = require "telescope.themes"
 local trouble = require "trouble.providers.telescope"
 
--- Dropdown list theme using a builtin theme definitions :
-local center_list_w_preview = themes.get_dropdown {
-  -- winblend = 10,
-  -- width = 0.5,
-  prompt = ">> ",
-  results_height = 15,
-  previewer = true,
-}
-
--- Dropdown list theme using a builtin theme definitions :
-local center_list = themes.get_dropdown {
-  -- winblend = 10,
-  -- width = 0.5,
-  prompt = ">> ",
-  results_height = 15,
-  previewer = false,
-}
-
 local inline_list = themes.get_ivy {
-  -- winblend = 10,
-  -- width = 0.5,
   previewer = false,
   sorting_strategy = "ascending",
   layout_strategy = "bottom_pane",
-  layout_config = { height = 5 },
+  layout_config = {
+    height = 5,
+    width = 0.5,
+  },
   prompt = ">> ",
 }
 
--- Settings for with preview option
-local files_list_w_preview = themes.get_dropdown {
-  winblend = 10,
-  prompt_position = "top",
-  show_line = false,
-  prompt = ">>",
-  results_title = "\\ Files //",
-  preview_title = false,
-  layout_strategy = "flex",
-  layout_config = { preview_width = 0.5 },
+local center_list = themes.get_dropdown {
+  layout_config = {
+    winblend = 10,
+    width = 0.5,
+  },
+  previewer = true,
 }
 
 require("telescope").setup {
   defaults = {
+    layout_config = {
+      center = {
+        preview_cutoff = 70,
+      },
+      cursor = {
+        preview_cutoff = 70,
+      },
+      height = 0.9,
+      horizontal = {
+        preview_cutoff = 120,
+        prompt_position = "bottom",
+      },
+      vertical = {
+        preview_cutoff = 70,
+      },
+      width = 0.8,
+    },
     vimgrep_arguments = { "rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-    find_command = { "rg", "--no-heading", "--with-filename", "--hidden", "--line-number", "--column", "--smart-case" },
+    find_command = {
+      "rg",
+      "--no-heading",
+      "--with-filename",
+      "--hidden",
+      "--line-number",
+      "--column",
+      "--smart-case",
+    },
     -- border = {},
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     mappings = {
@@ -69,74 +73,68 @@ require("telescope").setup {
   },
   extensions = {
     fzf = { override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
-    --[[ frecency = {
+    frecency = {
       show_scores = false,
       show_unindexed = true,
       show_fiter_column = true,
-      ignore_patterns = {"*.git/*", "*/tmp/*"},
+      ignore_patterns = { "*.git/*", "*/tmp/*" },
       workspaces = {
-        ["nvim"] = os.getenv("HOME") .. "/.config/nvim",
-        ["zsh"] = os.getenv("HOME") .. "/.config/zsh",
-        ["config"] = os.getenv("HOME") .. "/.config",
-        ["data"] = os.getenv("HOME") .. "/.local/share",
-      }
-    } ]]
+        ["nvim"] = os.getenv "HOME" .. "/.config/nvim",
+        ["zsh"] = os.getenv "HOME" .. "/.config/zsh",
+        ["config"] = os.getenv "HOME" .. "/.config",
+        ["data"] = os.getenv "HOME" .. "/.local/share",
+      },
+    },
   },
 }
 
 require("telescope").load_extension "fzf"
 -- require("telescope").load_extension("session-lens")
--- require("telescope").load_extension("frecency")
 
-local _M = {}
---[[
-	call via:
-	:lua require"telescope-config".edit_neovim()
+local M = {}
 
-	example keymap:
-	vim.api.nvim_set_keymap("n", "<Leader>nn", "<CMD>lua require\"telescope-config\".edit_neovim()<CR>", {noremap = true, silent = true})
---]]
-function _M.grep_neovim_dotfiles()
+function M.grep_neovim_dotfiles()
   require("telescope.builtin").live_grep { search_dirs = "~/.config/nvim", hidden = true }
 end
 
-function _M.open_recent()
-  local _opts = vim.deepcopy(center_list)
-  require("telescope").extensions.frecency.frecency(_opts)
+function M.open_recent()
+  require("telescope").extensions.frecency.frecency()
 end
 
-function _M.find_dotfiles()
-  local _opts = vim.deepcopy(inline_list)
-  _opts.prompt_title = "~ dotfiles ~"
-  _opts.cwd = "~"
-  _opts.find_command = { "git", "dots", "ls-files" }
-  -- _opts.layout_strategy = "flex"
-  require("telescope.builtin").find_files(_opts)
+function M.find_dotfiles()
+  local opts = vim.tbl_extend("keep", inline_list, {
+    prompt_title = "~ dotfiles ~",
+    cwd = "~",
+    find_command = { "git", "dots", "ls-files" },
+  })
+  -- opts.layout_strategy = "flex"
+  require("telescope.builtin").find_files(opts)
 end
 
-function _M.find_lunarvim_files()
-  local _opts = vim.deepcopy(inline_list)
-  _opts.prompt_title = "~ LunarVim ~"
-  _opts.cwd = "~/.local/share/lunarvim/lvim"
-  _opts.find_command = { "git", "ls-files" }
-  -- _opts.layout_strategy = "flex"
-  require("telescope.builtin").find_files(_opts)
+function M.find_lunarvim_files()
+  local opts = vim.tbl_extend("keep", inline_list, {
+    prompt_title = "~ LunarVim ~",
+    cwd = "~/.local/share/lunarvim/lvim",
+    find_command = { "git", "ls-files" },
+  })
+  -- opts.layout_strategy = "flex"
+  require("telescope.builtin").find_files(opts)
 end
 
-function _M.find_project_files()
-  local _opts = vim.deepcopy(center_list_w_preview)
-  local ok = pcall(require("telescope.builtin").git_files, _opts)
+function M.find_project_files()
+  local opts = vim.tbl_extend("keep", center_list)
+  local ok = pcall(require("telescope.builtin").git_files, opts)
   if not ok then
-    require("telescope.builtin").find_files(_opts)
+    require("telescope.builtin").find_files(opts)
   end
 end
 
-function _M.grep_project_files()
-  local _opts = vim.deepcopy(center_list_w_preview)
-  require("telescope.builtin").grep_string(_opts)
+function M.grep_project_files()
+  local opts = vim.tbl_extend("keep", center_list)
+  require("telescope.builtin").grep_string(opts)
 end
 
-function _M.scope_browser()
+function M.scope_browser()
   require("telescope.builtin").file_browser {
     layout_config = {
       preview_width = 0.7,
@@ -155,4 +153,4 @@ function _M.scope_browser()
   }
 end
 
-return _M
+return M
