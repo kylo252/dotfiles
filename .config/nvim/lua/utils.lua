@@ -1,5 +1,42 @@
 local utils = {}
 
+
+-- autoformat
+function utils.toggle_autoformat()
+  if lvim.format_on_save then
+    require("core.autocmds").define_augroups {
+      autoformat = {
+        {
+          "BufWritePre",
+          "*",
+          ":silent lua vim.lsp.buf.formatting_sync()",
+        },
+      },
+    }
+  end
+
+  if not lvim.format_on_save then
+    vim.cmd [[
+      if exists('#autoformat#BufWritePre')
+        :autocmd! autoformat
+      endif
+    ]]
+  end
+end
+
+function utils.reload_lv_config()
+  vim.cmd "source ~/.config/nvim/lua/settings.lua"
+  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
+  --[[ local plugins = require "plugins"
+  local plugin_loader = require("plugin-loader").init()
+  utils.toggle_autoformat()
+  plugin_loader:load { plugins, lvim.plugins } ]]
+  vim.cmd ":PackerCompile"
+  vim.cmd ":PackerInstall"
+  require("keymappings").setup()
+  -- vim.cmd ":PackerClean"
+end
+
 function utils.check_lsp_client_active(name)
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
@@ -10,43 +47,66 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
-function utils.define_augroups(definitions) -- {{{1
-  -- Create autocommand groups based on the passed definitions
-  --
-  -- The key will be the name of the group, and each definition
-  -- within the group should have:
-  --    1. Trigger
-  --    2. Pattern
-  --    3. Text
-  -- just like how they would normally be defined from Vim itself
-  for group_name, definition in pairs(definitions) do
-    vim.cmd("augroup " .. group_name)
-    vim.cmd "autocmd!"
-
-    for _, def in pairs(definition) do
-      local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")
-      vim.cmd(command)
+function utils.get_active_client_by_ft(filetype)
+  local clients = vim.lsp.get_active_clients()
+  for _, client in pairs(clients) do
+    if client.name == lvim.lang[filetype].lsp.provider then
+      return client
     end
+  end
+  return nil
+end
 
-    vim.cmd "augroup END"
+-- TODO: consider porting this logic to null-ls instead
+function utils.get_supported_linters_by_filetype(filetype)
+  local null_ls = require "null-ls"
+  local matches = {}
+  for _, provider in pairs(null_ls.builtins.diagnostics) do
+    if vim.tbl_contains(provider.filetypes, filetype) then
+      local provider_name = provider.name
+
+      table.insert(matches, provider_name)
+    end
+  end
+
+  return matches
+end
+
+function utils.get_supported_formatters_by_filetype(filetype)
+  local null_ls = require "null-ls"
+  local matches = {}
+  for _, provider in pairs(null_ls.builtins.formatting) do
+    if provider.filetypes and vim.tbl_contains(provider.filetypes, filetype) then
+      -- table.insert(matches, { provider.name, ft })
+      table.insert(matches, provider.name)
+    end
+  end
+
+  return matches
+end
+
+function utils.unrequire(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+end
+
+function utils.gsub_args(args)
+  if args == nil or type(args) ~= "table" then
+    return args
+  end
+  local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+  for i = 1, #args do
+    args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
+  end
+  return args
+end
+
+function utils.lvim_log(msg)
+  if lvim.debug then
+    vim.notify(msg, vim.log.levels.DEBUG)
   end
 end
-
-function utils.get_lsp_caps()
-  vim.fn.print(vim.inspect(vim.lsp.get_active_clients().resolved_capabilities))
-end
-
-function utils.add_keymap(mode, opts, keymaps)
-  for _, keymap in ipairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
-  end
-end
-
-function utils.add_buf_keymap(mode, opts, keymaps)
-  for _, keymap in ipairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
-  end
-end
-
 
 return utils
+
+-- TODO: find a new home for these autocommands

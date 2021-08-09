@@ -46,11 +46,6 @@ packer.startup(function(use)
       -- disable = true
     },
     {
-      "mhartington/formatter.nvim",
-      cmd = "Format",
-      config = [[require('core.formatter')]],
-    },
-    {
       "b3nj5m1n/kommentary",
       event = "BufRead",
       config = function()
