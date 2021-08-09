@@ -11,6 +11,7 @@ end
 
 local opts = {
   cmd = { provider, "start" },
+  on_init = require("lsp").common_on_init,
   on_attach = require("lsp").common_on_attach,
   root_dir = vim.loop.cwd,
   filetypes = ft,

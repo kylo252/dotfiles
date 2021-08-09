@@ -38,66 +38,24 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (TypeParameter)",
 }
 
-local function setup_lsp_handlers(test)
-  --[[ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    update_in_insert = true,
-    signs = true,
-    underline = true,
-  }) ]]
 
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
-    local config = { -- your config
-      underline = true,
-      virtual_text = false,
-      signs = true,
-      update_in_insert = true,
-    }
-    local uri = params.uri
-    local bufnr = vim.uri_to_bufnr(uri)
-
-    if not bufnr then
-      return
-    end
-
-    local diagnostics = params.diagnostics
-
-    for i, v in ipairs(diagnostics) do
-      diagnostics[i].message = string.format("%s: %s", v.source, v.message)
-    end
-
-    vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
-
-    if not vim.api.nvim_buf_is_loaded(bufnr) then
-      return
-    end
-
-    vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
-  end
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    -- border = popup_border,
-    border = single,
-  })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    -- border = popup_border,
-    border = single,
-  })
-end
 
 local function setup_lsp_keybindings()
-  u.add_buf_keymap("n", { noremap = true, silent = true }, {
-    { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>" },
-    { "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>" },
-    { "gr", "<cmd>lua vim.lsp.buf.references()<CR>" },
-    { "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
-    { "gp", "<cmd>lua require'lsp'.PeekDefinition()<CR>" },
-    { "gl", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>" },
-    { "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>" },
-    { "]d", "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>" },
-    { "K", "<cmd>lua vim.lsp.buf.hover()<CR>" },
-    { "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
-  })
+  local wk = require "which-key"
+  local keys = {
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
+    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
+    ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
+    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
+    ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
+    ["gl"] = {
+      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>",
+      "Show line diagnostics",
+    },
+  }
+  wk.register(keys, { mode = "n", buffer = bufnr })
 end
 
 local function documentHighlight(client)
@@ -119,8 +77,14 @@ local function documentHighlight(client)
   end
 end
 
+function lsp_config.common_on_init(client, bufnr)
+  local handlers = require("lsp.handlers")
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
+  vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
+  vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
+end
+
 function lsp_config.common_on_attach(client, bufnr)
-  setup_lsp_handlers()
   documentHighlight(client)
   vim.api.nvim_set_current_dir(client.config.root_dir)
   setup_lsp_keybindings()
