@@ -19,11 +19,6 @@ function find_untracked() {
       MISSED_FILES+=("$file")
     done
   done
-  if [ -f "${MISSED_FILES[1]}" ]; then
-    echo "warning! did you miss these?"
-    echo -e "${MISSED_FILES[@]}"
-    # return 1
-  fi
 }
 
 # function find_unique_untracked() {
@@ -35,5 +30,10 @@ function find_untracked() {
 # }
 
 find_untracked
-exit 0
+if [ -f "${MISSED_FILES[1]}" ]; then
+    # echo "warning! did you miss these?"
+    # echo -e "${MISSED_FILES[@]}"
+    # # return 1
+  exit 0
+fi
 # find_unique_untracked
