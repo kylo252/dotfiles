@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+
+# TODO: consider using python instead
+
+declare -a TRACKED_DIR
+declare -a UNIQUE_DIRS
+declare -a MISSED_FILES
+UNIQUE_DIRS=( ".config/nvim" ".config/zsh")
+TRACKED_DIR=($(git -C "$HOME" dots ls-files | xargs -n 1 dirname | rg '^.config/\w*$' | uniq))
+
+function find_untracked() {
+  local -a hits
+  for dir in "${TRACKED_DIR[@]}"; do
+    [ -r "$HOME/$dir/.gitignore" ] && local EXCLUDE_FLAG="--exclude-from $HOME/$dir/.gitignore"
+    hits=($(git dots -C "$HOME/$dir" ls-files \
+      --full-name --others $EXCLUDE_FLAG --exclude 'lazygit' --exclude '_*'))
+    for file in "${hits[@]}"; do
+      MISSED_FILES+=("$file")
+    done
+  done
+  if [ -f "${MISSED_FILES[1]}" ]; then
+    echo "warning! did you miss these?"
+    echo -e "${MISSED_FILES[@]}"
+    # return 1
+  fi
+}
+
+# function find_unique_untracked() {
+#   for dir in "${UNIQUE_DIRS[@]}"; do
+#     local -a hits=("$(git dots -C "$HOME/$dir" ls-files \
+#       --full-name --others --exclude-from "$HOME/$dir/.gitignore")")
+#     echo "${hits[@]}"
+#   done
+# }
+
+find_untracked
+exit 0
+# find_unique_untracked
