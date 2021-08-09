@@ -1,13 +1,13 @@
 --require('plenary.profile').start("profile.log")
 
-require("utils")
-require("default-config")
-require("plugins")
-require("settings")
+require "utils"
+require "default-config"
+require "plugins"
+require "settings"
 require("autocmds").setup()
 require("keymappings").setup()
-require("core.treesitter")
-require("lsp")
+require "core.treesitter"
+require "lsp"
 
 -- require'plenary.profile'.stop()
 --

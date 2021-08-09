@@ -39,6 +39,7 @@
 !/.gitignore
 # --- bash
 !/.bashrc.user
+!/.config
 !/.config/bash/**
 # --- zsh (still not working as expected)
 !/.zshrc.user

@@ -38,8 +38,6 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (TypeParameter)",
 }
 
-
-
 local function setup_lsp_keybindings()
   local wk = require "which-key"
   local keys = {
@@ -78,7 +76,7 @@ local function documentHighlight(client)
 end
 
 function lsp_config.common_on_init(client, bufnr)
-  local handlers = require("lsp.handlers")
+  local handlers = require "lsp.handlers"
   vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
   vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
   vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
