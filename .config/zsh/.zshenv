@@ -113,7 +113,7 @@ function __setup_misc() {
   export ENHANCED_LAZY_COMPLETION=true
 
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    source "$HOME/.nix-profile/etc/profile.d/nix.sh"
   fi
 
   export VMUX_REALEDITOR_NVIM="$(which nvim)"
