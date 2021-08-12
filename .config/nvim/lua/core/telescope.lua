@@ -1,3 +1,4 @@
+local builtin = require "telescope.builtin"
 local actions = require "telescope.actions"
 local themes = require "telescope.themes"
 local trouble = require "trouble.providers.telescope"
@@ -152,5 +153,17 @@ function M.scope_browser()
     winblend = 10,
   }
 end
+
+function M.fuzzy_grep_string(query)
+  query = query or {}
+  -- local builtin = require "telescope.builtin"
+  -- local themes = require "telescope.themes"
+  builtin.grep_string(themes.get_ivy {
+    prompt_title = "Fuzzy grep string, initial query: " .. query,
+    search = query,
+  })
+end
+
+vim.cmd [[ command! -nargs=* GS :lua require('core.telescope').fuzzy_grep_string(<f-args>) ]]
 
 return M

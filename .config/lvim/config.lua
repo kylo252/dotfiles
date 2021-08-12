@@ -1,7 +1,6 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
 -- general
-lvim.debug = true
+lvim.log.level = "error"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
@@ -23,23 +22,32 @@ lvim.builtin.rooter.active = false
 lvim.leader = "space"
 lvim.keys.insert_mode["<C-s>"] = "<cmd>w<cr>"
 lvim.keys.normal_mode["<C-s>"] = "<cmd>w<cr>"
-lvim.keys.normal_mode["<S-q>"] = ":BufferWipeout<cr>"
+lvim.keys.normal_mode["<S-q>"] = "<cmd>BufferWipeout<cr>"
+lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<cr>"
 lvim.keys.normal_mode["gL"] = ":BufferNext<cr>"
 lvim.keys.normal_mode["gH"] = ":BufferPrev<cr>"
 lvim.keys.normal_mode["<space><space>"] = "<cmd>BufferNext<cr>"
 lvim.keys.normal_mode["<leader>Lc"] = ":e ~/.config/lvim/config.lua<cr>"
 lvim.builtin.which_key.mappings["Li"] = {
-  "<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_display(vim.bo.filetype)<cr>",
+  "<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_popup(vim.bo.filetype)<cr>",
   "Toggle LunarVim Info",
 }
+
+lvim.builtin.which_key.mappings["dl"] = {
+  "<cmd>lua require('user.core.telescope').find_lunarvim_files()<cr>",
+  "Find LunarVim file",
+}
+lvim.builtin.which_key.mappings["de"] = {
+  "<cmd>lua require('user.core.telescope').find_dotfiles()<cr>",
+  "Find dotfiles",
+}
+
+lvim.builtin.which_key.mappings["j"] = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" }
+
 -- Allow pasting same thing many times
 lvim.keys.visual_mode["p"] = '""p:let @"=@0<CR>'
 lvim.keys.visual_block_mode["p"] = '""p:let @"=@0<CR>'
 
-lvim.builtin.which_key.mappings["lt"] = {
-  "<cmd>lua print(vim.inspect(require('lsp').get_ls_capabilities(1)))<cr>",
-  "Toggle LS Capabilities Info",
-}
 vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select': v:true })", { expr = true })
 
 -- TODO: User Config for predefined plugins
@@ -77,6 +85,26 @@ lvim.plugins = {
   },
   { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
   { "nanotee/zoxide.vim", cmd = "Z" },
+  {
+    "aserowy/tmux.nvim",
+    config = function()
+      require("tmux").setup {
+        copy_sync = {
+          enable = true,
+          redirect_to_clipboard = true,
+          sync_deletes = true,
+        },
+        navigation = {
+          cycle_navigation = true,
+          enable_default_keybindings = true,
+          persist_zoom = false,
+        },
+        resize = {
+          enable_default_keybindings = true,
+        },
+      }
+    end,
+  },
 }
 
 lvim.builtin.which_key.mappings["lh"] = {
@@ -100,14 +128,14 @@ require "user.core.telescope"
 -- set a formatter if you want to override the default lsp one (if it exists)
 
 -- generic LSP settings
-lvim.lang.sh.formatters = { { exe = "shfmt" } }
 lvim.lang.sh.linters = { { exe = "shellcheck" } }
+lvim.lang.sh.formatters = { { exe = "shfmt" } }
 
 lvim.lang.python.linters = { { exe = "flake8" } }
 lvim.lang.python.formatters = { { exe = "black" } }
 
 lvim.lang.lua.formatters = { { exe = "stylua" } }
--- lvim.lang.lua.linters = { { exe = "luacheck" } }
+lvim.lang.lua.linters = { { exe = "luacheck" } }
 
 -- set an additional linter
 lvim.lang.javascript.formatters = { { exe = "prettier" } }
@@ -118,6 +146,35 @@ lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.formatters = { { exe = "prettier" } }
 lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
 
--- require "user.keymappings"
-lvim.builtin.which_key.mappings = require("user.core.whichkey").mappings
+local user_mappings = require("user.core.whichkey").mappings
+lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, user_mappings)
+
+lvim.builtin.which_key.mappings["fE"] = {
+  "<cmd>lua require('user.core.telescope').scope_browser()<cr>",
+  "open scope browser",
+}
 require "user.core.telescope"
+vim.cmd [[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]]
+
+lvim.builtin.which_key.mappings["T"] = {
+  -- "<cmd>lua print(vim.inspect(require('lsp').get_ls_capabilities(1)))<cr>",
+  -- "<cmd>lua require('telescope.builtin').grep_string({ layout_strategy = 'center', only_sort_text = true, search = 'win' })<cr>>",
+
+  ":lua package.loaded['core.telescope'] = nil; require('core.telescope').fuzzy_grep_string()<cr>",
+  "Test Telescope grep",
+}
+
+vim.cmd [[command! -nargs=* GS :lua require('user.core.telescope').fuzzy_grep_string(<f-args>) ]]
+
+-- vim.cmd(
+-- 	[[command! -nargs=1 GS :lua require("telescope.builtin").grep_string(require("telescope.themes").get_dropdown({ prompt_title = "Fuzzy grep string " .. "<args>", search = "<args>" }))]]
+-- )
+
+-- testing if this actually works (it doesn't...)
+lvim.keys.visual_mode["<leader>fg"] = "<cmd>Telescope grep_string<cr>"
+
+-- hello
+
+-- hel
+
+-- lo

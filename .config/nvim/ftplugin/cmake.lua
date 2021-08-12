@@ -5,7 +5,7 @@ if vim.fn.executable(provider) ~= 1 then
 end
 
 local opts = {
-  cmd = { provider, "--stdio" },
+  cmd = { provider },
   on_init = require("lsp").common_on_init,
   on_attach = require("lsp").common_on_attach,
   filetypes = { "cmake" },

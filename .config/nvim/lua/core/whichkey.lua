@@ -20,9 +20,9 @@ M.global_mappings = {
 M.mappings = {
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
+  ["j"] = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
   b = {
     name = "+barbar",
-    j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
     q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
     e = { "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer" },
     h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
@@ -31,7 +31,7 @@ M.mappings = {
     L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
   },
   e = { '<cmd>lua require"core.nvimtree".toggle_tree()<CR>', "Open nvim-tree" },
-  E = {
+  d = {
     name = "+Edit dotfiles",
     d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
     l = { '<cmd>lua require"core.telescope".find_lunarvim_files()<CR>', "Find LunarVim's files" },
@@ -46,8 +46,9 @@ M.mappings = {
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     c = { "<cmd>Telescope colorscheme<CR>", "Colorscheme" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
-    g = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
-    l = {
+    g = { "<cmd>Telescope grep_string<CR>", "Grep String (under-the-cursor)" },
+    l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
+    L = {
       "<cmd>lua require'telescope.builtin'.live_grep{ search_dirs={vim.fn.expand(\"%:p\")} }<cr>",
       "Local live-grep",
     },

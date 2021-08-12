@@ -25,6 +25,10 @@ M.augroups = {
     { "VimLeavePre", "*", "set title set titleold=" },
     { "FileType", "qf", "set nobuflisted" },
   },
+  _git = {
+    { "FileType", "gitcommit", "setlocal wrap" },
+    { "FileType", "gitcommit", "setlocal spell" },
+  },
   _markdown = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },

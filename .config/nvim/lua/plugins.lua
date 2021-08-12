@@ -32,6 +32,10 @@ and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
   use { "wbthomason/packer.nvim" }
+  use { "nvim-lua/plenary.nvim" }
+  use { "tjdevries/astronauta.nvim" }
+  use { "nvim-lua/popup.nvim" }
+      
 
   -- LSP and linting
   use {
@@ -69,11 +73,7 @@ packer.startup(function(use)
     },
     {
       "nvim-telescope/telescope.nvim",
-      requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
-        { "tjdevries/astronauta.nvim" },
-      },
+
       config = [[require('core.telescope')]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
