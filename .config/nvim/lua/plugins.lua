@@ -35,7 +35,6 @@ packer.startup(function(use)
   use { "nvim-lua/plenary.nvim" }
   use { "tjdevries/astronauta.nvim" }
   use { "nvim-lua/popup.nvim" }
-      
 
   -- LSP and linting
   use {
@@ -58,8 +57,6 @@ packer.startup(function(use)
     },
   }
 
-  use { "nanotee/zoxide.vim", cmd = "Z" }
-
   -- Helpers
   use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
   use { "folke/lua-dev.nvim" }
@@ -67,28 +64,18 @@ packer.startup(function(use)
   -- Search
   use {
     {
-      "folke/trouble.nvim",
-      config = [[require('core.trouble')]],
-      -- event = "BufWinEnter"
-    },
-    {
       "nvim-telescope/telescope.nvim",
 
-      config = [[require('core.telescope')]],
+      config = [[require('core.telescope').setup()]],
       -- cmd = "Telescope",
       event = "BufWinEnter",
-      after = "trouble.nvim",
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "jvgrootveld/telescope-zoxide" },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
       config = [[require('core.lightspeed')]],
-    },
-    {
-      "windwp/nvim-spectre",
-      event = "BufRead",
-      config = [[require('core.spectre')]],
     },
   }
 
@@ -101,17 +88,9 @@ packer.startup(function(use)
     },
     { "andersevenrud/compe-tmux", event = "InsertEnter *" },
     {
-      "rmagatti/auto-session",
-      event = "BufWinEnter",
-      -- event = "VimEnter",
-      config = [[require('core.sessions')]],
-    },
-    {
-      "rmagatti/session-lens",
-      cmd = "Telescope",
-      config = function()
-        require("session-lens").setup()
-      end,
+      "folke/persistence.nvim",
+      event = "BufReadPre",
+      config = [[require('core.sessions').setup()]],
     },
   }
 
@@ -153,7 +132,7 @@ packer.startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "BufRead",
+      event = "VimEnter",
       config = [[require('core.indent')]],
     },
     {
@@ -183,9 +162,6 @@ packer.startup(function(use)
       config = function()
         vim.g.cursorhold_updatetime = 1000
       end,
-    },
-    {
-      "gabrielpoca/replacer.nvim",
     },
     { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
   }

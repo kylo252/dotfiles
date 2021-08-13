@@ -43,6 +43,7 @@ M.mappings = {
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
 
     d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
+    D = { '<cmd>lua require"core.telescope".get_z_list()<CR>', "Zoxide" },
     e = { '<cmd>lua require"core.telescope".scope_browser()<CR>', "Open scope browser" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
@@ -132,7 +133,11 @@ M.mappings = {
   },
   S = {
     name = "+sessions",
-    s = { "<cmd>lua require('session-lens').search_session()<cr>", "search sessions" },
+    d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving"},
+    l = { "<cmd>lua require('persistance').load()<cr>", "restore the session for the current directory" },
+    r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
+    s = { "<cmd>lua require('persistence').save()<cr>", "stop saving"},
+
   },
   P = {
     name = "+packer",
