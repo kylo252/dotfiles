@@ -148,7 +148,7 @@ function M.scope_browser()
     sorting_strategy = "ascending",
     prompt_title = " File Browser",
     results_title = false,
-    shorten_path = smart,
+    shorten_path = "smart",
     show_line = false,
     winblend = 10,
   }
