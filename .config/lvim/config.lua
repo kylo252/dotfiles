@@ -27,7 +27,8 @@ require "scratch"
 
 -- keymappings
 local user_mappings = require("user.core.whichkey").mappings
-lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, user_mappings)
+-- lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, user_mappings)
+lvim.builtin.which_key.mappings["f"] = user_mappings["f"]
 
 lvim.leader = "space"
 lvim.keys.insert_mode["<C-s>"] = "<cmd>w<cr>"
@@ -37,7 +38,6 @@ lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<cr>"
 lvim.keys.normal_mode["gL"] = ":BufferNext<cr>"
 lvim.keys.normal_mode["gH"] = ":BufferPrev<cr>"
 lvim.keys.normal_mode["<space><space>"] = "<cmd>BufferNext<cr>"
-lvim.keys.normal_mode["<leader>Lc"] = ":e ~/.config/lvim/config.lua<cr>"
 
 -- fix telescope functions' scope
 lvim.builtin.which_key.mappings["fn"] = {
@@ -48,7 +48,7 @@ lvim.builtin.which_key.mappings["fd"] = {
   "<cmd>lua require('user.core.telescope').find_dotfiles()<cr>",
   "Find dotfiles",
 }
-lvim.builtin.which_key.mappings["fE"] = {
+lvim.builtin.which_key.mappings["fe"] = {
   "<cmd>lua require('user.core.telescope').scope_browser()<cr>",
   "open scope browser",
 }
@@ -98,6 +98,12 @@ lvim.plugins = {
   {
     "aserowy/tmux.nvim",
     config = [[require('user.core.tmux')]],
+  },
+  {
+    "pwntester/octo.nvim",
+    config = function()
+      require("octo").setup()
+    end,
   },
 }
 

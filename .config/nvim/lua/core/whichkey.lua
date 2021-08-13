@@ -33,18 +33,19 @@ M.mappings = {
   e = { '<cmd>lua require"core.nvimtree".toggle_tree()<CR>', "Open nvim-tree" },
   d = {
     name = "+Edit dotfiles",
-    d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
     l = { '<cmd>lua require"core.telescope".find_lunarvim_files()<CR>', "Find LunarVim's files" },
+    d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
     s = { "<cmd>edit ~/.config/nvim/lua/settings.lua<CR>", "Edit nvim settings" },
     p = { "<cmd>edit ~/.config/nvim/lua/plugins.lua<CR>", "Edit Packer plugins" },
   },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
+
+    d = { '<cmd>lua require"core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
     e = { '<cmd>lua require"core.telescope".scope_browser()<CR>', "Open scope browser" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
-    c = { "<cmd>Telescope colorscheme<CR>", "Colorscheme" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
     g = { "<cmd>Telescope grep_string<CR>", "Grep String (under-the-cursor)" },
     l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
@@ -55,15 +56,14 @@ M.mappings = {
     m = { "<cmd>Telescope marks<CR>", "Marks" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles<CR>", "Find Recenct Files" },
-    R = { '<Cmd>lua require"core.telescope".open_recent()<CR>', "Frecency" },
-    ["'"] = { "<cmd>Telescope registers<CR>", "Registers" },
   },
-  c = {
-    name = "+commands",
+  s = {
+    name = "+Search",
     c = { "<cmd>Telescope commands<CR>", "commands" },
+    C = { "<cmd>Telescope colorscheme<CR>", "Colorscheme" },
+    r = { "<cmd>Telescope registers<CR>", "Registers" },
     h = { "<cmd>Telescope command_history<CR>", "history" },
   },
-
   g = {
     name = "+git",
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
