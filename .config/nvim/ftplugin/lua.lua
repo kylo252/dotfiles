@@ -51,3 +51,4 @@ local lspconfig = require "lspconfig"
 
 local luadev = require("lua-dev").setup { lspconfig = opts }
 lspconfig.sumneko_lua.setup(luadev)
+require("lsp.efm-general-ls").generic_setup({"lua"})

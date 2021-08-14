@@ -164,12 +164,40 @@ table.insert(section.right, {
   },
 })
 
+local function get_attached_provider_name(msg)
+  msg = msg or "LSP Inactive"
+
+  local buf_clients = vim.lsp.buf_get_clients()
+  if next(buf_clients) == nil then
+    return msg
+  end
+
+  local buf_client_names = {}
+  for _, client in pairs(buf_clients) do
+    if client.name ~= "efm" then
+      table.insert(buf_client_names, client.name)
+    end
+  end
+
+  local efm_ls = require "lsp.efm-general-ls"
+  local efm_ls_providers = efm_ls.list_supported_provider_names(vim.bo.filetype)
+  vim.list_extend(buf_client_names, efm_ls_providers)
+
+  return table.concat(buf_client_names, ", ")
+end
+
 table.insert(section.right, {
   ShowLspClient = {
-    provider = "GetLspClient",
-    condition = check_active_lsp,
-    icon = "  ",
-    highlight = { colors.grey, colors.bg },
+    provider = get_attached_provider_name,
+    condition = function()
+      local tbl = { ["dashboard"] = true, [" "] = true }
+      if tbl[vim.bo.filetype] then
+        return false
+      end
+      return true
+    end,
+    icon = " ",
+    highlight = { colors.fg, colors.bg },
   },
 })
 
@@ -177,7 +205,12 @@ table.insert(section.right, {
   BufferType = {
     provider = "FileTypeName",
     separator = " ",
-    condition = condition.buffer_not_empty,
+    condition = function()
+      if vim.bo.filetype == "dashboard" or vim.lsp.buf_get_clients() then
+        return false
+      end
+      return true
+    end,
     separator_highlight = { "NONE", colors.bg },
     highlight = { colors.fg, colors.bg },
   },
