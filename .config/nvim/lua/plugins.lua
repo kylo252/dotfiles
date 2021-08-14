@@ -115,7 +115,7 @@ packer.startup(function(use)
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       -- event = "BufWinEnter",
-      config = [[require('core.nvimtree')]],
+      config = [[require('core.nvimtree').setup()]],
     },
 
     {
