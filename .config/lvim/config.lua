@@ -1,4 +1,5 @@
 -- general
+
 lvim.log.level = "error"
 lvim.format_on_save = true
 lvim.lint_on_save = true
@@ -25,9 +26,26 @@ require "user.keymappings"
 require "scratch"
 
 -- keymappings
-local user_mappings = require("user.core.whichkey").mappings
--- lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, user_mappings)
-lvim.builtin.which_key.mappings["f"] = user_mappings["f"]
+lvim.builtin.which_key.mappings["f"] = {
+  name = "+Find",
+  b = { "<cmd>Telescope buffers<CR>", "buffers" },
+
+  d = { '<cmd>lua require"user.core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
+  D = { '<cmd>lua require"user.core.telescope".get_z_list()<CR>', "Zoxide" },
+  e = { '<cmd>lua require"user.core.telescope".scope_browser()<CR>', "Open scope browser" },
+  h = { "<cmd>Telescope help_tags<CR>", "help tags" },
+  M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
+  f = { "<cmd>Telescope find_files<CR>", "Find Files" },
+  g = { "<cmd>Telescope grep_string<CR>", "Grep String (under-the-cursor)" },
+  l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
+  L = {
+    "<cmd>lua require'telescope.builtin'.live_grep{ search_dirs={vim.fn.expand(\"%:p\")} }<cr>",
+    "Local live-grep",
+  },
+  m = { "<cmd>Telescope marks<CR>", "Marks" },
+  p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
+  r = { "<cmd>Telescope oldfiles<CR>", "Find Recenct Files" },
+}
 
 lvim.leader = "space"
 lvim.keys.insert_mode["<C-s>"] = "<cmd>w<cr>"
@@ -118,9 +136,4 @@ vim.cmd [[command! -nargs=1 GS :lua require("telescope.builtin").grep_string(req
 lvim.builtin.which_key.mappings["Li"] = {
   "<cmd>lua package.loaded['core.info']=nil; require('core.info').toggle_popup(vim.bo.filetype)<cr>",
   "Toggle LunarVim Info",
-}
-
-lvim.builtin.which_key.mappings["f"] = {
-  "<cmd>Telescope find_files hidden=true<cr>",
-  "Find files",
 }
