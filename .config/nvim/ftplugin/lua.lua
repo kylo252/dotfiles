@@ -1,4 +1,4 @@
-vim.cmd "setl ts=2 sw=2"
+vim.cmd("setl ts=2 sw=2")
 
 local provider_root_path = DATA_PATH .. "/lspinstall/lua"
 
@@ -8,20 +8,14 @@ local provider_cmd = {
   provider_root_path .. "/main.lua",
 }
 
-local function resolve_caps(client, bufnr)
-  local caps = client.resolved_capabilities
-  if caps.document_formatting then
-    -- print(vim.inspect(caps))
-    noop()
-  end
-end
-
 local opts = {
   cmd = provider_cmd,
   autostart = true,
-  on_init = resolve_caps,
   on_init = require("lsp").common_on_init,
   on_attach = require("lsp").common_on_attach,
+  root_dir = function(fname)
+    return require("lspconfig/util").root_pattern(".git", "init.lua")(fname) or util.path.dirname(fname)
+  end,
   settings = {
     Lua = {
       telemetry = { enable = false },
@@ -39,16 +33,16 @@ local opts = {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
         },
         maxPreload = 50000,
       },
     },
   },
 }
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 
-local luadev = require("lua-dev").setup { lspconfig = opts }
+local luadev = require("lua-dev").setup({ lspconfig = opts })
 lspconfig.sumneko_lua.setup(luadev)
-require("lsp.efm-general-ls").generic_setup({"lua"})
+require("lsp.efm-general-ls").generic_setup({ "lua" })

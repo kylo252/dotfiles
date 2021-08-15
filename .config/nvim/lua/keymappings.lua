@@ -7,6 +7,7 @@ local generic_opts = {
   normal_mode = generic_opts_any,
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
+  command_mode = generic_opts_any,
   term_mode = { silent = true },
 }
 
@@ -16,17 +17,8 @@ local mode_adapters = {
   term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
+  command_mode = "c",
 }
-
--- Append key mappings to lunarvim's defaults for a given mode
--- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
-function M.append_to_defaults(keymaps)
-  for mode, mappings in pairs(keymaps) do
-    for k, v in ipairs(mappings) do
-      lvim.keys[mode][k] = v
-    end
-  end
-end
 
 -- Set key mappings individually
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
@@ -105,6 +97,8 @@ M.groups = {
     ["<C-Left>"] = ":vertical resize -2<CR>",
     ["<C-Right>"] = ":vertical resize +2<CR>",
 
+    ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
+
     -- Tab switch buffer
     ["<S-l>"] = ":BufferNext<CR>",
     ["<S-h>"] = ":BufferPrevious<CR>",
@@ -166,7 +160,7 @@ M.groups = {
 function M.setup()
   vim.g.mapleader = " "
   -- Search and replace word under cursor using <F2>
-  vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
+  vim.cmd([[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]])
   M.load(M.groups)
 end
 

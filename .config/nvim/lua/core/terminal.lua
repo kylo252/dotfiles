@@ -34,42 +34,24 @@ M.config = {
 }
 
 M.setup = function()
-  local terminal = require "toggleterm"
+  local terminal = require("toggleterm")
   terminal.setup(M.config)
 end
 
-local function is_installed(exe)
-  return vim.fn.executable(exe) == 1
-end
-
-M._lazygit_toggle = function()
-  if is_installed "lazygit" ~= true then
-    print "Please install lazygit. Check documentation for more information"
+M.execute_command = function(opts)
+  local cmd = opts.bin
+  if opts.args and not vim.tbl_isempty(opts.args) then
+    cmd = cmd .. " " .. table.concat(opts.args, " ")
+  end
+  if vim.fn.executable(opts.bin) ~= 1 then
+    error(string.format("unable to find [%s].", bin))
     return
   end
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
-  lazygit:toggle()
-end
 
-M._lf_toggle = function()
-  if is_installed "lf" ~= true then
-    print "Please install lf. Check documentation for more information"
-    return
-  end
   local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new { cmd = "lf", hidden = true }
-  lazygit:toggle()
-end
-
-M._ranger_toggle = function()
-  if is_installed "ranger" ~= true then
-    print "Please install lf. Check documentation for more information"
-    return
-  end
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new { cmd = "ranger", hidden = true }
-  lazygit:toggle()
+  print(vim.inspect(cmd))
+  local request = Terminal:new({ cmd = cmd, hidden = true })
+  request:toggle()
 end
 
 return M
