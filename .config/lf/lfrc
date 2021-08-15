@@ -58,6 +58,10 @@ cmd vmux_send ${{
   bash -c "VMUX_NOT_SELECT_PANE=1 vmux $fx; tmux display-popup -C" &lf -remote 'send quit'
 }}
 
+cmd rpc_nvim_edit ${{
+  nvim-ctrl "tabedit $f"
+}}
+
 cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
 cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
 cmd yank-basename $basename -a -- "$fx" | head -c-1 | xclip -i -selection clipboard
@@ -144,7 +148,8 @@ map DT delete
 map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
 
-map E vmux_send
+# map E vmux_send
+map E rpc_nvim_edit
 map Xvp push :!nvim<space>
 
 # Semi Bookmarks

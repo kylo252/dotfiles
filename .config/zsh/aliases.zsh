@@ -24,6 +24,7 @@ alias ll='ls -laFq --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 
 alias lz='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
+alias pre-dots-commit="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME pre-commit"
 alias lzd='lazydocker'
 alias lzg='lazygit'
 alias gu='gitui'

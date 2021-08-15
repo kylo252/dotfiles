@@ -26,13 +26,26 @@ require "user.keymappings"
 require "scratch"
 
 -- keymappings
+lvim.builtin.which_key.mappings["cg"] = {
+  [[<cmd>lua require('user.core.terminal').execute_command({bin = 'lazygit'})<CR>]],
+  "LazyGit",
+}
+lvim.builtin.which_key.mappings["cd"] = {
+  [[<cmd>lua require('user.core.terminal').execute_command({bin = 'lazygit', args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
+  "LazyDots",
+}
+lvim.builtin.which_key.mappings["cl"] = {
+  [[<cmd>lua require('user.core.terminal').execute_command({bin = 'lf'})<CR>]],
+  "lf",
+}
+
 lvim.builtin.which_key.mappings["f"] = {
   name = "+Find",
   b = { "<cmd>Telescope buffers<CR>", "buffers" },
 
-  d = { '<cmd>lua require"user.core.telescope".find_dotfiles()<CR>', "Find dotfiles" },
-  D = { '<cmd>lua require"user.core.telescope".get_z_list()<CR>', "Zoxide" },
-  e = { '<cmd>lua require"user.core.telescope".scope_browser()<CR>', "Open scope browser" },
+  d = { '<cmd>lua require("user.core.telescope").find_dotfiles()<CR>', "Find dotfiles" },
+  D = { '<cmd>lua require("user.core.telescope").get_z_list()<CR>', "Zoxide" },
+  e = { '<cmd>lua require("user.core.telescope").scope_browser()<CR>', "Open scope browser" },
   h = { "<cmd>Telescope help_tags<CR>", "help tags" },
   M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
   f = { "<cmd>Telescope find_files<CR>", "Find Files" },
