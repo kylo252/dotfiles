@@ -9,6 +9,7 @@ lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true
 lvim.lsp.smart_cwd = true
 lvim.lsp.diagnostics.update_in_insert = true
+
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.active = true
 lvim.builtin.compe.active = true
