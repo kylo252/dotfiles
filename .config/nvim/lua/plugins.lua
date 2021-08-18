@@ -63,15 +63,16 @@ packer.startup(function(use)
 
   -- Search
   use {
+    { "jvgrootveld/telescope-zoxide", event = "BufWinEnter" },
     {
       "nvim-telescope/telescope.nvim",
 
       config = [[require('core.telescope').setup()]],
+      after = "telescope-zoxide",
       -- cmd = "Telescope",
       event = "BufWinEnter",
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    { "jvgrootveld/telescope-zoxide" },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
