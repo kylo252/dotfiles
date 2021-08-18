@@ -1,6 +1,6 @@
 local lsp_config = {}
 
-local u = require("utils")
+local u = require "utils"
 
 local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
@@ -39,7 +39,7 @@ vim.lsp.protocol.CompletionItemKind = {
 }
 
 local function setup_lsp_keybindings()
-  local wk = require("which-key")
+  local wk = require "which-key"
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover({focusable = false})<CR>", "Show hover" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
@@ -76,7 +76,7 @@ local function documentHighlight(client)
 end
 
 function lsp_config.common_on_init(client, bufnr)
-  local handlers = require("lsp.handlers")
+  local handlers = require "lsp.handlers"
   vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
   vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
   vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature

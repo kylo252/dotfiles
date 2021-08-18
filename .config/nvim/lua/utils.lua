@@ -3,7 +3,7 @@ local utils = {}
 -- autoformat
 function utils.toggle_autoformat()
   if lvim.format_on_save then
-    require("core.autocmds").define_augroups({
+    require("core.autocmds").define_augroups {
       autoformat = {
         {
           "BufWritePre",
@@ -11,27 +11,27 @@ function utils.toggle_autoformat()
           ":silent lua vim.lsp.buf.formatting_sync()",
         },
       },
-    })
+    }
   end
 
   if not lvim.format_on_save then
-    vim.cmd([[
+    vim.cmd [[
       if exists('#autoformat#BufWritePre')
         :autocmd! autoformat
       endif
-    ]])
+    ]]
   end
 end
 
 function utils.reload_lv_config()
-  vim.cmd("source ~/.config/nvim/lua/settings.lua")
-  vim.cmd("source ~/.config/nvim/lua/plugins.lua")
+  vim.cmd "source ~/.config/nvim/lua/settings.lua"
+  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   --[[ local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
   utils.toggle_autoformat()
   plugin_loader:load { plugins, lvim.plugins } ]]
-  vim.cmd(":PackerCompile")
-  vim.cmd(":PackerInstall")
+  vim.cmd ":PackerCompile"
+  vim.cmd ":PackerInstall"
   require("keymappings").setup()
   -- vim.cmd ":PackerClean"
 end
@@ -73,12 +73,11 @@ function utils.gsub_args(args)
   return args
 end
 
-function utils.lvim_log(msg)
-  if lvim.debug then
-    vim.notify(msg, vim.log.levels.DEBUG)
-  end
+function _G.dump(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  print(unpack(objects))
+  return ...
 end
 
 return utils
 
--- TODO: find a new home for these autocommands

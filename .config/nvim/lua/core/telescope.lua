@@ -66,12 +66,12 @@ function M.config()
 end
 
 function M.setup()
-  require("telescope").setup({ M.config() })
+  require("telescope").setup { M.config() }
 
-  require("telescope").load_extension("fzf")
-  require("telescope").load_extension("zoxide")
+  require("telescope").load_extension "fzf"
+  -- require("telescope").load_extension "zoxide"
 
-  vim.cmd([[ command! -nargs=* GS :lua require('core.telescope').fuzzy_grep_string(<f-args>) ]])
+  vim.cmd [[ command! -nargs=* GS :lua require('core.telescope').fuzzy_grep_string(<f-args>) ]]
 
   local keymaps = {
     normal_mode = {
@@ -84,14 +84,14 @@ function M.setup()
 end
 
 function M.grep_dotfiles()
-  require("telescope.builtin").live_grep({
-    search_dirs = { CONFIG_PATH, os.getenv("XDG_CONFIG_HOME") .. "/zsh" },
+  require("telescope.builtin").live_grep {
+    search_dirs = { CONFIG_PATH, os.getenv "XDG_CONFIG_HOME" .. "/zsh" },
     hidden = true,
-  })
+  }
 end
 
 function M.find_dotfiles()
-  local opts = require("telescope.themes").get_ivy({
+  local opts = require("telescope.themes").get_ivy {
     previewer = false,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
@@ -103,13 +103,13 @@ function M.find_dotfiles()
     prompt_title = "~ dotfiles ~",
     cwd = "~",
     find_command = { "git", "dots", "ls-files" },
-  })
+  }
 
   require("telescope.builtin").find_files(opts)
 end
 
 function M.find_lunarvim_files()
-  local opts = require("telescope.themes").get_ivy({
+  local opts = require("telescope.themes").get_ivy {
     previewer = false,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
@@ -121,12 +121,12 @@ function M.find_lunarvim_files()
     prompt_title = "~ LunarVim ~",
     cwd = "~/.local/share/lunarvim/lvim",
     find_command = { "git", "ls-files" },
-  })
+  }
   require("telescope.builtin").find_files(opts)
 end
 
 function M.get_z_list()
-  local opts = require("telescope.themes").get_ivy({
+  local opts = require("telescope.themes").get_ivy {
     previewer = false,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
@@ -136,12 +136,12 @@ function M.get_z_list()
     },
     prompt = ">> ",
     prompt_title = "~ Zoxide ~",
-  })
+  }
   require("telescope").extensions.zoxide.list(opts)
 end
 
 function M.scope_browser()
-  require("telescope.builtin").file_browser({
+  require("telescope.builtin").file_browser {
     layout_config = {
       preview_width = 0.7,
       -- width = 0.15,
@@ -156,17 +156,17 @@ function M.scope_browser()
     shorten_path = "smart",
     show_line = false,
     winblend = 10,
-  })
+  }
 end
 
 function M.fuzzy_grep_string(query)
   query = query or {}
-  local builtin = require("telescope.builtin")
-  local themes = require("telescope.themes")
-  builtin.grep_string(themes.get_ivy({
+  local builtin = require "telescope.builtin"
+  local themes = require "telescope.themes"
+  builtin.grep_string(themes.get_ivy {
     prompt_title = "Fuzzy grep string, initial query: " .. query,
     search = query,
-  }))
+  })
 end
 
 M.actions.import_entry = function(prompt_bufnr)

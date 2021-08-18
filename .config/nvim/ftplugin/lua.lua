@@ -1,4 +1,4 @@
-vim.cmd("setl ts=2 sw=2")
+vim.cmd "setl ts=2 sw=2"
 
 local provider_root_path = DATA_PATH .. "/lspinstall/lua"
 
@@ -33,16 +33,16 @@ local opts = {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
         },
         maxPreload = 50000,
       },
     },
   },
 }
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 
-local luadev = require("lua-dev").setup({ lspconfig = opts })
+local luadev = require("lua-dev").setup { lspconfig = opts }
 lspconfig.sumneko_lua.setup(luadev)
-require("lsp.efm-general-ls").generic_setup({ "lua" })
+require("lsp.efm-general-ls").generic_setup { "lua" }

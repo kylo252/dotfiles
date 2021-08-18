@@ -127,13 +127,13 @@ M.mappings = {
 }
 
 function M.setup()
-  local wk = require("which-key")
+  local wk = require "which-key"
 
   -- Set leader
   vim.api.nvim_set_keymap("n", "<Space>", "<NOP>", { noremap = true, silent = true })
   vim.g.mapleader = " "
 
-  require("which-key").setup({
+  require("which-key").setup {
     plugins = {
       marks = true, -- shows a list of your marks on ' and `
       registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -170,7 +170,7 @@ function M.setup()
     },
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
-  })
+  }
 
   local global_opts = {
     mode = "n", -- normal mode

@@ -2,11 +2,11 @@ local efm = {}
 
 function efm.list_supported_provider_names(ft)
   if ft == "lua" then
-    return {"stylua", "luacheck"}
+    return { "stylua", "luacheck" }
   elseif ft == "sh" then
-    return {"shellcheck", "shfmt"}
+    return { "shellcheck", "shfmt" }
   else
-    return {"efm"}
+    return { "efm" }
   end
 end
 

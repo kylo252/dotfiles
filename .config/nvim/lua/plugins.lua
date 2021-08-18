@@ -63,7 +63,7 @@ packer.startup(function(use)
 
   -- Search
   use {
-    { "jvgrootveld/telescope-zoxide", event = "BufWinEnter" },
+    { "jvgrootveld/telescope-zoxide", event = "BufEnter" },
     {
       "nvim-telescope/telescope.nvim",
 

@@ -160,7 +160,7 @@ M.groups = {
 function M.setup()
   vim.g.mapleader = " "
   -- Search and replace word under cursor using <F2>
-  vim.cmd([[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]])
+  vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
   M.load(M.groups)
 end
 

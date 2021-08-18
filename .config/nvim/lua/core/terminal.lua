@@ -34,7 +34,7 @@ M.config = {
 }
 
 M.setup = function()
-  local terminal = require("toggleterm")
+  local terminal = require "toggleterm"
   terminal.setup(M.config)
 end
 
@@ -50,7 +50,7 @@ M.execute_command = function(opts)
 
   local Terminal = require("toggleterm.terminal").Terminal
   print(vim.inspect(cmd))
-  local request = Terminal:new({ cmd = cmd, hidden = true })
+  local request = Terminal:new { cmd = cmd, hidden = true }
   request:toggle()
 end
 
