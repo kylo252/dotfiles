@@ -52,10 +52,8 @@ cmd open ${{
   esac
 }}
 
-# https://github.com/gokcehan/lf/issues/177
-cmd vmux_send ${{
-  # bash -c "VMUX_NOT_SELECT_PANE=1 vmux $fx" &lf -remote 'send quit'
-  bash -c "VMUX_NOT_SELECT_PANE=1 vmux $fx; tmux display-popup -C" &lf -remote 'send quit'
+cmd open_with_lnav ${{
+  lnav "$f"
 }}
 
 cmd rpc_nvim_edit ${{
@@ -148,7 +146,7 @@ map DT delete
 map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
 
-# map E vmux_send
+map L open_with_lnav
 map E rpc_nvim_edit
 map Xvp push :!nvim<space>
 
