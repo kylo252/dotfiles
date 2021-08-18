@@ -6,7 +6,9 @@ require "settings"
 require("autocmds").setup()
 require("keymappings").setup()
 require "core.treesitter"
-require "lsp"
+require("lsp").setup()
+
+
 
 -- require'plenary.profile'.stop()
 --

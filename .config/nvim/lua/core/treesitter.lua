@@ -1,4 +1,6 @@
 -- avoid problems with old `gcc` on RHEL7
+local M = {}
+function M.setup()
 require("nvim-treesitter.install").compilers = { "clang", "gcc" }
 
 require("nvim-treesitter.configs").setup {
@@ -36,3 +38,5 @@ require("nvim-treesitter.configs").setup {
     },
   },
 }
+end
+return M

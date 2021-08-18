@@ -108,4 +108,7 @@ function lsp_config.get_ls_capabilities(client_id)
   return lsp_caps
 end
 
+function lsp_config.setup()
+    require("lsp.ft.lua").setup()
+end
 return lsp_config

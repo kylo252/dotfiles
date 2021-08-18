@@ -1,5 +1,7 @@
-vim.cmd "setl ts=2 sw=2"
+-- vim.cmd "setl ts=2 sw=2"
+local M = {}
 
+function M.setup()
 local provider_root_path = DATA_PATH .. "/lspinstall/lua"
 
 local provider_cmd = {
@@ -41,8 +43,14 @@ local opts = {
     },
   },
 }
+
 local lspconfig = require "lspconfig"
 
 local luadev = require("lua-dev").setup { lspconfig = opts }
 lspconfig.sumneko_lua.setup(luadev)
+
 require("lsp.efm-general-ls").generic_setup { "lua" }
+
+end
+
+return M

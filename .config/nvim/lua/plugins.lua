@@ -33,12 +33,11 @@ packer.startup(function(use)
   -- packer can manage itself as an optional plugin
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
-  use { "tjdevries/astronauta.nvim" }
   use { "nvim-lua/popup.nvim" }
 
   -- LSP and linting
   use {
-    { "nvim-treesitter/nvim-treesitter" },
+    { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
     { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
@@ -145,7 +144,9 @@ packer.startup(function(use)
       "glepnir/dashboard-nvim",
       -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
       -- "ChristianChiarulli/dashboard-nvim",
-      event = "BufWinEnter",
+
+      opt = true,
+      -- event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
     },
