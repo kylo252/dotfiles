@@ -26,16 +26,13 @@ function ex() {
 }
 
 function ta() {
-  if [ -n "$1" ]; then TARGET="-t $1"; fi
-  tmux attach $TARGET
+  local target="${1:-default}"
+  tmux attach -t $target
 }
 
 function ts() {
-  TARGET="default"
-  if [ -n "$1" ]; then
-    TARGET="$1"
-  fi
-  smug start $TARGET --attach
+  local target="${1:-default}"
+  smug start $target --attach
 }
 
 # an alias is not enough since we can only pass `depth` flag as a git command

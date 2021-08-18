@@ -28,6 +28,7 @@ alias pre-dots-commit="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME pre-commit"
 alias lzd='lazydocker'
 alias lzg='lazygit'
 alias gu='gitui'
+[ -e /etc/arch-release ] && alias -g paks='sudo pacman -S'
 
 alias paux='ps aux | rg'
 
