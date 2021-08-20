@@ -20,11 +20,12 @@ lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.nvimtree.hide_dotfiles = false
 -- lvim.builtin.autopairs.active = false
+lvim.lang.lua.lsp.setup.settings.Lua.telemetry = { enable = false }
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {}
 
--- require("user.keymappings")
+require "user.keymappings"
 -- require "scratch"
 
 -- keymappings
@@ -78,7 +79,10 @@ lvim.keys.normal_mode["gL"] = ":BufferNext<cr>"
 lvim.keys.normal_mode["gH"] = ":BufferPrev<cr>"
 lvim.keys.normal_mode["<space><space>"] = "<cmd>BufferNext<cr>"
 
-vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
+local components = require "core.lualine.components"
+-- lvim.builtin.lualine.sections.lualine_c = { "location", "filetype" } -- Add this
+-- lvim.builtin.lualine.sections.lualine_b = { components.branch, "filename" }   -- or this
+
 -- Allow pasting same thing many times
 lvim.keys.visual_mode["p"] = '""p:let @"=@0<CR>'
 lvim.keys.visual_block_mode["p"] = '""p:let @"=@0<CR>'
