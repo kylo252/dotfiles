@@ -43,8 +43,8 @@ vim.opt.termguicolors = true -- set term gui colors (most terminals support this
 vim.opt.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.title = true -- set the title of window to the value of the titlestring
 vim.opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
-vim.opt.undodir = CACHE_PATH .. "/undo" -- set an undo directory
-vim.opt.undofile = false -- enable persisten undo
+vim.opt.undodir = vim.fn.stdpath "cache" .. "/undo" -- set an undo directory
+vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited

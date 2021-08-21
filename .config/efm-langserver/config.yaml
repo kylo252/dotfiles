@@ -158,7 +158,8 @@ tools:
     format-command: 'stylua -'
     format-stdin: true
     root-markers:
-      - 'stylua.toml'
+      - .stylua.toml
+      - stylua.toml
 
   luaformat: &luaformat
     format-command: "lua-format --chop-down-table --indent-width=2 --no-use-tab --in-place --no-keep-simple-function-one-line --column-limit=80"

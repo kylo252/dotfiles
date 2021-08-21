@@ -1,4 +1,5 @@
 -- general
+
 lvim.builtin.telescope.active = true
 lvim.log.level = "error"
 lvim.format_on_save = true
@@ -17,6 +18,7 @@ lvim.builtin.nvimtree.hide_dotfiles = 0
 -- lvim.builtin.nvimtree.ignore = { "" }
 lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.nvimtree.hide_dotfiles = false
+-- lvim.builtin.autopairs.active = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {}
@@ -79,7 +81,8 @@ vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
 -- Allow pasting same thing many times
 lvim.keys.visual_mode["p"] = '""p:let @"=@0<CR>'
 lvim.keys.visual_block_mode["p"] = '""p:let @"=@0<CR>'
-
+local sorters = require "telescope.sorters"
+lvim.builtin.telescope.defaults.file_sorter = sorters.fuzzy_with_index_bias
 lvim.builtin.telescope.extensions = {
   fzf = {
     fuzzy = true, -- false will only do exact matching

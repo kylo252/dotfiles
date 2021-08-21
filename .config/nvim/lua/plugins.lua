@@ -22,13 +22,6 @@ packer.init {
   },
 }
 
---[[
-FIXME: figure out why this is breaking barbar and indent-line and requires neovim restart
-see [#401](https://github.com/wbthomason/packer.nvim/issues/401)
-and [#201](https://github.com/wbthomason/packer.nvim/issues/201)
-]]
--- vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
   use { "wbthomason/packer.nvim" }
@@ -63,15 +56,14 @@ packer.startup(function(use)
   -- Search
   use {
     { "jvgrootveld/telescope-zoxide", event = "BufEnter" },
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufWinEnter" },
     {
       "nvim-telescope/telescope.nvim",
 
       config = [[require('core.telescope').setup()]],
       after = "telescope-zoxide",
-      -- cmd = "Telescope",
       event = "BufWinEnter",
     },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
@@ -83,13 +75,13 @@ packer.startup(function(use)
   use {
     {
       "aserowy/tmux.nvim",
-      event = "BufRead",
+      event = "VimEnter",
       config = [[require('core.tmux')]],
     },
     { "andersevenrud/compe-tmux", event = "InsertEnter *" },
     {
       "folke/persistence.nvim",
-      event = "BufReadPre",
+      event = "VimEnter",
       config = [[require('core.sessions').setup()]],
     },
   }
@@ -104,23 +96,24 @@ packer.startup(function(use)
 
   -- UI
   use {
+    { "kyazdani42/nvim-web-devicons", event = "BufWinEnter" },
     {
       "kylo252/onedark.nvim",
       config = function()
         require("onedark").setup()
       end,
     },
-    { "romgrk/barbar.nvim", requires = { "kyazdani42/nvim-web-devicons" } },
+    { "romgrk/barbar.nvim", event = "BufWinEnter" },
     {
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
-      -- event = "BufWinEnter",
+      event = "BufWinEnter",
       config = [[require('core.nvimtree').setup()]],
     },
 
     {
       "glepnir/galaxyline.nvim",
-      event = "WinEnter",
+      event = "BufWinEnter",
       config = [[require('core.statusline')]],
     },
     {
@@ -145,8 +138,7 @@ packer.startup(function(use)
       -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
       -- "ChristianChiarulli/dashboard-nvim",
 
-      opt = true,
-      -- event = "BufWinEnter",
+      event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
     },

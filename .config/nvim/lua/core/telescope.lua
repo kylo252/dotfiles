@@ -27,17 +27,18 @@ function M.config()
         },
         width = 0.8,
       },
-      vimgrep_arguments = { "rg", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-      find_command = {
+      vimgrep_arguments = {
         "rg",
         "--no-heading",
-        "--with-filename",
         "--hidden",
+        "--with-filename",
         "--line-number",
         "--column",
         "--smart-case",
       },
-      -- border = {},
+      find_command = { "fd", "--type=file", "--hidden" },
+      file_sorter = require("telescope.sorters").fuzzy_with_index_bias,
+      -- file_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
       mappings = {
         i = {
@@ -60,22 +61,22 @@ function M.config()
       },
     },
     extensions = {
-      fzf = { override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
+      fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
     },
   }
 end
 
 function M.setup()
-  require("telescope").setup { M.config() }
+  local opts = M.config()
+  require("telescope").setup(opts)
 
   require("telescope").load_extension "fzf"
-  -- require("telescope").load_extension "zoxide"
 
   vim.cmd [[ command! -nargs=* GS :lua require('core.telescope').fuzzy_grep_string(<f-args>) ]]
 
   local keymaps = {
     normal_mode = {
-      ["<C-p>"] = "<cmd>Telescope find_files hidden=true<CR>",
+      ["<C-p>"] = "<cmd>Telescope find_files<CR>",
       ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
       ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
     },
@@ -197,7 +198,7 @@ function M.live_grep_v2(opts)
   }, opts))
 end
 
-M.theme = function(opts)
+function M.theme(opts)
   opts = opts or {}
 
   local theme_opts = {
@@ -223,7 +224,7 @@ M.theme = function(opts)
   return vim.tbl_deep_extend("force", theme_opts, opts)
 end
 
-M.grep_string_v2 = function(opts)
+function M.grep_string_v2(opts)
   opts = opts or M.theme()
   local pickers = require "telescope.pickers"
   local finders = require "telescope.finders"
