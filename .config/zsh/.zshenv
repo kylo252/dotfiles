@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 function __setup_wsl() {
-
   export TERM="xterm-256color"
   export BROWSER="wslview"
   PULSE_SERVER=tcp:$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
@@ -14,7 +13,6 @@ function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
-  export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
   [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
   export LANG=en_US.UTF-8
@@ -34,7 +32,7 @@ function __setup_defaults() {
   fi
 
   # https://github.com/romkatv/powerlevel10k/issues/1428
-  export GITSTATUS_LOG_LEVEL=DEBUG
+  # export GITSTATUS_LOG_LEVEL=DEBUG
 }
 
 function __setup_cli_colors() {
@@ -103,21 +101,14 @@ function __setup_misc() {
   export DELTA_PAGER="less -RF"
   export BAT_THEME="TwoDark"
 
-  # interactive search when using three dots
-  export ENHANCD_DOT_ARG='...'
-
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
   export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
   export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-  export ENHANCED_LAZY_COMPLETION=true
-
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
     source "$HOME/.nix-profile/etc/profile.d/nix.sh"
   fi
-
-  export VMUX_REALEDITOR_NVIM="$(which nvim)"
-  export VMUX_NVIM_SESSION_DIR="$XDG_CACHE_HOME/nvim/nvim_sessions"
 }
 
 __setup_functions=(
