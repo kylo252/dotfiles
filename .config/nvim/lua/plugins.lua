@@ -56,12 +56,12 @@ packer.startup(function(use)
   -- Search
   use {
     { "jvgrootveld/telescope-zoxide", event = "BufEnter" },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufWinEnter" },
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+    -- { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufEnter" }, -- this is broken on Bionic
     {
       "nvim-telescope/telescope.nvim",
-
       config = [[require('core.telescope').setup()]],
-      after = "telescope-zoxide",
+      after = { "telescope-fzf-native.nvim", "telescope-zoxide" },
       event = "BufWinEnter",
     },
     {
