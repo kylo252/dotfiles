@@ -85,8 +85,8 @@ function M.setup()
 end
 
 function M.grep_dotfiles()
-  require("telescope.builtin").live_grep {
-    search_dirs = { CONFIG_PATH, os.getenv "XDG_CONFIG_HOME" .. "/zsh" },
+  M.live_grep_v2 {
+    search_dirs = { CONFIG_PATH, os.getenv "ZDOTDIR" },
     hidden = true,
   }
 end
@@ -104,24 +104,6 @@ function M.find_dotfiles()
     prompt_title = "~ dotfiles ~",
     cwd = "~",
     find_command = { "git", "dots", "ls-files" },
-  }
-
-  require("telescope.builtin").find_files(opts)
-end
-
-function M.find_lunarvim_files()
-  local opts = require("telescope.themes").get_ivy {
-    previewer = false,
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 5,
-      width = 0.5,
-    },
-    prompt = ">> ",
-    prompt_title = "~ LunarVim ~",
-    cwd = "~/.local/share/lunarvim/lvim",
-    find_command = { "git", "ls-files" },
   }
   require("telescope.builtin").find_files(opts)
 end
