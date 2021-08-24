@@ -4,8 +4,6 @@
 # TODO: check more examples from
 # https://blog.sebastian-daschner.com/entries/zsh-aliases
 
-alias cls='clear'
-
 alias dtf='dotbare'
 
 alias dta='dotbare fadd'
@@ -23,20 +21,15 @@ alias la='ls -A --color=auto'
 alias ll='ls -laFq --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 
-alias lz='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias pre-dots-commit="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME pre-commit"
-alias lzd='lazydocker'
+alias lzd='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias lzg='lazygit'
 alias gu='gitui'
 [ -e /etc/arch-release ] && alias -g paks='sudo pacman -S'
 
-alias paux='ps aux | rg'
+alias paux='procs aux | rg'
 
-alias rd='rm -rd'
-
-alias rn='ranger'
-alias v='vmux'
-alias nv='nvim'
+alias v='nvim'
 
 # insert relevant xkcd
 alias archive='tar --create --gzip --verbose --file'
@@ -46,7 +39,5 @@ if alias rm &>/dev/null; then
   unalias rm
 fi
 
-alias -g LSR='| less -Rf'
-alias -g BT='| bat'
 alias -g MN='| bat --language man'
 alias -g FZ='| fzf'
