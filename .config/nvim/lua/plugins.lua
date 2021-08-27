@@ -1,11 +1,11 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
   execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-  execute "packadd packer.nvim"
+  execute("packadd packer.nvim")
 end
 
 local packer_ok, packer = pcall(require, "packer")
@@ -13,23 +13,23 @@ if not packer_ok then
   return
 end
 
-packer.init {
+packer.init({
   git = { clone_timeout = 300 },
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "single" }
+      return require("packer.util").float({ border = "single" })
     end,
   },
-}
+})
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
-  use { "wbthomason/packer.nvim" }
-  use { "nvim-lua/plenary.nvim" }
-  use { "nvim-lua/popup.nvim" }
+  use({ "wbthomason/packer.nvim" })
+  use({ "nvim-lua/plenary.nvim" })
+  use({ "nvim-lua/popup.nvim" })
 
   -- LSP and linting
-  use {
+  use({
     { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
@@ -43,20 +43,25 @@ packer.startup(function(use)
     {
       "b3nj5m1n/kommentary",
       event = "BufRead",
-      config = function()
-        require("kommentary.config").use_extended_mappings()
-      end,
+      config = [[ require("core.comment").setup() ]],
     },
-  }
+  })
 
   -- Helpers
-  use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
-  use { "folke/lua-dev.nvim" }
+  use({ "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] })
+  use({ "folke/lua-dev.nvim" })
 
   -- Search
-  use {
+  use({
     { "jvgrootveld/telescope-zoxide", event = "BufEnter" },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    {
+      "ahmedkhalf/project.nvim",
+      config = function()
+        require("core.project").setup()
+      end,
+      event = "BufEnter",
+    },
     -- { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufEnter" }, -- this is broken on Bionic
     {
       "nvim-telescope/telescope.nvim",
@@ -69,10 +74,10 @@ packer.startup(function(use)
       event = "BufRead",
       config = [[require('core.lightspeed')]],
     },
-  }
+  })
 
   -- TMUX and session management
-  use {
+  use({
     {
       "aserowy/tmux.nvim",
       event = "VimEnter",
@@ -84,18 +89,18 @@ packer.startup(function(use)
       event = "VimEnter",
       config = [[require('core.sessions').setup()]],
     },
-  }
+  })
 
-  use {
+  use({
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
     config = function()
       require("core.terminal").setup()
     end,
-  }
+  })
 
   -- UI
-  use {
+  use({
     { "kyazdani42/nvim-web-devicons", event = "BufWinEnter" },
     {
       "kylo252/onedark.nvim",
@@ -120,7 +125,7 @@ packer.startup(function(use)
       "karb94/neoscroll.nvim",
       event = "BufRead",
       config = function()
-        require("neoscroll").setup { respect_scrolloff = true }
+        require("neoscroll").setup({ respect_scrolloff = true })
       end,
     },
     {
@@ -142,14 +147,14 @@ packer.startup(function(use)
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
     },
-  }
+  })
 
   -- utils
-  use { "kevinhwang91/nvim-bqf", event = "BufRead" }
+  use({ "kevinhwang91/nvim-bqf", event = "BufRead" })
 
   -- misc
   -- https://github.com/neovim/neovim/issues/12587
-  use {
+  use({
     {
       "antoinemadec/FixCursorHold.nvim",
       event = "BufRead",
@@ -158,5 +163,5 @@ packer.startup(function(use)
       end,
     },
     { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
-  }
+  })
 end)
