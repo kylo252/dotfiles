@@ -119,7 +119,6 @@ map u unselect
 map br bulkrename
 map r push :rename<space>
 map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
-map <c-e> push :zoxide<space>
 
 # create dir/file
 map ad push $mkdir<space>
@@ -150,12 +149,13 @@ map L open_with_lnav
 map E rpc_nvim_edit
 map Xvp push :!nvim<space>
 
-# Semi Bookmarks
-map gr cd /repo/ekhhaga
-map gc cd ~/.config
-map gs cd ~/.scripts
-map gd cd ~/.local/share
-map gl cd ~/local
+# Zoxide jump
+map gj push :zoxide<space>
+map gc z ~/.config
+map gs z ~/.scripts
+map gd z ~/.local/share
+map gl z ~/local
+
 # show documentation
 map g? $lf -doc | bat -l man
 
