@@ -108,7 +108,7 @@ packer.startup(function(use)
         require("onedark").setup()
       end,
     },
-    { "romgrk/barbar.nvim", event = "BufWinEnter" },
+    { "romgrk/barbar.nvim", after = "nvim-web-devicons", event = "BufWinEnter" },
     {
       "kyazdani42/nvim-tree.lua",
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },

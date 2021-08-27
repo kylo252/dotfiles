@@ -2,9 +2,6 @@ local M = {}
 
 function M.setup()
   local opts = {
-    active = true,
-
-    on_config_done = nil,
     manual_mode = false,
 
     detection_methods = { "lsp", "pattern" },
