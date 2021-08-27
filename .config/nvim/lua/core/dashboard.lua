@@ -11,4 +11,4 @@ vim.g.dashboard_custom_section = {
 }
 
 -- vim.cmd("let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))")
-vim.g.dashboard_session_directory = vim.fn.stdpath "cache" .. "/nvim_sessions"
+vim.g.dashboard_enable_session = 0

@@ -13,6 +13,17 @@ M.global_mappings = {
   },
 }
 
+M.dashboard_mappings = {
+  name = "dashboard",
+  r = { "<cmd> Telescope oldfiles<cr>", "Recently Used Files" },
+  f = { "<cmd> Telescope find_files hidden=true<cr>", "Find File" },
+  p = { "<cmd> :edit ~/.config/nvim/lua/plugins.lua<cr>", "Plugins" },
+  s = { "<cmd> :edit ~/.config/nvim/lua/settings.lua<cr>", "Settings" },
+  g = { "<cmd> Telescope live_grep<cr>", "Find Word" },
+  l = { "<cmd> SessionLoad<cr>", "Load Last Session" },
+  m = { "<cmd> Telescope marks<cr>", "Marks" },
+}
+
 M.mappings = {
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   h = { '<cmd>let @/=""<CR>', "No Highlight" },
@@ -128,13 +139,12 @@ M.mappings = {
 }
 
 function M.setup()
-  local wk = require "which-key"
+  local wk = require("which-key")
 
   -- Set leader
   vim.api.nvim_set_keymap("n", "<Space>", "<NOP>", { noremap = true, silent = true })
   vim.g.mapleader = " "
-
-  require("which-key").setup {
+  local setup_opts = {
     plugins = {
       marks = true, -- shows a list of your marks on ' and `
       registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -153,40 +163,15 @@ function M.setup()
         g = true, -- bindings for prefixed with g
       },
     },
-    icons = {
-      breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-      separator = "➜", -- symbol used between a key and it's label
-      group = "+", -- symbol prepended to a group
-    },
-    window = {
-      border = "single", -- none, single, double, shadow
-      position = "bottom", -- bottom, top
-      margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-      padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-    },
-    layout = {
-      height = { min = 4, max = 25 }, -- min and max height of the columns
-      width = { min = 20, max = 50 }, -- min and max width of the columns
-      spacing = 3, -- spacing between columns
-    },
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
   }
 
-  local global_opts = {
-    mode = "n", -- normal mode
-    buffer = nil, -- global mappings. specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  }
+  require("which-key").setup(setup_opts)
 
-  -- TODO: move all the mappings here
-  local opts = vim.deepcopy(global_opts)
-  opts.prefix = "<leader>"
-
-  wk.register(M.mappings, opts)
-  wk.register(M.global_mappings, global_opts)
+  wk.register(M.global_mappings)
+  wk.register(M.dashboard_mappings, { prefix = "f", buffer = 1 })
+  wk.register(M.mappings, { prefix = "<leader>" })
 end
 
 return M
