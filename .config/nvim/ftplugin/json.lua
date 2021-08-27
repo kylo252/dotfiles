@@ -2,8 +2,7 @@
 local provider = "vscode-json-languageserver"
 
 if vim.fn.executable(provider) ~= 1 then
-  provider = DATA_PATH
-    .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js"
+  provider = DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js"
 end
 
 local opts = {

@@ -2,7 +2,7 @@
 local M = {}
 
 M.global_mappings = {
-  ["<c-e>"] = { [[<cmd>lua require('core.terminal').execute_command({bin = 'lf'})<CR>]], "lf" },
+  ["<c-e>"] = { [[<cmd>lua require('core.terminal').toggle_explorer()<CR>]], "lf" },
   Q = { "<cmd>BufferClose<cr>", "close buffer" },
   g = {
     -- LSP
@@ -37,7 +37,6 @@ M.mappings = {
     d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
     L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
   },
-  e = { '<cmd>lua require"core.nvimtree".toggle_tree()<CR>', "Open nvim-tree" },
   d = {
     name = "+dotfiles",
     d = { '<cmd>lua require("core.telescope").find_dotfiles()<CR>', "Find dotfiles" },
@@ -139,7 +138,7 @@ M.mappings = {
 }
 
 function M.setup()
-  local wk = require("which-key")
+  local wk = require "which-key"
 
   -- Set leader
   vim.api.nvim_set_keymap("n", "<Space>", "<NOP>", { noremap = true, silent = true })

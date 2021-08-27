@@ -1,39 +1,39 @@
 [core]
-    pager = delta
+  pager = delta
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-    features = decorations unobtrusive-line-numbers
-    line-numbers = true
-    whitespace-error-style = 22 reverse
+  features = decorations unobtrusive-line-numbers
+  line-numbers = true
+  whitespace-error-style = 22 reverse
 [color]
-    ui = true
-    colorMoved = default
+  ui = true
+  colorMoved = default
 [pull]
-    rebase = true
+  rebase = true
 [fetch]
-    prune = true
+  prune = true
 [mergetool "nvim"] 
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
-    tool = nvim
+  tool = nvim
 [mergetool] 
-    prompt = true
+  prompt = true
 [filter "spacify"]
-    clean = expand --tabs=4 --initial
+  clean = expand --tabs=4 --initial
 [alias]
-    dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/"
-    add-dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/ add -f"
-    amend = commit --amend
-    reuse-msg = commit --reuse-message=ORIG_HEAD
-    soft-reset = reset HEAD~1 --soft
-    quick-amend = commit --amend --no-edit
-    qa = commit --amend --no-edit
-    st = status
-	ro = rebase origin/master
-    smu = submodule update --init --recursive
-	potd = push origin HEAD:refs/drafts/master
-	potm = push origin HEAD:refs/for/master
+  dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/"
+  add-dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/ add -f"
+  amend = commit --amend
+  reuse-msg = commit --reuse-message=ORIG_HEAD
+  soft-reset = reset HEAD~1 --soft
+  quick-amend = commit --amend --no-edit
+  qa = commit --amend --no-edit
+  st = status
+  ro = rebase origin/master
+  smu = submodule update --init --recursive
+  potd = push origin HEAD:refs/drafts/master
+  potm = push origin HEAD:refs/for/master
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252
