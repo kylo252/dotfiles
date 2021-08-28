@@ -24,6 +24,8 @@ unset -f __setup_defaults
 
 function __setup_kemaps() {
 
+  bindkey -e
+
   # Fix backspace not working after returning from cmd mode
   bindkey '^?' backward-delete-char
   bindkey '^h' backward-delete-char
@@ -49,9 +51,6 @@ function __setup_kemaps() {
   # [muscle-memory] kill line-forward
   bindkey '^K' kill-line
 
-  # ctrl-space
-  bindkey '^@' accept-line
-
   # [muscle-memory] use ctrl+backspace as well
   bindkey '^H' backward-kill-word
 
@@ -67,6 +66,10 @@ function __setup_kemaps() {
 
   bindkey '^[,' vi-forward-word # alt+,
   bindkey '^ ' autosuggest-accept
+
+  # in case they get overwritten
+  bindkey '^T' fzf-file-widget
+  bindkey '^R' fzf-history-widget
 
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word

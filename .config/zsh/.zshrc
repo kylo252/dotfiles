@@ -66,9 +66,9 @@ source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
 
-source "$ZDOTDIR/completions.zsh"
-
 source "$ZDOTDIR/plugins.zsh"
+
+source "$ZDOTDIR/completions.zsh"
 
 source "$ZDOTDIR/opts.zsh"
 

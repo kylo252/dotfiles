@@ -42,6 +42,7 @@ M.mappings = {
     d = { '<cmd>lua require("core.telescope").find_dotfiles()<CR>', "Find dotfiles" },
     g = { '<cmd>lua require("core.telescope").grep_dotfiles()<CR>', "Find dotfiles" },
   },
+  e = { '<cmd>lua require("core.nvimtree").toggle_tree()<CR>', "Open scope browser" },
   E = { '<cmd>lua require("core.telescope").scope_browser()<CR>', "Open scope browser" },
   f = {
     name = "+Find",
@@ -126,6 +127,11 @@ M.mappings = {
     r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
     s = { "<cmd>lua require('persistence').save()<cr>", "saving" },
   },
+  t = {
+    name = "+test",
+    t = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test()<cr>", "scratch test1" }
+  },
+
   P = {
     name = "+packer",
     c = { "<cmd>PackerCompile<CR>", "Packer Compile" },

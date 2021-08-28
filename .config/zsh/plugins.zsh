@@ -24,7 +24,7 @@ znap source Aloxaf/fzf-tab
 
 znap fpath dotbare "_dotbare_completion_cmd"
 
-znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
+# znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
 # znap eval pip-completion "source <(pip3 completion --zsh)"
 
 znap eval zoxide 'zoxide init zsh'
@@ -35,4 +35,3 @@ if command -v vivid >/dev/null; then
 fi
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
-
