@@ -101,14 +101,20 @@ packer.startup(function(use)
 
   -- UI
   use {
-    { "kyazdani42/nvim-web-devicons", event = "BufWinEnter", after = "barbar.nvim" },
+    { "kyazdani42/nvim-web-devicons" },
     {
       "kylo252/onedark.nvim",
       config = function()
         require("onedark").setup()
       end,
     },
-    { "romgrk/barbar.nvim", event = "BufWinEnter" },
+    {
+      "kyazdani42/nvim-tree.lua",
+      -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
+      event = "BufWinEnter",
+      config = [[require('core.nvimtree').setup()]],
+    },
+    { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
     {
       "glepnir/galaxyline.nvim",
       event = "BufWinEnter",
