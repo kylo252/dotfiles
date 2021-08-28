@@ -42,10 +42,10 @@ M.mappings = {
     d = { '<cmd>lua require("core.telescope").find_dotfiles()<CR>', "Find dotfiles" },
     g = { '<cmd>lua require("core.telescope").grep_dotfiles()<CR>', "Find dotfiles" },
   },
+  E = { '<cmd>lua require("core.telescope").scope_browser()<CR>', "Open scope browser" },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
-    e = { '<cmd>lua require("core.telescope").scope_browser()<CR>', "Open scope browser" },
     d = { '<cmd>lua require("core.telescope").get_z_list()<CR>', "Zoxide" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
     g = { "<cmd>lua require'core.telescope'.live_grep_v2()<CR>", "Live Grep v2" },
