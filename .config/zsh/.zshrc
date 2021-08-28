@@ -66,9 +66,11 @@ source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
 
-source "$ZDOTDIR/opts.zsh"
+source "$ZDOTDIR/completions.zsh"
 
 source "$ZDOTDIR/plugins.zsh"
+
+source "$ZDOTDIR/opts.zsh"
 
 if [ -d "$XDG_CONFIG_HOME/rhel" ] && [ -z "$MANPATH_og" ] ; then
   source "$XDG_CONFIG_HOME/rhel/settings.sh"

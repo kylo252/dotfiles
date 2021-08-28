@@ -24,14 +24,13 @@ unset -f __setup_defaults
 
 function __setup_kemaps() {
 
-  bindkey -e
-
   # Fix backspace not working after returning from cmd mode
   bindkey '^?' backward-delete-char
   bindkey '^h' backward-delete-char
 
   # Edit line in vim buffer alt-v
-  autoload edit-command-line; zle -N edit-command-line
+  autoload edit-command-line
+  zle -N edit-command-line
   bindkey '^[v' edit-command-line
 
   # Fix Home/End
@@ -45,11 +44,13 @@ function __setup_kemaps() {
   fi
 
   # Fix Delete
-
   bindkey '^[[3~' delete-char
 
   # [muscle-memory] kill line-forward
   bindkey '^K' kill-line
+
+  # ctrl-space
+  bindkey '^@' accept-line
 
   # [muscle-memory] use ctrl+backspace as well
   bindkey '^H' backward-kill-word
@@ -63,7 +64,9 @@ function __setup_kemaps() {
   bindkey '^[^?' backward-kill-dir
 
   bindkey '^[[1;5C' vi-forward-word
-  bindkey '^ ' vi-forward-word
+
+  bindkey '^[,' vi-forward-word # alt+,
+  bindkey '^ ' autosuggest-accept
 
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word
@@ -72,7 +75,7 @@ function __setup_kemaps() {
 
   zle -N _zlf
   zle -N _zlf_handler
-  bindkey '^o' _zlf
+  bindkey '^[O' _zlf
 
   tmux-kill-popup() {
     BUFFER="tmux display-popup -C"
