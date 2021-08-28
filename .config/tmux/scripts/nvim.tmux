@@ -2,10 +2,10 @@
 
 IS_VIM="tmux display -p '#{pane_current_command}' | rg 'nvim'"
 
-bind -n 'C-h' if-shell "$IS_VIM" 'send-keys C-h' "{ if -F '#{pane_at_left}' '' 'select-pane -L' }"
-bind -n 'C-j' if-shell "$IS_VIM" 'send-keys C-j' "{ if -F '#{pane_at_bottom}' '' 'select-pane -D' }"
-bind -n 'C-k' if-shell "$IS_VIM" 'send-keys C-k' "{ if -F '#{pane_at_top}' '' 'select-pane -U' }"
-bind -n 'C-l' if-shell "$IS_VIM" 'send-keys C-l' "{ if -F '#{pane_at_right}' '' 'select-pane -R' }"
+bind -n 'C-h' if-shell "$IS_VIM" 'send-keys C-h' { if -F '#{pane_at_left}' '' 'select-pane -L' }
+bind -n 'C-j' if-shell "$IS_VIM" 'send-keys C-j' { if -F '#{pane_at_bottom}' '' 'select-pane -D' }
+bind -n 'C-k' if-shell "$IS_VIM" 'send-keys C-k' { if -F '#{pane_at_top}' '' 'select-pane -U' }
+bind -n 'C-l' if-shell "$IS_VIM" 'send-keys C-l' { if -F '#{pane_at_right}' '' 'select-pane -R' }
 
 bind -T copy-mode-vi 'C-h' if -F '#{pane_at_left}' '' 'select-pane -L'
 bind -T copy-mode-vi 'C-j' if -F '#{pane_at_bottom}' '' 'select-pane -D'
