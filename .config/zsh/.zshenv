@@ -3,8 +3,6 @@
 function __setup_wsl() {
   export TERM="xterm-256color"
   export BROWSER="wslview"
-  PULSE_SERVER=tcp:$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
-  DISPLAY=$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0      #GWSL
   export PULSE_SERVER
   export DISPLAY
 }
