@@ -1,10 +1,11 @@
 -- general
 
 lvim.builtin.telescope.active = true
-lvim.log.level = "error"
+lvim.log.level = "info"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
+-- vim.g.rose_pine_variant = "moon"
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true
 lvim.lsp.smart_cwd = true
@@ -29,6 +30,10 @@ require "user.keymappings"
 -- require "scratch"
 
 -- keymappings
+lvim.builtin.which_key.mappings["gd"] = {
+  [[<cmd>Gitsigns diffthis HEAD<cr>]],
+  "Diff against HEAD",
+}
 lvim.builtin.which_key.mappings["cg"] = {
   [[<cmd>lua require('user.core.terminal').execute_command({bin = 'lazygit'})<CR>]],
   "LazyGit",
@@ -78,6 +83,11 @@ lvim.keys.normal_mode["<C-p>"] = "<cmd>Telescope find_files<cr>"
 lvim.keys.normal_mode["gL"] = ":BufferNext<cr>"
 lvim.keys.normal_mode["gH"] = ":BufferPrev<cr>"
 lvim.keys.normal_mode["<space><space>"] = "<cmd>BufferNext<cr>"
+-- have to do it manually because it keeps getting overwritten in `reload_lv_config()`
+lvim.keys.normal_mode["<C-h>"] = [[<cmd>lua require'tmux'.move_left()<cr>]]
+lvim.keys.normal_mode["<C-j>"] = [[<cmd>lua require'tmux'.move_bottom()<cr>]]
+lvim.keys.normal_mode["<C-k>"] = [[<cmd>lua require'tmux'.move_top()<cr>]]
+lvim.keys.normal_mode["<C-l>"] = [[<cmd>lua require'tmux'.move_right()<cr>]]
 
 local components = require "core.lualine.components"
 -- lvim.builtin.lualine.sections.lualine_c = { "location", "filetype" } -- Add this
@@ -86,8 +96,7 @@ local components = require "core.lualine.components"
 -- Allow pasting same thing many times
 lvim.keys.visual_mode["p"] = '""p:let @"=@0<CR>'
 lvim.keys.visual_block_mode["p"] = '""p:let @"=@0<CR>'
-local sorters = require "telescope.sorters"
-lvim.builtin.telescope.defaults.file_sorter = sorters.fuzzy_with_index_bias
+-- lvim.builtin.telescope.defaults.file_sorter = require("telescope.sorters").fuzzy_with_index_bias
 lvim.builtin.telescope.extensions = {
   fzf = {
     fuzzy = true, -- false will only do exact matching
@@ -109,17 +118,18 @@ vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select'
 lvim.builtin.dashboard.active = true
 lvim.builtin.dashboard.custom_section = {
   a = { description = { "  Recently Used Files" }, command = "Telescope oldfiles" },
-  b = { description = { "  Find File          " }, command = "Telescope find_files hidden=true" },
-  c = { description = { "  Plugins            " }, command = ":edit ~/.config/nvim/lua/plugins.lua" },
+  b = { description = { "  Recent Projects    " }, command = "Telescope projects" },
+  c = { description = { "  Find File          " }, command = "Telescope find_files hidden=true" },
+  d = { description = { "  Plugins            " }, command = ":edit ~/.local/share/lunarvim/lvim/lua/plugins.lua" },
+  e = { description = { "  Find Word          " }, command = "Telescope live_grep" },
+  n = { description = { "  Load Last Session  " }, command = "<cmd>lua require('persistence').load({ last = true })" },
   s = { description = { "  Settings           " }, command = ":edit ~/.config/lvim/config.lua" },
-  d = { description = { "  Find Word          " }, command = "Telescope live_grep" },
-  n = { description = { "  Load Last Session  " }, command = "SessionLoad" },
-  m = { description = { "  Marks              " }, command = "Telescope marks" },
 }
 
 -- Additional Plugins
 lvim.plugins = {
   { "folke/tokyonight.nvim" },
+  { "rose-pine/neovim" },
   { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
   { "jvgrootveld/telescope-zoxide" },
   {
@@ -160,9 +170,11 @@ lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
 lvim.lang.yaml.formatters = { { exe = "prettier" } }
 ---------- scratch
 
-lvim.keys.normal_mode["<c-f>"] = ":lua package.loaded['scratch'] = nil; require('scratch').test()<cr>"
+lvim.keys.normal_mode["<c-e>"] = ":lua package.loaded['scratch'] = nil; require('scratch').test()<cr>"
 
-lvim.keys.normal_mode["<c-e>"] = ":lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>"
+-- lvim.keys.normal_mode["<c-e>"] = ":lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>"
+lvim.keys.normal_mode["<c-f>"] =
+  ":lua package.loaded['lsp.manager'] = nil; require('lsp.manager').gen_ftplugin('lua')<cr>"
 
 vim.cmd [[command! -nargs=1 GS :lua require("telescope.builtin").grep_string(require("telescope.themes").get_dropdown({ prompt_title = "Fuzzy grep string " .. "<args>", search = "<args>" }))]]
 
