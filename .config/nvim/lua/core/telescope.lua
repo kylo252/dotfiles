@@ -76,7 +76,7 @@ function M.setup()
 
   local keymaps = {
     normal_mode = {
-      ["<C-p>"] = "<cmd>Telescope find_files<CR>",
+      ["<C-p>"] = "<cmd>Telescope find_files hidden=true<CR>",
       ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
       ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
     },

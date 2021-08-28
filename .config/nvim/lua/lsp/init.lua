@@ -52,6 +52,10 @@ local function setup_lsp_keybindings()
     },
   }
   wk.register(keys, { mode = "n", buffer = bufnr })
+  local visual_keys = {    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" }}
+
+
+  wk.register(visual_keys, { mode = "v", buffer = bufnr })
 end
 
 local function documentHighlight(client)
@@ -107,5 +111,6 @@ end
 
 function lsp_config.setup()
   require("lsp.ft.lua").setup()
+  require("lsp.ft.c_cpp").setup()
 end
 return lsp_config
