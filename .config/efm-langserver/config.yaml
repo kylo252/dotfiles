@@ -187,6 +187,9 @@ languages:
   dockerfile:
     - <<: *dockerfile-hadolint
 
+  zsh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
   sh:
     - <<: *sh-shellcheck
     - <<: *sh-shfmt
