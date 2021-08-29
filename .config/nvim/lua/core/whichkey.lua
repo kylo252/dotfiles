@@ -125,7 +125,7 @@ M.mappings = {
     d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving" },
     l = { "<cmd>lua require('persistance').load()<cr>", "restore the session for the current directory" },
     r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
-    s = { "<cmd>lua require('persistence').save()<cr>", "saving" },
+    s = { "<cmd>lua require('persistence').save()<cr>", "save session" },
   },
   t = {
     name = "+test",
