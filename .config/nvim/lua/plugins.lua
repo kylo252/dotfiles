@@ -1,11 +1,8 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-  execute "packadd packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.execute("git", "clone", "https://github.com/wbthomason/packer.nvim " .. install_path)
+  vim.cmd "packadd packer.nvim"
 end
 
 local packer_ok, packer = pcall(require, "packer")
@@ -26,7 +23,7 @@ packer.startup(function(use)
   -- packer can manage itself as an optional plugin
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
-  use { "nvim-lua/popup.nvim" }
+  use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
 
   -- LSP and linting
   use {
@@ -42,7 +39,7 @@ packer.startup(function(use)
     },
     {
       "b3nj5m1n/kommentary",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = [[ require("core.comment").setup() ]],
     },
   }
@@ -71,7 +68,7 @@ packer.startup(function(use)
     },
     {
       "ggandor/lightspeed.nvim",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = [[require('core.lightspeed')]],
     },
   }
@@ -101,12 +98,14 @@ packer.startup(function(use)
 
   -- UI
   use {
-    { "kyazdani42/nvim-web-devicons" },
     {
       "kylo252/onedark.nvim",
       config = function()
         require("onedark").setup()
       end,
+    },
+    {
+      "kyazdani42/nvim-web-devicons",
     },
     {
       "kyazdani42/nvim-tree.lua",
@@ -134,14 +133,11 @@ packer.startup(function(use)
     },
     {
       "lewis6991/gitsigns.nvim",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = [[require('core.git')]],
     },
     {
       "glepnir/dashboard-nvim",
-      -- temporarily until https://github.com/glepnir/dashboard-nvim/issues/63 is resolved
-      -- "ChristianChiarulli/dashboard-nvim",
-
       event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
@@ -150,18 +146,6 @@ packer.startup(function(use)
 
   -- utils
   use { "kevinhwang91/nvim-bqf", event = "BufRead" }
-
-  -- misc
-  -- https://github.com/neovim/neovim/issues/12587
-  use {
-    {
-      "antoinemadec/FixCursorHold.nvim",
-      event = "BufRead",
-      config = function()
-        vim.g.cursorhold_updatetime = 1000
-      end,
-    },
-    { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
-    { "VebbNix/lf-vim" },
-  }
+  use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
+  use { "VebbNix/lf-vim" }
 end)
