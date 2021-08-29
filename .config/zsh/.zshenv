@@ -31,6 +31,9 @@ function __setup_defaults() {
 
   # https://github.com/romkatv/powerlevel10k/issues/1428
   # export GITSTATUS_LOG_LEVEL=DEBUG
+
+  # https://github.com/dandavison/delta/issues/497
+  export LESS='-Rf'
 }
 
 function __setup_cli_colors() {
