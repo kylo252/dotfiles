@@ -1,4 +1,4 @@
-local lsp_config = {}
+local M = {}
 
 local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
@@ -52,44 +52,12 @@ local function setup_lsp_keybindings()
     },
   }
   wk.register(keys, { mode = "n", buffer = bufnr })
-  local visual_keys = {    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" }}
-
+  local visual_keys = { f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" } }
 
   wk.register(visual_keys, { mode = "v", buffer = bufnr })
 end
 
-local function documentHighlight(client)
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
-  end
-end
-
-function lsp_config.common_on_init(client, bufnr)
-  local handlers = require "lsp.handlers"
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
-  vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
-  vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
-end
-
-function lsp_config.common_on_attach(client, bufnr)
-  documentHighlight(client)
-  setup_lsp_keybindings()
-end
-
-function lsp_config.get_ls_capabilities(client_id)
+function M.get_ls_capabilities(client_id)
   local client
   if not client_id then
     local buf_clients = vim.lsp.buf_get_clients()
@@ -109,8 +77,52 @@ function lsp_config.get_ls_capabilities(client_id)
   return lsp_caps
 end
 
-function lsp_config.setup()
-  require("lsp.ft.lua").setup()
-  require("lsp.ft.c_cpp").setup()
+local function setup_document_highlight(client)
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_command [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+    vim.api.nvim_command [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+    vim.api.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+  end
 end
-return lsp_config
+
+function M.common_on_init(client, bufnr)
+  local handlers = require "lsp.handlers"
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
+  vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
+  vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
+  -- TODO: move this so that it done only once
+  -- https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f
+  vim.cmd [[ hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646 ]]
+  vim.cmd [[ hi LspReferenceText cterm=bold ctermbg=red guibg=#464646 ]]
+  vim.cmd [[ hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646 ]]
+end
+
+function M.common_on_attach(client, _)
+  setup_document_highlight(client)
+  setup_lsp_keybindings()
+end
+
+function M.setup()
+  local nvim_lsp = require "lspconfig"
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls" }
+  local opts = {
+    autostart = true,
+    on_attach = M.common_on_attach,
+    on_init = M.common_on_init,
+    flags = {
+      debounce_text_changes = 150,
+    },
+  }
+
+  for _, server in ipairs(servers) do
+    local status_ok, provider_opts = pcall(require, "lsp/providers/" .. server)
+    if status_ok then
+      opts = vim.tbl_deep_extend("force", opts, provider_opts)
+    end
+    nvim_lsp[server].setup(opts)
+  end
+
+  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash", "yaml", "json" }
+end
+return M

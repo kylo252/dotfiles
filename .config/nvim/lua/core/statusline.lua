@@ -166,7 +166,7 @@ table.insert(section.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
-
+  local efm_ls = require "lsp.efm-general-ls"
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
     return msg
@@ -174,14 +174,15 @@ local function get_attached_provider_name(msg)
 
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do
-    if client.name ~= "efm" then
+    if client.name == "efm" then
+      local efm_ls_providers = efm_ls.list_supported_provider_names(vim.bo.filetype)
+      for _, provider in ipairs(efm_ls_providers) do
+        table.insert(buf_client_names, provider)
+      end
+    else
       table.insert(buf_client_names, client.name)
     end
   end
-
-  local efm_ls = require "lsp.efm-general-ls"
-  local efm_ls_providers = efm_ls.list_supported_provider_names(vim.bo.filetype)
-  vim.list_extend(buf_client_names, efm_ls_providers)
 
   return table.concat(buf_client_names, ", ")
 end
