@@ -1,17 +1,10 @@
 repos:
   - repo: local
     hooks:
-      - id: shfmt
-        name: shfmt
-        minimum_pre_commit_version: 2.4.0
-        language: system
-        entry: shfmt
-        args: [-i=2, -ci, -w]
-        types: [shell]
       - id: stylua
         name: StyLua
         language: rust
         entry: stylua
         types: [lua]
-        files: '^.config/nvim/'
+        files: '^\.config/nvim/'
         args: ["--config-path", ".config/nvim/.stylua.toml"]
