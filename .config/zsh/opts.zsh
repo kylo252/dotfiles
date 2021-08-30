@@ -65,11 +65,6 @@ function __setup_kemaps() {
   bindkey '^[[1;5C' vi-forward-word
 
   bindkey '^[,' vi-forward-word # alt+,
-  bindkey '^ ' autosuggest-accept
-
-  # in case they get overwritten
-  bindkey '^T' fzf-file-widget
-  bindkey '^R' fzf-history-widget
 
   # [muscle-memory] use alt+. to repeat argument
   bindkey '\e.' insert-last-word
