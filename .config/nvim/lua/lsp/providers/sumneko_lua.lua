@@ -1,4 +1,4 @@
-local provider_root_path = DATA_PATH .. "/lspinstall/lua"
+local provider_root_path = vim.fn.stdpath "data" .. "/lspinstall/lua"
 
 local provider_cmd = {
   provider_root_path .. "/sumneko-lua-language-server",
