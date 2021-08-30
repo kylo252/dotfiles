@@ -52,7 +52,7 @@ function __setup_dotfiles() {
   if [ ! -d "$HOME/.dtf.git" ]; then
     "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
     ln -sf "$XDG_CONFIG_HOME/git/hooks/dots_post_commit" "$HOME/.dtf.git/hooks/pre-push"
-    chmod +x "$HOME/.dtf.git/hooks/pre-push" 
+    chmod +x "$HOME/.dtf.git/hooks/pre-push"
   fi
 
   echo 'Installing zsh plugins'

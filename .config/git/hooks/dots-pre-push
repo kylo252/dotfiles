@@ -6,7 +6,7 @@ set -e
 declare -a TRACKED_DIR
 declare -a UNIQUE_DIRS
 declare -a MISSED_FILES
-UNIQUE_DIRS=( ".config/nvim" ".config/zsh")
+UNIQUE_DIRS=(".config/nvim" ".config/zsh")
 TRACKED_DIR=($(git -C "$HOME" dots ls-files | xargs -n 1 dirname | rg '^.config/\w*$' | uniq))
 
 function find_untracked() {
@@ -31,9 +31,9 @@ function find_untracked() {
 
 find_untracked
 if [ -f "${MISSED_FILES[1]}" ]; then
-    # echo "warning! did you miss these?"
-    # echo -e "${MISSED_FILES[@]}"
-    # # return 1
+  # echo "warning! did you miss these?"
+  # echo -e "${MISSED_FILES[@]}"
+  # # return 1
   exit 0
 fi
 # find_unique_untracked
