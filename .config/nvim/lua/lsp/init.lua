@@ -105,7 +105,7 @@ end
 
 function M.setup()
   local nvim_lsp = require "lspconfig"
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls" }
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright" }
   local opts = {
     autostart = true,
     on_attach = M.common_on_attach,
@@ -118,9 +118,11 @@ function M.setup()
   for _, server in ipairs(servers) do
     local status_ok, provider_opts = pcall(require, "lsp/providers/" .. server)
     if status_ok then
-      opts = vim.tbl_deep_extend("force", opts, provider_opts)
+      local new_config = vim.tbl_deep_extend("keep", {}, opts, provider_opts)
+      nvim_lsp[server].setup(new_config)
+    else
+      nvim_lsp[server].setup(opts)
     end
-    nvim_lsp[server].setup(opts)
   end
 
   require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash", "yaml", "json" }

@@ -33,7 +33,8 @@ function __setup_defaults() {
   # export GITSTATUS_LOG_LEVEL=DEBUG
 
   # https://github.com/dandavison/delta/issues/497
-  export LESS='-Rf'
+  # this is actually broken
+  # export LESS='-Rf'
 }
 
 function __setup_cli_colors() {

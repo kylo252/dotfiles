@@ -2,7 +2,7 @@ vim.g.dashboard_default_executive = "telescope"
 
 vim.g.dashboard_custom_section = {
   a = { description = { "  Recently Used Files" }, command = "Telescope oldfiles" },
-  b = { description = { "  Find File          " }, command = "Telescope find_files hidden=true" },
+  b = { description = { "  Find File          " }, command = "lua require('telescope.builtin').find_files({hidden = true, ignored = false})" },
   c = { description = { "  Plugins            " }, command = ":edit ~/.config/nvim/lua/plugins.lua" },
   s = { description = { "  Settings           " }, command = ":edit ~/.config/nvim/lua/settings.lua" },
   d = { description = { "  Find Word          " }, command = "Telescope live_grep" },

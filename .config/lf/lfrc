@@ -57,7 +57,12 @@ cmd open_with_lnav ${{
 }}
 
 cmd rpc_nvim_edit ${{
-  nvim-ctrl "tabedit $f"
+  
+  if ! command -v nvim-ctrl &>/dev/null; then
+    vmux "$f"
+  else
+    nvim-ctrl "tabedit $f"
+  fi
 }}
 
 cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard

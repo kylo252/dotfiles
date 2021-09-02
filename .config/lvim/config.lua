@@ -190,5 +190,3 @@ function _G.dump(...)
 end
 
 vim.cmd [[command! -nargs=1 MagicInstall :lua package.loaded['scratch']=nil; require'scratch'.query_cmd(<f-args>)]]
-
-require "user.lsp.ft.lua".setup()
