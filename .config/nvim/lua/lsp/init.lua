@@ -36,7 +36,7 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (TypeParameter)",
 }
 
-local function setup_lsp_keybindings()
+local function setup_lsp_keybindings(bufnr)
   local wk = require "which-key"
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover({focusable = false})<CR>", "Show hover" },
@@ -46,10 +46,7 @@ local function setup_lsp_keybindings()
     ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
     ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help({focusable = false})<CR>", "show signature help" },
     ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
-    ["gl"] = {
-      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>",
-      "Show line diagnostics",
-    },
+    ["gl"] = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show line diagnostics" },
   }
   wk.register(keys, { mode = "n", buffer = bufnr })
   local visual_keys = { f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" } }
@@ -98,18 +95,23 @@ function M.common_on_init(client, bufnr)
   vim.cmd [[ hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646 ]]
 end
 
-function M.common_on_attach(client, _)
+function M.common_on_attach(client, bufnr)
   setup_document_highlight(client)
-  setup_lsp_keybindings()
+  setup_lsp_keybindings(bufnr)
 end
 
 function M.setup()
   local nvim_lsp = require "lspconfig"
   local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright" }
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
   local opts = {
     autostart = true,
     on_attach = M.common_on_attach,
     on_init = M.common_on_init,
+    apabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     },
@@ -125,6 +127,6 @@ function M.setup()
     end
   end
 
-  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash", "yaml", "json" }
+  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash", "yaml" }
 end
 return M

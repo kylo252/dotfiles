@@ -32,11 +32,16 @@ packer.startup(function(use)
     { "neovim/nvim-lspconfig" },
     { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
     {
-      "hrsh7th/nvim-compe",
+      "hrsh7th/nvim-cmp",
+      requires = {
+        { "L3MON4D3/LuaSnip" },
+      },
       event = "InsertEnter *",
-      config = [[require('core.compe')]],
-      -- disable = true
+      config = [[require('core.cmp').config()]],
     },
+ { "hrsh7th/cmp-path", after = "nvim-cmp" },
+ { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+ { "hrsh7th/cmp-nvim-lsp" },
     {
       "b3nj5m1n/kommentary",
       event = "BufWinEnter",
