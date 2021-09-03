@@ -6,8 +6,6 @@
   features = decorations unobtrusive-line-numbers
   line-numbers = true
   whitespace-error-style = 22 reverse
-  paging = always
-  pager = less -Rf
 [color]
   ui = true
   colorMoved = default
