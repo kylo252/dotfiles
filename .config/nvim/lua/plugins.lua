@@ -51,7 +51,6 @@ packer.startup(function(use)
 
   -- Helpers
   use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
-  use { "folke/lua-dev.nvim" }
 
   -- Search
   use {

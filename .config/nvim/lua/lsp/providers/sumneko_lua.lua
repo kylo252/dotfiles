@@ -38,4 +38,4 @@ local opts = {
   },
 }
 
-return require("lua-dev").setup { lspconfig = opts }
+return opts
