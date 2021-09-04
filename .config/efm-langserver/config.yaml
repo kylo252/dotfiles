@@ -129,11 +129,8 @@ tools:
       - .prettierrc.json
 
   json-prettier: &json-prettier
-    format-command: './node_modules/.bin/prettier --parser json --stdin-filename ${INPUT}'
+    format-command: 'prettier --parser json --stdin-filename ${INPUT}'
     format-stdin: true
-    root-markers: 
-      - .prettierrc
-      - .prettierrc.json
 
   json-jq: &json-jq
     lint-command: 'jq .'

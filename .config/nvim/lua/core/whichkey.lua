@@ -85,6 +85,12 @@ M.mappings = {
   },
   g = {
     name = "+git",
+    c = {
+      b = {
+        '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard })<cr>',
+        "Copy buffer URL",
+      },
+    },
     d = {
       [[<cmd>lua require('core.terminal').execute_command({bin = 'lazygit', args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
       "LazyDots",

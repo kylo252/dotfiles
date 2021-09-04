@@ -136,16 +136,26 @@ packer.startup(function(use)
       event = "VimEnter",
       config = [[require('core.indent')]],
     },
-    {
-      "lewis6991/gitsigns.nvim",
-      event = "BufWinEnter",
-      config = [[require('core.git')]],
-    },
+
     {
       "glepnir/dashboard-nvim",
       event = "BufWinEnter",
       cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
       config = [[require('core.dashboard')]],
+    },
+  }
+
+  -- GIT
+  use {
+    {
+      "lewis6991/gitsigns.nvim",
+      event = "BufWinEnter",
+      config = [[require('core.git').setup_gitsigns()]],
+    },
+    {
+      "ruifm/gitlinker.nvim",
+      event = "BufWinEnter",
+      config = [[require('core.git').setup_gitlinker()]],
     },
   }
 
