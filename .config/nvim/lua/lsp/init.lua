@@ -98,9 +98,14 @@ end
 
 function M.common_on_init(client, bufnr)
   local handlers = require "lsp.handlers"
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = handlers.set_diagnostics
   vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
   vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      underline = true,
+      virtual_text = false,
+      signs = true,
+      update_in_insert = true,
+  })
   setup_document_highlight(client)
 end
 
