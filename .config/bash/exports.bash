@@ -67,14 +67,6 @@ function __setup_misc() {
   # https://github.com/sharkdp/bat/issues/652
   # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-  # interactive search when using three dots
-  export ENHANCD_DOT_ARG='...'
-
-  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
-  export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
-  export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-  export ENHANCED_LAZY_COMPLETION=true
 }
 
 __setup_functions=(

@@ -39,13 +39,15 @@ function __setup_defaults() {
 
 function __setup_cli_colors() {
   export CLICOLOR=1
-  export LESS_TERMCAP_mb=$(print -P "%F{cyan}")
-  export LESS_TERMCAP_md=$(print -P "%B%F{red}")
-  export LESS_TERMCAP_me=$(print -P "%f%b")
-  export LESS_TERMCAP_so=$(print -P "%F{magenta}")
-  export LESS_TERMCAP_se=$(print -P "%K{black}")
-  export LESS_TERMCAP_us=$(print -P "%U%F{green}")
-  export LESS_TERMCAP_ue=$(print -P "%f%u")
+  export LESS_TERMCAP_mb=$(print -P "%F{cyan}")    #Start blinking
+  export LESS_TERMCAP_md=$(print -P "%B%F{green}") #Start bold mode
+  export LESS_TERMCAP_so=$(print -P "%F%K{magenta}") #Start standout mode
+  export LESS_TERMCAP_us=$(print -P "%F{yellow}")  #Start underlining
+  export LESS_TERMCAP_me=$(print -P "%f")          # reset
+  export LESS_TERMCAP_me=$'\e[0m'                  # reset bold/blink
+  export LESS_TERMCAP_se=$'\e[0m'                  # reset reverse video
+  export LESS_TERMCAP_ue=$'\e[0m'                  # reset underline
+  export GROFF_NO_SGR=1                            # for konsole and gnome-terminal
 }
 
 function __setup_xdg() {
@@ -100,8 +102,9 @@ function __setup_fzf() {
 
 function __setup_misc() {
   export BAT_PAGER="less -RF"
-  export DELTA_PAGER="less -RF"
   export BAT_THEME="TwoDark"
+  export DELTA_PAGER="less -RF"
+  export MANPAGER='less -s -M +Gg'
 
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
   export ZSH_AUTOSUGGEST_USE_ASYNC="ON"

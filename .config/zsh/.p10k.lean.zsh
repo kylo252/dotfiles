@@ -46,9 +46,9 @@
     background_jobs         # presence of background jobs
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    goenv                   # go environment (https://github.com/syndbg/goenv)
+    # goenv                   # go environment (https://github.com/syndbg/goenv)
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    context                 # user@hostname
+    # context                 # user@hostname
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline
