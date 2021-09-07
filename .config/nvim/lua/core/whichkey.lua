@@ -26,8 +26,6 @@ M.dashboard_mappings = {
 
 M.mappings = {
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
-  h = { '<cmd>let @/=""<CR>', "No Highlight" },
-  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
   b = {
     name = "+barbar",
     q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
@@ -36,6 +34,18 @@ M.mappings = {
     l = { "<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right" },
     d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
     L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
+  },
+  c = {
+    name = "+commands",
+    p = {
+      name = "+packer",
+      c = { "<cmd>PackerCompile<CR>", "Packer Compile" },
+      l = { "<cmd>PackerLoad<CR>", "Packer Load" },
+      r = { "<cmd>lua require('utils').reload_config()<cr>", "Reload config" },
+      s = { "<cmd>PackerSync<CR>", "Packer Sync" },
+      C = { "<cmd>PackerClean<CR>", "Packer Clean" },
+      S = { "<cmd>PackerStatus<CR>", "Packer Status" },
+    },
   },
   d = {
     name = "+dotfiles",
@@ -89,6 +99,8 @@ M.mappings = {
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },
+  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
+  h = { '<cmd>let @/=""<CR>', "No Highlight" },
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -128,18 +140,9 @@ M.mappings = {
     s = { "<cmd>lua require('persistence').save()<cr>", "save session" },
   },
   t = {
-    name = "+test",
-    t = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test()<cr>", "scratch test1" }
-  },
-
-  P = {
-    name = "+packer",
-    c = { "<cmd>PackerCompile<CR>", "Packer Compile" },
-    l = { "<cmd>PackerLoad<CR>", "Packer Load" },
-    r = { "<cmd>lua require('utils').reload_config()<cr>", "Reload config" },
-    s = { "<cmd>PackerSync<CR>", "Packer Sync" },
-    C = { "<cmd>PackerClean<CR>", "Packer Clean" },
-    S = { "<cmd>PackerStatus<CR>", "Packer Status" },
+    name = "+scratch test",
+    ["1"] = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test1()<cr>", "scratch test1" },
+    ["2"] = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>", "scratch test2" },
   },
 }
 
