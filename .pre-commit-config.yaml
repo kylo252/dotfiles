@@ -3,8 +3,7 @@ repos:
     hooks:
       - id: stylua
         name: StyLua
-        language: rust
-        entry: stylua
+        language: system
+        entry: bash
         types: [lua]
-        files: '^\.config/nvim/'
-        args: ["--config-path", ".config/nvim/.stylua.toml"]
+        args: ["~/.config/git/hooks/run_style_lint.sh"]
