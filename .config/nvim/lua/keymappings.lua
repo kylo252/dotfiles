@@ -64,15 +64,6 @@ M.groups = {
     ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-k>"] = "<Esc>:m .-2<CR>==gi",
-    -- navigation
-    ["<A-Up>"] = "<C-\\><C-N><C-w>k",
-    ["<A-Down>"] = "<C-\\><C-N><C-w>j",
-    ["<A-Left>"] = "<C-\\><C-N><C-w>h",
-    ["<A-Right>"] = "<C-\\><C-N><C-w>l",
-    -- navigate tab completion with <c-j> and <c-k>
-    -- runs conditionally
-    ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
-    ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
 
     -- save file
     ["<C-s>"] = "<cmd>w<CR>",
@@ -90,12 +81,6 @@ M.groups = {
     ["<C-j>"] = "<C-w>j",
     ["<C-k>"] = "<C-w>k",
     ["<C-l>"] = "<C-w>l",
-
-    -- Resize with arrows
-    ["<C-Up>"] = ":resize -2<CR>",
-    ["<C-Down>"] = ":resize +2<CR>",
-    ["<C-Left>"] = ":vertical resize -2<CR>",
-    ["<C-Right>"] = ":vertical resize +2<CR>",
 
     ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
 
@@ -143,6 +128,10 @@ M.groups = {
     -- move selected line(s)
     ["K"] = ":move '<-2<CR>gv-gv",
     ["J"] = ":move '>+1<CR>gv-gv",
+
+    -- only move one line at a time
+    ["<S-Down>"] = "j",
+    ["<S-Up"] = "k",
   },
 
   ---@usage change or add keymappings for visual block mode

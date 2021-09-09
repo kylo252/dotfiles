@@ -53,7 +53,10 @@ local function setup_lsp_keybindings(bufnr)
     ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
     ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
     ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
-    ["gl"] = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show line diagnostics" },
+    ["gl"] = {
+      "<cmd>lua require'lsp.handlers'.show_line_diagnostics()<CR>",
+      "Show line diagnostics",
+    },
   }
 
   wk.register(keys, { mode = "n", buffer = bufnr })
@@ -97,15 +100,6 @@ local function setup_document_highlight(client)
 end
 
 function M.common_on_init(client, bufnr)
-  local handlers = require "lsp.handlers"
-  vim.lsp.handlers["textDocument/hover"] = handlers.set_hover
-  vim.lsp.handlers["textDocument/signatureHelp"] = handlers.set_sigature
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
-      virtual_text = false,
-      signs = true,
-      update_in_insert = true,
-  })
   setup_document_highlight(client)
 end
 
@@ -116,6 +110,7 @@ end
 function M.setup()
   local nvim_lsp = require "lspconfig"
   local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright" }
+  require("lsp.handlers").setup()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)

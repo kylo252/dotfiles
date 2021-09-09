@@ -13,6 +13,7 @@ local clangd_flags = {
 local provider = "clangd"
 
 local custom_on_attach = function(_, bufnr)
+  require("lsp").common_on_attach()
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
 end
@@ -20,7 +21,7 @@ end
 local rhel_config = os.getenv "RHEL_CONFIG_HOME"
 if rhel_config then
   vim.opt.rtp:append(rhel_config)
-  local project_config = require("clangd_wrs")
+  local project_config = require "clangd_wrs"
   clangd_flags = vim.tbl_deep_extend("keep", project_config, clangd_flags)
 end
 
