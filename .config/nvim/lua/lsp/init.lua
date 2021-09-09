@@ -7,35 +7,38 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
--- symbols for autocomplete
-vim.lsp.protocol.CompletionItemKind = {
-  "   (Text) ",
-  "   (Method)",
-  "   (Function)",
-  "   (Constructor)",
-  " ﴲ  (Field)",
-  "[] (Variable)",
-  "   (Class)",
-  " ﰮ  (Interface)",
-  "   (Module)",
-  " 襁 (Property)",
-  "   (Unit)",
-  "   (Value)",
-  " 了 (Enum)",
-  "   (Keyword)",
-  "   (Snippet)",
-  "   (Color)",
-  "   (File)",
-  "   (Reference)",
-  "   (Folder)",
-  "   (EnumMember)",
-  "   (Constant)",
-  "   (Struct)",
-  "   (Event)",
-  "   (Operator)",
-  "   (TypeParameter)",
-}
+function M.get_lsp_kind()
+  -- symbols for autocomplete
+  return {
+    "   (Text) ",
+    "   (Method)",
+    "   (Function)",
+    "   (Constructor)",
+    " ﴲ  (Field)",
+    "[] (Variable)",
+    "   (Class)",
+    " ﰮ  (Interface)",
+    "   (Module)",
+    " 襁 (Property)",
+    "   (Unit)",
+    "   (Value)",
+    " 了 (Enum)",
+    "   (Keyword)",
+    "   (Snippet)",
+    "   (Color)",
+    "   (File)",
+    "   (Reference)",
+    "   (Folder)",
+    "   (EnumMember)",
+    "   (Constant)",
+    "   (Struct)",
+    "   (Event)",
+    "   (Operator)",
+    "   (TypeParameter)",
+  }
+end
 
+vim.lsp.protocol.CompletionItemKind = M.get_lsp_kind()
 local function setup_lsp_keybindings(bufnr)
   local status_ok, wk = pcall(require, "which-key")
   if not status_ok then

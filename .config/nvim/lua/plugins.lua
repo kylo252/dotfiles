@@ -34,14 +34,15 @@ packer.startup(function(use)
     {
       "hrsh7th/nvim-cmp",
       requires = {
-        { "L3MON4D3/LuaSnip" },
+        { "L3MON4D3/LuaSnip", "hrsh7th/cmp-nvim-lsp" },
       },
       event = "InsertEnter *",
       config = [[require('core.cmp').config()]],
     },
- { "hrsh7th/cmp-path", after = "nvim-cmp" },
- { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
- { "hrsh7th/cmp-nvim-lsp" },
+    { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+    { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+    { "hrsh7th/cmp-path", after = "nvim-cmp" },
+    { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
     {
       "b3nj5m1n/kommentary",
       event = "BufWinEnter",
