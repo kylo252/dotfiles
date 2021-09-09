@@ -1,27 +1,23 @@
 -- general
 
 lvim.builtin.telescope.active = true
-lvim.log.level = "info"
+lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.colorscheme = "tokyonight"
+-- lvim.colorscheme = "tokyonight"
 -- vim.g.rose_pine_variant = "moon"
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true
-lvim.lsp.smart_cwd = true
 lvim.lsp.diagnostics.update_in_insert = true
 
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.active = true
-lvim.builtin.compe.active = true
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.disable_window_picker = 1
 lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.nvimtree.hide_dotfiles = false
--- lvim.builtin.autopairs.active = false
-lvim.lang.lua.lsp.setup.settings.Lua.telemetry = { enable = false }
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {}

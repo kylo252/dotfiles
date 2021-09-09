@@ -140,6 +140,6 @@ function M.setup()
     end
   end
 
-  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash", "yaml" }
+  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash" }
 end
 return M
