@@ -14,3 +14,10 @@
 # if [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
 #    command -v smug >/dev/null && { tmux attach -t default || smug start default -a; } >/dev/null 2>&1
 # fi
+
+# Use of stty should really only be used with interactive shells.
+if [[ -o interactive ]]; then
+# https://unix.stackexchange.com/questions/72086/ctrl-s-hangs-the-terminal-emulator
+# stty stop ''
+  stty -ixon
+fi
