@@ -122,7 +122,7 @@ function M.setup()
     autostart = true,
     on_attach = M.common_on_attach,
     on_init = M.common_on_init,
-    apabilities = capabilities,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     },

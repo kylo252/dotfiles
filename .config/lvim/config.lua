@@ -168,7 +168,6 @@ lvim.lang.yaml.formatters = { { exe = "prettier" } }
 
 lvim.keys.normal_mode["<c-e>"] = ":lua package.loaded['scratch'] = nil; require('scratch').test()<cr>"
 
-lvim.keys.normal_mode["<c-e>"] = ":lua package.loaded['scratch'] = nil; require('scratch').query_cmd('cpp')<cr>"
 lvim.keys.normal_mode["<c-f>"] =
   ":lua package.loaded['lsp.manager'] = nil; require('lsp.manager').gen_ftplugin('lua')<cr>"
 

@@ -7,7 +7,6 @@ M.augroups = {
       "*",
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
     },
-    { "VimLeavePre", "*", "set title set titleold=" },
     { "FileType", "qf", "set nobuflisted" },
   },
   _git = {
