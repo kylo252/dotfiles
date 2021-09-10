@@ -27,8 +27,9 @@ function ex() {
 }
 
 function ta() {
-  local target="${1:-default}"
-  tmux attach -t $target
+  local args
+  [ -n "$1" ] && tmux attach -t "$1"
+  "$XDG_DATA_HOME/tmux/plugins/tmux-fzf/scripts/session.sh" list
 }
 
 function ts() {
