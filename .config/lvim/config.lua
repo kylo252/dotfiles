@@ -25,6 +25,7 @@ lvim.builtin.treesitter.ensure_installed = {}
 require "user.keymappings"
 -- require "scratch"
 
+vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
 -- keymappings
 lvim.builtin.which_key.mappings["gd"] = {
   [[<cmd>Gitsigns diffthis HEAD<cr>]],
@@ -106,8 +107,6 @@ lvim.builtin.telescope.extensions = {
 lvim.builtin.telescope.on_config_done = function()
   require("telescope").load_extension "fzf"
 end
-
-vim.api.nvim_set_keymap("i", "<c-y>", "compe#confirm({ 'keys': '<c-y>', 'select': v:true })", { expr = true })
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
