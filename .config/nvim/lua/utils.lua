@@ -23,17 +23,11 @@ function utils.toggle_autoformat()
   end
 end
 
-function utils.reload_lv_config()
-  vim.cmd "source ~/.config/nvim/lua/settings.lua"
-  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
-  --[[ local plugins = require "plugins"
-  local plugin_loader = require("plugin-loader").init()
-  utils.toggle_autoformat()
-  plugin_loader:load { plugins, lvim.plugins } ]]
-  vim.cmd ":PackerCompile"
-  vim.cmd ":PackerInstall"
-  require("keymappings").setup()
-  -- vim.cmd ":PackerClean"
+function utils.reload_plugins()
+  utils.reset_cache()
+  vim.cmd(string.format("source %q/lua/plugins.lua", vim.fn.stdpath "config"))
+  local packer = require "packer"
+  packer.sync()
 end
 
 function utils.check_lsp_client_active(name)
@@ -57,9 +51,15 @@ function utils.get_active_client()
   return nil
 end
 
-function utils.unrequire(m)
+function utils.reload_package(m)
+  local status
+  if package.loaded[m] then
+    status = true
+  end
   package.loaded[m] = nil
   _G[m] = nil
+  status, _ = pcall(require, m)
+  return status
 end
 
 function utils.gsub_args(args)
@@ -72,6 +72,22 @@ function utils.gsub_args(args)
   end
   return args
 end
+
+
+function utils.is_file(filename)
+  local stat = vim.loop.fs_stat(filename)
+  return stat and stat.type == "file" or false
+end
+
+function utils.reset_cache()
+  local packer_cache = vim.fn.stdpath "config" .. "/plugin/packer_compiled.lua"
+  if utils.is_file(packer_cache) then
+    vim.fn.delete(packer_cache)
+    require("packer").compile()
+  end
+end
+
+vim.cmd [[ command! PackerReCompile lua require('utils').reset_cache() ]]
 
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })

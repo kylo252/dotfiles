@@ -37,11 +37,12 @@ M.mappings = {
   },
   c = {
     name = "+commands",
+    r = { "<cmd>Telescope reloader<CR>", "Telescope reloader" },
     p = {
       name = "+packer",
-      c = { "<cmd>PackerCompile<CR>", "Packer Compile" },
+      c = { "<cmd>lua require('utils').reset_cache()<CR>", "Packer Re-Compile" },
       l = { "<cmd>PackerLoad<CR>", "Packer Load" },
-      r = { "<cmd>lua require('utils').reload_config()<cr>", "Reload config" },
+      r = { "<cmd>lua require('utils').reload_plugins()<cr>", "Reload plugins" },
       s = { "<cmd>PackerSync<CR>", "Packer Sync" },
       C = { "<cmd>PackerClean<CR>", "Packer Clean" },
       S = { "<cmd>PackerStatus<CR>", "Packer Status" },
