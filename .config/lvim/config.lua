@@ -1,7 +1,7 @@
 -- general
 
-lvim.builtin.telescope.active = true
-lvim.log.level = "warn"
+-- lvim.builtin.telescope.active = true
+lvim.log.level = "debug"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 -- lvim.colorscheme = "tokyonight"
@@ -11,7 +11,7 @@ lvim.lsp.default_keybinds = true
 lvim.lsp.diagnostics.update_in_insert = true
 
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.active = true
+-- lvim.builtin.nvimtree.active = true
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.nvimtree.hide_dotfiles = 0
@@ -20,7 +20,7 @@ lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.nvimtree.hide_dotfiles = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {}
+lvim.builtin.treesitter.ensure_installed = { "lua", "c", "bash" }
 
 require "user.keymappings"
 -- require "scratch"
@@ -63,13 +63,20 @@ lvim.builtin.which_key.mappings["f"] = {
   m = { "<cmd>Telescope marks<CR>", "Marks" },
   p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
   r = { "<cmd>Telescope oldfiles<CR>", "Find Recenct Files" },
+  t = {
+    name = "+Tests",
+    f = {
+      "<cmd>lua package.loaded['task_runner'] = nil; require('task_runner').find_test_function()<cr>",
+      "find test function",
+    },
+  },
 }
 lvim.builtin.which_key.mappings["S"] = {
   name = "+sessions",
   d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving" },
   l = { "<cmd>lua require('persistance').load()<cr>", "restore the session for the current directory" },
   r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
-  s = { "<cmd>lua require('persistence').save()<cr>", "stop saving" },
+  s = { "<cmd>lua require('persistence').save()<cr>", "save session" },
 }
 
 lvim.leader = "space"
@@ -140,7 +147,7 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    config = [[require('user.core.sessions').setup()]],
+    config = [[ require("persistence").setup({dir = vim.fn.stdpath("cache") .. "/lvim_sessions" }) ]],
   },
 }
 

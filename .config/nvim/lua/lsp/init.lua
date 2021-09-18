@@ -112,7 +112,7 @@ end
 
 function M.setup()
   local nvim_lsp = require "lspconfig"
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright" }
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
   require("lsp.handlers").setup()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()

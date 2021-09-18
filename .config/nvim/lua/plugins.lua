@@ -1,7 +1,8 @@
-local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local package_root = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local compile_path = vim.fn.stdpath "config" .. "/plugin/packer_compile.lua"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute("git", "clone", "https://github.com/wbthomason/packer.nvim " .. install_path)
+if vim.fn.empty(vim.fn.glob(package_root)) > 0 then
+  vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", package_root }
   vim.cmd "packadd packer.nvim"
 end
 
@@ -11,6 +12,8 @@ if not packer_ok then
 end
 
 packer.init {
+  package_root = package_root,
+  compile_path = compile_path,
   git = { clone_timeout = 300 },
   display = {
     open_fn = function()
@@ -24,6 +27,7 @@ packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
+  use { "lewis6991/impatient.nvim" }
 
   -- LSP and linting
   use {
