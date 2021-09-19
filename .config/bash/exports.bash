@@ -4,8 +4,6 @@ function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
-  export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
-
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 
@@ -50,16 +48,27 @@ function __setup_history() {
 }
 
 function __setup_fzf() {
-  export FZF_DEFAULT_OPTS="--layout=reverse  --multi \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-y:execute-silent(echo {+} | xcopy)' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o vim)' \
-        --bind 'ctrl-v:execute(code {+})' "
-  export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | xbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
-  # export FZF_DEFAULT_COMMAND='rg --files --hidden'
-  export FZF_DEFAULT_COMMAND='fd --type f'
-  export FZF_PREVIEW_DEFAULT_SETTING='--sync --height="80%" --preview-window="down:60%" --expect="ctrl-space" --header="C-Space: continue fzf completion"'
+  export FZF_DEFAULT_COMMAND="fd --type f"
+  export FZF_DEFAULT_OPTS=" \
+    --layout=reverse  --multi \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-y:execute-silent(echo {+} | xclip)' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+    --bind 'ctrl-x:execute(code {+})' "
+  export FZF_CTRL_R_OPTS=" \
+    --preview 'echo {}' \
+    --preview-window down:3:hidden:wrap \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip)+abort' \
+    --header 'Press CTRL-Y to copy command into clipboard'\
+    --border"
+  export FZF_PREVIEW_DEFAULT_SETTING=" \
+    --sync \
+    --height='80%' \
+    --preview-window='down:60%' \
+    --expect='ctrl-space' \
+    --header='C-Space: continue fzf completion'"
 }
 
 function __setup_misc() {
@@ -69,7 +78,7 @@ function __setup_misc() {
 
 }
 
-__setup_functions=(
+setup_functions=(
   __setup_defaults
   __setup_cli_colors
   __setup_xdg
@@ -78,13 +87,13 @@ __setup_functions=(
   __setup_misc
 )
 
-for func in "${__setup_functions[@]}"; do
+for func in "${setup_functions[@]}"; do
   "$func"
   unset -f "$func"
 done
-unset __setup_functions
+unset setup_functions
 
-_bin_list=(
+bin_list=(
   "$HOME/.local/bin"
   "$HOME/local/bin"
   "$HOME/bin"
@@ -94,8 +103,8 @@ _bin_list=(
   "$GOPATH/bin"
 )
 
-for extra in "${_bin_list[@]}"; do
+for extra in "${bin_list[@]}"; do
   PATH=$extra:$PATH
 done
 export PATH
-unset _bin_list
+unset bin_list
