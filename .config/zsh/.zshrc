@@ -14,29 +14,6 @@ fi
 
 source "$XDG_CONFIG_HOME/zsh/.p10k.lean.zsh"
 
-_bin_list=(
-  "$HOME/.local/bin"
-  "$HOME/local/bin"
-  "$HOME/bin"
-  "$CARGO_HOME/bin"
-  "$GEM_HOME/bin"
-  "$NPM_HOME/bin"
-  "$GOPATH/bin"
-  "$LUAROCKS_HOME/bin"
-  "$XDG_CONFIG_HOME/rofi/bin"
-  )
-
-for extra in "${_bin_list[@]}"; do
-  PATH=$extra:$PATH
-done
-export PATH
-unset _bin_list
-
-# just in case latest zsh is not in '/usr/bin'
-# it's probably unnecessary
-SHELL="$(command -v zsh)"
-export SHELL
-
 function __setup_x11() {
   if apt-get -v &> /dev/null; then
     return 

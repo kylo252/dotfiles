@@ -16,7 +16,7 @@ function __setup_defaults() {
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 
-  export EDITOR="$(command -v vmx 2>/dev/null || echo nvim)"
+  export EDITOR="nvim"
 
   export ZDOTDIR="$HOME/.config/zsh"
 
@@ -67,6 +67,7 @@ function __setup_xdg() {
   export LUAROCKS_HOME="$XDG_DATA_HOME/luarocks"
   export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
   export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
+  export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
 }
 
 function __setup_history() {
@@ -109,14 +110,9 @@ function __setup_misc() {
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
   export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
   export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-  if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-    export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
-    source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-  fi
 }
 
-__setup_functions=(
+setup_functions=(
   __setup_defaults
   __setup_cli_colors
   __setup_xdg
@@ -125,8 +121,31 @@ __setup_functions=(
   __setup_misc
 )
 
-for func in "${__setup_functions[@]}"; do
+for func in "${setup_functions[@]}"; do
   "$func"
   unset -f "$func"
 done
-unset __setup_functions
+unset setup_functions
+
+bin_list=(
+  "$HOME/.local/bin"
+  "$HOME/local/bin"
+  "$HOME/bin"
+  "$CARGO_HOME/bin"
+  "$GEM_HOME/bin"
+  "$NPM_HOME/bin"
+  "$GOPATH/bin"
+  "$LUAROCKS_HOME/bin"
+  "$XDG_CONFIG_HOME/rofi/bin"
+  )
+
+for extra in "${bin_list[@]}"; do
+  PATH=$extra:$PATH
+done
+export PATH
+unset bin_list
+
+# just in case latest zsh is not in '/usr/bin'
+# it's probably unnecessary
+SHELL="$(command -v zsh)"
+export SHELL
