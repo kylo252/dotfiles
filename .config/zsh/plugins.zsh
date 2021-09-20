@@ -36,7 +36,7 @@ fi
 
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
-  znap source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
 source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
