@@ -62,6 +62,14 @@ function utils.reload_package(m)
   return status
 end
 
+function utils.xdg_open_handler()
+  if vim.fn.executable("xdg-open") ~= 1 then
+    vim.notify("xdg-open was not found", vim.log.levels.WARN)
+    return
+  end
+  os.execute("xdg-open " .. vim.fn.expand("<cWORD>"))
+end
+
 function utils.gsub_args(args)
   if args == nil or type(args) ~= "table" then
     return args

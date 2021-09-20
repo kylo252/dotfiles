@@ -8,6 +8,7 @@ local generic_opts = {
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
   command_mode = generic_opts_any,
+  operator_mode = generic_opts,
   term_mode = { silent = true },
 }
 
@@ -18,6 +19,7 @@ local mode_adapters = {
   visual_mode = "v",
   visual_block_mode = "x",
   command_mode = "c",
+  operator_mode = "o"
 }
 
 -- Set key mappings individually
@@ -89,8 +91,9 @@ M.groups = {
     ["<S-h>"] = ":BufferPrevious<CR>",
 
     -- Move current line / block with Alt-j/k a la vscode.
-    ["<A-j>"] = ":m .+1<CR>==",
-    ["<A-k>"] = ":m .-2<CR>==",
+    -- FIXME: this interferes with tmux
+    -- ["<A-j>"] = ":m .+1<CR>==",
+    -- ["<A-k>"] = ":m .-2<CR>==",
 
     -- QuickFix
     ["]q"] = ":cnext<CR>",
@@ -103,13 +106,16 @@ M.groups = {
     -- Page down/up
     ["[d"] = "<PageUp>",
     ["]d"] = "<PageDown>",
+
+    -- fix gx
+    ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
   },
 
   ---@usage change or add keymappings for terminal mode
   term_mode = {
     -- Terminal window navigation
-    ["<Esc>"] = [[<C-\><C-n>]],
     -- ["<C-c>"] = "<Esc>",
+    ["<Esc>"] = [[<C-\><C-n>]],
   },
 
   ---@usage change or add keymappings for visual mode
@@ -132,6 +138,9 @@ M.groups = {
     -- only move one line at a time
     ["<S-Down>"] = "j",
     ["<S-Up"] = "k",
+
+    -- fix gx
+    ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
   },
 
   ---@usage change or add keymappings for visual block mode
@@ -144,7 +153,21 @@ M.groups = {
     ["<A-j>"] = ":m '>+1<CR>gv-gv",
     ["<A-k>"] = ":m '<-2<CR>gv-gv",
   },
+
+  operator_mode = {},
 }
+
+-- Add some text objects
+local chars = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "-", "#" }
+for _, char in ipairs(chars) do
+  M.groups.visual_mode["i" .. char] = ":<C-u>normal! T" .. char .. "vt" .. char .. "<CR>"
+  M.groups.operator_mode["i" .. char] = ":normal vi" .. char .. "<CR>"
+
+  M.groups.visual_mode["a" .. char] = ":<C-u>normal! F" .. char .. "vf" .. char .. "<CR>"
+  M.groups.operator_mode["a" .. char] = ":normal va" .. char .. "<CR>"
+end
+M.groups.visual_mode["ae"] = ":<C-u>keepjumps normal! ggVG<CR>"
+M.groups.operator_mode["ae"] = ":normal vae<CR>"
 
 function M.setup()
   vim.g.mapleader = " "

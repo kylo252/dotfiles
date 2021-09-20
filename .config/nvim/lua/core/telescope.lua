@@ -81,7 +81,7 @@ function M.setup()
       ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
     },
   }
-  vim.cmd [[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]]
+  vim.cmd [[cmap <A-R> <Plug>(TelescopeFuzzyCommandSearch)]]
   require("keymappings").load(keymaps)
 end
 
