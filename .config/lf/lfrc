@@ -151,9 +151,8 @@ map Xvp push :!nvim<space>
 # Zoxide jump
 map gj push :zoxide<space>
 map gc z ~/.config
-map gs z ~/.scripts
 map gd z ~/.local/share
-map gl z ~/local
+map gT z ~/local/share/Trash
 
 # show documentation
 map g? $lf -doc | bat -l man
