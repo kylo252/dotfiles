@@ -8,10 +8,10 @@ gui:
   theme:
     lightTheme: false # For terminals with a light background
     activeBorderColor:
-      - white
+      - green
       - bold
     inactiveBorderColor:
-      - green
+      - white
     optionsTextColor:
       - blue
     selectedLineBgColor:
@@ -20,12 +20,13 @@ gui:
       - blue
   commitLength:
     show: true
+  skipNoStagedFilesWarning: false
   mouseEvents: true
   skipUnstageLineWarning: true
   skipStashWarning: true
   showFileTree: true # for rendering changes files in a tree format
   showRandomTip: true
-  showCommandLog: false
+  showCommandLog: true
   commandLogSize: 8
 git:
   paging:
@@ -46,15 +47,18 @@ git:
 refresher:
   refreshInterval: 10 # file/submodule refresh interval in seconds
   fetchInterval: 60 # re-fetch interval in seconds
+  commitPrefixes: {}
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often an update is checked for
 reporting: 'off' # one of: 'on' | 'off' | 'undetermined'
-confirmOnQuit: true
-# determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
+splashUpdatesIndex: 0
+confirmOnQuit: false
 quitOnTopLevelReturn: false
 disableStartupPopups: false
+services: {}
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
+
 keybinding:
   universal:
     quit: 'q'
@@ -108,21 +112,33 @@ keybinding:
     copyToClipboard: '<c-o>'
     submitEditorText: '<enter>'
     appendNewline: '<tab>'
+    prevBlock-alt: 'h'
+    nextBlock-alt: 'l'
+    nextBlock-alt2: '<tab>'
+    prevBlock-alt2: '<backtab>'
+    startSearch: '/'
+    extrasMenu: '@'
+
   status:
     checkForUpdate: 'r'
     recentRepos: '<enter>'
+    allBranchesLogGraph: 'a'
+
   files:
     commitChanges: 'c'
+    commitChangesWithoutHook: 'w'
     amendLastCommit: 'A'
     commitChangesWithEditor: 'C'
     ignoreFile: 'i'
     refreshFiles: 'r'
     stashAllChanges: 's'
-    viewStashOptions: '<c-s>'
+    viewStashOptions: 'S'
     toggleStagedAll: 'a' # stage/unstage all
     viewResetOptions: 'D'
     fetch: 'f'
     toggleTreeView: '`'
+    openMergeTool: 'M'
+
   branches:
     createPullRequest: 'o'
     checkoutBranchByName: 'c'
@@ -134,6 +150,9 @@ keybinding:
     pushTag: 'P'
     setUpstream: 'u' # set as upstream of checked-out branch
     fetchRemote: 'f'
+    copyPullRequestURL: '<c-y>'
+    renameBranch: 'R'
+
   commits:
     squashDown: 's'
     renameCommit: 'r'
@@ -152,23 +171,36 @@ keybinding:
     pasteCommits: 'v'
     tagCommit: 'T'
     checkoutCommit: '<space>'
-    resetCherryPick: '<c-R>'
+    resetCherryPick: '<c-r>'
     copyCommitMessageToClipboard: '<c-y>'
+
   stash:
     popStash: 'g'
+
   commitFiles:
     checkoutCommitFile: 'c'
+
   main:
     toggleDragSelect: 'v'
     toggleDragSelect-alt: 'V'
     toggleSelectHunk: 'a'
     pickBothHunks: 'b'
+
   submodules:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
+
 customCommands:
-  - key: '<c-R>'
+  - key: 'U'
     command: "git smu" # maybe it's not necessary
-    context: 'global'
+    context: 'files'
+    loadingText: 'Updating all submodules'
+  - key: '<c-g>'
+    command: "git reuse-msg"
+    context: 'files'
+    loadingText: 'Updating all submodules'
+  - key: '<c-r>'
+    command: "git soft-reset"
+    context: 'commits'
     loadingText: 'Updating all submodules'
