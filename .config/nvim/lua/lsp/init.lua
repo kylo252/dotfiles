@@ -91,15 +91,17 @@ local function setup_document_highlight(client)
         autocmd! * <buffer>
         autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END 
+      augroup END
     ]]
   end
 end
 
+--luacheck: no unused args
 function M.common_on_init(client, bufnr)
   setup_document_highlight(client)
 end
 
+--luacheck: no unused args
 function M.common_on_attach(client, bufnr)
   setup_lsp_keybindings(bufnr)
 end

@@ -109,6 +109,9 @@ M.groups = {
 
     -- fix gx
     ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+
+    -- quick rename
+    ["<F2>"] = ":%s@<c-r><c-w>@<c-r><c-w>@gc<c-f>$F@i",
   },
 
   ---@usage change or add keymappings for terminal mode
@@ -128,7 +131,7 @@ M.groups = {
     ["<"] = ">gv",
 
     -- Visual mode pressing * or # searches for the current selection
-    -- { "*", "<cmd>/\\<<C-r>=expand('<cword>')<CR>\\><CR>" },
+    ["*"] = "<cmd>/\\<<C-r>=expand('<cword>')<CR>\\><CR>",
     ["#"] = "<cmd>?\\<<C-r>=expand('<cword>')<CR>\\><CR>",
 
     -- move selected line(s)
@@ -172,7 +175,7 @@ M.groups.operator_mode["ae"] = ":normal vae<CR>"
 function M.setup()
   vim.g.mapleader = " "
   -- Search and replace word under cursor using <F2>
-  vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
+  -- vim.cmd [[ nnoremap <F2> :%s@<c-r><c-w>@<c-r><c-w>@gc<c-f>$F@i ]]
   M.load(M.groups)
 end
 

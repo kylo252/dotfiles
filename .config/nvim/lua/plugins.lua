@@ -1,8 +1,10 @@
-local package_root = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-local compile_path = vim.fn.stdpath "config" .. "/plugin/packer_compile.lua"
+local package_root = vim.fn.stdpath "data" .. "/site/pack"
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+-- this doesn't work actually
+-- local compile_path = vim.fn.stdpath "cache" .. "/packer_compile.lua"
 
-if vim.fn.empty(vim.fn.glob(package_root)) > 0 then
-  vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", package_root }
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
   vim.cmd "packadd packer.nvim"
 end
 
@@ -13,7 +15,8 @@ end
 
 packer.init {
   package_root = package_root,
-  compile_path = compile_path,
+  -- compile_path = compile_path,
+  log = { level = "info" },
   git = { clone_timeout = 300 },
   display = {
     open_fn = function()
@@ -34,7 +37,8 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
-    { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
+    -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
+    { "williamboman/nvim-lsp-installer" },
     {
       "hrsh7th/nvim-cmp",
       requires = {
