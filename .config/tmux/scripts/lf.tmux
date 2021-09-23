@@ -1,25 +1,23 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+set -ex
 
-current_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-split_direction="$(get_option "@extrakto_split_direction")"
-exec_cmd="$(get_option "@lf_exec_cmd")"
-split_direction="$(get_option "@lf_split_direction")"
+function toggle_lf() {
+  split_direction="$1"
+  split_size="$2"
 
-# TODO: fix split option
-if [ -n "$split_direction" ]; then
-  split_size="$(get_option "@lf_split_size")"
-  tmux split-window \
-    -"${split_direction}:-"R"" \
-    -l "${split_size}:-"50%"" "tmux setw remain-on-exit off ${exec_cmd:-"lf"}"
-else
-  IFS=, read popup_width popup_height <<< "$(get_option "@lf_popup_size")"
-  IFS=, read popup_x popup_y <<< "$(get_option "@lf_popup_position")"
-  tmux popup \
+  if [ -n "$split_direction" ]; then
+    tmux split-window \
+      -"$split_direction" \
+      -l "${split_size:-"50%"}" "${lf_exec_cmd:-"lf"}"
+  else
+    tmux popup \
       -d "#{pane_current_path}" \
-      -w "${popup_width:-"80%"}" \
-      -h "${popup_height:-"50%"}" \
-      -x "${popup_x:-"C"}" \
-      -y "${popup_y:-"C"}" \
-      -E "${exec_cmd:-"lf -single"}"
-  exit 0
-fi
+      -w "${tmux_popup_width:-"80%"}" \
+      -h "${tmux_popup_height:-"80%"}" \
+      -x "${tmux_popup_x:-"C"}" \
+      -y "${tmux_popup_y:-"C"}" \
+      -E "${lf_exec_cmd:-"lf -single"}"
+  fi
+}
+
+toggle_lf "$@"
