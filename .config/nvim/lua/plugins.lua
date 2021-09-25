@@ -37,8 +37,8 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
-    -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
-    { "williamboman/nvim-lsp-installer" },
+    -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
+    { "kylo252/nvim-lsp-installer", branch = "logger" },
     {
       "hrsh7th/nvim-cmp",
       requires = {

@@ -98,7 +98,7 @@ function M.find_dotfiles()
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     layout_config = {
-      height = 5,
+      height = 15,
       width = 0.5,
     },
     prompt = ">> ",
@@ -115,7 +115,7 @@ function M.get_z_list()
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     layout_config = {
-      height = 5,
+      height = 15,
       width = 0.5,
     },
     prompt = ">> ",
