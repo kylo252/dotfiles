@@ -73,20 +73,15 @@ cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
 cmd mkfile %[ -n "${1}" ] && touch ${@} || echo "Argument needed"
 
 cmd trash ${{
-    set -f
-    printf "$fx\n"
-    printf "delete?[y/n]"
-    read ans
-    [ $ans = "y" ] && gio trash $fx
+   IFS="$(printf '\n\t')"; gio trash $fx
 }}
 
 
 # define a custom 'delete' command
 cmd delete ${{
-  printf "$fx\n"
   printf "delete?[y/n]"
   read ans
-  [ $ans = "y" ] && rm -rf "$fx"
+  [ $ans = "y" ] && rm -rf $fs
 }}
 
 # FIXME: not working currently
@@ -144,8 +139,7 @@ map Yd yank-dirname
 map Yb yank-basename
 
 map Dd trash
-map Dt trash
-map DT delete
+map DD delete
 
 map <c-f> :fzf_jump
 map <c-t> $lf -remote "send $id select '$(fzf)'"
