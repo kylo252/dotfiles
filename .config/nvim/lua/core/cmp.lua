@@ -18,12 +18,8 @@ local cmp_format_layout = function(entry, vim_item)
     vsnip = "(Snippet)",
     luasnip = "(Snippet)",
     buffer = "(Buffer)",
+    tmux = "(TMUX)",
   })[entry.source.name]
-  vim_item.dup = ({
-    buffer = 1,
-    path = 1,
-    nvim_lsp = 0,
-  })[entry.source.name] or 0
   return vim_item
 end
 
@@ -55,7 +51,14 @@ M.config = function()
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "buffer" },
-      { name = "treesitter" },
+      {
+        name = "tmux",
+        opts = {
+          all_panes = false,
+          label = "[tmux]",
+          trigger_characters = { "." },
+        },
+      },
     },
     mapping = {
       ["<Tab>"] = cmp.mapping(function()

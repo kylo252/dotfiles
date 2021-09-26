@@ -12,7 +12,6 @@ local packer_ok, packer = pcall(require, "packer")
 if not packer_ok then
   return
 end
-
 packer.init {
   package_root = package_root,
   -- compile_path = compile_path,
@@ -51,6 +50,7 @@ packer.startup(function(use)
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+    { "andersevenrud/compe-tmux", branch = "cmp", after = "nvim-cmp" },
     {
       "b3nj5m1n/kommentary",
       event = "BufWinEnter",
@@ -93,7 +93,6 @@ packer.startup(function(use)
       event = "VimEnter",
       config = [[require('core.tmux')]],
     },
-    { "andersevenrud/compe-tmux", event = "InsertEnter *" },
     {
       "folke/persistence.nvim",
       event = "VimEnter",

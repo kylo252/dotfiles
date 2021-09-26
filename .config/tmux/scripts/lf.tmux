@@ -7,11 +7,12 @@ function toggle_lf() {
 
   if [ -n "$split_direction" ]; then
     tmux split-window \
+      -c '#{pane_current_path}' \
       -"$split_direction" \
       -l "${split_size:-"50%"}" "${lf_exec_cmd:-"lf"}"
   else
     tmux popup \
-      -d "#{pane_current_path}" \
+      -d '#{pane_current_path}' \
       -w "${tmux_popup_width:-"80%"}" \
       -h "${tmux_popup_height:-"80%"}" \
       -x "${tmux_popup_x:-"C"}" \
