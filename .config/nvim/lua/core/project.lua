@@ -14,7 +14,7 @@ function M.setup()
 
     ignore_lsp = {},
 
-    datapath = CACHE_PATH,
+    datapath = vim.fn.stdpath "cache",
   }
 
   require("project_nvim").setup(opts)
