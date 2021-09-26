@@ -60,6 +60,7 @@ packer.startup(function(use)
 
   -- Helpers
   use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
+  use { "folke/trouble.nvim", cmd = "Trouble" }
 
   -- Search
   use {
