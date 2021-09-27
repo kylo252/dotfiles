@@ -199,8 +199,12 @@ customCommands:
   - key: '<c-g>'
     command: "git reuse-msg"
     context: 'files'
-    loadingText: 'Updating all submodules'
+    loadingText: 're-use last message'
   - key: '<c-r>'
     command: "git soft-reset"
     context: 'commits'
-    loadingText: 'Updating all submodules'
+    loadingText: 'soft reset'
+  - key: 'X'
+    command: "git rebase --abort"
+    context: 'commits'
+    loadingText: 'rebase --abort'
