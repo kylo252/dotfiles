@@ -1,6 +1,5 @@
 local M = {}
 
-
 function M.get_lsp_kind()
   -- symbols for autocomplete
   return {
@@ -136,6 +135,6 @@ function M.setup()
     end
   end
 
-  require("lsp.efm-general-ls").generic_setup { "lua", "sh", "zsh", "bash" }
+  require("lsp.null-ls").setup()
 end
 return M

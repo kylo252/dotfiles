@@ -98,7 +98,7 @@ table.insert(section.left, {
   FileIcon = {
     provider = "FileIcon",
     condition = condition.buffer_not_empty,
-    highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.bg },
+    highlight = { require("galaxyline.providers.fileinfo").get_file_icon_color, colors.bg },
   },
 })
 
@@ -108,7 +108,7 @@ table.insert(section.left, {
     condition = condition.buffer_not_empty,
     separator = " ",
     separator_highlight = { colors.bg, colors.bg },
-    highlight = { mode_color, colors.bg },
+    highlight = { colors.fg, colors.bg },
   },
 })
 
@@ -166,7 +166,6 @@ table.insert(section.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
-  local efm_ls = require "lsp.efm-general-ls"
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
     return msg
@@ -174,11 +173,11 @@ local function get_attached_provider_name(msg)
 
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do
-    if client.name == "efm" then
-      local efm_ls_providers = efm_ls.list_supported_provider_names(vim.bo.filetype)
-      for _, provider in ipairs(efm_ls_providers) do
-        table.insert(buf_client_names, provider)
-      end
+    if client.name == "null-ls" then
+      local null_ls_formatters = require("lsp.null-ls").list_registered_formatters(vim.bo.filetype)
+      vim.list_extend(buf_client_names, null_ls_formatters)
+      local null_ls_linters = require("lsp.null-ls").list_registered_linters(vim.bo.filetype)
+      vim.list_extend(buf_client_names, null_ls_linters)
     else
       table.insert(buf_client_names, client.name)
     end

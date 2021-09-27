@@ -36,6 +36,7 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
+    { "jose-elias-alvarez/null-ls.nvim" },
     -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
     { "kylo252/nvim-lsp-installer", branch = "logger" },
     {
@@ -128,7 +129,7 @@ packer.startup(function(use)
     },
     { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
     {
-      "glepnir/galaxyline.nvim",
+      "NTBBloodbath/galaxyline.nvim",
       event = "BufWinEnter",
       config = [[require('core.statusline')]],
     },
