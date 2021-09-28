@@ -32,14 +32,15 @@ function M.get_lsp_kind()
 end
 
 vim.lsp.protocol.CompletionItemKind = M.get_lsp_kind()
+    
 local function setup_lsp_keybindings(bufnr)
   local status_ok, wk = pcall(require, "which-key")
   if not status_ok then
     return
   end
-  local visual_keys = { f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" } }
+  local visual_keys = { ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" } }
 
-  wk.register(visual_keys, { mode = "v", buffer = bufnr })
+  wk.register(visual_keys, { mode = "x", buffer = bufnr })
 
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },

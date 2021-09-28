@@ -38,7 +38,7 @@ packer.startup(function(use)
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
     -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
-    { "kylo252/nvim-lsp-installer", branch = "logger" },
+    { "kylo252/nvim-lsp-installer", branch = "popup" },
     {
       "hrsh7th/nvim-cmp",
       requires = {
