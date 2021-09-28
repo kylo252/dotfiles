@@ -117,8 +117,6 @@ M.groups = {
   ---@usage change or add keymappings for terminal mode
   term_mode = {
     -- Terminal window navigation
-    -- ["<C-c>"] = "<Esc>",
-    ["<Esc>"] = [[<C-\><C-n>]],
   },
 
   ---@usage change or add keymappings for visual mode

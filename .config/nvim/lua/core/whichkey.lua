@@ -96,7 +96,7 @@ M.mappings = {
       [[<cmd>lua require('core.terminal').execute_command({bin = 'lazygit', args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
       "LazyDots",
     },
-    g = { [[<cmd>lua require('core.terminal').execute_command({bin = 'lazygit'})<CR>]], "LazyGit" },
+    g = { [[<cmd>lua require('core.terminal').toggle_lazygit()<CR>]], "LazyGit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },

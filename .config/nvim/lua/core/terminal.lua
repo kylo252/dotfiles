@@ -50,6 +50,21 @@ M.execute_command = function(opts)
   request:toggle()
 end
 
+M.toggle_lazygit = function()
+  vim.opt.splitright = false
+  local opts = vim.tbl_deep_extend("force", M.config, {
+    ---@usage direction = 'vertical' | 'horizontal' | 'window' | 'float',
+    open_mapping = "<leader>gg",
+    -- size can be a number or function which is passed the current terminal
+    cmd = "lazygit",
+  })
+
+  local Terminal = require("toggleterm.terminal").Terminal
+  local request = Terminal:new(opts)
+  request:toggle()
+  -- vim.opt.splitright = true
+end
+
 M.toggle_explorer = function()
   vim.opt.splitright = false
   local opts = vim.tbl_deep_extend("force", M.config, {
