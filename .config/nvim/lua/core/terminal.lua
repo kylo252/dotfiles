@@ -22,7 +22,6 @@ M.config = {
     border = "single",
     -- width = <value>,
     -- height = <value>,
-    winblend = 3,
     highlights = {
       border = "Normal",
       background = "Normal",
@@ -36,48 +35,37 @@ M.setup = function()
 end
 
 M.execute_command = function(opts)
-  local cmd = opts.bin
-  if opts.args and not vim.tbl_isempty(opts.args) then
-    cmd = cmd .. " " .. table.concat(opts.args, " ")
-  end
+  opts.bin = opts.bin or opts.cmd
+
   if vim.fn.executable(opts.bin) ~= 1 then
-    error(string.format("unable to find [%s].", bin))
+    error(string.format("unable to find [%s].", opts.bin))
     return
   end
+  local cmd = opts.bin .. " " .. table.concat(opts.args or {}, " ")
   opts.hidden = true
+  opts.cmd = cmd
+
+  local config = vim.tbl_deep_extend("force", M.config, opts)
   local Terminal = require("toggleterm.terminal").Terminal
-  local request = Terminal:new(opts)
+
+  local request = Terminal:new(config)
   request:toggle()
 end
 
 M.toggle_lazygit = function()
-  vim.opt.splitright = false
-  local opts = vim.tbl_deep_extend("force", M.config, {
-    ---@usage direction = 'vertical' | 'horizontal' | 'window' | 'float',
+  local opts = {
     open_mapping = "<leader>gg",
-    -- size can be a number or function which is passed the current terminal
     cmd = "lazygit",
-  })
-
-  local Terminal = require("toggleterm.terminal").Terminal
-  local request = Terminal:new(opts)
-  request:toggle()
-  -- vim.opt.splitright = true
+  }
+  M.execute_command(opts)
 end
 
 M.toggle_explorer = function()
-  vim.opt.splitright = false
-  local opts = vim.tbl_deep_extend("force", M.config, {
-    ---@usage direction = 'vertical' | 'horizontal' | 'window' | 'float',
+  local opts = {
     open_mapping = "<C-e>",
-    -- size can be a number or function which is passed the current terminal
-    cmd = "lf",
-  })
-
-  local Terminal = require("toggleterm.terminal").Terminal
-  local request = Terminal:new(opts)
-  request:toggle()
-  -- vim.opt.splitright = true
+    bin = "lf",
+  }
+  M.execute_command(opts)
 end
 
 return M

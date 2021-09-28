@@ -93,7 +93,7 @@ M.mappings = {
       },
     },
     d = {
-      [[<cmd>lua require('core.terminal').execute_command({bin = 'lazygit', args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
+      [[<cmd>lua require('core.terminal').execute_command({bin = "lazygit", args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
       "LazyDots",
     },
     g = { [[<cmd>lua require('core.terminal').toggle_lazygit()<CR>]], "LazyGit" },
