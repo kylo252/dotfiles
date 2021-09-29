@@ -64,7 +64,8 @@ M.mappings = {
     G = { "<cmd>lua require'core.telescope'.grep_string_v2()<CR>", "Grep String v2" },
     l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
-    r = { "<cmd>Telescope oldfiles<CR>", "Find Recenct Files" },
+    r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
+    R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
     h = { "<cmd>Telescope command_history<CR>", "history" },
     v = {
       name = "+vim",

@@ -38,7 +38,13 @@ packer.startup(function(use)
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
     -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
-    { "kylo252/nvim-lsp-installer", branch = "popup" },
+    {
+      "kylo252/nvim-lsp-installer",
+      branch = "popup",
+      config = function()
+        vim.g.lsp_installer_log_level = vim.log.levels.DEBUG
+      end,
+    },
     {
       "hrsh7th/nvim-cmp",
       requires = {
@@ -93,7 +99,7 @@ packer.startup(function(use)
     {
       "aserowy/tmux.nvim",
       event = "VimEnter",
-      config = [[require('core.tmux')]],
+      config = [[require('core.tmux').setup()]],
     },
     {
       "folke/persistence.nvim",

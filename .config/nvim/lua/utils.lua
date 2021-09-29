@@ -1,28 +1,5 @@
 local utils = {}
 
--- autoformat
-function utils.toggle_autoformat()
-  if lvim.format_on_save then
-    require("core.autocmds").define_augroups {
-      autoformat = {
-        {
-          "BufWritePre",
-          "*",
-          ":silent lua vim.lsp.buf.formatting_sync()",
-        },
-      },
-    }
-  end
-
-  if not lvim.format_on_save then
-    vim.cmd [[
-      if exists('#autoformat#BufWritePre')
-        :autocmd! autoformat
-      endif
-    ]]
-  end
-end
-
 function utils.reload_plugins()
   utils.reset_cache()
   vim.cmd(string.format("source %q/lua/plugins.lua", vim.fn.stdpath "config"))
@@ -63,11 +40,11 @@ function utils.reload_package(m)
 end
 
 function utils.xdg_open_handler()
-  if vim.fn.executable("xdg-open") ~= 1 then
+  if vim.fn.executable "xdg-open" ~= 1 then
     vim.notify("xdg-open was not found", vim.log.levels.WARN)
     return
   end
-  os.execute("xdg-open " .. vim.fn.expand("<cWORD>"))
+  os.execute("xdg-open " .. vim.fn.expand "<cWORD>")
 end
 
 function utils.gsub_args(args)
@@ -80,7 +57,6 @@ function utils.gsub_args(args)
   end
   return args
 end
-
 
 function utils.is_file(filename)
   local stat = vim.loop.fs_stat(filename)
@@ -104,4 +80,3 @@ function _G.dump(...)
 end
 
 return utils
-
