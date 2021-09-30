@@ -85,7 +85,7 @@ function M.get_all_servers_with_package_json()
   if status_ok then
     return list
   end
-
+  local matches = {}
   for _, s in ipairs(servers) do
     local entry = {
       language = s[1],
@@ -96,14 +96,16 @@ function M.get_all_servers_with_package_json()
     }
     if entry.url then
       entry.package_json = M.get_package_json_from_url(entry.url)
-      if entry.package_json then
-        table.insert(list, entry)
+      if entry.package_json and entry.package_json:match(".json$") then
+        -- print(entry.package_json)
+        table.insert(matches, entry)
       end
     end
   end
+  -- print(vim.inspect(matches))
   -- cache the searches
-  util.write_async('lspconfig/util/all-servers.lua', vim.inspect(list))
-  return list
+  util.write_file('lspconfig/util/all-servers.lua', vim.inspect(matches))
+  return matches
 end
 
 function M.get_all_servers_with_configuration_info()
@@ -126,7 +128,7 @@ function M.get_configuration_info(url)
   local query = [['if has("contributes") then .contributes else .configuration end']]
   local cmd = string.format('curl -LSs %s | jq %s', package_json_url, query)
   local configuration = string.gsub(vim.fn.system(cmd), '%s+', '')
-  if configuration then
+  if configuration ~= "" then
     return configuration
   end
 end
