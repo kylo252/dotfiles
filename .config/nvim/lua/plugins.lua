@@ -1,7 +1,7 @@
 local package_root = vim.fn.stdpath "data" .. "/site/pack"
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 -- this doesn't work actually
--- local compile_path = vim.fn.stdpath "cache" .. "/packer_compile.lua"
+-- local compile_path = vim.fn.stdpath "cache" .. "/packer_compiled.lua"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
@@ -29,7 +29,6 @@ packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
-  use { "lewis6991/impatient.nvim" }
 
   -- LSP and linting
   use {
@@ -41,9 +40,6 @@ packer.startup(function(use)
     {
       "kylo252/nvim-lsp-installer",
       branch = "popup",
-      config = function()
-        vim.g.lsp_installer_log_level = vim.log.levels.DEBUG
-      end,
     },
     {
       "hrsh7th/nvim-cmp",
