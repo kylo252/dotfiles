@@ -81,7 +81,7 @@ packer.startup(function(use)
       "nvim-telescope/telescope.nvim",
       config = [[require('core.telescope').setup()]],
       after = { "telescope-fzf-native.nvim", "telescope-zoxide" },
-      event = "BufWinEnter",
+      event = "BufEnter",
     },
     {
       "ggandor/lightspeed.nvim",
