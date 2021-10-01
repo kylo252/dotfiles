@@ -1,0 +1,10 @@
+start_directory: "${PROJECT_DIR}"
+session_name: "${PROJECT_NAME}"
+shell_command_before: "${PRE_CMD}"
+windows:
+- window_name: editor
+  panes:
+    - nvim
+- window_name: git
+  panes:
+    - git status
