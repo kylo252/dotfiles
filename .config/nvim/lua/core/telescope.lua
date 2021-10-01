@@ -1,8 +1,8 @@
 local M = {}
 
-local custom_actions = require "core.telescope.custom-actions"
 
 function M.config()
+local custom_actions = require "core.telescope.custom-actions"
   local _, actions = pcall(require, "telescope.actions")
 
   return {
