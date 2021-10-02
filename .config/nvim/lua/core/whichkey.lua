@@ -57,15 +57,13 @@ M.mappings = {
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
-    d = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
     g = { "<cmd>lua require('core.telescope.custom-finders').live_grep_v2()<CR>", "Live Grep v2" },
-    G = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "Grep String v2" },
+    h = { "<cmd>Telescope command_history<CR>", "history" },
+    j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
     l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
-    R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
-    h = { "<cmd>Telescope command_history<CR>", "history" },
     v = {
       name = "+vim",
       c = { "<cmd>Telescope commands<CR>", "commands" },
@@ -79,10 +77,12 @@ M.mappings = {
       },
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     },
+    G = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "Grep String v2" },
     L = {
       "<cmd>lua require'telescope.builtin'.live_grep{ search_dirs={vim.fn.expand(\"%:p\")} }<cr>",
       "Local live-grep",
     },
+    R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
   },
   g = {
     name = "+git",

@@ -8,10 +8,6 @@ local provider_cmd = {
 
 local opts = {
   cmd = provider_cmd,
-  root_dir = function(fname)
-    return require("lspconfig/util").root_pattern(".git", "init.lua")(fname)
-      or require("lspconfig/util").path.dirname(fname)
-  end,
   settings = {
     Lua = {
       telemetry = { enable = false },

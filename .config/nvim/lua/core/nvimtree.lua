@@ -3,13 +3,14 @@ local M = {}
 local opts = {
   side = "left",
   setup = {
-    auto_open = 0,
-    auto_close = 1,
-    tab_open = 0,
+    auto_open = false,
+    auto_close = true,
+    tab_open = false,
     update_focused_file = {
-      enable = 1,
+      enable = true,
+      update_cwd = false,
     },
-    lsp_diagnostics = 1,
+    lsp_diagnostics = false,
   },
   width = 30,
   show_icons = {
@@ -17,7 +18,7 @@ local opts = {
     folders = 1,
     files = 1,
     folder_arrows = 1,
-    tree_width = 30,
+    tree_width = 35,
   },
   ignore = { ".git", "node_modules", ".cache" },
   quit_on_open = 0,
@@ -40,8 +41,8 @@ function M.setup()
   end
 
   -- Implicitly update nvim-tree when project module is active
-  opts.respect_buf_cwd = 1
-  opts.setup.update_cwd = 1
+  opts.respect_buf_cwd = 0
+  opts.setup.update_cwd = false
   opts.setup.disable_netrw = 0
   opts.setup.hijack_netrw = 0
   vim.g.netrw_banner = 0

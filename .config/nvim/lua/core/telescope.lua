@@ -79,6 +79,7 @@ function M.setup_z()
       ["<C-f>"] = {
         action = function(selection)
           builtin.find_files(themes.get_ivy { cwd = selection.path })
+          vim.cmd [[normal! A]]
         end,
       },
       ["<C-g>"] = {
