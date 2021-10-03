@@ -124,11 +124,11 @@ M.mappings = {
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
-      "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>",
+      "<cmd>lua vim.diagnostic.goto_next({popup_opts = {border = 'single'}})<cr>",
       "Next Diagnostic",
     },
     k = {
-      "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>",
+      "<cmd>lua vim.diagnostic.goto_prev({popup_opts = {border = 'single'}})<cr>",
       "Prev Diagnostic",
     },
     Q = { "<cmd>Telescope quickfix<cr>", "Quickfix (Telescope)" },
