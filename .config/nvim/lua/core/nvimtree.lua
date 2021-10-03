@@ -1,18 +1,6 @@
 local M = {}
 
 local opts = {
-  side = "left",
-  setup = {
-    auto_open = false,
-    auto_close = true,
-    tab_open = false,
-    update_focused_file = {
-      enable = true,
-      update_cwd = false,
-    },
-    lsp_diagnostics = false,
-  },
-  width = 30,
   show_icons = {
     git = 1,
     folders = 1,
@@ -22,6 +10,7 @@ local opts = {
   },
   ignore = { ".git", "node_modules", ".cache" },
   quit_on_open = 0,
+  respect_buf_cwd = 1,
   hide_dotfiles = 0,
   git_hl = 1,
   root_folder_modifier = ":t",
@@ -32,41 +21,74 @@ local opts = {
 function M.setup()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
+    error "failed to load nvim-tree.config"
     return
   end
-  local g = vim.g
 
   for opt, val in pairs(opts) do
-    g["nvim_tree_" .. opt] = val
+    vim.g["nvim_tree_" .. opt] = val
   end
 
-  -- Implicitly update nvim-tree when project module is active
-  opts.respect_buf_cwd = 0
-  opts.setup.update_cwd = false
-  opts.setup.disable_netrw = 0
-  opts.setup.hijack_netrw = 0
   vim.g.netrw_banner = 0
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
-  if not opts.bindings then
-    opts.bindings = {
-      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-      { key = "h", cb = tree_cb "close_node" },
-    }
+  local setup_opts = {
+    auto_open = false,
+    auto_close = true,
+    tab_open = false,
+    update_cwd = true,
+    disable_netrw = false,
+    hijack_netrw = false,
+    update_focused_file = {
+      enable = true,
+    },
+    lsp_diagnostics = false,
+    view = {
+      width = 30,
+      side = "left",
+      auto_resize = false,
+      mappings = {
+        custom_only = false,
+        list = {
+          { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+          { key = "h", cb = tree_cb "close_node" },
+        },
+      },
+    },
+  }
+
+  -- Add nvim_tree open callback
+  local tree_view = require "nvim-tree.view"
+  local open = tree_view.open
+  tree_view.open = function()
+    M.on_open()
+    open()
   end
 
-  require("nvim-tree").setup(opts)
+  vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
+
+  require("nvim-tree").setup(setup_opts)
 end
 
-M.toggle_tree = function()
-  local view = require "nvim-tree.view"
-  if view.win_open() then
-    require("nvim-tree").close()
+function M.on_open()
+  if package.loaded["bufferline.state"] then
+    require("bufferline.state").set_offset(35, "")
+  end
+end
+
+function M.on_close()
+  local buf = tonumber(vim.fn.expand "<abuf>")
+  local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+  if ft == "NvimTree" and package.loaded["bufferline.state"] then
     require("bufferline.state").set_offset(0)
-  else
-    require("bufferline.state").set_offset(31, "")
-    require("nvim-tree").find_file(true)
+  end
+end
+
+function M.change_tree_dir(dir)
+  local lib_status_ok, lib = pcall(require, "nvim-tree.lib")
+  if lib_status_ok then
+    lib.change_dir(dir)
   end
 end
 

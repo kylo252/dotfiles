@@ -1,7 +1,5 @@
 local package_root = vim.fn.stdpath "data" .. "/site/pack"
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
--- this doesn't work actually
--- local compile_path = vim.fn.stdpath "cache" .. "/packer_compiled.lua"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
@@ -14,7 +12,6 @@ if not packer_ok then
 end
 packer.init {
   package_root = package_root,
-  -- compile_path = compile_path,
   log = { level = "info" },
   git = { clone_timeout = 300 },
   display = {
@@ -39,7 +36,7 @@ packer.startup(function(use)
     -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
     {
       "kylo252/nvim-lsp-installer",
-      branch = "popup",
+      branch = "add-server-filetype",
     },
     {
       "hrsh7th/nvim-cmp",
@@ -66,21 +63,23 @@ packer.startup(function(use)
 
   -- Search
   use {
-    { "jvgrootveld/telescope-zoxide", event = "BufEnter" },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "jvgrootveld/telescope-zoxide", event = "BufRead", config = [[require('core.telescope').setup_z()]] },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      event = "BufRead",
+      run = "make",
+      config = [[ require("telescope").load_extension "fzf" ]],
+    },
     {
       "ahmedkhalf/project.nvim",
       config = function()
         require("core.project").setup()
       end,
-      event = "BufEnter",
     },
-    -- { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufEnter" }, -- this is broken on Bionic
     {
       "nvim-telescope/telescope.nvim",
       config = [[require('core.telescope').setup()]],
-      after = { "telescope-fzf-native.nvim", "telescope-zoxide" },
-      event = "BufEnter",
+      event = "BufWinEnter",
     },
     {
       "ggandor/lightspeed.nvim",
@@ -124,8 +123,7 @@ packer.startup(function(use)
     },
     {
       "kyazdani42/nvim-tree.lua",
-      -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
-      event = "BufWinEnter",
+      cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       config = [[require('core.nvimtree').setup()]],
     },
     { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },

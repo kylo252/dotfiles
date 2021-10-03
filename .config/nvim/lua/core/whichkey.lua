@@ -53,7 +53,7 @@ M.mappings = {
     d = { "<cmd>lua require('core.telescope.custom-finders').find_dotfiles()<CR>", "Find dotfiles" },
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_dotfiles()<CR>", "Find dotfiles" },
   },
-  e = { '<cmd>lua require("core.nvimtree").toggle_tree()<CR>', "Open scope browser" },
+  e = { '<cmd>NvimTreeToggle<CR>', "NvimTree" },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },

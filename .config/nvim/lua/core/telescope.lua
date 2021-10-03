@@ -96,8 +96,6 @@ function M.setup()
   local opts = M.config()
   require("telescope").setup(opts)
 
-  require("telescope").load_extension "fzf"
-  M.setup_z()
   vim.cmd [[ command! -nargs=* FuzzyGrepString :lua require('core.telescope.custom-actions').fuzzy_grep_string(<f-args>) ]]
 
   local keymaps = {

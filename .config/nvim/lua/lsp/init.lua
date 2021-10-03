@@ -32,7 +32,7 @@ function M.get_lsp_kind()
 end
 
 vim.lsp.protocol.CompletionItemKind = M.get_lsp_kind()
-    
+
 local function setup_lsp_keybindings(bufnr)
   local status_ok, wk = pcall(require, "which-key")
   if not status_ok then
@@ -126,10 +126,8 @@ function M.setup()
 
   for _, server in ipairs(servers) do
     local status_ok, config = pcall(require, "lsp/providers/" .. server)
-    local new_config
     if status_ok then
-      new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
-      new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+      local new_config = vim.tbl_deep_extend("force", default_config, config)
       nvim_lsp[server].setup(new_config)
     else
       nvim_lsp[server].setup(default_config)
