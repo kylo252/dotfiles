@@ -22,8 +22,6 @@ znap source zsh-users/zsh-completions
 
 znap source Aloxaf/fzf-tab
 
-znap fpath dotbare "_dotbare_completion_cmd"
-
 # znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
 # znap eval pip-completion "source <(pip3 completion --zsh)"
 
