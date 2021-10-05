@@ -107,7 +107,7 @@ M.mappings = {
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },
   j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
-  h = { '<cmd>let @/=""<CR>', "No Highlight" },
+  h = { '<cmd>nohlsearch<CR>', "No Highlight" },
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
