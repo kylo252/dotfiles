@@ -60,6 +60,14 @@ function cpr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
 }
 
+function jqz(){
+  emulate -L bash
+  set -x
+  args="${2:-}"
+  file="$1"
+  jq --color-output "$args" "$file" | fzf --ansi
+}
+
 function mvr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
 }

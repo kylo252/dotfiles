@@ -22,6 +22,8 @@ znap source zsh-users/zsh-completions
 
 znap source Aloxaf/fzf-tab
 
+znap source reegnz/jq-zsh-plugin
+
 # znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
 # znap eval pip-completion "source <(pip3 completion --zsh)"
 
@@ -53,4 +55,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 bindkey '^ ' autosuggest-accept
+
+bindkey '^\ei' jq-complete
 
