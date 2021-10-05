@@ -6,8 +6,11 @@ require "settings"
 require("autocmds").setup()
 require("keymappings").setup()
 require "core.treesitter"
-require("lsp").setup()
 
 pcall(require, "scratch")
 
+require("impatient").setup {
+  path = vim.fn.stdpath "cache" .. "/lua_cache",
+  enable_profiling = true,
+}
 -- require'plenary.profile'.stop()

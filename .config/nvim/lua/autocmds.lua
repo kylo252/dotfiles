@@ -9,6 +9,7 @@ M.augroups = {
     },
     { "FileType", "qf", "set nobuflisted" },
     { "BufEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
+    { "BufEnter", "*", "++once", "lua require('lsp').setup()" },
   },
   _git = {
     { "FileType", "gitcommit", "setlocal wrap" },

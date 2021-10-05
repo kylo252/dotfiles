@@ -40,12 +40,11 @@ packer.startup(function(use)
     },
     {
       "hrsh7th/nvim-cmp",
-      requires = {
-        { "L3MON4D3/LuaSnip", "hrsh7th/cmp-nvim-lsp" },
-      },
-      event = "InsertEnter *",
+      event = "BufRead",
       config = [[require('core.cmp').config()]],
     },
+    { "L3MON4D3/LuaSnip" },
+    { "hrsh7th/cmp-nvim-lsp" },
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
@@ -63,12 +62,14 @@ packer.startup(function(use)
 
   -- Search
   use {
-    { "jvgrootveld/telescope-zoxide", event = "BufRead", config = [[require('core.telescope').setup_z()]] },
+    {
+      "jvgrootveld/telescope-zoxide",
+      requires = { "nvim-telescope/telescope.nvim" },
+    },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      event = "BufRead",
+      requires = { "nvim-telescope/telescope.nvim" },
       run = "make",
-      config = [[ require("telescope").load_extension "fzf" ]],
     },
     {
       "ahmedkhalf/project.nvim",
@@ -78,8 +79,12 @@ packer.startup(function(use)
     },
     {
       "nvim-telescope/telescope.nvim",
-      config = [[require('core.telescope').setup()]],
-      event = "BufWinEnter",
+      config = [[
+        require('core.telescope').setup()
+        require('core.telescope').setup_z()
+        require("telescope").load_extension "fzf"
+      ]],
+      event = "BufEnter",
     },
     {
       "ggandor/lightspeed.nvim",
