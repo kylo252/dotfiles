@@ -61,6 +61,7 @@ M.mappings = {
     g = { "<cmd>lua require('core.telescope.custom-finders').live_grep_v2()<CR>", "Live Grep v2" },
     h = { "<cmd>Telescope command_history<CR>", "history" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
+    J = { "<cmd>lua require('core.telescope.custom-finders').find_runtime_files()<CR>", "Find runtime files" },
     l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },

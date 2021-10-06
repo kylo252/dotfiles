@@ -82,4 +82,28 @@ function M.find_dotfiles()
   require("telescope.builtin").find_files(opts)
 end
 
+function M.find_runtime_files(opts)
+  opts = opts or themes.get_ivy {}
+  local runtimepath = vim.opt.runtimepath:get()
+  local runtimedirs = {}
+
+  for _, entry in ipairs(runtimepath) do
+    vim.list_extend(runtimedirs, vim.fn.globpath(entry, "", 1, 1))
+  end
+
+  pickers.new(opts, {
+    prompt_title = "select a runtime directory",
+    layout_strategy = "flex",
+    finder = finders.new_table(runtimedirs),
+    sorter = sorters.get_generic_fuzzy_sorter(opts),
+    attach_mappings = function(_, map)
+      -- map("i", "<cr>", no_redraw_find_in_dir)
+      map("i", "<cr>", custom_actions.find_in_dir)
+      map("i", "<c-f>", custom_actions.find_in_dir)
+      map("i", "<c-g>", custom_actions.grep_in_dir)
+      return true
+    end,
+  }):find()
+end
+
 return M
