@@ -37,8 +37,8 @@ git:
     manualCommit: false
     # extra args passed to `git merge`, e.g. --no-ff
     args: ''
-  pull:
-    mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
+  # pull:
+  #   mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: false 
   branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
