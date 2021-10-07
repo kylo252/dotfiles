@@ -3,7 +3,7 @@
 --max-columns-preview
 
 # Always show hidden files
-# --hidden
+--hidden
 
 # Add my 'zshrc' type
 --type-add=zshrc:*.zsh*
@@ -12,6 +12,8 @@
 
 # Using glob patterns to include/exclude files or folders
 --glob=!git/*
+--glob=!.git/*
+--glob=!github/*
 
 # or
 # --glob
