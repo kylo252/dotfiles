@@ -28,6 +28,7 @@ alias gu='gitui'
 [ -e /etc/arch-release ] && alias -g paks='sudo pacman -S'
 
 alias paux='procs aux | rg'
+alias tk='tmux kill-server'
 
 alias v='nvim'
 
