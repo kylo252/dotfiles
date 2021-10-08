@@ -106,34 +106,21 @@ function M.common_on_attach(client, bufnr)
   setup_lsp_keybindings(bufnr)
 end
 
+function M.common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  return require("cmp_nvim_lsp").update_capabilities(capabilities)
+end
+
 function M.setup()
-  local nvim_lsp = require "lspconfig"
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
   require("lsp.handlers").setup()
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-
-  local default_config = {
-    autostart = true,
-    on_attach = M.common_on_attach,
-    on_init = M.common_on_init,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  }
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
 
   for _, server in ipairs(servers) do
-    local status_ok, config = pcall(require, "lsp/providers/" .. server)
-    if status_ok then
-      local new_config = vim.tbl_deep_extend("force", default_config, config)
-      nvim_lsp[server].setup(new_config)
-    else
-      nvim_lsp[server].setup(default_config)
-    end
+    require("lsp.manager").setup(server)
   end
 
   require("lsp.null-ls").setup()
 end
+
 return M

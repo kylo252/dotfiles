@@ -33,7 +33,6 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
-    -- -- { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" },
     {
       "kylo252/nvim-lsp-installer",
       branch = "add-server-filetype",
