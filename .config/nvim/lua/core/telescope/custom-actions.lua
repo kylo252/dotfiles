@@ -72,14 +72,19 @@ M.fuzzy_filter_results = function()
   vim.cmd [[normal! A]]
 end
 
-M.find_in_dir = function()
+M.find_in_dir = function(_, opts)
   local entry = action_state.get_selected_entry()
-  builtin.find_files(themes.get_ivy { cwd = entry.value })
+  opts = opts or themes.get_ivy()
+  opts.cwd = entry.value
+  builtin.find_files(opts)
+  vim.cmd [[normal! A]]
 end
 
-M.grep_in_dir = function()
+M.grep_in_dir = function(_, opts)
   local entry = action_state.get_selected_entry()
-  builtin.live_grep(themes.get_ivy { cwd = entry.value })
+  opts = opts or themes.get_ivy()
+  opts.cwd = entry.value
+  builtin.live_grep(opts)
   vim.cmd [[normal! A]]
 end
 

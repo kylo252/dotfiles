@@ -1,8 +1,7 @@
 local M = {}
 
-
 function M.config()
-local custom_actions = require "core.telescope.custom-actions"
+  local custom_actions = require "core.telescope.custom-actions"
   local _, actions = pcall(require, "telescope.actions")
 
   return {
@@ -55,6 +54,11 @@ local custom_actions = require "core.telescope.custom-actions"
         },
       },
     },
+    pickers = {
+      live_grep = {
+        only_sort_text = true,
+      },
+    },
     extensions = {
       fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
     },
@@ -97,6 +101,7 @@ function M.setup()
   require("telescope").setup(opts)
 
   vim.cmd [[ command! -nargs=* FuzzyGrepString :lua require('core.telescope.custom-actions').fuzzy_grep_string(<f-args>) ]]
+  vim.cmd [[ command! FindRuntimeFiles :lua require('core.telescope.custom-finders').find_runtime_files() ]]
 
   local keymaps = {
     normal_mode = {
