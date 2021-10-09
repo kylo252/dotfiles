@@ -1,12 +1,5 @@
 #!/usr/bin/env zsh
 
-function __setup_wsl() {
-  export TERM="xterm-256color"
-  export BROWSER="wslview"
-  export PULSE_SERVER
-  export DISPLAY
-}
-
 function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
@@ -24,10 +17,6 @@ function __setup_defaults() {
   export DOTBARE_TREE="$HOME"
 
   export FONTCONFIG_PATH=/etc/fonts
-
-  if [ -r "/etc/wsl.conf" ]; then
-    __setup_wsl
-  fi
 
   # https://github.com/romkatv/powerlevel10k/issues/1428
   # export GITSTATUS_LOG_LEVEL=DEBUG

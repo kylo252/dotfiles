@@ -21,7 +21,7 @@ function __setup_x11() {
   if [ -z "$SSH_CONNECTION" ]; then
     # How to check if WSL1/2
     # https://github.com/microsoft/WSL/issues/4555#issuecomment-609908080
-    if [ -d /run/WSL ]; then
+    if [ -d /run/WSL ] && [ ! -d /mnt/wslg ] ; then
       # How to set up working X11 forwarding on WSL2
       # https://stackoverflow.com/a/61110604
       DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
