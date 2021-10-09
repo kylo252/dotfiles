@@ -26,12 +26,9 @@ function __setup_x11() {
       # https://stackoverflow.com/a/61110604
       DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
       # PULSE_SERVER=tcp:$(echo /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
-	  source "$ZDOTDIR/utils/ssh-agent.zsh"
-    else
-      DISPLAY=localhost:0
+      export DISPLAY
+	    source "$ZDOTDIR/utils/ssh-agent.zsh"
     fi
-    export DISPLAY
-    export LIBGL_ALWAYS_INDIRECT=1
   fi
 }
 
