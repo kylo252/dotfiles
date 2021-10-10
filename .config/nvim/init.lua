@@ -1,5 +1,3 @@
---require('plenary.profile').start("profile.log")
-
 require "utils"
 require "plugins"
 require "settings"
@@ -11,6 +9,5 @@ pcall(require, "scratch")
 
 require("impatient").setup {
   path = vim.fn.stdpath "cache" .. "/lua_cache",
-  enable_profiling = true,
+  enable_profiling = false,
 }
--- require'plenary.profile'.stop()

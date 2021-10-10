@@ -53,7 +53,7 @@ M.mappings = {
     d = { "<cmd>lua require('core.telescope.custom-finders').find_dotfiles()<CR>", "Find dotfiles" },
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_dotfiles()<CR>", "Find dotfiles" },
   },
-  e = { '<cmd>NvimTreeToggle<CR>', "NvimTree" },
+  e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope buffers<CR>", "buffers" },
@@ -108,7 +108,7 @@ M.mappings = {
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },
   j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
-  h = { '<cmd>nohlsearch<CR>', "No Highlight" },
+  h = { "<cmd>nohlsearch<CR>", "No Highlight" },
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -169,8 +169,8 @@ function M.setup()
       -- No actual key bindings are created
       presets = { -- adds help for operators like d, y, ...
         operators = {
-          v = nil,
-          d = nil,
+          v = false,
+          d = false,
         },
         motions = true, -- adds help for motions
         text_objects = true, -- help for text objects triggered after entering an operator
