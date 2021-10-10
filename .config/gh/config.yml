@@ -11,3 +11,4 @@ aliases:
     co: pr checkout
     rc: repo clone
     repo-delete: api -X DELETE "repos/$1"
+    fork: repo fork --remote-name=fork --remote=true
