@@ -43,6 +43,7 @@ case "$1" in
     ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0
     $HOME/.config/lf/image draw "$CACHE" $num 1 $numb $numc
     ;;
+  *.md) glow -s dark $1 | bat ;;
   *)
     unset COLORTERM
     bat --color=always --style=plain --wrap auto "$1"
