@@ -43,7 +43,7 @@ function M.setup()
     update_focused_file = {
       enable = true,
     },
-    lsp_diagnostics = false,
+    diagnostics = nil,
     view = {
       width = 30,
       side = "left",
