@@ -28,6 +28,7 @@ M.mappings = {
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   b = {
     name = "+barbar",
+    b = { "<cmd>Telescope buffers theme=get_ivy<CR>", "buffers" },
     q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
     e = { "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer" },
     h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
@@ -56,17 +57,16 @@ M.mappings = {
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
-    b = { "<cmd>Telescope buffers<CR>", "buffers" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
     g = { "<cmd>lua require('core.telescope.custom-finders').live_grep_v2()<CR>", "Live Grep v2" },
-    h = { "<cmd>Telescope command_history<CR>", "history" },
+    h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
-    J = { "<cmd>lua require('core.telescope.custom-finders').find_runtime_files()<CR>", "Find runtime files" },
     l = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
+    m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
-    v = {
-      name = "+vim",
+    i = {
+      name = "+internal",
       c = { "<cmd>Telescope commands<CR>", "commands" },
       h = { "<cmd>Telescope help_tags<CR>", "help tags" },
       m = { "<cmd>Telescope marks<CR>", "Marks" },
@@ -79,10 +79,12 @@ M.mappings = {
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     },
     G = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "Grep String v2" },
+    J = { "<cmd>lua require('core.telescope.custom-finders').find_runtime_files()<CR>", "Find runtime files" },
     L = {
       "<cmd>lua require'telescope.builtin'.live_grep{ search_dirs={vim.fn.expand(\"%:p\")} }<cr>",
       "Local live-grep",
     },
+    M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
   },
   g = {
