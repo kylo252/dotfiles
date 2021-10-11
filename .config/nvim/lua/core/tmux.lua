@@ -59,6 +59,11 @@ function M.setup()
       -- prevents unzoom tmux when navigating beyond vim border
       persist_zoom = true,
     },
+    copy_sync = {
+      -- enables copy sync and overwrites all register actions to
+      -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+      enable = false,
+    },
     resize = {
       -- enables default keybindings (A-hjkl) for normal mode
       enable_default_keybindings = true,
