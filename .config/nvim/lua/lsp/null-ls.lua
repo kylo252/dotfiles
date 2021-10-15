@@ -4,7 +4,7 @@ function M.config()
   return {
     formatters = {
       lua = { exe = "stylua", args = {} },
-      sh = { exe = "shfmt", args = {} },
+      sh = { exe = "shfmt", args = { "-i", "2", "-ci" } },
     },
     linters = {
       lua = { exe = "luacheck", args = {} },
@@ -62,7 +62,7 @@ function M:setup()
   end
   null_ls.config { sources = sources }
 
-  require("lspconfig")["null-ls"].setup({})
+  require("lspconfig")["null-ls"].setup {}
 end
 
 return M
