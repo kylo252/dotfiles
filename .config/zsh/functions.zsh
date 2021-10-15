@@ -112,6 +112,11 @@ bindkey "${terminfo[kf5]}" reset-zsh
 #   "$XDG_DATA_HOME"/nvim/lspinstall/lua/3rd/luamake/luamake "$@"
 # }
 
+gh-latest-release(){
+  local repo="$1"
+  gh api "repos/$repo/releases/latest" --jq '.assets[].browser_download_url'
+}
+
 _zlf() {
  emulate -L zsh
   local d=$(mktemp -d) || return 1
