@@ -137,12 +137,17 @@ M.mappings = {
     Q = { "<cmd>Telescope quickfix<cr>", "Quickfix (Telescope)" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    s = { "<cmd> Telescope lsp_document_symbols theme=get_ivy<cr>", "Document Symbols" },
     S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+      "<cmd>Telescope lsp_dynamic_workspace_symbols theme=get_ivy<cr>",
       "Workspace Symbols",
     },
   },
+  q = {
+    name ="+quickfix",
+    t = { "<cmd>BqfToggle<cr>", "toggle bqf" },
+    q = { "<cmd>quit<cr>", "close bqf" },
+    },
   S = {
     name = "+sessions",
     d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving" },

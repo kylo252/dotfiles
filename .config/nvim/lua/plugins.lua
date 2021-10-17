@@ -171,7 +171,7 @@ packer.startup(function(use)
   }
 
   -- utils
-  use { "kevinhwang91/nvim-bqf", event = "BufRead" }
+  use { "kevinhwang91/nvim-bqf", event = "BufRead", config = [[ require("core.quickfix").setup() ]] }
   use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
   use { "VebbNix/lf-vim" }
 end)
