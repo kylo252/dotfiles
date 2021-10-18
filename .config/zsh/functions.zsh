@@ -27,9 +27,11 @@ function ex() {
 }
 
 function ta() {
-  local args
-  [ -n "$1" ] && tmux attach -t "$1"
-  "$XDG_DATA_HOME/tmux/plugins/tmux-fzf/scripts/session.sh" list
+  [ -n "$TMUX" ] && local change="switch-client" || local change="attach-session"
+  if [ $1 ]; then
+    tmux "$change" -t "$1" 2>/dev/null || (tmux new-session -d -s "$1" && tmux "$change" -t "$1"); return
+  fi
+  local session="$(tmux list-sessions -F '#{session_name}' 2>/dev/null | fzf --exit-0)" &&  tmux "$change" -t "$session" || echo "No sessions found."
 }
 
 function ts() {
