@@ -127,11 +127,11 @@ M.mappings = {
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
-      "<cmd>lua vim.diagnostic.goto_next({popup_opts = {border = 'single'}})<cr>",
+      "<cmd>lua vim.diagnostic.goto_next()<cr>",
       "Next Diagnostic",
     },
     k = {
-      "<cmd>lua vim.diagnostic.goto_prev({popup_opts = {border = 'single'}})<cr>",
+      "<cmd>lua vim.diagnostic.goto_prev()<cr>",
       "Prev Diagnostic",
     },
     Q = { "<cmd>Telescope quickfix<cr>", "Quickfix (Telescope)" },
@@ -144,10 +144,10 @@ M.mappings = {
     },
   },
   q = {
-    name ="+quickfix",
+    name = "+quickfix",
     t = { "<cmd>BqfToggle<cr>", "toggle bqf" },
     q = { "<cmd>quit<cr>", "close bqf" },
-    },
+  },
   S = {
     name = "+sessions",
     d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving" },

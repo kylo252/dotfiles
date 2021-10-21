@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.setup() 
   local signs = {
     { name = "LspDiagnosticsSignError", text = "" },
     { name = "LspDiagnosticsSignWarning", text = "" },
@@ -25,7 +25,20 @@ function M.setup()
     underline = true,
     update_in_insert = true,
     severity_sort = true,
+    float = {
+      source = "if_many",
+      show_header = false,
+      format = function(d)
+        local t = vim.deepcopy(d)
+        if d.user_data.lsp.code then
+          t.message = string.format("%s [%s]", t.message, t.user_data.lsp.code):gsub("1. ", "")
+        end
+        return t.message
+      end,
+    },
   }
+
+  vim.diagnostic.config(config)
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
 
