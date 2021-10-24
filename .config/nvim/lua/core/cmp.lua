@@ -14,8 +14,8 @@ local cmp_format_layout = function(entry, vim_item)
   vim_item.kind = icons[vim_item.kind]
   vim_item.menu = ({
     nvim_lsp = "(LSP)",
+    nvim_lua = "(API)",
     path = "(Path)",
-    vsnip = "(Snippet)",
     luasnip = "(Snippet)",
     buffer = "(Buffer)",
     tmux = "(TMUX)",
@@ -46,19 +46,27 @@ M.config = function()
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
     sources = {
-      { name = "nvim_lsp" },
-      { name = "path" },
-      { name = "luasnip" },
-      { name = "nvim_lua" },
-      { name = "buffer" },
+      { name = "nvim_lua", keyword_length = 2 },
+      { name = "nvim_lsp", keyword_length = 2 },
+      { name = "luasnip", keyword_length = 2 },
+      { name = "buffer", keyword_length = 5 },
       {
         name = "tmux",
+        keyword_length = 4,
         opts = {
           all_panes = false,
           label = "[tmux]",
           trigger_characters = { "." },
         },
       },
+      { name = "path", keyword_length = 4 },
+    },
+    experimental = {
+      -- I like the new menu better! Nice work hrsh7th
+      native_menu = false,
+
+      -- Let's play with this for a day or two
+      ghost_text = true,
     },
     mapping = {
       ["<Tab>"] = cmp.mapping(function()
@@ -89,7 +97,8 @@ M.config = function()
       }),
 
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      ["<C-c>"] = cmp.mapping.abort(),
+      ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,

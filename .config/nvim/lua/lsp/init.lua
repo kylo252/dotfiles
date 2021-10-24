@@ -1,33 +1,32 @@
 local M = {}
 
 function M.get_lsp_kind()
-  -- symbols for autocomplete
   return {
-    "   (Text) ",
-    "   (Method)",
-    "   (Function)",
-    "   (Constructor)",
-    " ﴲ  (Field)",
-    "[] (Variable)",
-    "   (Class)",
-    " ﰮ  (Interface)",
-    "   (Module)",
-    " 襁 (Property)",
-    "   (Unit)",
-    "   (Value)",
-    " 了 (Enum)",
-    "   (Keyword)",
-    "   (Snippet)",
-    "   (Color)",
-    "   (File)",
-    "   (Reference)",
-    "   (Folder)",
-    "   (EnumMember)",
-    "   (Constant)",
-    "   (Struct)",
-    "   (Event)",
-    "   (Operator)",
-    "   (TypeParameter)",
+    Class = "",
+    Color = "",
+    Constant = "",
+    Constructor = "",
+    Enum = "了",
+    EnumMember = "",
+    Event = "",
+    Field = "ﴲ",
+    File = "",
+    Folder = "",
+    Function = "",
+    Interface = "ﰮ",
+    Keyword = "",
+    Method = "",
+    Module = "",
+    Operator = "",
+    Property = " ",
+    Reference = "",
+    Snippet = "",
+    Struct = "",
+    Text = " ",
+    TypeParameter = "",
+    Unit = "",
+    Value = "",
+    Variable = "",
   }
 end
 
@@ -71,7 +70,7 @@ function M.get_ls_capabilities(client_id)
 
   local lsp_caps = client.resolved_capabilities
 
-  print("client id: ", client.id)
+  print("client id:", client.id)
   print("client name:", client.name)
   print("resolved_capabilities:", vim.inspect(lsp_caps))
 

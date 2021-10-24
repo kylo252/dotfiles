@@ -16,7 +16,7 @@ vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
 vim.opt.colorcolumn = "99999" -- fix indentline for now
-vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = {  "menu", "menuone", "noselect" }
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
@@ -29,7 +29,7 @@ vim.opt.number = true -- set numbered lines
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2 -- always show tabs
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
