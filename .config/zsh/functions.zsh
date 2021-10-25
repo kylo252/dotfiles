@@ -79,20 +79,28 @@ function pprint() {
   echo "$1" | sed -e 's/\:/\n/g' | fzf
 }
 
-# find-in-file - usage: fif <SEARCH_TERM>
+# find-in-file - usage: fif <SEARCH_TERM> <target>
 function fif() {
-  [ ! "$#" -gt 0 ] && echo "No arguments!!" && return 1
-  rg "$1" "$2" --vimgrep --color ansi | fzf --ansi \
-    --preview "rg --smart-case --pretty --context 10 '$1' {}"
+  [ ! "$#" -gt 0 ] && echo "please provoide an argument, these are pass to rg directly" && return 1
+  local initial_query="$@"
+  local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case "
+  FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
+    fzf --bind "change:reload:$rg_prefix {q} || true" \
+        --ansi --disabled --query "$initial_query" \
+        --bind 'ctrl-o:execute:${EDITOR:-vim} <(xdg {1}) > /dev/tty' \
+  --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2 | awk -F":" '{ printf("%s +%s\n",$1,$2) }'
+        # --layout=reverse | xargs "$EDITOR"
+
 }
 
 # TODO: add the ability to open in an editor
-function ifzf() {
-  INITIAL_QUERY="$@"
-  RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-  FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-    --ansi --phony --query "$INITIAL_QUERY" \
+function fif-v2() {
+  [ ! "$#" -gt 0 ] && echo "please provoide an argument, these are pass to rg directly" && return 1
+  local initial_query="$@"
+  local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case "
+  FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
+    fzf --bind "change:reload:$rg_prefix {q} || true" \
+    --ansi --phony --query "$initial_query" \
     --height=50% --layout=reverse --preview "$XDG_CONFIG_HOME/fzf/helper/previewer.sh $PWD/{}" |
     awk -F ":" -v home="$PWD" '{ print home "/" $1 ":" $2 }' 
 }
