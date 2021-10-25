@@ -146,7 +146,6 @@ M.mappings = {
   q = {
     name = "+quickfix",
     t = { "<cmd>BqfToggle<cr>", "toggle bqf" },
-    q = { "<cmd>quit<cr>", "close bqf" },
   },
   S = {
     name = "+sessions",

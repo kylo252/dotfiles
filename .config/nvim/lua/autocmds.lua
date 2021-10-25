@@ -9,7 +9,12 @@ M.augroups = {
     },
     { "FileType", "qf", "set nobuflisted" },
     { "BufEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
-    { "BufEnter", "*", "++once", "lua require('lsp').setup()" },
+    { "BufRead", "*", "++once", "lua require('lsp').setup()" },
+  },
+  _filetypechanges = {
+    { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
+    { "BufRead", "*.zsh", "setlocal filetype=sh" },
+    { "BufNewFile", "*.zsh", "setlocal filetype=sh" },
   },
   _git = {
     { "FileType", "gitcommit", "setlocal wrap" },
@@ -21,6 +26,9 @@ M.augroups = {
   },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
+  },
+  _general_lsp = {
+    { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> <esc> :close<CR>" },
   },
 }
 
