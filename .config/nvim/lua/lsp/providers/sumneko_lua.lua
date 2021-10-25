@@ -3,7 +3,7 @@ local opts = {
     Lua = {
       telemetry = { enable = false },
       diagnostics = {
-        globals = { "vim" },
+        globals = { "vim", "awesome" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
