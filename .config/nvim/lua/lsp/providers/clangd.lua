@@ -2,11 +2,12 @@ local clangd_flags = {
   "--all-scopes-completion",
   "--suggest-missing-includes",
   "--background-index",
-  "--pch-storage=disk",
+  "--pch-storage=memory",
   "--cross-file-rename",
   "--log=info",
   "--enable-config",
   "--clang-tidy",
+  "--completion-style=detailed",
   -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
 }
 
