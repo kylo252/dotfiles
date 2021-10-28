@@ -97,7 +97,10 @@ M.config = function()
       }),
 
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-c>"] = cmp.mapping.abort(),
+      ["<C-c>"] = function()
+        cmp.mapping.close()
+        vim.cmd [[stopinsert]]
+      end,
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
