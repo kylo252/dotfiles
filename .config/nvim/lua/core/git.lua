@@ -25,7 +25,29 @@ function M.setup_gitsigns()
 end
 
 function M.setup_gitlinker()
-  require("gitlinker").setup()
+
+  local gitlinker = require "gitlinker"
+  local hosts = require("gitlinker").hosts
+
+  local get_gerrit_gitlies_type_url = function(url_data)
+    local url = "https://" .. url_data.host .. "/plugins/gitiles/" .. url_data.repo
+    if not url_data.file or not url_data.rev then
+      return url
+    end
+    url = url .. "/+/" .. url_data.rev .. "/" .. url_data.file
+    if not url_data.lstart then
+      return url
+    end
+    url = url .. "#" .. url_data.lstart
+    return url
+  end
+
+  gitlinker.setup {
+    callbacks = {
+      ["github.com"] = hosts.get_github_type_url,
+      ["gerrit"] = get_gerrit_gitlies_type_url,
+    },
+  }
 end
 
 return M
