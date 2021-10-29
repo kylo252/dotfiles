@@ -81,8 +81,8 @@ M.mappings = {
     G = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "Grep String v2" },
     J = { "<cmd>lua require('core.telescope.custom-finders').find_runtime_files()<CR>", "Find runtime files" },
     L = {
-      "<cmd>lua require'telescope.builtin'.live_grep{ search_dirs={vim.fn.expand(\"%:p\")} }<cr>",
-      "Local live-grep",
+      "<cmd>lua require('core.telescope.custom-finders').local_buffer_fuzzy_grep()<CR>",
+      "Local fuzzy grep",
     },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },

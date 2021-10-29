@@ -7,6 +7,9 @@ local _, finders = pcall(require, "telescope.finders")
 local _, pickers = pcall(require, "telescope.pickers")
 local _, sorters = pcall(require, "telescope.sorters")
 local _, themes = pcall(require, "telescope.themes")
+local _, config = pcall(require, "telescope.config")
+local _, make_entry = pcall(require, "telescope.make_entry")
+local Path = require "plenary.path"
 
 function M.grep_string_v2(opts)
   opts = opts or M.theme()
@@ -80,6 +83,66 @@ function M.find_dotfiles()
     find_command = { "git", "dots", "ls-files" },
   }
   require("telescope.builtin").find_files(opts)
+end
+
+function M.local_buffer_fuzzy_grep()
+  local opts = themes.get_ivy {
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 15,
+      width = 0.5,
+    },
+    prompt = ">> ",
+    path_display = "hidden",
+    -- ignore_filename = true,
+    -- include_extension = false,
+  }
+  local vimgrep_arguments = {
+    "rg",
+    "--no-heading",
+    "--hidden",
+    "--with-filename",
+    "--line-number",
+    "--column",
+    "--smart-case",
+  }
+
+  opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
+  local live_grepper = finders.new_job(function(prompt)
+    if not prompt or prompt == "" then
+      return nil
+    end
+
+    local filelist = {}
+
+    local bufnrs = vim.tbl_filter(function(b)
+      if 1 ~= vim.fn.buflisted(b) then
+        return false
+      end
+      return true
+    end, vim.api.nvim_list_bufs())
+    if not next(bufnrs) then
+      return
+    end
+
+    for _, bufnr in ipairs(bufnrs) do
+      local file = vim.api.nvim_buf_get_name(bufnr)
+      table.insert(filelist, Path:new(file):make_relative(opts.cwd))
+    end
+    return vim.tbl_flatten { vimgrep_arguments, "--", prompt, filelist }
+  end, make_entry.gen_from_vimgrep(
+    opts
+  ), opts.max_results, opts.cwd)
+
+  pickers.new(opts, {
+    prompt_title = "Live Grep",
+    finder = live_grepper,
+    previewer = config.values.grep_previewer(opts),
+    -- TODO: It would be cool to use `--json` output for this
+    -- and then we could get the highlight positions directly.
+    sorter = sorters.highlighter_only(opts),
+  }):find()
 end
 
 function M.find_runtime_files(opts)
