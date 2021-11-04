@@ -35,6 +35,7 @@ M.mappings = {
     l = { "<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right" },
     d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
     L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
+    y = { "<cmd>lua require('utils').copy_help_url()<cr>", "copy help URL" },
   },
   c = {
     name = "+commands",
@@ -194,6 +195,7 @@ function M.setup()
   require("which-key").setup(setup_opts)
 
   wk.register(M.global_mappings)
+
   wk.register(M.dashboard_mappings, { prefix = "f", buffer = 1 })
   wk.register(M.mappings, { prefix = "<leader>" })
 end

@@ -13,13 +13,18 @@ function open-nvim-log() {
 }
 
 function open-lvim-log() {
-  _tmux_split "lnav ~/.cache/nvim/lunarvim.log"
+  _tmux_split "lnav ~/.cache/nvim/lvim.log"
+}
+
+function open-installer-log() {
+  _tmux_split "lnav ~/.cache/nvim/lsp-installer.log"
 }
 
 declare -a actions=(
   open-lsp-log
   open-nvim-log
   open-lvim-log
+  open-installer-log
 )
 
 SELECTION=$(
