@@ -157,8 +157,8 @@ M.mappings = {
   },
   t = {
     name = "+scratch test",
-    a = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test1()<cr>", "scratch test1" },
-    s = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>", "scratch test2" },
+    a = { "<cmd>lua require_clean('scratch').test1()<cr>", "scratch test1" },
+    s = { "<cmd>lua require_clean('scratch').test2()<cr>", "scratch test2" },
     e = { "<cmd>edit ~/.config/nvim/lua/scratch.lua<cr>", "edit scratch file" },
   },
 }

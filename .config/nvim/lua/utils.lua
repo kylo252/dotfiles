@@ -28,17 +28,6 @@ function utils.get_active_client()
   return nil
 end
 
-function utils.reload_package(m)
-  local status
-  if package.loaded[m] then
-    status = true
-  end
-  package.loaded[m] = nil
-  _G[m] = nil
-  status, _ = pcall(require, m)
-  return status
-end
-
 function utils.xdg_open_handler()
   if vim.fn.executable "xdg-open" ~= 1 then
     vim.notify("xdg-open was not found", vim.log.levels.WARN)
@@ -101,6 +90,13 @@ function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))
   return ...
+end
+
+function _G.require_clean(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+  local _, module = pcall(require, m)
+  return module
 end
 
 return utils
