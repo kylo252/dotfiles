@@ -145,7 +145,9 @@ packer.startup(function(use)
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "VimEnter",
-      config = [[require('core.indent')]],
+      config = function()
+        require("core.indent").setup()
+      end,
     },
 
     {
