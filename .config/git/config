@@ -37,3 +37,5 @@
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252
+[gitreview]
+	remote = origin
