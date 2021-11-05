@@ -105,17 +105,12 @@ function fif-v2() {
     awk -F ":" -v home="$PWD" '{ print home "/" $1 ":" $2 }' 
 }
 
-# reload by using F5
-function reset-zsh() {
-  fd "$ZDOT_DIR" --hidden -e zwc -x rm || exit 1
-  fd . "$XDG_CACHE_HOME/zsh" --type file --hidden -x rm || exit 1
-  znap clean || exit 1
-  znap compile || exit 1
+# zsh force reset
+function zfr() {
+  fd . "$ZDOTDIR" --hidden -e zwc -x rm 
+  fd . "$XDG_CACHE_HOME/zsh" --type file --hidden -x rm 
   znap restart
 }
-
-zle -N reset-zsh
-bindkey "${terminfo[kf5]}" reset-zsh
 
 # TODO not sure what this does
 # function luamake() {
