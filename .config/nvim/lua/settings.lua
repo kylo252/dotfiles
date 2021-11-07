@@ -13,7 +13,7 @@ vim.cmd "set syntax=off"
 
 ---  SETTINGS  ---
 vim.opt.backup = false -- creates a backup file
-vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
+-- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
 vim.opt.colorcolumn = "99999" -- fix indentline for now
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -47,14 +47,13 @@ vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-
 vim.g.clipboard = {
   copy = {
-    ["+"] = "xsel -i -b",
+    ["+"] = "xsel -i -p",
     ["*"] = "xsel -i -p",
   },
   paste = {
-    ["+"] = "xsel -o -b 2>/dev/null",
+    ["+"] = "xsel -o -p 2>/dev/null",
     ["*"] = "xsel -o -p 2>/dev/null",
   },
 }
