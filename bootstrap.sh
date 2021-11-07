@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
+set -eou pipefail
 
-set -eu
-
-function __check_reqs() {
-  __reqs=(
+function check_reqs() {
+  local reqs=(
     git
     zsh
     nvim
   )
-
-  for req in "${__reqs[@]}"; do
+  for req in "${reqs[@]}"; do
     if ! command -v "$req"; then
       echo ">>> ERROR: missing requirement: $req"
       echo ">>> please install and re-run the script again" && exit 1
     fi
   done
-  unset __reqs
 }
 
-function __setup_default_exports() {
+function setup_default_exports() {
 
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
@@ -32,55 +29,52 @@ function __setup_default_exports() {
   export ZDOTDIR="$HOME/.config/zsh"
 
   export DOTBARE_DIR="$HOME/.dtf.git"
-
   export DOTBARE_TREE="$HOME"
+  export DOTBARE_INSTALL_PREFIX="$XDG_DATA_HOME/zsh/plugins/dotbare"
 
   export TPM_DIR="$XDG_DATA_HOME/tmux/plugins/tpm"
 }
 
-function __setup_dotfiles() {
+function setup_dotfiles() {
 
-  __check_reqs
-  __setup_default_exports
+  check_reqs
+  setup_default_exports
 
   echo "Fetching dependencies.."
 
-  if [ ! -d "$XDG_DATA_HOME/dotbare" ]; then
-    git clone https://github.com/kazhala/dotbare "$XDG_DATA_HOME/dotbare"
+  if [ ! -d "$DOTBARE_INSTALL_PREFIX" ]; then
+    git clone --depth=1 https://github.com/kazhala/dotbare "$DOTBARE_INSTALL_PREFIX"
   fi
 
   if [ ! -d "$HOME/.dtf.git" ]; then
-    "$XDG_DATA_HOME/dotbare/dotbare" finit -u https://github.com/kylo252/dotfiles.git
-    ln -sf "$XDG_CONFIG_HOME/git/hooks/dots_post_commit" "$HOME/.dtf.git/hooks/pre-push"
-    chmod +x "$HOME/.dtf.git/hooks/pre-push"
+    "$DOTBARE_INSTALL_PREFIX/dotbare" finit -u https://github.com/kylo252/dotfiles.git
+    ln -sf "$XDG_CONFIG_HOME/git/hooks/dots_post_commit" "$DOTBARE_DIR/hooks/pre-push"
+    chmod +x "$DOTBARE_DIR/hooks/pre-push"
   fi
 
-  echo 'Installing zsh plugins'
-
-  local ZNAP_DIR="$XDG_DATA_HOME/zsh/plugins/znap"
-  if [ ! -d "$ZNAP_DIR" ]; then
-    git clone https://github.com/marlonrichert/zsh-snap "$ZNAP_DIR"
+  local znap_dir="$XDG_DATA_HOME/zsh/plugins/znap"
+  if [ ! -d "$znap_dir" ]; then
+    echo 'setting up zsh ...'
+    git clone --depth=1 https://github.com/marlonrichert/zsh-snap "$znap_dir"
+    zsh -c "source $ZDOTDIR/plugins.zsh"
   fi
-
-  zsh -c "source $ZDOTDIR/plugins.zsh"
-
-  echo "setting up fzf.."
 
   if [ ! -d "$XDG_DATA_HOME/fzf" ]; then
-    git clone https://github.com/junegunn/fzf "$XDG_DATA_HOME/fzf"
+    git clone --depth=1 https://github.com/junegunn/fzf "$XDG_DATA_HOME/fzf"
   fi
 
+  echo "setting up fzf .."
   "$XDG_DATA_HOME/fzf/install" --all --xdg --completion --no-update-rc
 
   echo "setting up tmux.."
-
   if [ ! -d "$TPM_DIR" ]; then
-    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    git clone --depth=1 https://github.com/tmux-plugins/tpm "$TPM_DIR"
   fi
+  echo "setup complete!"
 }
 
-__setup_dotfiles
+setup_dotfiles
 
-unset -f __check_reqs
-unset -f __setup_dotfiles
-unset -f __setup_default_exports
+unset -f check_reqs
+unset -f setup_dotfiles
+unset -f setup_default_exports

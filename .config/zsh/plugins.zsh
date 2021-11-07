@@ -10,12 +10,16 @@ LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
 
 source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
+znap source kazhala/dotbare
 znap source romkatv/powerlevel10k
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
 znap source Aloxaf/fzf-tab
 znap source reegnz/jq-zsh-plugin
+
+
+
 
 # znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
 # znap eval pip-completion "source <(pip3 completion --zsh)"
