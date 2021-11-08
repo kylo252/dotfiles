@@ -1,23 +1,5 @@
 local M = {}
 
-local function get_tmux()
-  return os.getenv "TMUX"
-end
-
-local function get_socket()
-  return vim.split(get_tmux(), ",")[1]
-end
-
-local function execute(arg, pre)
-  local command = string.format("%s tmux -S %s %s", pre or "", get_socket(), arg)
-
-  local handle = assert(io.popen(command), string.format("unable to execute: [%s]", command))
-  local result = handle:read "*a"
-  handle:close()
-
-  return result
-end
-
 function M.set_tmux_win_title(pattern)
   local bufnr = vim.api.nvim_get_current_buf()
   local buftype = vim.api.nvim_buf_get_option(bufnr, "buftype")
@@ -33,18 +15,6 @@ function M.set_tmux_win_title(pattern)
       args = { "rename-window", title },
     })
     :start()
-end
-
-function M.set_tmux_win_title_native(pattern)
-  local bufnr = vim.api.nvim_get_current_buf()
-  local buftype = vim.api.nvim_buf_get_option(bufnr, "buftype")
-  print(vim.inspect("got buftype: " .. buftype))
-  if not buftype or buftype == "nofile" or buftype == "quickfix" or buftype == "help" then
-    return
-  end
-  local title = vim.fn.expand(pattern)
-  local cmd = string.format("tmux rename-window %q", title)
-  execute(cmd)
 end
 
 function M.setup()
