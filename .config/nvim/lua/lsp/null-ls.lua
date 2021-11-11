@@ -8,7 +8,7 @@ function M.config()
     },
     linters = {
       lua = { exe = "luacheck", args = {} },
-      sh = { exe = "shellcheck", args = {} },
+      sh = { exe = "shellcheck", args = {"--exclude=SC1091"} },
     },
   }
 end
