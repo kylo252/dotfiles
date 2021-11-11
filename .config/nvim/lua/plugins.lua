@@ -151,10 +151,11 @@ packer.startup(function(use)
     },
 
     {
-      "glepnir/dashboard-nvim",
+      "goolord/alpha-nvim",
       event = "BufWinEnter",
-      cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
-      config = [[require('core.dashboard')]],
+      config = function()
+        require("core.dashboard").setup()
+      end,
     },
   }
 
