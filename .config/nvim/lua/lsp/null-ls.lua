@@ -14,15 +14,13 @@ function M.config()
 end
 
 function M.list_registered_providers_names(filetype)
-  local u = require "null-ls.utils"
-  local c = require "null-ls.config"
+  local s = require "null-ls.sources"
+  local available_sources = s.get_available(filetype)
   local registered = {}
-  for method, source in pairs(c.get()._methods) do
-    for name, filetypes in pairs(source) do
-      if u.filetype_matches(filetypes, filetype) then
-        registered[method] = registered[method] or {}
-        table.insert(registered[method], name)
-      end
+  for _, source in ipairs(available_sources) do
+    for method in pairs(source.methods) do
+      registered[method] = registered[method] or {}
+      table.insert(registered[method], source.name)
     end
   end
   return registered
@@ -60,7 +58,7 @@ function M:setup()
     }
     table.insert(sources, source)
   end
-  null_ls.config { sources = sources }
+  null_ls.config { sources = sources, log = { level = "error" } }
 
   require("lspconfig")["null-ls"].setup {}
 end
