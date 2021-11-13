@@ -1,7 +1,7 @@
 [core]
-  pager = delta --paging
+  pager = delta --paging || less
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only || less
 [delta]
   features = decorations unobtrusive-line-numbers
   line-numbers = true
