@@ -37,19 +37,17 @@ function M.config()
       mappings = {
         i = {
           ["<C-c>"] = actions.close,
-          ["<S-Up>"] = actions.preview_scrolling_up,
-          ["<S-Down>"] = actions.preview_scrolling_down,
+          ["<S-Up>"] = actions.cycle_previewers_prev ,
+          ["<S-Down>"] = actions.cycle_previewers_next,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<C-space>"] = custom_actions.fuzzy_filter_results,
-
           -- ["<C-i>"] = my_cool_custom_action,
         },
         n = {
           ["<C-c>"] = actions.close,
-          ["<S-Up>"] = actions.preview_scrolling_up,
-          ["<S-Down>"] = actions.preview_scrolling_down,
+          ["<S-Up>"] = actions.cycle_previewers_prev ,
+          ["<S-Down>"] = actions.cycle_previewers_next,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<C-space>"] = custom_actions.fuzzy_filter_results,
+          -- ["<C-Space>"] = custom_actions.fuzzy_filter_results,
           -- ["<C-i>"] = my_cool_custom_action,
         },
       },

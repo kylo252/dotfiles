@@ -30,6 +30,10 @@ M.augroups = {
   _general_lsp = {
     { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> <esc> :close<CR>" },
   },
+  _cmp = { 
+
+    { "FileType", "TelescopePrompt",  [[lua require('cmp').setup.buffer { enabled = false }]] }
+    }
 }
 
 function M.define_augroups(definitions) -- {{{1
