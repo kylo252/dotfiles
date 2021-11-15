@@ -8,7 +8,6 @@ local opts = {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.stdpath "config"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
         },

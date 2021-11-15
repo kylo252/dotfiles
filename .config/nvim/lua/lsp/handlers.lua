@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup() 
+function M.setup()
   local signs = {
     { name = "LspDiagnosticsSignError", text = "" },
     { name = "LspDiagnosticsSignWarning", text = "" },
@@ -30,8 +30,8 @@ function M.setup()
       show_header = false,
       format = function(d)
         local t = vim.deepcopy(d)
-        if d.user_data.lsp.code then
-          t.message = string.format("%s [%s]", t.message, t.user_data.lsp.code):gsub("1. ", "")
+        if d.code then
+          t.message = string.format("%s [%s]", t.message, t.code):gsub("1. ", "")
         end
         return t.message
       end,
