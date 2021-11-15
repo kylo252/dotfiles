@@ -19,7 +19,7 @@ local mode_adapters = {
   visual_mode = "v",
   visual_block_mode = "x",
   command_mode = "c",
-  operator_mode = "o"
+  operator_mode = "o",
 }
 
 -- Set key mappings individually

@@ -8,7 +8,7 @@ function M.config()
     },
     linters = {
       lua = { exe = "luacheck", args = {} },
-      sh = { exe = "shellcheck", args = {"--exclude=SC1091"} },
+      sh = { exe = "shellcheck", args = { "--exclude=SC1091" } },
     },
   }
 end
@@ -58,7 +58,7 @@ function M:setup()
     }
     table.insert(sources, source)
   end
-  null_ls.config { sources = sources, log = { level = "error" } }
+  null_ls.config { sources = sources, log = { level = "warn" } }
 
   require("lspconfig")["null-ls"].setup {}
 end

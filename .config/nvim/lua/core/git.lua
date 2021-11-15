@@ -25,7 +25,6 @@ function M.setup_gitsigns()
 end
 
 function M.setup_gitlinker()
-
   local gitlinker = require "gitlinker"
   local hosts = require("gitlinker").hosts
 

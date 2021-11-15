@@ -35,7 +35,7 @@ function M.setup(server_name)
   local config = resolve_config(server_name)
   local server_available, requested_server = require("nvim-lsp-installer.servers").get_server(server_name)
 
-  if server_available  then
+  if server_available then
     requested_server:setup(config)
   else
     require("lspconfig")[server_name].setup(config)

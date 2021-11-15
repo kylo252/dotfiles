@@ -12,7 +12,7 @@ function M.setup()
 
     silent_chdir = true,
 
-    ignore_lsp = {"null-ls"},
+    ignore_lsp = { "null-ls" },
 
     datapath = vim.fn.stdpath "cache",
   }
