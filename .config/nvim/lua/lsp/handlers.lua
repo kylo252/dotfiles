@@ -26,7 +26,7 @@ function M.setup()
     update_in_insert = true,
     severity_sort = true,
     float = {
-      source = "if_many",
+      source = "always",
       show_header = false,
       format = function(d)
         local t = vim.deepcopy(d)
