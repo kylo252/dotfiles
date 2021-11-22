@@ -87,7 +87,7 @@ packer.startup(function(use)
     {
       "ggandor/lightspeed.nvim",
       event = "BufWinEnter",
-      config = [[require('core.lightspeed')]],
+      config = [[require('core.lightspeed').setup()]],
     },
   }
 
@@ -144,7 +144,7 @@ packer.startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "VimEnter",
+      event = "FileReadPost",
       config = function()
         require("core.indent").setup()
       end,
