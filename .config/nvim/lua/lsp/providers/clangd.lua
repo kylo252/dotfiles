@@ -1,9 +1,7 @@
 local clangd_flags = {
   "--all-scopes-completion",
-  "--suggest-missing-includes",
   "--background-index",
   "--pch-storage=memory",
-  "--cross-file-rename",
   "--log=info",
   "--enable-config",
   "--clang-tidy",

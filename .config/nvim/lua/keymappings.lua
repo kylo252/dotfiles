@@ -142,6 +142,9 @@ M.groups = {
 
     -- fix gx
     ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+
+    -- search for visually selected text
+    ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
   },
 
   ---@usage change or add keymappings for visual block mode

@@ -38,12 +38,12 @@ local buttons = {
     { keybind = "SPC r", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
     { keybind = "SPC f", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
     { keybind = "SPC n", description = "  New File", command = "<CMD>ene!<CR>" },
-    { keybind = "SPC p", description = "  Recent Projects ", command = "<CMD>Telescope projects<CR>" },
+    { keybind = "SPC j", description = "  Recent Places", command = "<CMD>Telescope zoxide list<CR>" },
     { keybind = "SPC t", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
     {
-      keybind = "SPC P",
+      keybind = "SPC p",
       description = "  Plugins ",
-      command = ":edit ~/.local/share/lunarvim/lvim/lua//lvim/plugins.lua",
+      command = ":edit ~/.config/nvim/lua/plugins.lua<cr>",
     },
     {
       keybind = "SPC s",
