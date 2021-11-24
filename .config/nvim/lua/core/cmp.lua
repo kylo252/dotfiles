@@ -33,9 +33,6 @@ M.config = function()
     return
   end
   cmp.setup {
-    completion = {
-      completeopt = "menu,menuone,noinsert",
-    },
     formatting = { format = cmp_format_layout },
     snippet = {
       expand = function(args)
@@ -46,17 +43,16 @@ M.config = function()
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
     sources = {
-      { name = "nvim_lua", keyword_length = 2 },
       { name = "nvim_lsp", keyword_length = 2 },
+      { name = "nvim_lua", keyword_length = 2 },
       { name = "luasnip", keyword_length = 2 },
-      { name = "buffer", keyword_length = 5 },
+      { name = "buffer", keyword_length = 4 },
       {
         name = "tmux",
         keyword_length = 4,
-        opts = {
+        options = {
           all_panes = false,
           label = "[tmux]",
-          trigger_characters = { "." },
         },
       },
       { name = "path", keyword_length = 4 },
@@ -101,12 +97,30 @@ M.config = function()
         cmp.mapping.close()
         vim.cmd [[stopinsert]]
       end,
-      ["<C-e>"] = cmp.mapping.abort(),
+      ["<C-e>"] = cmp.mapping {
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      },
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
     },
   }
+
+  -- Use cmdline & path source for ':'
+  cmp.setup.cmdline(":", {
+    sources = cmp.config.sources {
+      { name = "path" },
+    },
+  })
+
+  -- Use buffer source for `/`
+  cmp.setup.cmdline("/", {
+    sources = {
+      -- TODO: test out `rg` completion source
+      { name = "buffer" },
+    },
+  })
 end
 return M

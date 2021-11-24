@@ -113,7 +113,7 @@ end
 function M.setup()
   require("lsp.handlers").setup()
 
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pylsp", "cmake" }
 
   for _, server in ipairs(servers) do
     require("lsp.manager").setup(server)
