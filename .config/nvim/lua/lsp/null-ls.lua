@@ -60,7 +60,14 @@ function M:setup()
   end
   null_ls.config { sources = sources, log = { level = "warn" } }
 
-  require("lspconfig")["null-ls"].setup {}
+  local on_attach = function(client, bufnr)
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
+    end
+  end
+  require("lspconfig")["null-ls"].setup {
+    on_attach = on_attach,
+  }
 end
 
 return M
