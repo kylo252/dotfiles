@@ -1,30 +1,17 @@
 #!/usr/bin/env bash
 
-function _tmux_split() {
-  tmux split-window -v -c '#{pane_current_path}' "$1"
-}
-
-function open-lsp-log() {
-  _tmux_split "lnav ~/.cache/nvim/lsp.log"
+function _tmux_lnav_split() {
+  local file="$1"
+  local file_basedir=echo "$(dirname "$(readlink -m "$file")")"
+  tmux split-window -v -c "$file_basedir" "lnav $file"
 }
 
 function open-nvim-log() {
-  _tmux_split "lnav ~/.cache/nvim/log"
-}
-
-function open-lvim-log() {
-  _tmux_split "lnav ~/.cache/nvim/lvim.log"
-}
-
-function open-installer-log() {
-  _tmux_split "lnav ~/.cache/nvim/lsp-installer.log"
+  _tmux_lnav_split "$HOME/.cache/nvim/*log*"
 }
 
 declare -a actions=(
-  open-lsp-log
   open-nvim-log
-  open-lvim-log
-  open-installer-log
 )
 
 SELECTION=$(

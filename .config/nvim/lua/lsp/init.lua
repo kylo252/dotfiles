@@ -112,6 +112,7 @@ end
 
 function M.setup()
   require("lsp.handlers").setup()
+  require("vim.lsp.log").set_format_func(vim.inspect)
 
   local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pylsp", "cmake" }
 
