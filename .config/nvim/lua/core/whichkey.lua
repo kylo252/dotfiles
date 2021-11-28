@@ -13,17 +13,6 @@ M.global_mappings = {
   },
 }
 
-M.dashboard_mappings = {
-  name = "dashboard",
-  r = { "<cmd> Telescope oldfiles<cr>", "Recently Used Files" },
-  f = { "<cmd> Telescope find_files hidden=true<cr>", "Find File" },
-  p = { "<cmd> :edit ~/.config/nvim/lua/plugins.lua<cr>", "Plugins" },
-  s = { "<cmd> :edit ~/.config/nvim/lua/settings.lua<cr>", "Settings" },
-  g = { "<cmd> Telescope live_grep<cr>", "Find Word" },
-  l = { "<cmd> SessionLoad<cr>", "Load Last Session" },
-  m = { "<cmd> Telescope marks<cr>", "Marks" },
-}
-
 M.mappings = {
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   b = {
@@ -145,6 +134,16 @@ M.mappings = {
       "Workspace Symbols",
     },
   },
+  L = {
+    l = {
+      name = "+logs",
+      d = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
+      i = { "<cmd>LspInstallLog<cr>", "Open lsp-installer logfile" },
+      l = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
+      n = { "<cmd>NullLsLog<cr>", "Open null-ls logfile" },
+      p = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
+    },
+  },
   q = {
     name = "+quickfix",
     t = { "<cmd>BqfToggle<cr>", "toggle bqf" },
@@ -197,7 +196,6 @@ function M.setup()
 
   wk.register(M.global_mappings)
 
-  wk.register(M.dashboard_mappings, { prefix = "f", buffer = 1 })
   wk.register(M.mappings, { prefix = "<leader>" })
 end
 

@@ -156,6 +156,9 @@ M.groups = {
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = ":m '>+1<CR>gv-gv",
     ["<A-k>"] = ":m '<-2<CR>gv-gv",
+
+    -- Sort lines
+    ["<A-s>"] = ":'<,'>!sort -u<CR>",
   },
 
   operator_mode = {},
