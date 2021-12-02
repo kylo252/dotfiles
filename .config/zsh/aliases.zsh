@@ -8,7 +8,6 @@ alias dtf='dotbare'
 
 alias dta='dotbare fadd'
 alias dtc='dotbare commit -m '
-alias dte='dotbare fedit'
 alias dtg='dotbare fgrep'
 alias dtl='dotbare flog'
 alias dtp='dotbare pull'
@@ -21,10 +20,13 @@ alias la='ls -A --color=auto'
 alias ll='ls -laFq --color=auto'
 alias ls='ls -FhN --color=auto --group-directories-first'
 
+alias dte="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME dotbare fedit"
+alias dtm="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME dotbare fedit --modified"
 alias pre-dots-commit="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME pre-commit"
 alias lzd='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
 alias lzg='lazygit'
 alias gu='gitui'
+
 [ -e /etc/arch-release ] && alias -g paks='sudo pacman -S'
 
 alias paux='procs aux | rg'

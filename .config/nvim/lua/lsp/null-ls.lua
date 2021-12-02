@@ -4,7 +4,7 @@ function M.config()
   return {
     formatters = {
       lua = { exe = "stylua", args = {} },
-      sh = { exe = "shfmt", args = { "-i", "2", "-ci" } },
+      sh = { exe = "shfmt", args = { "-i", "2", "-ci", "-bn" } },
     },
     linters = {
       lua = { exe = "luacheck", args = {} },
@@ -61,9 +61,9 @@ function M:setup()
   null_ls.config { sources = sources, log = { level = "warn" } }
 
   local on_attach = function(client, bufnr)
-    if client.resolved_capabilities.document_formatting then
-      vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
-    end
+    -- if client.resolved_capabilities.document_formatting then
+    --   vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
+    -- end
   end
   require("lspconfig")["null-ls"].setup {
     on_attach = on_attach,
