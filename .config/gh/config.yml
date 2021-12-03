@@ -8,7 +8,7 @@ editor: nvim
 prompt: enabled
 
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
-pager: bat || less -Rf
+pager: bat --paging=always --color=always --style=plain
 
 # Aliases allow you to create nicknames for gh commands
 aliases:
