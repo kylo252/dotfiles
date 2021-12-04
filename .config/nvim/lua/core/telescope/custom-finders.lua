@@ -9,6 +9,8 @@ local _, sorters = pcall(require, "telescope.sorters")
 local _, themes = pcall(require, "telescope.themes")
 local _, config = pcall(require, "telescope.config")
 local _, make_entry = pcall(require, "telescope.make_entry")
+local _, action_state = pcall(require, "telescope.actions.state")
+
 local Path = require "plenary.path"
 
 function M.grep_string_v2(opts)
@@ -53,9 +55,23 @@ function M.live_grep_v2(opts)
   opts = opts or {}
   builtin.live_grep(vim.tbl_deep_extend("force", {
     prompt_title = "Search",
-    attach_mappings = function(_, map)
-      map("i", "<C-g>", custom_actions.fuzzy_filter_results)
-      map("n", "<C-g>", custom_actions.fuzzy_filter_results)
+    attach_mappings = function(prompt_bufnr, map)
+      local fuzzy_filter_results = function()
+        local query = action_state.get_current_line()
+        if not query then
+          print "no matching results"
+          return
+        end
+        vim.fn.histadd("search", query)
+        -- print(vim.inspect(entry))
+        opts.search = query
+        opts.prompt_title = "Filter"
+        opts.prompt_prefix = "/" .. query .. " >> "
+        opts.next_picker = "grep_string"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+      map("i", "<C-g>", fuzzy_filter_results)
+      map("n", "<C-g>", fuzzy_filter_results)
       return true
     end,
   }, opts))
@@ -131,9 +147,7 @@ function M.local_buffer_fuzzy_grep()
       table.insert(filelist, Path:new(file):make_relative(opts.cwd))
     end
     return vim.tbl_flatten { vimgrep_arguments, "--", prompt, filelist }
-  end, make_entry.gen_from_vimgrep(
-    opts
-  ), opts.max_results, opts.cwd)
+  end, make_entry.gen_from_vimgrep(opts), opts.max_results, opts.cwd)
 
   pickers.new(opts, {
     prompt_title = "Live Grep",
@@ -147,6 +161,7 @@ end
 
 function M.find_runtime_files(opts)
   opts = opts or themes.get_ivy {}
+
   local runtimepath = vim.opt.runtimepath:get()
   local runtimedirs = {}
 
@@ -159,11 +174,23 @@ function M.find_runtime_files(opts)
     layout_strategy = "flex",
     finder = finders.new_table(runtimedirs),
     sorter = sorters.get_generic_fuzzy_sorter(opts),
-    attach_mappings = function(_, map)
-      -- map("i", "<cr>", no_redraw_find_in_dir)
-      map("i", "<cr>", custom_actions.find_in_dir)
-      map("i", "<c-f>", custom_actions.find_in_dir)
-      map("i", "<c-g>", custom_actions.grep_in_dir)
+    attach_mappings = function(prompt_bufnr, map)
+      local find_in_dir = function()
+        local entry = action_state.get_selected_entry()
+        opts.cwd = entry.value
+        opts.next_picker = "find_files"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+      local grep_in_dir = function()
+        local entry = action_state.get_selected_entry()
+        opts.cwd = entry.value
+        opts.next_picker = "live_grep"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+
+      map("i", "<cr>", find_in_dir)
+      map("i", "<c-f>", find_in_dir)
+      map("i", "<c-g>", grep_in_dir)
       return true
     end,
   }):find()

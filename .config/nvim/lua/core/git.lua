@@ -9,6 +9,7 @@ function M.setup_gitsigns()
       topdelete = { hl = "GitSignsDelete", text = "‾" },
       changedelete = { hl = "GitSignsChange", text = "~" },
     },
+    sign_priority = 10000,
     keymaps = {
       -- Default keymap options
       noremap = true,

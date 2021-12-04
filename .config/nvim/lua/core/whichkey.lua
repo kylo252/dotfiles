@@ -47,6 +47,7 @@ M.mappings = {
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
+    b = { "<cmd>Telescope current_buffer_fuzzy_find theme=get_ivy<CR>", "Current buffer fuzzy-find" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
     g = { "<cmd>lua require('core.telescope.custom-finders').live_grep_v2()<CR>", "Live Grep v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
@@ -97,6 +98,7 @@ M.mappings = {
     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    S = { "<cmd>Telescope git_status theme=get_ivy<cr>", "Git status" },
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
   },

@@ -48,6 +48,7 @@ vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
+vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
 
 if vim.fn.has "wsl" == 1 then
   vim.g.clipboard = {
