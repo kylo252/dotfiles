@@ -85,6 +85,7 @@ function utils.reset_cache()
 end
 
 vim.cmd [[ command! PackerReCompile lua require('utils').reset_cache() ]]
+vim.cmd [[ command! ToggleFormatOnSave lua require('autocmds').toggle_format_on_save() ]]
 
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })

@@ -35,6 +35,25 @@ M.augroups = {
   },
 }
 
+function M.toggle_format_on_save(opts)
+  opts = opts
+    or {
+      ---@usage pattern string pattern used for the autocommand
+      pattern = "*.lua",
+      ---@usage timeout number timeout in ms for the format request
+      timeout = 1000,
+    }
+  if vim.fn.exists "#fmt_on_save#BufWritePre" == 0 then
+    local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
+    M.define_augroups {
+      fmt_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
+    }
+  else
+    vim.cmd "au! fmt_on_save"
+    vim.notify("disabled fmt_on_save", vim.log.levels.INFO)
+  end
+end
+
 function M.define_augroups(definitions) -- {{{1
   -- Create autocommand groups based on the passed definitions
   --
@@ -59,6 +78,7 @@ end
 
 function M.setup()
   M.define_augroups(M.augroups)
+  M.toggle_format_on_save()
 end
 
 return M
