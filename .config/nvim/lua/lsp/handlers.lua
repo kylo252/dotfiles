@@ -26,8 +26,12 @@ function M.setup()
     update_in_insert = true,
     severity_sort = true,
     float = {
+      focusable = false,
+      style = "minimal",
+      border = "rounded",
       source = "always",
-      show_header = false,
+      header = "",
+      prefix = "",
       format = function(d)
         local t = vim.deepcopy(d)
         if d.code then
