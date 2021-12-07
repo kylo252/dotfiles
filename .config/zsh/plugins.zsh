@@ -17,9 +17,7 @@ znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
 znap source Aloxaf/fzf-tab
 znap source reegnz/jq-zsh-plugin
-
-
-
+znap source RobSis/zsh-completion-generator
 
 # znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
 # znap eval pip-completion "source <(pip3 completion --zsh)"
