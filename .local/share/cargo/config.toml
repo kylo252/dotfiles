@@ -9,7 +9,7 @@ i = "install"
 ia = "install-update"
 
 [target.x86_64-unknown-linux-gnu]
-rustflags = [ "-C", "linker=clang-12"]
+rustflags = [ "-C", "linker=clang"]
 
 [term]
 color = 'auto'         # whether cargo colorizes output
