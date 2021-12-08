@@ -58,12 +58,16 @@ local function setup_lsp_keybindings(bufnr)
   wk.register(keys, { mode = "n", buffer = bufnr })
 end
 
-function M.get_ls_capabilities(client_id)
+function M.get_client_capabilities(client_id)
   local client
   if not client_id then
     local buf_clients = vim.lsp.buf_get_clients()
-    local first_client_id = vim.tbl_keys(buf_clients)[1]
-    client = vim.lsp.get_client_by_id(tonumber(first_client_id))
+    for _, buf_client in pairs(buf_clients) do
+      if buf_client.name ~= "null-ls" then
+        client = buf_client
+        break
+      end
+    end
   else
     client = vim.lsp.get_client_by_id(tonumber(client_id))
   end
