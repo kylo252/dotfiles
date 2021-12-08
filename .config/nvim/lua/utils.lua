@@ -76,6 +76,11 @@ function utils.is_file(filename)
   return stat and stat.type == "file" or false
 end
 
+function utils.is_directory(filename)
+  local stat = vim.loop.fs_stat(filename)
+  return stat and stat.type == "directory" or false
+end
+
 function utils.reset_cache()
   local packer_cache = vim.fn.stdpath "config" .. "/plugin/packer_compiled.lua"
   if utils.is_file(packer_cache) then

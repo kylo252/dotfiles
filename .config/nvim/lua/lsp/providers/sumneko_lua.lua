@@ -1,3 +1,5 @@
+local utils = require "utils"
+
 local opts = {
   settings = {
     Lua = {
@@ -17,5 +19,10 @@ local opts = {
     },
   },
 }
+
+local awesome_lib = "/usr/share/awesome/lib"
+if utils.is_directory(awesome_lib) then
+  opts.settings.Lua.workspace.library[awesome_lib] = true
+end
 
 return opts
