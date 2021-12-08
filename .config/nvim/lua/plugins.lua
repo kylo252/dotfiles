@@ -47,7 +47,7 @@ packer.startup(function(use)
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-    { "andersevenrud/compe-tmux", branch = "cmp", after = "nvim-cmp" },
+    { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
     {
       "b3nj5m1n/kommentary",
       event = "BufWinEnter",
