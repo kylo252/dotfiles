@@ -51,34 +51,8 @@ function M.fuzzy_grep_string(query)
   })
 end
 
-function M.live_grep_v2(opts)
-  opts = opts or {}
-  builtin.live_grep(vim.tbl_deep_extend("force", {
-    prompt_title = "Search",
-    attach_mappings = function(prompt_bufnr, map)
-      local fuzzy_filter_results = function()
-        local query = action_state.get_current_line()
-        if not query then
-          print "no matching results"
-          return
-        end
-        vim.fn.histadd("search", query)
-        -- print(vim.inspect(entry))
-        opts.search = query
-        opts.prompt_title = "Filter"
-        opts.prompt_prefix = "/" .. query .. " >> "
-        opts.next_picker = "grep_string"
-        custom_actions.run_builtin(prompt_bufnr, opts)
-      end
-      map("i", "<C-g>", fuzzy_filter_results)
-      map("n", "<C-g>", fuzzy_filter_results)
-      return true
-    end,
-  }, opts))
-end
-
 function M.grep_dotfiles()
-  M.live_grep_v2 {
+  M.chained_live_grep {
     search_dirs = { vim.fn.stdpath "config", os.getenv "ZDOTDIR" },
     hidden = true,
   }
@@ -195,5 +169,71 @@ function M.find_runtime_files(opts)
     end,
   }):find()
 end
+
+function M.chained_live_grep(opts)
+  local conf = require("telescope.config").values
+
+  opts = opts or themes.get_ivy {}
+  builtin.live_grep(vim.tbl_deep_extend("force", {
+    prompt_title = "Search",
+    attach_mappings = function(prompt_bufnr, map)
+      local fuzzy_filter_results = function()
+        local query = action_state.get_current_line()
+        if not query then
+          print "no matching results"
+          return
+        end
+        vim.fn.histadd("search", query)
+        opts.search = query
+        opts.prompt_title = "Filter"
+        opts.prompt_prefix = "/" .. query .. " >> "
+        opts.next_picker = "grep_string"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+
+      local dynamic_filetype = function()
+        local entry = action_state.get_selected_entry()
+        local onlytype = vim.fn.fnamemodify(entry.filename, ":e")
+        opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
+        opts.prompt_prefix = opts.prompt_prefix or "*." .. onlytype .. " >> "
+        opts.prompt_title = "Scoped Results"
+        vim.list_extend(opts.vimgrep_arguments, { "--type=" .. onlytype })
+
+        opts.next_picker = "live_grep"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+
+      local dynamic_filetype_skip = function()
+        local entry = action_state.get_selected_entry()
+        local skiptype = vim.fn.fnamemodify(entry.filename, ":e")
+        opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
+        opts.prompt_prefix = opts.prompt_prefix or "!*." .. skiptype .. " >> "
+        opts.prompt_title = "Scoped Results"
+        vim.list_extend(opts.vimgrep_arguments, { "--type-not=" .. skiptype })
+
+        opts.next_picker = "live_grep"
+        custom_actions.run_builtin(prompt_bufnr, opts)
+      end
+
+      -- local reset_search = function()
+      --   opts.next_picker = "live_grep"
+      --   opts.prompt_prefix = opts.prompt_prefix or " >> "
+      --   custom_actions.run_builtin(prompt_bufnr, opts)
+      -- end
+
+      map("i", "<C-space>", fuzzy_filter_results)
+      map("n", "<C-space>", fuzzy_filter_results)
+      map("i", "<C-b>", dynamic_filetype)
+      map("n", "<C-b>", dynamic_filetype)
+      map("i", "<M-b>", dynamic_filetype_skip)
+      map("n", "<M-b>", dynamic_filetype_skip)
+      -- map("i", "<M-r>", reset_search)
+      -- map("n", "<M-r>", reset_search)
+      return true
+    end,
+  }, opts))
+end
+
+vim.cmd [[ command! ChainedLiveGrep :lua require("core.telescope.custom-finders").chained_live_grep()<CR> ]]
 
 return M
