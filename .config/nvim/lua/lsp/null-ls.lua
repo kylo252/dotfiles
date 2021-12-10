@@ -66,7 +66,7 @@ function M:setup()
     local source = null_ls.builtins.code_actions[provider.cmd].with {}
     table.insert(sources, source)
   end
-  null_ls.config { sources = sources, log = { level = "warn" } }
+  null_ls.setup { sources = sources, log = { level = "warn" } }
 end
 
 return M

@@ -83,7 +83,7 @@ function M.setup()
     },
     filters = {
       dotfiles = false,
-      custom = { ".git", "node_modules", ".cache" },
+      custom = { "node_modules", ".cache" },
     },
     auto_open = false,
     tab_open = false,

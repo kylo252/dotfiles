@@ -119,7 +119,7 @@ function M.setup()
   require("vim.lsp.log").set_format_func(vim.inspect)
   require("lsp.null-ls").setup()
 
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pylsp", "cmake", "null-ls" }
+  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pylsp", "cmake" }
 
   for _, server in ipairs(servers) do
     require("lsp.manager").setup(server)
