@@ -32,7 +32,7 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
-    { "jose-elias-alvarez/null-ls.nvim" },
+    { "jose-elias-alvarez/null-ls.nvim", branch = "no-lspconfig" },
     {
       "williamboman/nvim-lsp-installer",
     },
