@@ -2,21 +2,14 @@ local M = {}
 
 function M.setup()
   local signs = {
-    { name = "LspDiagnosticsSignError", text = "" },
-    { name = "LspDiagnosticsSignWarning", text = "" },
-    { name = "LspDiagnosticsSignHint", text = "" },
-    { name = "LspDiagnosticsSignInformation", text = "" },
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
   }
 
-  local sign_names = {
-    "DiagnosticSignError",
-    "DiagnosticSignWarn",
-    "DiagnosticSignInfo",
-    "DiagnosticSignHint",
-  }
-
-  for i, sign in ipairs(signs) do
-    vim.fn.sign_define(sign_names[i], { texthl = sign_names[i], text = sign.text, numhl = "" })
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
   local config = {
@@ -43,16 +36,6 @@ function M.setup()
   }
 
   vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "single",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "single",
-  })
 end
 
 return M
