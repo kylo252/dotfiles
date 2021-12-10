@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
   local opts = {
-    char = "▏",
+    char = "┊",
     filetype_exclude = {
       "alpha",
       "help",

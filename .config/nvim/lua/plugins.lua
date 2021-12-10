@@ -144,7 +144,7 @@ packer.startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "FileReadPost",
+      event = "BufRead",
       config = function()
         require("core.indent").setup()
       end,
