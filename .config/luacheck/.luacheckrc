@@ -15,6 +15,7 @@ stds.nvim = {
     os = { fields = { "capture" } },
   },
   read_globals = {
+    "bit",
     "jit",
     "os",
     "vim",

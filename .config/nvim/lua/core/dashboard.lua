@@ -1,6 +1,5 @@
 local M = {}
 
--- local setings_file = vim.fn.stdpath "config" .. "/lua/settings.lua"
 local scratch_file = vim.fn.stdpath "config" .. "/lua/scratch.lua"
 
 local header = {
@@ -35,18 +34,18 @@ local footer = {
 
 local buttons = {
   entries = {
-    { keybind = "SPC r", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
-    { keybind = "SPC f", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
-    { keybind = "SPC n", description = "  New File", command = "<CMD>ene!<CR>" },
-    { keybind = "SPC j", description = "  Recent Places", command = "<CMD>Telescope zoxide list<CR>" },
-    { keybind = "SPC t", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
+    { keybind = "<c-r>", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
+    { keybind = "<c-f>", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
+    { keybind = "<c-n>", description = "  New File", command = "<CMD>ene!<CR>" },
+    { keybind = "<c-j>", description = "  Recent Places", command = "<CMD>Telescope zoxide list<CR>" },
+    { keybind = "<c-t>", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
     {
       keybind = "SPC p",
       description = "  Plugins ",
       command = ":edit ~/.config/nvim/lua/plugins.lua<cr>",
     },
     {
-      keybind = "SPC s",
+      keybind = "SPC t",
       description = "  Scratch",
       command = "<CMD>edit " .. scratch_file .. " <CR>",
     },
