@@ -1,10 +1,21 @@
 gui:
   # stuff relating to the UI
-  scrollHeight: 3 # how many lines you scroll by
-  scrollPastBottom: false # enable scrolling past the bottom
-  sidePanelWidth: 0.3333 # number from 0 to 1
+  authorColors: {}
+  commandLogSize: 8
   expandFocusedSidePanel: false
+  language: auto
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
+  mouseEvents: true
+  scrollHeight: 3 # how many lines you scroll by
+  scrollPastBottom: true # enable scrolling past the bottom
+  showCommandLog: true
+  showFileTree: true # for rendering changes files in a tree format
+  showListFooter: true
+  showRandomTip: false
+  sidePanelWidth: 0.3333 # number from 0 to 1
+  skipNoStagedFilesWarning: false
+  skipStashWarning: true
+  skipUnstageLineWarning: true
   theme:
     lightTheme: false # For terminals with a light background
     activeBorderColor:
@@ -18,20 +29,17 @@ gui:
       - reverse
     selectedRangeBgColor:
       - blue
+    cherryPickedCommitBgColor:
+    - blue
+    cherryPickedCommitFgColor:
+    - cyan
   commitLength:
     show: true
-  skipNoStagedFilesWarning: false
-  mouseEvents: true
-  skipUnstageLineWarning: true
-  skipStashWarning: true
-  showFileTree: true # for rendering changes files in a tree format
-  showRandomTip: true
-  showCommandLog: true
-  commandLogSize: 8
 git:
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: ""
+    useConfig: false
   merging:
     # only applicable to unix users
     manualCommit: false
@@ -40,17 +48,23 @@ git:
   pull:
     mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: false 
-  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
-  allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative
+    --pretty=medium {{branchName}} --
+  allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate
+    --date=relative  --pretty=medium
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
+  commitPrefixes: {}
   disableForcePushing: false
+  log:
+    order: topo-order
+    showGraph: when-maximised
+update:
+  method: prompt # can be: prompt | background | never
+  days: 14 # how often an update is checked for
 refresher:
   refreshInterval: 10 # file/submodule refresh interval in seconds
   fetchInterval: 60 # re-fetch interval in seconds
   commitPrefixes: {}
-update:
-  method: prompt # can be: prompt | background | never
-  days: 14 # how often an update is checked for
 reporting: 'off' # one of: 'on' | 'off' | 'undetermined'
 splashUpdatesIndex: 0
 confirmOnQuit: false
@@ -58,6 +72,10 @@ quitOnTopLevelReturn: false
 disableStartupPopups: false
 services: {}
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
+os:
+  editCommandTemplate: '{{editor}} {{filename}}'
+  openCommand:  xdg-open {{filename}} >/dev/null
+  openLinkCommand: xdg-open {{link}} >/dev/null
 
 keybinding:
   universal:
