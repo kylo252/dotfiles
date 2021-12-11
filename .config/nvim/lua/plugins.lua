@@ -26,6 +26,7 @@ packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
+  use { "folke/lua-dev.nvim", filetype = "lua" }
 
   -- LSP and linting
   use {
@@ -46,7 +47,6 @@ packer.startup(function(use)
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
     {
       "b3nj5m1n/kommentary",
