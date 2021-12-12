@@ -131,9 +131,11 @@ packer.startup(function(use)
     },
     { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
     {
-      "NTBBloodbath/galaxyline.nvim",
+      "nvim-lualine/lualine.nvim",
       event = "BufWinEnter",
-      config = [[require('core.statusline')]],
+      config = function()
+        require("core.statusline").setup()
+      end,
     },
     {
       "karb94/neoscroll.nvim",

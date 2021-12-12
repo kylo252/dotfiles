@@ -1,6 +1,4 @@
-local gl = require "galaxyline"
-local section = require("galaxyline").section
-local condition = require "galaxyline.condition"
+local M = {}
 
 local colors = {
   bg = "#1C1F24",
@@ -30,229 +28,100 @@ local colors = {
   info_yellow = "#FFCC66",
 }
 
-local mode_color = function()
-  -- auto change color according the vim mode
-  local mode_colors = {
-    n = colors.blue,
-    i = colors.green,
-    v = colors.purple,
-    [""] = colors.purple,
-    V = colors.purple,
-    c = colors.magenta,
-    no = colors.blue,
-    s = colors.orange,
-    S = colors.orange,
-    [""] = colors.orange,
-    ic = colors.yellow,
-    R = colors.red,
-    Rv = colors.red,
-    cv = colors.blue,
-    ce = colors.blue,
-    r = colors.cyan,
-    rm = colors.cyan,
-    ["r?"] = colors.cyan,
-    ["!"] = colors.blue,
-    t = colors.blue,
-  }
+local conditions = {
+  buffer_not_empty = function()
+    return vim.fn.empty(vim.fn.expand "%:t") ~= 1
+  end,
+  hide_in_width = function()
+    return vim.fn.winwidth(0) > 70
+  end,
+  check_git_workspace = function()
+    local filepath = vim.fn.expand "%:p:h"
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+  end,
+}
 
-  local color = mode_colors[vim.fn.mode()]
-
-  if color == nil then
-    color = colors.red
-  end
-
-  return color
-end
-
-gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
-
-table.insert(section.left, {
-  ViMode = {
-    provider = function()
-      local alias = {
-        n = "NORMAL",
-        i = "INSERT",
-        c = "COMMAND",
-        V = "VISUAL",
-        [""] = "VISUAL",
-        v = "VISUAL",
-        R = "REPLACE",
-      }
-      vim.api.nvim_command("hi GalaxyViMode gui=bold guibg=" .. mode_color())
-      local alias_mode = alias[vim.fn.mode()]
-      if alias_mode == nil then
-        alias_mode = vim.fn.mode()
+local components = {
+  diagnostics = {
+    "diagnostics",
+    sources = { "nvim_diagnostic" },
+    symbols = { error = " ", warn = " ", info = " ", hint = " " },
+    color = {},
+    cond = conditions.hide_in_width,
+  },
+  lsp_clients = {
+    function(msg)
+      msg = msg or "LSP Inactive"
+      local buf_clients = vim.lsp.buf_get_clients()
+      if next(buf_clients) == nil then
+        return msg
       end
-      return "  " .. alias_mode .. " "
+
+      local buf_client_names = {}
+      for _, client in pairs(buf_clients) do
+        if client.name == "null-ls" then
+          local null_ls_formatters = require("lsp.null-ls").list_registered_formatters(vim.bo.filetype)
+          vim.list_extend(buf_client_names, null_ls_formatters)
+          local null_ls_linters = require("lsp.null-ls").list_registered_linters(vim.bo.filetype)
+          vim.list_extend(buf_client_names, null_ls_linters)
+        else
+          table.insert(buf_client_names, client.name)
+        end
+      end
+
+      return table.concat(buf_client_names, ", ")
     end,
-    separator = " ",
-    highlight = { colors.bg, colors.bg },
-    separator_highlight = { colors.bg, colors.bg },
   },
-})
-
-print(vim.fn.getbufvar(0, "ts"))
-vim.fn.getbufvar(0, "ts")
-
-table.insert(section.left, {
-  FileIcon = {
-    provider = "FileIcon",
-    condition = condition.buffer_not_empty,
-    highlight = { require("galaxyline.providers.fileinfo").get_file_icon_color, colors.bg },
-  },
-})
-
-table.insert(section.left, {
-  FileName = {
-    provider = "FileName",
-    condition = condition.buffer_not_empty,
-    separator = " ",
-    separator_highlight = { colors.bg, colors.bg },
-    highlight = { colors.fg, colors.bg },
-  },
-})
-
-table.insert(section.left, {
-  GitIcon = {
-    provider = function()
-      return " "
-    end,
-    condition = condition.check_git_workspace,
-    separator = " ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.orange, colors.bg },
-  },
-})
-
-table.insert(section.left, {
-  GitBranch = {
-    provider = "GitBranch",
-    condition = condition.check_git_workspace,
-    separator = " ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.grey, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  DiagnosticError = { provider = "DiagnosticError", icon = "  ", highlight = { colors.error_red, colors.bg } },
-})
-table.insert(
-  section.right,
-  { DiagnosticWarn = { provider = "DiagnosticWarn", icon = "  ", highlight = { colors.orange, colors.bg } } }
-)
-
-table.insert(section.right, {
-  DiagnosticHint = { provider = "DiagnosticHint", icon = "  ", highlight = { colors.vivid_blue, colors.bg } },
-})
-
-table.insert(section.right, {
-  DiagnosticInfo = { provider = "DiagnosticInfo", icon = "  ", highlight = { colors.info_yellow, colors.bg } },
-})
-
-table.insert(section.right, {
-  TreesitterIcon = {
-    provider = function()
-      if next(vim.treesitter.highlighter.active) ~= nil then
-        return "   "
+  treesitter = {
+    function()
+      local b = vim.api.nvim_get_current_buf()
+      if next(vim.treesitter.highlighter.active[b]) then
+        return "  "
       end
       return ""
     end,
-    separator = " ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.green, colors.bg },
+    color = { fg = colors.green },
+    cond = conditions.hide_in_width,
   },
-})
+  filename = {
+    "filename",
+    color = {},
+    cond = nil,
+  },
+}
 
-local function get_attached_provider_name(msg)
-  msg = msg or "LSP Inactive"
-  local buf_clients = vim.lsp.buf_get_clients()
-  if next(buf_clients) == nil then
-    return msg
-  end
+local config = {
+  options = {
+    icons_enabled = true,
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = { "NvimTree" },
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff" },
+    lualine_c = { components.filename },
+    lualine_x = { components.diagnostics, components.lsp_clients, "filetype" },
+    lualine_y = { components.treesitter },
+    lualine_z = { "location" },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  extensions = {},
+}
 
-  local buf_client_names = {}
-  for _, client in pairs(buf_clients) do
-    if client.name == "null-ls" then
-      local null_ls_formatters = require("lsp.null-ls").list_registered_formatters(vim.bo.filetype)
-      vim.list_extend(buf_client_names, null_ls_formatters)
-      local null_ls_linters = require("lsp.null-ls").list_registered_linters(vim.bo.filetype)
-      vim.list_extend(buf_client_names, null_ls_linters)
-    else
-      table.insert(buf_client_names, client.name)
-    end
-  end
-
-  return table.concat(buf_client_names, ", ")
+function M.setup()
+  require("lualine").setup(config)
 end
 
-table.insert(section.right, {
-  ShowLspClient = {
-    provider = get_attached_provider_name,
-    condition = function()
-      local tbl = { ["dashboard"] = true, [" "] = true }
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
-    icon = " ",
-    highlight = { colors.fg, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  BufferType = {
-    provider = "FileTypeName",
-    separator = " ",
-    condition = function()
-      if vim.bo.filetype == "dashboard" or vim.lsp.buf_get_clients() then
-        return false
-      end
-      return true
-    end,
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.fg, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  LineInfo = {
-    provider = "LineColumn",
-    separator = "  ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.grey, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  Space = {
-    provider = function()
-      return " "
-    end,
-    separator = " ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.orange, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  ScrollBar = {
-    provider = "ScrollBar",
-    condition = condition.buffer_not_empty,
-    seperator = " | ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.yellow, colors.bg },
-  },
-})
-
-table.insert(section.right, {
-  Space = {
-    provider = function()
-      return " "
-    end,
-    separator = " ",
-    separator_highlight = { "NONE", colors.bg },
-    highlight = { colors.bg, colors.bg },
-  },
-})
+return M
