@@ -11,7 +11,7 @@ local opts = {
   quit_on_open = 0,
   respect_buf_cwd = 1,
   git_hl = 1,
-  disable_window_picker = 0,
+  disable_window_picker = 1,
   root_folder_modifier = ":t",
 }
 
@@ -43,7 +43,7 @@ function M.setup()
       enable = true,
       auto_open = true,
     },
-    auto_close = true,
+    auto_close = false,
     open_on_tab = false,
     hijack_cursor = false,
     update_cwd = true,
