@@ -108,12 +108,12 @@ M.mappings = {
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     c = { "<cmd>lua require('lsp').get_client_capabilities()<cr>", "Show language-server capabilities" },
     d = {
-      "<cmd>Telescope lsp_document_diagnostics theme=get_ivy<cr>",
-      "Document Diagnostics",
+      "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
+      "Buffer Diagnostics",
     },
     w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
+      "<cmd>Telescope diagnostics<cr>",
+      "Diagnostics",
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
@@ -181,8 +181,8 @@ function M.setup()
           v = false,
           d = false,
         },
-        motions = true, -- adds help for motions
-        text_objects = true, -- help for text objects triggered after entering an operator
+        motions = false, -- adds help for motions
+        text_objects = false, -- help for text objects triggered after entering an operator
         windows = true, -- default bindings on <c-w>
         nav = true, -- misc bindings to work with windows
         z = true, -- bindings for folds, spelling and others prefixed with z
@@ -193,11 +193,36 @@ function M.setup()
     show_help = true, -- show help message on the command line when the popup is visible
   }
 
-  require("which-key").setup(setup_opts)
+  local select_labels = {
+    ["af"] = "@function.outer",
+    ["if"] = "@function.inner",
+    ["ac"] = "@class.outer",
+    ["ic"] = "@class.inner",
+    ["ar"] = "@parameter.inner", -- "ap" is already used
+    ["ir"] = "@parameter.outer", -- "ip" is already used
+    ["."] = "textsubjects-smart",
+    [";"] = "textsubjects-big",
+    ["iF"] = "(function_definition) @function",
+  }
+
+  local move_labels = {
+    ["]m"] = "@function.outer",
+    ["]]"] = "@class.outer",
+    ["]M"] = "@function.outer",
+    ["]["] = "@class.outer",
+    ["[m"] = "@function.outer",
+    ["[["] = "@class.outer",
+    ["[M"] = "@function.outer",
+    ["[]"] = "@class.outer",
+  }
+  wk.setup(setup_opts)
 
   wk.register(M.global_mappings)
 
   wk.register(M.mappings, { prefix = "<leader>" })
+
+  wk.register(select_labels, { mode = "o", prefix = "", preset = true })
+  wk.register(move_labels, { mode = "n", prefix = "", preset = true })
 end
 
 return M

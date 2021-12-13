@@ -13,7 +13,6 @@ function M.setup()
     textobjects = {
       select = {
         enable = true,
-
         -- Automatically jump forward to textobj, similar to targets.vim
         lookahead = true,
 
@@ -27,13 +26,42 @@ function M.setup()
           ["ir"] = "@parameter.outer", -- "ip" is already used
           ["."] = "textsubjects-smart",
           [";"] = "textsubjects-big",
-          --[[ -- Or you can define your own textobjects like this
-				["iF"] = {
-					python = "(function_definition) @function",
-					cpp = "(function_definition) @function",
-					c = "(function_definition) @function",
-					java = "(method_declaration) @function",
-				}, ]]
+          -- Or you can define your own textobjects like this
+          ["iF"] = {
+            python = "(function_definition) @function",
+            cpp = "(function_definition) @function",
+            c = "(function_definition) @function",
+          },
+        },
+        lsp_interop = {
+          enable = true,
+          border = "none",
+          peek_definition_code = {
+            ["<leader>ldf"] = "@function.outer",
+            ["<leader>ldF"] = "@class.outer",
+          },
+        },
+        textobjects = {
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
+          },
         },
       },
     },
