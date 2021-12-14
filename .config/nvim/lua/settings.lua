@@ -1,11 +1,7 @@
-CONFIG_PATH = vim.fn.stdpath "config"
-DATA_PATH = vim.fn.stdpath "data"
-CACHE_PATH = vim.fn.stdpath "cache"
-TERMINAL = vim.fn.expand "$TERMINAL"
+local terminal = vim.fn.expand "$TERMINAL"
 
 ---  VIM ONLY COMMANDS  ---
-vim.cmd "filetype plugin on"
-vim.cmd('let &titleold="' .. TERMINAL .. '"')
+vim.cmd('let &titleold="' .. terminal .. '"')
 vim.cmd "set inccommand=split"
 vim.cmd "set iskeyword+=-"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
@@ -21,6 +17,10 @@ vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
+vim.opt.fillchars = { fold = " " } -- remove folding chars
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 10 -- don't close any folds by default
+vim.opt.foldmethod = "expr"
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.hidden = true -- required to keep multiple buffers and open multiple buffers
 vim.opt.ignorecase = true -- ignore case in search patterns
@@ -28,10 +28,12 @@ vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.number = true -- set numbered lines
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.relativenumber = true -- set relative numbered lines
+vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2 -- always show tabs
+vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = false -- make indenting smarter again
@@ -47,8 +49,6 @@ vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
-vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
 
 if vim.fn.has "wsl" == 1 then
   vim.g.clipboard = {
