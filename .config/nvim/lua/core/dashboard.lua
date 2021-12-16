@@ -45,7 +45,7 @@ local buttons = {
       command = ":edit ~/.config/nvim/lua/plugins.lua<cr>",
     },
     {
-      keybind = "SPC t",
+      keybind = "SPC T",
       description = "  Scratch",
       command = "<CMD>edit " .. scratch_file .. " <CR>",
     },

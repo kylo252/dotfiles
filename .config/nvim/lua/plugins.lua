@@ -93,16 +93,9 @@ packer.startup(function(use)
 
   -- TMUX and session management
   use {
-    {
-      "aserowy/tmux.nvim",
-      event = "VimEnter",
-      config = [[require('core.tmux').setup()]],
-    },
-    {
-      "folke/persistence.nvim",
-      event = "VimEnter",
-      config = [[require('core.sessions').setup()]],
-    },
+    "aserowy/tmux.nvim",
+    event = "VimEnter",
+    config = [[require('core.tmux').setup()]],
   }
 
   use {

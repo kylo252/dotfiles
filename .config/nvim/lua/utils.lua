@@ -91,6 +91,7 @@ end
 
 vim.cmd [[ command! PackerReCompile lua require('utils').reset_cache() ]]
 vim.cmd [[ command! ToggleFormatOnSave lua require('autocmds').toggle_format_on_save() ]]
+vim.cmd [[ command! -nargs=* SaveSession lua require('core.sessions').save_session(<f-args>) ]]
 
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
