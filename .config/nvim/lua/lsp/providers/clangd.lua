@@ -6,6 +6,7 @@ local clangd_flags = {
   "--enable-config",
   "--clang-tidy",
   "--completion-style=detailed",
+  "--offset-encoding=utf-16", --temporary fix for null-ls
   -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
 }
 
