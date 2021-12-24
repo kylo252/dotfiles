@@ -34,7 +34,7 @@ vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2 -- always show tabs
 vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
-vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
+vim.opt.signcolumn = "auto:1-2" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = false -- make indenting smarter again
 vim.opt.splitbelow = true -- force all horizontal splits to go below current window
