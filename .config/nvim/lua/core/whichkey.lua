@@ -2,7 +2,7 @@
 local M = {}
 
 M.global_mappings = {
-  ["<c-e>"] = { [[<cmd>lua require('core.terminal').toggle_explorer()<CR>]], "lf" },
+  ["<c-e>"] = { "lf" },
   Q = { "<cmd>BufferClose<cr>", "close buffer" },
   g = {
     -- LSP
@@ -58,6 +58,10 @@ M.mappings = {
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
     i = {
       name = "+internal",
+      p = {
+        "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+        "Colorscheme with Preview",
+      },
       c = { "<cmd>Telescope commands<CR>", "commands" },
       h = { "<cmd>Telescope help_tags<CR>", "help tags" },
       m = { "<cmd>Telescope marks<CR>", "Marks" },
@@ -86,11 +90,8 @@ M.mappings = {
         "Copy buffer URL",
       },
     },
-    d = {
-      [[<cmd>lua require('core.terminal').execute_command({bin = "lazygit", args = { "--git-dir=$HOME/.dtf.git", "--work-tree=$HOME" } })<CR>]],
-      "LazyDots",
-    },
-    g = { [[<cmd>lua require('core.terminal').toggle_lazygit()<CR>]], "LazyGit" },
+    d = { "LazyDots" },
+    g = { "LazyGit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -151,10 +152,8 @@ M.mappings = {
   },
   S = {
     name = "+sessions",
-    d = { "<cmd>lua require('persistence').stop()<cr>", "stop saving" },
-    l = { "<cmd>lua require('persistance').load()<cr>", "restore the session for the current directory" },
-    r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
-    s = { "<cmd>lua require('persistence').save()<cr>", "save session" },
+    l = { "<cmd>lua require('core.sessions').load_session()<cr>", "load session" },
+    s = { "<cmd>lua require('core.sessions').save_session()<cr>", "save session" },
   },
   t = {
     name = "+scratch test",
