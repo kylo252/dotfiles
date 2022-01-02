@@ -3,12 +3,12 @@ local M = {}
 function M.config()
   return {
     formatters = {
-      { cmd = "stylua", args = {}, filetypes = { "lua" } },
-      { cmd = "shfmt", args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
+      { cmd = "stylua", extra_args = {}, filetypes = { "lua" } },
+      { cmd = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
     },
     linters = {
-      { cmd = "luacheck", args = {}, filetypes = { "lua" } },
-      { cmd = "shellcheck", args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
+      { cmd = "luacheck", extra_args = {}, filetypes = { "lua" } },
+      { cmd = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
       { cmd = "gitsigns", filetypes = {} },
@@ -50,20 +50,16 @@ function M:setup()
   local null_ls = require "null-ls"
   local sources = {}
   for _, provider in ipairs(config.formatters) do
-    local source = null_ls.builtins.formatting[provider.cmd].with {
-      extra_args = provider.args,
-    }
+    local source = null_ls.builtins.formatting[provider.cmd].with(provider)
     table.insert(sources, source)
   end
 
   for _, provider in ipairs(config.linters) do
-    local source = null_ls.builtins.diagnostics[provider.cmd].with {
-      extra_args = provider.args,
-    }
+    local source = null_ls.builtins.diagnostics[provider.cmd].with(provider)
     table.insert(sources, source)
   end
   for _, provider in ipairs(config.code_actions) do
-    local source = null_ls.builtins.code_actions[provider.cmd].with {}
+    local source = null_ls.builtins.code_actions[provider.cmd].with(provider)
     table.insert(sources, source)
   end
   null_ls.setup { sources = sources, log = { level = "warn" } }
