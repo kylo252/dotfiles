@@ -105,6 +105,21 @@ function fif-v2() {
     awk -F ":" -v home="$PWD" '{ print home "/" $1 ":" $2 }' 
 }
 
+function dev-nvim() {
+  export VIMRUNTIME="$HOME/.local/share/neovim/runtime"
+  export XDG_CACHE_HOME="$HOME/.cache/nvim/nightly"
+  rm -rf "$XDG_CACHE_HOME"/nvim/nightly/*log*
+
+  local pre_cmd="lua vim.loop.os_setenv('XDG_CACHE_HOME', vim.loop.os_homedir() .. '/.cache')" 
+
+  exec nvim --cmd "$pre_cmd" "$@"
+}
+
+function min-nvim() {
+  local minimal_init_rc="$HOME/.config/nvim/utils/minimal_lsp.lua"
+  dev-nvim -u "$minimal_init_rc" "$@"
+}
+
 # zsh force reset
 function zfr() {
   fd . "$ZDOTDIR" --hidden -e zwc -x rm 
@@ -112,17 +127,12 @@ function zfr() {
   znap restart
 }
 
-# TODO not sure what this does
-# function luamake() {
-#   "$XDG_DATA_HOME"/nvim/lspinstall/lua/3rd/luamake/luamake "$@"
-# }
-
-gh-latest-release(){
+function gh-latest-release(){
   local repo="$1"
   gh api "repos/$repo/releases/latest" --jq '.assets[].browser_download_url'
 }
 
-_zlf() {
+function _zlf() {
  emulate -L zsh
   local d=$(mktemp -d) || return 1
   {
@@ -136,7 +146,7 @@ _zlf() {
   }
 }
 
-_zlf_handler() {
+function _zlf_handler() {
   emulate -L zsh
   local line
   if ! read -r line <&$1; then
