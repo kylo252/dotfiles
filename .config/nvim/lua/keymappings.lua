@@ -8,7 +8,7 @@ local generic_opts = {
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
   command_mode = generic_opts_any,
-  operator_mode = generic_opts,
+  operator_mode = generic_opts_any,
   term_mode = { silent = true },
 }
 
