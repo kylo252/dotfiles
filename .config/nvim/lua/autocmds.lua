@@ -54,18 +54,52 @@ function M.toggle_format_on_save(opts)
   end
 end
 
-function M.define_augroups(definitions) -- {{{1
-  -- Create autocommand groups based on the passed definitions
-  --
-  -- The key will be the name of the group, and each definition
-  -- within the group should have:
-  --    1. Trigger
-  --    2. Pattern
-  --    3. Text
-  -- just like how they would normally be defined from Vim itself
+function M.enable_lsp_document_highlight(client_id)
+  M.define_augroups({
+    lsp_document_highlight = {
+      {
+        "CursorHold",
+        "<buffer>",
+        string.format("lua require('lsp.utils').conditional_document_highlight(%d)", client_id),
+      },
+      {
+        "CursorMoved",
+        "<buffer>",
+        "lua vim.lsp.buf.clear_references()",
+      },
+    },
+  }, true)
+end
+
+function M.disable_lsp_document_highlight()
+  M.disable_augroup "lsp_document_highlight"
+end
+
+--- Disable autocommand groups if it exists
+--- This is more reliable than trying to delete the augroup itself
+---@param name string the augroup name
+function M.disable_augroup(name)
+  -- defer the function in case the autocommand is still in-use
+  vim.schedule(function()
+    if vim.fn.exists("#" .. name) == 1 then
+      vim.cmd("augroup " .. name)
+      vim.cmd "autocmd!"
+      vim.cmd "augroup END"
+    end
+  end)
+end
+
+--- Create autocommand groups based on the passed definitions
+---@param definitions table contains trigger, pattern and text. The key will be used as a group name
+---@param buffer boolean indicate if the augroup should be local to the buffer
+function M.define_augroups(definitions, buffer)
   for group_name, definition in pairs(definitions) do
     vim.cmd("augroup " .. group_name)
-    vim.cmd "autocmd!"
+    if buffer then
+      vim.cmd [[autocmd! * <buffer>]]
+    else
+      vim.cmd [[autocmd!]]
+    end
 
     for _, def in pairs(definition) do
       local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")

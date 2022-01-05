@@ -81,31 +81,12 @@ function M.get_client_capabilities(client_id)
   return lsp_caps
 end
 
-local function setup_document_highlight(client)
-  -- TODO: move this so that it done only once
-  -- https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f
-  vim.cmd [[ hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646 ]]
-  vim.cmd [[ hi LspReferenceText cterm=bold ctermbg=red guibg=#464646 ]]
-  vim.cmd [[ hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646 ]]
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.cmd [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]]
-  end
-end
-
 --luacheck: no unused args
-function M.common_on_init(client, bufnr)
-  setup_document_highlight(client)
-end
+function M.common_on_init(client, bufnr) end
 
 --luacheck: no unused args
 function M.common_on_attach(client, bufnr)
+  require("autocmds").enable_lsp_document_highlight(client.id)
   setup_lsp_keybindings(bufnr)
 end
 
