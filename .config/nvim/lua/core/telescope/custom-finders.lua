@@ -2,14 +2,14 @@ local M = {}
 
 local custom_actions = require "core.telescope.custom-actions"
 
-local _, builtin = pcall(require, "telescope.builtin")
-local _, finders = pcall(require, "telescope.finders")
-local _, pickers = pcall(require, "telescope.pickers")
-local _, sorters = pcall(require, "telescope.sorters")
-local _, themes = pcall(require, "telescope.themes")
-local _, config = pcall(require, "telescope.config")
-local _, make_entry = pcall(require, "telescope.make_entry")
-local _, action_state = pcall(require, "telescope.actions.state")
+local builtin = require "telescope.builtin"
+local finders = require "telescope.finders"
+local pickers = require "telescope.pickers"
+local sorters = require "telescope.sorters"
+local themes = require "telescope.themes"
+local config = require "telescope.config"
+local make_entry = require "telescope.make_entry"
+local action_state = require "telescope.actions.state"
 
 local Path = require "plenary.path"
 
@@ -233,7 +233,5 @@ function M.chained_live_grep(opts)
     end,
   }, opts))
 end
-
-vim.cmd [[ command! ChainedLiveGrep :lua require("core.telescope.custom-finders").chained_live_grep()<CR> ]]
 
 return M

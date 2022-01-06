@@ -39,20 +39,32 @@ function M.save_session(name)
   vim.o.sessionoptions = tmp
 end
 
-function M.load_session()
+function M.load_session_by_name(name)
+  vim.validate { requested = { name, "s", true } }
+  local full_path = fnameescape(join_paths(defaults.dir, name))
+  vim.schedule(function()
+    vim.cmd("source " .. full_path)
+  end)
+end
+
+function M.load_session(name)
+  name = name.args or ""
+
+  if name ~= "" then
+    M.load_session_by_name(name)
+    return
+  end
+
   local actions = require "telescope.actions"
-  local _, action_state = pcall(require, "telescope.actions.state")
+  local action_state = require "telescope.actions.state"
   require("telescope.builtin").find_files {
     prompt_title = "Select a session to load",
     cwd = defaults.dir,
     attach_mappings = function(prompt_bufnr)
       actions.select_default:replace(function()
         local entry = action_state.get_selected_entry()
-        local full_path = fnameescape(join_paths(defaults.dir, entry.value))
         actions.close(prompt_bufnr)
-        vim.schedule(function()
-          vim.cmd(":source " .. full_path)
-        end)
+        M.load_session_by_name(entry.value)
       end)
       return true
     end,

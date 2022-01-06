@@ -10,6 +10,7 @@ local packer_ok, packer = pcall(require, "packer")
 if not packer_ok then
   return
 end
+
 packer.init {
   package_root = package_root,
   log = { level = "info" },
@@ -20,6 +21,21 @@ packer.init {
     end,
   },
 }
+
+local function run_on_packer_complete()
+  vim.schedule(function()
+    vim.cmd [[ doautocmd ColorScheme ]]
+  end)
+end
+
+local commands = {
+  { name = "PackerRunOnComplete", fn = run_on_packer_complete },
+  { name = "PackerRecompile", fn = require("utils").reset_cache },
+}
+
+require("utils").load_commands(commands)
+
+vim.cmd [[autocmd User PackerComplete PackerRunOnComplete]]
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
@@ -33,7 +49,7 @@ packer.startup(function(use)
     {
       "nvim-treesitter/nvim-treesitter",
       event = "BufRead",
-      run = ":TSUpdate",
+      run = "TSUpdate",
       config = function()
         require("core.treesitter").setup()
       end,
@@ -41,9 +57,7 @@ packer.startup(function(use)
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
-    {
-      "williamboman/nvim-lsp-installer",
-    },
+    { "williamboman/nvim-lsp-installer" },
     {
       "hrsh7th/nvim-cmp",
       event = "BufRead",
@@ -60,7 +74,9 @@ packer.startup(function(use)
     {
       "b3nj5m1n/kommentary",
       event = "BufWinEnter",
-      config = [[ require("core.comment").setup() ]],
+      config = function()
+        require("core.comment").setup()
+      end,
     },
   }
 
@@ -91,11 +107,12 @@ packer.startup(function(use)
     },
     {
       "nvim-telescope/telescope.nvim",
-      config = [[
-        require('core.telescope').setup()
-        require('core.telescope').setup_z()
+      lock = true, -- don't change the checked-out branch
+      config = function()
+        require("core.telescope").setup()
+        require("core.telescope").setup_z()
         require("telescope").load_extension "fzf"
-      ]],
+      end,
       event = "BufEnter",
     },
     {
@@ -193,7 +210,13 @@ packer.startup(function(use)
   }
 
   -- utils
-  use { "kevinhwang91/nvim-bqf", event = "BufRead", config = [[ require("core.quickfix").setup() ]] }
+  use {
+    "kevinhwang91/nvim-bqf",
+    event = "BufRead",
+    config = function()
+      require("core.quickfix").setup()
+    end,
+  }
   use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
   use { "VebbNix/lf-vim" }
 end)

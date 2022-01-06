@@ -100,8 +100,27 @@ function M.setup()
   local opts = M.config()
   require("telescope").setup(opts)
 
-  vim.cmd [[ command! -nargs=* FuzzyGrepString :lua require('core.telescope.custom-actions').fuzzy_grep_string(<f-args>) ]]
-  vim.cmd [[ command! FindRuntimeFiles :lua require('core.telescope.custom-finders').find_runtime_files() ]]
+  local commands = {
+    { name = "ChainedLiveGrep", fn = require("core.telescope.custom-finders").chained_live_grep },
+    { name = "FindRuntimeFiles", fn = require("core.telescope.custom-finders").find_runtime_files },
+    {
+      name = "FuzzyGrepString",
+      fn = require("core.telescope.custom-finders").fuzzy_grep_string,
+      opts = { bang = true, nargs = "*", force = true },
+    },
+    {
+      name = "LoadSession",
+      fn = require("core.sessions").load_session,
+      opts = { bang = true, nargs = "*", force = true },
+    },
+    {
+      name = "SaveSession",
+      fn = require("core.sessions").save_session,
+      opts = { bang = true, nargs = "*", force = true },
+    },
+  }
+
+  require("utils").load_commands(commands)
 
   local keymaps = {
     normal_mode = {

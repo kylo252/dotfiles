@@ -114,6 +114,10 @@ end
 function M.setup()
   M.define_augroups(M.augroups)
   M.toggle_format_on_save()
+  local commands = {
+    { name = "ToggleFormatOnSave", fn = require("autocmds").toggle_format_on_save },
+  }
+  require("utils").load_commands(commands)
 end
 
 return M

@@ -89,9 +89,12 @@ function utils.reset_cache()
   end
 end
 
-vim.cmd [[ command! PackerReCompile lua require('utils').reset_cache() ]]
-vim.cmd [[ command! ToggleFormatOnSave lua require('autocmds').toggle_format_on_save() ]]
-vim.cmd [[ command! -nargs=* SaveSession lua require('core.sessions').save_session(<f-args>) ]]
+function utils.load_commands(collection)
+  local common_opts = { bang = true, force = true }
+  for _, cmd in pairs(collection) do
+    vim.api.nvim_add_user_command(cmd.name, cmd.fn, cmd.opts or common_opts)
+  end
+end
 
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
