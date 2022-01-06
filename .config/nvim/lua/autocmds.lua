@@ -27,7 +27,8 @@ M.augroups = {
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
-  _general_lsp = {
+  _general_windows = {
+    { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
     { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> <esc> :close<CR>" },
   },
   _cmp = {

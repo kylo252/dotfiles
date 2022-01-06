@@ -30,7 +30,14 @@ packer.startup(function(use)
 
   -- LSP and linting
   use {
-    { "nvim-treesitter/nvim-treesitter", event = "BufRead", config = [[require("core.treesitter").setup()]] },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      event = "BufRead",
+      run = ":TSUpdate",
+      config = function()
+        require("core.treesitter").setup()
+      end,
+    },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
@@ -40,7 +47,9 @@ packer.startup(function(use)
     {
       "hrsh7th/nvim-cmp",
       event = "BufRead",
-      config = [[require('core.cmp').config()]],
+      config = function()
+        require("core.cmp").config()
+      end,
     },
     { "L3MON4D3/LuaSnip" },
     { "hrsh7th/cmp-nvim-lsp" },
@@ -56,7 +65,12 @@ packer.startup(function(use)
   }
 
   -- Helpers
-  use { "folke/which-key.nvim", config = [[require("core.whichkey").setup() ]] }
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("core.whichkey").setup()
+    end,
+  }
 
   -- Search
   use {
@@ -87,7 +101,9 @@ packer.startup(function(use)
     {
       "ggandor/lightspeed.nvim",
       event = "BufWinEnter",
-      config = [[require('core.lightspeed').setup()]],
+      config = function()
+        require("core.lightspeed").setup()
+      end,
     },
   }
 
@@ -95,7 +111,9 @@ packer.startup(function(use)
   use {
     "aserowy/tmux.nvim",
     event = "VimEnter",
-    config = [[require('core.tmux').setup()]],
+    config = function()
+      require("core.tmux").setup()
+    end,
   }
 
   use {
@@ -120,7 +138,9 @@ packer.startup(function(use)
     {
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
-      config = [[require('core.nvimtree').setup()]],
+      config = function()
+        require("core.nvimtree").setup()
+      end,
     },
     { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
     {
@@ -159,12 +179,16 @@ packer.startup(function(use)
     {
       "lewis6991/gitsigns.nvim",
       event = "BufWinEnter",
-      config = [[require('core.git').setup_gitsigns()]],
+      config = function()
+        require("core.git").setup_gitsigns()
+      end,
     },
     {
       "ruifm/gitlinker.nvim",
       event = "BufWinEnter",
-      config = [[require('core.git').setup_gitlinker()]],
+      config = function()
+        require("core.git").setup_gitlinker()
+      end,
     },
   }
 

@@ -79,6 +79,7 @@ M.mappings = {
       "Local fuzzy grep",
     },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
+    N = { "<cmd>Telescope live_grep theme=get_ivy cwd=$XDG_DATA_HOME/neovim/runtime/lua<CR>", "Neovim lua runtime" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
   },
   g = {
