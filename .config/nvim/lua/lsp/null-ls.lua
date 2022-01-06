@@ -7,7 +7,15 @@ function M.config()
       { cmd = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
     },
     linters = {
-      { cmd = "luacheck", extra_args = {}, filetypes = { "lua" } },
+      {
+        cmd = "luacheck",
+        extra_args = {},
+        filetypes = { "lua" },
+        cwd = function(params) -- force luacheck to find its '.luacheckrc' file
+          local u = require "null-ls.utils"
+          return u.root_pattern ".luacheckrc"(params.bufname)
+        end,
+      },
       { cmd = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
