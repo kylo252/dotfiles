@@ -31,6 +31,7 @@ alias gu='gitui'
 
 alias paux='procs aux | rg'
 alias tk='tmux kill-server'
+alias tree='tree &>/dev/null || exa --tree --color=always --icons --all --git'
 
 alias v='nvim'
 
