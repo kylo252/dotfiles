@@ -52,7 +52,7 @@ M.mappings = {
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "grep string v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
-    l = { "<cmd>lua require('core.telescope.custom-finders').chained_live_grep()<CR>", "ChainedLiveGrep" },
+    l = { "<cmd>ChainedLiveGrep<CR>", "ChainedLiveGrep" },
     m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
     p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
@@ -73,7 +73,7 @@ M.mappings = {
       },
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     },
-    J = { "<cmd>lua require('core.telescope.custom-finders').find_runtime_files()<CR>", "Find runtime files" },
+    J = { "<cmd>FindRuntimeFiles<CR>", "Find runtime files" },
     L = {
       "<cmd>lua require('core.telescope.custom-finders').local_buffer_fuzzy_grep()<CR>",
       "Local fuzzy grep",
@@ -153,8 +153,8 @@ M.mappings = {
   },
   S = {
     name = "+sessions",
-    l = { "<cmd>lua require('core.sessions').load_session()<cr>", "load session" },
-    s = { "<cmd>lua require('core.sessions').save_session()<cr>", "save session" },
+    l = { "<cmd>LoadSession<cr>", "load session" },
+    s = { "<cmd>SaveSession<cr>", "save session" },
   },
   t = {
     name = "+scratch test",
