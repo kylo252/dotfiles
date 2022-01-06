@@ -42,7 +42,7 @@ local buttons = {
     {
       keybind = "SPC p",
       description = "  Plugins ",
-      command = ":edit ~/.config/nvim/lua/plugins.lua<cr>",
+      command = "<cmd>edit ~/.config/nvim/lua/plugins.lua<cr>",
     },
     {
       keybind = "SPC T",

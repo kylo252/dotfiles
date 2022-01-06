@@ -116,7 +116,7 @@ function dev-nvim() {
 }
 
 function min-nvim() {
-  local minimal_init_rc="$HOME/.config/nvim/utils/minimal_lsp.lua"
+  local minimal_init_rc="$HOME/.config/nvim/scripts/minimal_init.lua"
   dev-nvim -u "$minimal_init_rc" "$@"
 }
 

@@ -14,7 +14,13 @@ end
 packer.init {
   package_root = package_root,
   log = { level = "info" },
-  git = { clone_timeout = 300 },
+  git = {
+    clone_timeout = 300,
+    subcommands = {
+      -- this is more efficient than what Packer is using
+      fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
+    },
+  },
   display = {
     open_fn = function()
       return require("packer.util").float { border = "single" }
