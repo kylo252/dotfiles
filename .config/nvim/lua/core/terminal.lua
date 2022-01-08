@@ -2,7 +2,7 @@ local M = {}
 
 local config = {
   size = 20,
-  open_mapping = [[<C-t>]],
+  open_mapping = [[<C-\>]],
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
   shade_terminals = false,
