@@ -5,9 +5,6 @@ source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
 
 source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
-LFCD="$GOPATH/src/github.com/gokcehan/lf/etc/lfcd.sh"
-[ -f "$LFCD" ] && source "$LFCD"
-
 source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
 znap source kazhala/dotbare
@@ -39,7 +36,7 @@ source <(fnm env --fnm-dir="$XDG_DATA_HOME/fnm" --shell=zsh)
 autoload -Uz kp
 
 # turn off git maintenance
-zstyle ':znap:*:<glob pattern>' git-maintenance off
+zstyle ':znap:*:*' git-maintenance off
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
