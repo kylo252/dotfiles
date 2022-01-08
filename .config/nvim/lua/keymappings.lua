@@ -67,9 +67,8 @@ M.groups = {
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-k>"] = "<Esc>:m .-2<CR>==gi",
 
-    -- save file
-    ["<C-s>"] = "<cmd>w<CR>",
-    ["<C-c>"] = "<ESC>",
+    -- save file and quit insert-mode
+    ["<C-s>"] = "<Esc><cmd>w<CR>",
 
     -- move the cursor
     ["<A-h>"] = "<Left>",
@@ -101,7 +100,7 @@ M.groups = {
     ["<C-q>"] = ":call QuickFixToggle()<CR>",
 
     -- save file
-    ["<C-s>"] = ":w<CR>",
+    ["<C-s>"] = "<cmd>w<CR>",
 
     -- Page down/up
     ["[d"] = "<PageUp>",
@@ -117,6 +116,10 @@ M.groups = {
   ---@usage change or add keymappings for terminal mode
   term_mode = {
     -- Terminal window navigation
+    ["<C-h>"] = "<C-\\><C-N><C-w>h",
+    ["<C-j>"] = "<C-\\><C-N><C-w>j",
+    ["<C-k>"] = "<C-\\><C-N><C-w>k",
+    ["<C-l>"] = "<C-\\><C-N><C-w>l",
   },
 
   ---@usage change or add keymappings for visual mode

@@ -17,7 +17,7 @@ local install_path = join_paths(package_root, "packer", "start", "packer.nvim")
 local compile_path = join_paths(install_path, "plugin", "packer_compiled.lua")
 
 -- Choose whether to use the executable that's managed by lsp-installer
-local use_lsp_installer = false
+local use_lsp_installer = true
 
 local function load_plugins()
   require("packer").startup {
