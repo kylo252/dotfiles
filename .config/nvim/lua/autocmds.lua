@@ -29,7 +29,7 @@ M.augroups = {
   },
   _general_windows = {
     { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
-    { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> <esc> :close<CR>" },
+    { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
   },
   _cmp = {
     { "FileType", "TelescopePrompt", [[lua require('cmp').setup.buffer { enabled = false }]] },

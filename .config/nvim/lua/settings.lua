@@ -1,10 +1,3 @@
-local terminal = vim.fn.expand "$TERMINAL"
-
----  VIM ONLY COMMANDS  ---
-vim.cmd('let &titleold="' .. terminal .. '"')
-vim.cmd "set inccommand=split"
-vim.cmd "set iskeyword+=-"
-vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd "set syntax=off"
 
 ---  SETTINGS  ---
@@ -12,7 +5,6 @@ vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
 vim.opt.colorcolumn = "99999" -- fix indentline for now
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
@@ -24,13 +16,13 @@ vim.opt.foldmethod = "expr"
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.hidden = true -- required to keep multiple buffers and open multiple buffers
 vim.opt.ignorecase = true -- ignore case in search patterns
+vim.opt.inccommand = "split" -- showsthe effects of :s as you type.
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.number = true -- set numbered lines
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
-vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2 -- always show tabs
 vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
@@ -49,6 +41,10 @@ vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+
+vim.opt.iskeyword:append "-" -- used in searching and recognizing with many commands
+vim.opt.whichwrap:append "<,>,[,],h,l" -- let movement keys reach the previous line
+vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 
 if vim.fn.has "wsl" == 1 then
   vim.g.clipboard = {
