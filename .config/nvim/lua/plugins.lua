@@ -176,6 +176,7 @@ packer.startup(function(use)
         require("core.statusline").setup()
       end,
     },
+    { "arkav/lualine-lsp-progress" },
     {
       "karb94/neoscroll.nvim",
       event = "BufRead",
