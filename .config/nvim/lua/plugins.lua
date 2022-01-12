@@ -88,7 +88,9 @@ packer.startup(function(use)
 
   -- Helpers
   use {
-    "folke/which-key.nvim",
+    -- "folke/which-key.nvim",
+    "zeertzjq/which-key.nvim",
+    branch = "patch-1",
     config = function()
       require("core.whichkey").setup()
     end,
