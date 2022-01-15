@@ -8,7 +8,7 @@ M.augroups = {
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
     },
     { "FileType", "qf", "set nobuflisted" },
-    { "BufEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
+    { "BufWinEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
     { "BufRead", "*", "++once", "lua require('lsp').setup()" },
   },
   _filetypechanges = {

@@ -108,7 +108,7 @@ function fif-v2() {
 function dev-nvim() {
   export VIMRUNTIME="$HOME/.local/share/neovim/runtime"
   export XDG_CACHE_HOME="$HOME/.cache/nvim/nightly"
-  rm -rf "$XDG_CACHE_HOME"/nvim/nightly/*log*
+  fd 'log' "$XDG_CACHE_HOME" -x rm -f
 
   local pre_cmd="lua vim.loop.os_setenv('XDG_CACHE_HOME', vim.loop.os_homedir() .. '/.cache')" 
 

@@ -107,6 +107,7 @@ packer.startup(function(use)
     },
     {
       "ahmedkhalf/project.nvim",
+      after = "telescope.nvim",
       config = function()
         require("core.project").setup()
       end,
@@ -177,14 +178,14 @@ packer.startup(function(use)
     { "arkav/lualine-lsp-progress" },
     {
       "karb94/neoscroll.nvim",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = function()
         require("neoscroll").setup { respect_scrolloff = true }
       end,
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = function()
         require("core.indent").setup()
       end,
