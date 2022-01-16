@@ -14,7 +14,7 @@ local action_state = require "telescope.actions.state"
 local Path = require "plenary.path"
 
 function M.grep_string_v2(opts)
-  opts = opts or M.theme()
+  opts = opts or themes.get_ivy {}
 
   local search_string = vim.fn.execute "history search"
   local search_list = vim.split(search_string, "\n")
@@ -59,10 +59,8 @@ function M.grep_dotfiles()
 end
 
 function M.find_dotfiles()
-  local opts = themes.get_ivy {
+  local opts = themes.get_dropdown {
     previewer = false,
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
     layout_config = {
       height = 15,
       width = 0.5,
@@ -145,7 +143,6 @@ function M.find_runtime_files(opts)
 
   pickers.new(opts, {
     prompt_title = "select a runtime directory",
-    layout_strategy = "flex",
     finder = finders.new_table(runtimedirs),
     sorter = sorters.get_generic_fuzzy_sorter(opts),
     attach_mappings = function(prompt_bufnr, map)

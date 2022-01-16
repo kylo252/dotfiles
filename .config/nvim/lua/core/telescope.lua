@@ -1,11 +1,11 @@
 local M = {}
 
 function M.config()
-  -- local custom_actions = require "core.telescope.custom-actions"
   local _, actions = pcall(require, "telescope.actions")
+  local _, themes = pcall(require, "telescope.themes")
 
   return {
-    defaults = {
+    defaults = themes.get_ivy {
       layout_config = {
         center = {
           preview_cutoff = 70,
@@ -13,7 +13,6 @@ function M.config()
         cursor = {
           preview_cutoff = 70,
         },
-        height = 0.9,
         horizontal = {
           preview_cutoff = 120,
           prompt_position = "bottom",
@@ -21,7 +20,6 @@ function M.config()
         vertical = {
           preview_cutoff = 70,
         },
-        width = 0.8,
       },
       vimgrep_arguments = {
         "rg",
@@ -109,13 +107,17 @@ function M.setup()
       opts = { bang = true, nargs = "*", force = true },
     },
     {
-      name = "LoadSession",
-      fn = require("core.sessions").load_session,
+      name = "SessionLoad",
+      fn = function(nopts)
+        require("core.sessions").load_session(nopts.args)
+      end,
       opts = { bang = true, nargs = "*", force = true },
     },
     {
-      name = "SaveSession",
-      fn = require("core.sessions").save_session,
+      name = "SessionSave",
+      fn = function(nopts)
+        require("core.sessions").save_session(nopts.args)
+      end,
       opts = { bang = true, nargs = "*", force = true },
     },
   }
@@ -129,8 +131,13 @@ function M.setup()
       ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
     },
   }
-  vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
   require("keymappings").load(keymaps)
+
+  vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
+
+  M.setup_z()
+  require("telescope").load_extension "fzf"
+  require("telescope").load_extension "projects"
 end
 
 return M

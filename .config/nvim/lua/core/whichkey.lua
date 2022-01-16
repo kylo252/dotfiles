@@ -54,7 +54,7 @@ M.mappings = {
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
     l = { "<cmd>ChainedLiveGrep<CR>", "ChainedLiveGrep" },
     m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
-    p = { "<cmd>Telescope git_files<CR>", "Find Project Files" },
+    p = { "<cmd>Telescope projects<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
     i = {
       name = "+internal",
@@ -153,8 +153,8 @@ M.mappings = {
   },
   S = {
     name = "+sessions",
-    l = { "<cmd>LoadSession<cr>", "load session" },
-    s = { "<cmd>SaveSession<cr>", "save session" },
+    l = { "<cmd>SessionLoad<cr>", "load session" },
+    s = { "<cmd>SessionSave<cr>", "save session" },
   },
   t = {
     name = "+scratch test",

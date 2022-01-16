@@ -19,7 +19,7 @@ end
 
 local defaults = {
   -- directory where session files are saved
-  dir = join_paths(vim.fn.stdpath "cache", "lvim_sessions"),
+  dir = join_paths(vim.fn.stdpath "cache", "sessions"),
   -- sessionoptions used for saving
   options = { "buffers", "curdir", "tabpages", "winsize" },
   -- default session name
@@ -48,7 +48,7 @@ function M.load_session_by_name(name)
 end
 
 function M.load_session(name)
-  name = name.args or ""
+  name = name or ""
 
   if name ~= "" then
     M.load_session_by_name(name)

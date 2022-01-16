@@ -117,8 +117,6 @@ packer.startup(function(use)
       lock = true, -- don't change the checked-out branch
       config = function()
         require("core.telescope").setup()
-        require("core.telescope").setup_z()
-        require("telescope").load_extension "fzf"
       end,
       event = "BufEnter",
     },
