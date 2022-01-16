@@ -96,6 +96,16 @@ function utils.load_commands(collection)
   end
 end
 
+function utils.on_dir_changed()
+  local entry = vim.loop.cwd()
+  local Job = require "plenary.job"
+  local job = Job:new {
+    command = "zoxide",
+    args = { "add", entry },
+  }
+  job:start()
+end
+
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))

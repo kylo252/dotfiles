@@ -10,6 +10,7 @@ M.augroups = {
     { "FileType", "qf", "set nobuflisted" },
     { "BufWinEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
     { "BufRead", "*", "++once", "lua require('lsp').setup()" },
+    { "DirChanged", "*", "lua require('utils').on_dir_changed()" },
   },
   _filetypechanges = {
     { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
