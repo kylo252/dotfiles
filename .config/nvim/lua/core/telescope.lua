@@ -99,7 +99,13 @@ function M.setup()
   require("telescope").setup(opts)
 
   local commands = {
-    { name = "ChainedLiveGrep", fn = require("core.telescope.custom-finders").chained_live_grep },
+    {
+      name = "Grep",
+      fn = function(nargs)
+        require("core.telescope.custom-finders").chained_live_grep(nargs)
+      end,
+      opts = { bang = true, nargs = "*", force = true },
+    },
     { name = "FindRuntimeFiles", fn = require("core.telescope.custom-finders").find_runtime_files },
     {
       name = "FuzzyGrepString",
@@ -108,15 +114,15 @@ function M.setup()
     },
     {
       name = "SessionLoad",
-      fn = function(nopts)
-        require("core.sessions").load_session(nopts.args)
+      fn = function(nargs)
+        require("core.sessions").load_session(nargs.args)
       end,
       opts = { bang = true, nargs = "*", force = true },
     },
     {
       name = "SessionSave",
-      fn = function(nopts)
-        require("core.sessions").save_session(nopts.args)
+      fn = function(nargs)
+        require("core.sessions").save_session(nargs.args)
       end,
       opts = { bang = true, nargs = "*", force = true },
     },

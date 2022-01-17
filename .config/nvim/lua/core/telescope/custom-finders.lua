@@ -168,9 +168,17 @@ function M.find_runtime_files(opts)
 end
 
 function M.chained_live_grep(opts)
-  local conf = require("telescope.config").values
-
   opts = opts or themes.get_ivy {}
+  opts.vimgrep_arguments = opts.vimgrep_arguments or vim.deepcopy(config.values.vimgrep_arguments)
+
+  if opts.type_filter then
+    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--type=" .. opts.type_filter
+  end
+
+  if opts.glob_pattern then
+    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--glob=" .. opts.glob_pattern
+  end
+
   builtin.live_grep(vim.tbl_deep_extend("force", {
     prompt_title = "Search",
     attach_mappings = function(prompt_bufnr, map)
@@ -191,7 +199,6 @@ function M.chained_live_grep(opts)
       local dynamic_filetype = function()
         local entry = action_state.get_selected_entry()
         local onlytype = vim.fn.fnamemodify(entry.filename, ":e")
-        opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
         opts.prompt_prefix = opts.prompt_prefix or "*." .. onlytype .. " >> "
         opts.prompt_title = "Scoped Results"
         vim.list_extend(opts.vimgrep_arguments, { "--type=" .. onlytype })
@@ -203,7 +210,7 @@ function M.chained_live_grep(opts)
       local dynamic_filetype_skip = function()
         local entry = action_state.get_selected_entry()
         local skiptype = vim.fn.fnamemodify(entry.filename, ":e")
-        opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
+        opts.vimgrep_arguments = vim.deepcopy(config.values.vimgrep_arguments)
         opts.prompt_prefix = opts.prompt_prefix or "!*." .. skiptype .. " >> "
         opts.prompt_title = "Scoped Results"
         vim.list_extend(opts.vimgrep_arguments, { "--type-not=" .. skiptype })
