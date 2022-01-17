@@ -48,7 +48,7 @@ packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
-  use { "folke/lua-dev.nvim", filetype = "lua" }
+  use { "kylo252/lua-dev.nvim", branch = "fix-on-new-config", filetype = "lua" }
 
   -- LSP and linting
   use {
