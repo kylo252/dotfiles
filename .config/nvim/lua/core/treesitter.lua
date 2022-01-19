@@ -22,49 +22,40 @@ function M.setup()
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
-          ["ar"] = "@parameter.inner", -- "ap" is already used
-          ["ir"] = "@parameter.outer", -- "ip" is already used
-          ["."] = "textsubjects-smart",
-          [";"] = "textsubjects-big",
-          -- Or you can define your own textobjects like this
-          ["iF"] = {
-            python = "(function_definition) @function",
-            cpp = "(function_definition) @function",
-            c = "(function_definition) @function",
-          },
+          ["aa"] = "@parameter.inner", -- "ap" is already used
+          ["ia"] = "@parameter.outer", -- "ip" is already used
         },
-        lsp_interop = {
-          enable = true,
-          border = "none",
-          peek_definition_code = {
-            ["<leader>ldf"] = "@function.outer",
-            ["<leader>ldF"] = "@class.outer",
-          },
+      },
+      lsp_interop = {
+        enable = true,
+        border = "rounded",
+        peek_definition_code = {
+          ["gpof"] = "@function.outer",
+          ["gpoc"] = "@class.outer",
         },
-        textobjects = {
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              ["]m"] = "@function.outer",
-              ["]]"] = "@class.outer",
-            },
-            goto_next_end = {
-              ["]M"] = "@function.outer",
-              ["]["] = "@class.outer",
-            },
-            goto_previous_start = {
-              ["[m"] = "@function.outer",
-              ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-              ["[M"] = "@function.outer",
-              ["[]"] = "@class.outer",
-            },
-          },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
         },
       },
     },
   }
 end
+
 return M

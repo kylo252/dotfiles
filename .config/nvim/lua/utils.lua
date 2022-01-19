@@ -112,6 +112,13 @@ function _G.dump(...)
   return ...
 end
 
+function _G.log_entry(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  local log = require("plenary.log").new { level = "info", plugin = "user_debug", info_level = 3 }
+  log.info(unpack(objects))
+  return ...
+end
+
 function _G.require_clean(m)
   package.loaded[m] = nil
   _G[m] = nil

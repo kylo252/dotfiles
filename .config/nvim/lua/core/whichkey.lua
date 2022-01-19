@@ -52,7 +52,7 @@ M.mappings = {
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "grep string v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
-    l = { "<cmd>ChainedLiveGrep<CR>", "ChainedLiveGrep" },
+    l = { "<cmd>Grep<CR>", "ChainedLiveGrep" },
     m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
     p = { "<cmd>Telescope projects<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
@@ -198,10 +198,8 @@ function M.setup()
     ["if"] = "@function.inner",
     ["ac"] = "@class.outer",
     ["ic"] = "@class.inner",
-    ["ar"] = "@parameter.inner", -- "ap" is already used
-    ["ir"] = "@parameter.outer", -- "ip" is already used
-    ["."] = "textsubjects-smart",
-    [";"] = "textsubjects-big",
+    ["aa"] = "@parameter.inner", -- "ap" is already used
+    ["ia"] = "@parameter.outer", -- "ip" is already used
     ["iF"] = "(function_definition) @function",
   }
 
@@ -215,6 +213,12 @@ function M.setup()
     ["[M"] = "@function.outer",
     ["[]"] = "@class.outer",
   }
+
+  local lsp_ts_labels = {
+    ["gpof"] = "@function.outer",
+    ["gpoc"] = "@class.outer",
+  }
+
   wk.setup(setup_opts)
 
   wk.register(M.global_mappings)
@@ -223,6 +227,7 @@ function M.setup()
 
   wk.register(select_labels, { mode = "o", prefix = "", preset = true })
   wk.register(move_labels, { mode = "n", prefix = "", preset = true })
+  wk.register(lsp_ts_labels, { mode = "n", prefix = "", preset = true })
 end
 
 return M

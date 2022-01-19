@@ -48,7 +48,6 @@ local function setup_lsp_keybindings(bufnr)
     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
     ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
     ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
-    ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
     ["gl"] = {
       "<cmd>lua vim.diagnostic.open_float(0, {scope='line'}) <CR>",
       "Show line diagnostics",
