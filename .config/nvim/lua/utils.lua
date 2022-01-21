@@ -55,9 +55,9 @@ function utils.copy_help_url()
     return ""
   end
 
-  local url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
-  vim.api.nvim_command("let @+ = '" .. url .. "'")
-  print("copied: " .. url)
+  local help_url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
+  vim.notify(help_url, vim.log.levels.INFO, { title = "help url" })
+  vim.fn.setreg("+", help_url)
 end
 
 function utils.gsub_args(args)

@@ -81,14 +81,19 @@ M.mappings = {
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     N = { "<cmd>Telescope live_grep theme=get_ivy cwd=$XDG_DATA_HOME/neovim/runtime/lua<CR>", "Neovim lua runtime" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
+    P = { "<cmd>Telescope projects theme=get_ivy<CR>", "Find recent projects" },
   },
   g = {
     name = "+git",
     b = { "<cmd>Telescope git_bcommits theme=get_ivy<cr>", "Buffers commits" },
-    c = {
+    Y = {
+      r = {
+        '<cmd>lua require"gitlinker".get_repo_url()<cr>',
+        "Copy repo URL",
+      },
       b = {
-        '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard })<cr>',
-        "Copy buffer URL",
+        '<cmd>lua require"core.git".get_blame_url()<cr>',
+        "Copy blame URL",
       },
     },
     d = { "LazyDots" },
@@ -99,9 +104,10 @@ M.mappings = {
     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    S = { "<cmd>Telescope git_status theme=get_ivy<cr>", "Git status" },
-    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    S = { "<cmd>Telescope git_status theme=get_ivy<cr>", "Git status" },
+    T = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blame " },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
   },
   j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
