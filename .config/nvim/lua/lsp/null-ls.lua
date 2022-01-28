@@ -3,7 +3,7 @@ local M = {}
 function M.config()
   return {
     formatters = {
-      { command = "black", extra_args = { "--verbose" }, filetypes = { "python" } },
+      -- { command = "black", extra_args = { "--verbose" }, filetypes = { "python" } },
       { command = "stylua", extra_args = {}, filetypes = { "lua" } },
       { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
     },

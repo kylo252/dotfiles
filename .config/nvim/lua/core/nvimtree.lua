@@ -83,7 +83,7 @@ function M.setup()
     },
     filters = {
       dotfiles = false,
-      custom = { ".cache" },
+      custom = {},
     },
     auto_open = false,
     tab_open = false,
