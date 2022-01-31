@@ -128,7 +128,7 @@ function M.setup()
     },
   }
 
-  require("utils").load_commands(commands)
+  require("user.utils").load_commands(commands)
 
   local keymaps = {
     normal_mode = {
@@ -137,7 +137,7 @@ function M.setup()
       ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
     },
   }
-  require("keymappings").load(keymaps)
+  require("user.keymappings").load(keymaps)
 
   vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
 

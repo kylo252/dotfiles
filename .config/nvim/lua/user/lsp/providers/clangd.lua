@@ -13,7 +13,7 @@ local clangd_flags = {
 local provider = "clangd"
 
 local custom_on_attach = function(client, bufnr)
-  require("lsp").common_on_attach(client, bufnr)
+  require("user.lsp").common_on_attach(client, bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
 end

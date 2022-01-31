@@ -10,7 +10,7 @@ local T = function(str)
 end
 
 local cmp_format_layout = function(entry, vim_item)
-  local icons = require("lsp").get_lsp_kind()
+  local icons = require("user.lsp").get_lsp_kind()
   vim_item.kind = icons[vim_item.kind]
   vim_item.menu = ({
     nvim_lsp = "(LSP)",

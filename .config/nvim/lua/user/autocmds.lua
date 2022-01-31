@@ -9,8 +9,8 @@ M.augroups = {
     },
     { "FileType", "qf", "set nobuflisted" },
     { "BufWinEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
-    { "BufRead", "*", "++once", "lua require('lsp').setup()" },
-    { "DirChanged", "*", "lua require('utils').on_dir_changed()" },
+    { "BufRead", "*", "++once", "lua require('user.lsp').setup()" },
+    { "DirChanged", "*", "lua require('user.utils').on_dir_changed()" },
   },
   _filetypechanges = {
     { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
@@ -62,7 +62,7 @@ function M.enable_lsp_document_highlight(client_id)
       {
         "CursorHold",
         "<buffer>",
-        string.format("lua require('lsp.utils').conditional_document_highlight(%d)", client_id),
+        string.format("lua require('user.lsp.utils').conditional_document_highlight(%d)", client_id),
       },
       {
         "CursorMoved",
@@ -116,9 +116,9 @@ function M.setup()
   M.define_augroups(M.augroups)
   M.toggle_format_on_save()
   local commands = {
-    { name = "ToggleFormatOnSave", fn = require("autocmds").toggle_format_on_save },
+    { name = "ToggleFormatOnSave", fn = require("user.autocmds").toggle_format_on_save },
   }
-  require("utils").load_commands(commands)
+  require("user.utils").load_commands(commands)
 end
 
 return M

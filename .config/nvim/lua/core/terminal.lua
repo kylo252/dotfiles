@@ -80,7 +80,7 @@ M.add_exec = function(opts)
     opts.direction
   )
 
-  require("keymappings").load {
+  require("user.keymappings").load {
     normal_mode = { [opts.keymap] = exec_func },
     term_mode = { [opts.keymap] = exec_func },
   }

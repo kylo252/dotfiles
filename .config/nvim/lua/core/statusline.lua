@@ -61,9 +61,9 @@ local components = {
       local buf_client_names = {}
       for _, client in pairs(buf_clients) do
         if client.name == "null-ls" then
-          local null_ls_formatters = require("lsp.null-ls").list_registered_formatters(vim.bo.filetype)
+          local null_ls_formatters = require("user.lsp.null-ls").list_registered_formatters(vim.bo.filetype)
           vim.list_extend(buf_client_names, null_ls_formatters)
-          local null_ls_linters = require("lsp.null-ls").list_registered_linters(vim.bo.filetype)
+          local null_ls_linters = require("user.lsp.null-ls").list_registered_linters(vim.bo.filetype)
           vim.list_extend(buf_client_names, null_ls_linters)
         else
           table.insert(buf_client_names, client.name)

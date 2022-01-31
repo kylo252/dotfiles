@@ -36,10 +36,10 @@ end
 
 local commands = {
   { name = "PackerRunOnComplete", fn = run_on_packer_complete },
-  { name = "PackerRecompile", fn = require("utils").reset_cache },
+  { name = "PackerRecompile", fn = require("user.utils").reset_cache },
 }
 
-require("utils").load_commands(commands)
+require("user.utils").load_commands(commands)
 
 vim.cmd [[autocmd User PackerComplete PackerRunOnComplete]]
 

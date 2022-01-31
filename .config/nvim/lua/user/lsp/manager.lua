@@ -1,15 +1,15 @@
 local M = {}
 
-local lsp_utils = require "lsp.utils"
+local lsp_utils = require "user.lsp.utils"
 
 ---Resolve the configuration for a server
 ---@param name string
 ---@return table
 local function resolve_config(name)
   local config = {
-    on_attach = require("lsp").common_on_attach,
-    on_init = require("lsp").common_on_init,
-    capabilities = require("lsp").common_capabilities(),
+    on_attach = require("user.lsp").common_on_attach,
+    on_init = require("user.lsp").common_on_init,
+    capabilities = require("user.lsp").common_capabilities(),
     flags = {
       debounce_text_changes = 150,
     },

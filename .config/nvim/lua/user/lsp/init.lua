@@ -85,7 +85,7 @@ function M.common_on_init(client, bufnr) end
 
 --luacheck: no unused args
 function M.common_on_attach(client, bufnr)
-  require("autocmds").enable_lsp_document_highlight(client.id)
+  require("user.autocmds").enable_lsp_document_highlight(client.id)
   setup_lsp_keybindings(bufnr)
 end
 
@@ -95,14 +95,14 @@ function M.common_capabilities()
 end
 
 function M.setup()
-  require("lsp.handlers").setup()
+  require("user.lsp.handlers").setup()
   require("vim.lsp.log").set_format_func(vim.inspect)
-  require("lsp.null-ls").setup()
+  require("user.lsp.null-ls").setup()
 
   local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pylsp", "cmake" }
 
   for _, server in ipairs(servers) do
-    require("lsp.manager").setup(server)
+    require("user.lsp.manager").setup(server)
   end
 end
 
