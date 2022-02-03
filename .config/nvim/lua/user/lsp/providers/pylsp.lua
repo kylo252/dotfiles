@@ -12,21 +12,24 @@ return {
     pylsp = {
       plugins = {
         flake8 = {
-          enabled = true,
+          enabled = false,
         },
         pyflakes = {
-          enabled = false,
+          enabled = true,
         },
         pycodestyle = {
           enabled = false,
         },
         pylint = {
-          enabled = false,
+          enabled = true,
         },
         isort = {
           enabled = true,
         },
         black = {
+          enabled = false,
+        },
+        yapf = {
           enabled = true,
         },
       },
