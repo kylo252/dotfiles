@@ -167,7 +167,6 @@ packer.startup(function(use)
     { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
     {
       "nvim-lualine/lualine.nvim",
-      branch = "feat/retry_on_redraw_failure",
       event = "BufWinEnter",
       config = function()
         require("core.statusline").setup()

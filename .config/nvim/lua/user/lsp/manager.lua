@@ -15,7 +15,7 @@ local function resolve_config(name)
     },
   }
 
-  local status_ok, custom_config = pcall(require, "lsp/providers/" .. name)
+  local status_ok, custom_config = pcall(require, "user.lsp.providers." .. name)
   if status_ok then
     config = vim.tbl_deep_extend("force", config, custom_config)
   end

@@ -1,4 +1,4 @@
-local utils = require "utils"
+local utils = require "user.utils"
 
 local opts = {
   settings = {
