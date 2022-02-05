@@ -142,8 +142,10 @@ function M.setup()
   vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
 
   M.setup_z()
-  require("telescope").load_extension "fzf"
-  require("telescope").load_extension "projects"
+  pcall(function()
+    require("telescope").load_extension "fzf"
+    require("telescope").load_extension "projects"
+  end)
 end
 
 return M
