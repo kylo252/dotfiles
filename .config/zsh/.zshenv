@@ -18,9 +18,6 @@ function __setup_defaults() {
 
   export FONTCONFIG_PATH=/etc/fonts
 
-  # https://github.com/romkatv/powerlevel10k/issues/1428
-  # export GITSTATUS_LOG_LEVEL=DEBUG
-
   # https://github.com/dandavison/delta/issues/497
   # this is actually broken
   # export LESS='-Rf'

@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Based on romkatv/powerlevel10k/config/p10k-lean.zsh.
 #
 # Wizard options: nerdfont-complete + powerline, small icons, unicode, lean, 24h time,
@@ -285,6 +286,11 @@
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
 
   #####################################[ vcs: git status ]######################################
+
+  # https://github.com/romkatv/powerlevel10k/issues/1428
+  # typeset -g GITSTATUS_LOG_LEVEL=DEBUG
+  typeset -g GITSTATUS_NUM_THREADS=4
+
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
 
@@ -360,10 +366,10 @@
       res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
     fi
 
-    # Display "wip" if the latest commit's summary contains "wip" or "WIP".
-    if [[ $VCS_STATUS_COMMIT_SUMMARY == (|*[^[:alnum:]])(wip|WIP)(|[^[:alnum:]]*) ]]; then
-      res+=" ${modified}wip"
-    fi
+    # # Display "wip" if the latest commit's summary contains "wip" or "WIP".
+    # if [[ $VCS_STATUS_COMMIT_SUMMARY == (|*[^[:alnum:]])(wip|WIP)(|[^[:alnum:]]*) ]]; then
+    #   res+=" ${modified}wip"
+    # fi
 
     # ⇣42 if behind the remote.
     (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"

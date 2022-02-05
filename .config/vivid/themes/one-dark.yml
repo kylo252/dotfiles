@@ -3,7 +3,7 @@ colors:
   white: 'abb2bf'
   red: 'e06c75'
   green: '98c379'
-  yellow: 'd19a66'
+  yellow: 'e5c07b'
   blue: '61afef'
   pink: 'ff6ac1'
   cyan: '56b6c2'
@@ -14,7 +14,9 @@ colors:
   darkergray: '333333'
 
 core:
+  normal_text: {}
   regular_file: {}
+  reset_to_normal: {}
 
   directory:
     foreground: blue
@@ -29,9 +31,12 @@ core:
   broken_symlink:
     foreground: black
     background: red
+
   missing_symlink_target:
     foreground: black
     background: red
+
+  multi_hard_link: {}
 
   fifo:
     foreground: black
@@ -41,25 +46,29 @@ core:
     foreground: black
     background: pink
 
-  character_device:
-    foreground: pink
-    background: darkergray
+  door:
+    foreground: black
+    background: pink
 
   block_device:
     foreground: cyan
     background: darkergray
 
-  normal_text:
-    {}
+  setuid: {}
 
-  other_writable:
-    {}
+  setgid: {}
 
-  sticky:
-    {}
+  character_device:
+    foreground: pink
+    background: darkergray
 
-  sticky_other_writable:
-    {}
+  file_with_capability: {}
+
+  other_writable: {}
+
+  sticky: {}
+
+  sticky_other_writable: {}
 
 text:
   special:
