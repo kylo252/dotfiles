@@ -8,7 +8,6 @@ local opts = {
     folder_arrows = 1,
     tree_width = 35,
   },
-  quit_on_open = 0,
   respect_buf_cwd = 1,
   git_hl = 1,
   disable_window_picker = 1,
@@ -16,7 +15,7 @@ local opts = {
 }
 
 function M.setup()
-  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  local status_ok, _ = pcall(require, "nvim-tree")
   if not status_ok then
     error "failed to load nvim-tree.config"
     return
@@ -27,8 +26,6 @@ function M.setup()
   end
 
   vim.g.netrw_banner = 0
-
-  local tree_cb = nvim_tree_config.nvim_tree_callback
 
   local setup_opts = {
     disable_netrw = true,
@@ -72,12 +69,12 @@ function M.setup()
       mappings = {
         custom_only = false,
         list = {
-          { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-          { key = "h", cb = tree_cb "close_node" },
-          { key = "h", cb = tree_cb "close_node" },
-          { key = "C", cb = tree_cb "cd" },
-          { key = "gtf", cb = "<cmd>lua require'core.nvimtree'.start_telescope('find_files')<cr>" },
-          { key = "gtg", cb = "<cmd>lua require'core.nvimtree'.start_telescope('live_grep')<cr>" },
+          -- { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
+          -- { key = "h", action = "close_node" },
+          -- { key = "v", action = "vsplit" },
+          -- { key = "C", action = "cd" },
+          -- { key = "gtf", action_cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('find_files')<cr>" },
+          -- { key = "gtg", action_cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('live_grep')<cr>" },
         },
       },
     },
@@ -85,42 +82,19 @@ function M.setup()
       dotfiles = false,
       custom = {},
     },
+    actions = {
+      change_dir = {
+        global = false,
+      },
+      open_file = {
+        quit_on_open = false,
+      },
+    },
     auto_open = false,
     tab_open = false,
   }
 
-  -- Add nvim_tree open callback
-  local tree_view = require "nvim-tree.view"
-  local open = tree_view.open
-  tree_view.open = function()
-    M.on_open()
-    open()
-  end
-
-  vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
-
   require("nvim-tree").setup(setup_opts)
-end
-
-function M.on_open()
-  if package.loaded["bufferline.state"] then
-    require("bufferline.state").set_offset(35, "")
-  end
-end
-
-function M.on_close()
-  local buf = tonumber(vim.fn.expand "<abuf>")
-  local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-  if ft == "NvimTree" and package.loaded["bufferline.state"] then
-    require("bufferline.state").set_offset(0)
-  end
-end
-
-function M.change_tree_dir(dir)
-  local lib_status_ok, lib = pcall(require, "nvim-tree.lib")
-  if lib_status_ok then
-    lib.change_dir(dir)
-  end
 end
 
 function M.start_telescope(telescope_mode)

@@ -148,6 +148,9 @@ M.groups = {
 
     -- search for visually selected text
     ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
+
+    -- SnipRun
+    ["<leader>f"] = "<esc><cmd>'<,'>SnipRun<CR>",
   },
 
   ---@usage change or add keymappings for visual block mode
@@ -161,7 +164,7 @@ M.groups = {
     ["<A-k>"] = ":m '<-2<CR>gv-gv",
 
     -- Sort lines
-    ["<A-s>"] = ":'<,'>!sort -u<CR>",
+    ["<A-s>"] = "<esc>:'<,'>!sort -u<CR>",
   },
 
   operator_mode = {},

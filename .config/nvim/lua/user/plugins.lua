@@ -222,6 +222,14 @@ packer.startup(function(use)
       require("core.quickfix").setup()
     end,
   }
+  use {
+    "michaelb/sniprun",
+    run = "bash ./install.sh",
+    cmd = "SnipRun",
+    config = function()
+      require("core.sniprun").setup()
+    end,
+  }
   use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
   use { "VebbNix/lf-vim" }
 end)

@@ -22,7 +22,7 @@ function M.config()
           return u.root_pattern ".luacheckrc"(params.bufname)
         end,
       },
-      { command = "flake8", extra_args = { "" }, filetypes = { "python" }, cwd = py_cwd },
+      { command = "flake8", extra_args = { "--show-source" }, filetypes = { "python" }, cwd = py_cwd },
       { command = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
