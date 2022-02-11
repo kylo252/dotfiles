@@ -9,6 +9,7 @@ function M.config()
   return {
     formatters = {
       { command = "black", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
+      { command = "isort", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       { command = "stylua", extra_args = {}, filetypes = { "lua" } },
       { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
     },
@@ -22,7 +23,8 @@ function M.config()
           return u.root_pattern ".luacheckrc"(params.bufname)
         end,
       },
-      { command = "flake8", extra_args = { "--show-source" }, filetypes = { "python" }, cwd = py_cwd },
+      { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
+      { command = "mypy", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       { command = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
