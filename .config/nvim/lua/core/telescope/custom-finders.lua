@@ -52,7 +52,7 @@ function M.fuzzy_grep_string(query)
 end
 
 function M.grep_dotfiles()
-  M.chained_live_grep {
+  M.dynamic_grep {
     search_dirs = { vim.fn.stdpath "config", os.getenv "ZDOTDIR" },
     hidden = true,
   }
@@ -167,16 +167,19 @@ function M.find_runtime_files(opts)
   }):find()
 end
 
-function M.chained_live_grep(opts)
+function M.dynamic_grep(opts)
   opts = opts or themes.get_ivy {}
   opts.vimgrep_arguments = opts.vimgrep_arguments or vim.deepcopy(config.values.vimgrep_arguments)
 
-  if opts.type_filter then
-    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--type=" .. opts.type_filter
+  local type = string.match(opts.args, "type=(%w+)", 1)
+  local glob = string.match(opts.args, "glob=(%w+)", 1)
+
+  if type then
+    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--type=" .. type
   end
 
-  if opts.glob_pattern then
-    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--glob=" .. opts.glob_pattern
+  if glob then
+    opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--glob=" .. glob
   end
 
   builtin.live_grep(vim.tbl_deep_extend("force", {
@@ -227,10 +230,10 @@ function M.chained_live_grep(opts)
 
       map("i", "<C-space>", fuzzy_filter_results)
       map("n", "<C-space>", fuzzy_filter_results)
-      map("i", "<C-b>", dynamic_filetype)
-      map("n", "<C-b>", dynamic_filetype)
-      map("i", "<M-b>", dynamic_filetype_skip)
-      map("n", "<M-b>", dynamic_filetype_skip)
+      map("i", "<C-f>", dynamic_filetype)
+      map("n", "<C-f>", dynamic_filetype)
+      map("i", "<C-g>", dynamic_filetype_skip)
+      map("n", "<C-g>", dynamic_filetype_skip)
       -- map("i", "<M-r>", reset_search)
       -- map("n", "<M-r>", reset_search)
       return true

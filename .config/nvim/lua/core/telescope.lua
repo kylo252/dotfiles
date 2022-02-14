@@ -100,9 +100,9 @@ function M.setup()
 
   local commands = {
     {
-      name = "Grep",
+      name = "DynamicGrep",
       fn = function(nargs)
-        require("core.telescope.custom-finders").chained_live_grep(nargs)
+        require("core.telescope.custom-finders").dynamic_grep { args = nargs.args }
       end,
       opts = { bang = true, nargs = "*", force = true },
     },

@@ -52,7 +52,7 @@ M.mappings = {
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "grep string v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
-    l = { "<cmd>Grep<CR>", "ChainedLiveGrep" },
+    l = { "<cmd>DynamicGrep<CR>", "DynamicGrep" },
     m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
     p = { "<cmd>Telescope projects<CR>", "Find Project Files" },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
