@@ -112,7 +112,7 @@ function dev-nvim() {
 
   local pre_cmd="lua vim.loop.os_setenv('XDG_CACHE_HOME', vim.loop.os_homedir() .. '/.cache')" 
 
-  nvim --cmd "$pre_cmd" "$@"
+  "$VIMRUNTIME"/../build/bin/nvim --cmd "$pre_cmd" "$@"
 }
 
 function min-nvim() {

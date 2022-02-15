@@ -41,7 +41,7 @@ function M.toggle_format_on_save(opts)
   opts = opts
     or {
       ---@usage pattern string pattern used for the autocommand
-      pattern = "*.lua",
+      pattern = vim.fn.stdpath "config" .. "/**/*.lua",
       ---@usage timeout number timeout in ms for the format request
       timeout = 1000,
     }

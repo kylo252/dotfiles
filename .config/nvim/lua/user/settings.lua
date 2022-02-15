@@ -10,7 +10,7 @@ vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.fillchars = { fold = " " } -- remove folding chars
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 10 -- don't close any folds by default
 vim.opt.foldmethod = "expr"
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
