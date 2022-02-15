@@ -230,6 +230,14 @@ packer.startup(function(use)
       require("core.sniprun").setup()
     end,
   }
+  use {
+    "danymat/neogen",
+    config = function()
+      require("core.neogen").setup()
+    end,
+    event = "BufReadPost",
+  }
+
   use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
   use { "VebbNix/lf-vim" }
 end)

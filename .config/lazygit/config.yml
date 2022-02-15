@@ -90,6 +90,8 @@ keybinding:
     nextItem-alt: 'j' # go one line down
     prevPage: ',' # go to next page in list
     nextPage: '.' # go to previous page in list
+    scrollLeft: 'L'
+    scrollRight: 'H'
     gotoTop: 'g' # go to top of list
     gotoBottom: 'G' # go to bottom of list
     prevBlock: '<' # goto the previous block / panel
@@ -136,6 +138,9 @@ keybinding:
     prevBlock-alt2: '<backtab>'
     startSearch: '/'
     extrasMenu: '@'
+    toggleWhitespaceInDiffView: '<c-w>'
+    increaseContextInDiffView: '}'
+    decreaseContextInDiffView: '{'
 
   status:
     checkForUpdate: 'r'
@@ -156,17 +161,19 @@ keybinding:
     fetch: 'f'
     toggleTreeView: '`'
     openMergeTool: 'M'
+    openStatusFilter: '<c-b>'
 
   branches:
     createPullRequest: 'o'
+    viewPullRequestOptions: 'O'
     checkoutBranchByName: 'c'
-    forceCheckoutBranch: 'F'
-    rebaseBranch: 'r'
+    forceCheckoutBranch: 'C'
+    rebaseBranch: 'F'
     mergeIntoCurrentBranch: 'M'
     viewGitFlowOptions: 'i'
-    fastForward: 'f' # fast-forward this branch from its upstream
+    fastForward: 'u' # fast-forward this branch from its upstream
     pushTag: 'P'
-    setUpstream: 'u' # set as upstream of checked-out branch
+    setUpstream: 'U' # set as upstream of checked-out branch
     fetchRemote: 'f'
     copyPullRequestURL: '<c-y>'
     renameBranch: 'R'
@@ -191,6 +198,8 @@ keybinding:
     checkoutCommit: '<space>'
     resetCherryPick: '<c-r>'
     copyCommitMessageToClipboard: '<c-y>'
+    openLogMenu: '<c-l>'
+    openInBrowser: 'o'
 
   stash:
     popStash: 'g'

@@ -168,6 +168,10 @@ M.mappings = {
     s = { "<cmd>lua require_clean('scratch').test2()<cr>", "scratch test2" },
     e = { "<cmd>edit ~/.config/nvim/lua/scratch.lua<cr>", "edit scratch file" },
   },
+  T = {
+    name = "+TreeSitter",
+    d = { require("neogen").generate, "Neogen" },
+  },
 }
 
 function M.setup()
