@@ -170,7 +170,7 @@ M.mappings = {
   },
   T = {
     name = "+TreeSitter",
-    d = { require("neogen").generate, "Neogen" },
+    d = { "<cmd>lua require('neogen').generate()<cr>", "Neogen" },
   },
 }
 
