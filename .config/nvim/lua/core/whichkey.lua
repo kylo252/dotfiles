@@ -3,7 +3,7 @@ local M = {}
 
 M.global_mappings = {
   ["<c-e>"] = { "lf" },
-  Q = { "<cmd>BufferClose<cr>", "close buffer" },
+  Q = { "<cmd>BufferKill<cr>", "close buffer" },
   g = {
     -- LSP
     d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },

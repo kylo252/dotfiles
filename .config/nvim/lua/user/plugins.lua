@@ -47,7 +47,7 @@ packer.startup(function(use)
   -- packer can manage itself as an optional plugin
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
-  use { "nvim-lua/popup.nvim", event = "BufWinEnter" }
+  use { "nvim-lua/popup.nvim" }
   use { "folke/lua-dev.nvim", filetype = "lua" }
 
   -- LSP and linting
@@ -59,7 +59,7 @@ packer.startup(function(use)
         require("core.treesitter").setup()
       end,
     },
-    { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
+    { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
     { "neovim/nvim-lspconfig" },
     { "jose-elias-alvarez/null-ls.nvim" },
     { "williamboman/nvim-lsp-installer" },
@@ -78,7 +78,7 @@ packer.startup(function(use)
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
     {
       "b3nj5m1n/kommentary",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.comment").setup()
       end,
@@ -117,11 +117,10 @@ packer.startup(function(use)
       config = function()
         require("core.telescope").setup()
       end,
-      event = "BufEnter",
     },
     {
       "ggandor/lightspeed.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.lightspeed").setup()
       end,
@@ -131,7 +130,7 @@ packer.startup(function(use)
   -- TMUX and session management
   use {
     "aserowy/tmux.nvim",
-    event = "VimEnter",
+    event = "BufReadPost",
     config = function()
       require("core.tmux").setup()
     end,
@@ -139,7 +138,7 @@ packer.startup(function(use)
 
   use {
     "akinsho/nvim-toggleterm.lua",
-    event = "BufWinEnter",
+    event = "BufReadPost",
     config = function()
       require("core.terminal").setup()
     end,
@@ -158,15 +157,22 @@ packer.startup(function(use)
     },
     {
       "kyazdani42/nvim-tree.lua",
+      -- https://github.com/kyazdani42/nvim-tree.lua/issues/965
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       config = function()
         require("core.nvimtree").setup()
       end,
     },
-    { "romgrk/barbar.nvim", requires = { "nvim-web-devicons" }, event = "BufWinEnter" },
+    {
+      "akinsho/bufferline.nvim",
+      config = function()
+        require("core.bufferline").setup()
+      end,
+      event = "BufReadPost",
+    },
     {
       "nvim-lualine/lualine.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.statusline").setup()
       end,
@@ -174,14 +180,14 @@ packer.startup(function(use)
     { "arkav/lualine-lsp-progress" },
     {
       "karb94/neoscroll.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("neoscroll").setup { respect_scrolloff = true }
       end,
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.indent").setup()
       end,
@@ -189,7 +195,6 @@ packer.startup(function(use)
 
     {
       "goolord/alpha-nvim",
-      event = "BufWinEnter",
       config = function()
         require("core.dashboard").setup()
       end,
@@ -200,14 +205,14 @@ packer.startup(function(use)
   use {
     {
       "lewis6991/gitsigns.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.git").setup_gitsigns()
       end,
     },
     {
       "ruifm/gitlinker.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPost",
       config = function()
         require("core.git").setup_gitlinker()
       end,
@@ -217,7 +222,7 @@ packer.startup(function(use)
   -- utils
   use {
     "kevinhwang91/nvim-bqf",
-    event = "BufRead",
+    event = "BufReadPost",
     config = function()
       require("core.quickfix").setup()
     end,
