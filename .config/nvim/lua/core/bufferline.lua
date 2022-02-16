@@ -103,7 +103,13 @@ M.setup = function()
   }
 
   local commands = {
-    { name = "BufferKill", fn = require("core.bufferline").buf_kill },
+    {
+      name = "BufferKill",
+      fn = function()
+        require("core.bufferline").buf_kill()
+      end,
+      opts = { bang = true, force = true },
+    },
   }
 
   require("user.utils").load_commands(commands)
