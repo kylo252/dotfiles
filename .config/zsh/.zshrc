@@ -44,8 +44,4 @@ source "$ZDOTDIR/opts.zsh"
 
 source "$ZDOTDIR/plugins.zsh"
 
-if [ -d "$XDG_CONFIG_HOME/rhel" ] && [ -z "$MANPATH_og" ] ; then
-  source "$XDG_CONFIG_HOME/rhel/settings.sh"
-fi
-
 # zprof
