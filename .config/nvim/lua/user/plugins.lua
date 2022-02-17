@@ -168,7 +168,8 @@ packer.startup(function(use)
       config = function()
         require("core.bufferline").setup()
       end,
-      event = "BufReadPost",
+      requires = "kyazdani42/nvim-web-devicons",
+      -- event = "BufRead",
     },
     {
       "nvim-lualine/lualine.nvim",
