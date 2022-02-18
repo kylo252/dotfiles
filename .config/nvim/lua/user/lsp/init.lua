@@ -85,7 +85,10 @@ function M.common_on_init(client, bufnr) end
 
 --luacheck: no unused args
 function M.common_on_attach(client, bufnr)
-  require("user.autocmds").enable_lsp_document_highlight(client.id)
+  local blocked_clients = { "null-ls", "jsonls" }
+  if not vim.tbl_contains(blocked_clients, client.name) then
+    require("user.autocmds").enable_lsp_document_highlight(client.id)
+  end
   setup_lsp_keybindings(bufnr)
 end
 
