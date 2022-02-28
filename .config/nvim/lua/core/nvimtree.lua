@@ -10,7 +10,6 @@ local opts = {
   },
   respect_buf_cwd = 1,
   git_hl = 1,
-  disable_window_picker = 1,
   root_folder_modifier = ":t",
 }
 
@@ -26,6 +25,13 @@ function M.setup()
   end
 
   vim.g.netrw_banner = 0
+
+  local function telescope_find_files(_)
+    require("core.nvimtree").start_telescope "find_files"
+  end
+  local function telescope_find_str(_)
+    require("core.nvimtree").start_telescope "live_grep"
+  end
 
   local setup_opts = {
     disable_netrw = true,
@@ -69,12 +75,12 @@ function M.setup()
       mappings = {
         custom_only = false,
         list = {
-          -- { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
-          -- { key = "h", action = "close_node" },
-          -- { key = "v", action = "vsplit" },
-          -- { key = "C", action = "cd" },
-          -- { key = "gtf", action_cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('find_files')<cr>" },
-          -- { key = "gtg", action_cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('live_grep')<cr>" },
+          { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
+          { key = "h", action = "close_node" },
+          { key = "v", action = "vsplit" },
+          { key = "C", action = "cd" },
+          { key = "gtf", action = "find_files", action_cb = telescope_find_files },
+          { key = "gtg", action = "grep_string", action_cb = telescope_find_str },
         },
       },
     },
