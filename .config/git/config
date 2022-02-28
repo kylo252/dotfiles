@@ -22,18 +22,24 @@
 [filter "spacify"]
   clean = expand --tabs=4 --initial
 [alias]
-  dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/"
-  add-dots = "!git --git-dir=$HOME/.dtf.git --work-tree=$HOME/ add -f"
   amend = commit --amend
+  auto-commit = !git add -A && git commit -m "updates"
+  force-push = push --force -u
+  last = log -1 HEAD --stat
   reuse-msg = commit --reuse-message=ORIG_HEAD
   soft-reset = reset HEAD~1 --soft
-  quick-amend = commit --amend --no-edit
+  #############
+  fa = fetch --all
   qa = commit --amend --no-edit
-  st = status
-  ro = rebase origin/master
+  ro = !git rebase $(git rev-parse --abbrev-ref HEAD)
   smu = submodule update --init --recursive
+  st = status
+  #############
   potd = push origin HEAD:refs/drafts/master
   potm = push origin HEAD:refs/for/master
+  #############
+  dots = !git --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
+  #############
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252
