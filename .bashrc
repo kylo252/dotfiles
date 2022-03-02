@@ -25,5 +25,6 @@ if [ -n "$DISPLAY" ]; then
     fi
   fi
 
+  [ -e "$XDG_CONFIG_HOME/fzf/fzf.bash" ] && source "$XDG_CONFIG_HOME/fzf/fzf.bash"
   eval "$(starship init bash)"
 fi

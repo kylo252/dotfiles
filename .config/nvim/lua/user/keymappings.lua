@@ -125,7 +125,7 @@ M.groups = {
   ---@usage change or add keymappings for visual mode
   visual_mode = {
     -- Allow pasting same thing many times
-    ["p"] = '""p:let @"=@0<CR>',
+    ["P"] = '"_dP',
 
     -- better indent
     [">"] = "<gv",
