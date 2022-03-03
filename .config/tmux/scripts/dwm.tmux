@@ -27,12 +27,13 @@ function main() {
   esac
 }
 
+window_panes="$(tmux display -p "#{window_panes}")"
+
 function newpane() {
   tmux split-window -v -c '#{pane_current_path}' -p 30
 }
 
 function togglepane() {
-  window_panes="$(tmux display -p "#{window_panes}")"
   if ((window_panes > 1)); then
     tmux resize-pane -t "$BASE_IDX" -Z
   else
@@ -53,7 +54,7 @@ function focus() {
 }
 
 function layouttile() {
-  tmux select-layout even-vertical\; resize-pane -t "$BASE_IDX" -y "${FACTOR:-70}"%
+  tmux select-layout main-horizontal\; resize-pane -t "$BASE_IDX" -y "${FACTOR:-70}"%
 }
 
 function float() {

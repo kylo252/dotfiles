@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 onedark_black="#282c34"
 onedark_blue="#61afef"
@@ -14,7 +14,7 @@ extra_widget=" "
 date_format="%d/%m/%y"
 
 if [ -n "$SSH_CONNECTION" ]; then
-	host_format="#h"
+  host_format="#h"
 else
   host_format="local"
 fi
@@ -64,8 +64,47 @@ tmux set-option -gq "@prefix_highlight_bg" "$onedark_green"
 tmux set-option -gq "@prefix_highlight_copy_mode_attr" "fg=$onedark_black,bg=$onedark_green"
 tmux set-option -gq "@prefix_highlight_output_prefix" "  "
 
-tmux set-option -gq "status-right" "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]${extra_widget}  ${date_format} #[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]${time_format} #[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold] $host_format #[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
-tmux set-option -gq "status-left" "#[fg=$onedark_black,bg=$onedark_green,bold] #S #{prefix_highlight}#[fg=$onedark_green,bg=$onedark_black,nobold,nounderscore,noitalics]"
+# Automatically rename windows to the current directory
+# checking `#{pane_current_command}` does not work when neovim is invoked from another program, e.g. `lf`.
+current_cmd="#(ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$' && echo 'nvim' || echo '#{pane_current_command}')"
+current_path='#{b:pane_current_path}'
 
-tmux set-option -gq "window-status-format" "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_black] #I  #W #[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]"
-tmux set-option -gq "window-status-current-format" "#[fg=$onedark_black,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_visual_grey,nobold] #I  #W #[fg=$onedark_visual_grey,bg=$onedark_black,nobold,nounderscore,noitalics]"
+status_right=(
+  "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]${extra_widget}"
+  ""
+  "${date_format}"
+  "#[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]"
+  "${time_format}"
+  "#[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold]"
+  "$host_format"
+  "#[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
+)
+
+status_left=(
+  "#[fg=$onedark_black,bg=$onedark_green,bold] #S"
+  "#{prefix_highlight}#[fg=$onedark_green,bg=$onedark_black,nobold,nounderscore,noitalics]"
+)
+
+current_win_status_format=(
+  "#[fg=$onedark_black,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_visual_grey,nobold]"
+  "#I"
+  ""
+  "#[fg=$onedark_green]$current_cmd"
+  "#[fg=$onedark_blue]$current_path"
+  "#[fg=$onedark_visual_grey,bg=$onedark_black,nobold,nounderscore,noitalics]"
+)
+
+win_status_format=(
+  "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_black]"
+  "#I"
+  ""
+  "#[fg=$onedark_green]$current_cmd"
+  "#[fg=$onedark_visual_grey]$current_path"
+  "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]"
+)
+
+tmux set-option -gq "status-right" "${status_right[*]}"
+tmux set-option -gq "status-left" "${status_left[*]}"
+
+tmux set-option -gq "window-status-current-format" "${current_win_status_format[*]}"
+tmux set-option -gq "window-status-format" "${win_status_format[*]}"

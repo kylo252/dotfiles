@@ -8,14 +8,9 @@ M.augroups = {
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
     },
     { "FileType", "qf", "set nobuflisted" },
-    { "BufWinEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
+    -- { "BufWinEnter", "*", "lua require('core.tmux').set_tmux_win_title('%:t')" },
     { "BufRead", "*", "++once", "lua require('user.lsp').setup()" },
     { "DirChanged", "*", "lua require('user.utils').on_dir_changed()" },
-  },
-  _filetypechanges = {
-    { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
-    { "BufRead", "*.zsh", "setlocal filetype=sh" },
-    { "BufNewFile", "*.zsh", "setlocal filetype=sh" },
   },
   _git = {
     { "FileType", "gitcommit", "setlocal wrap" },
