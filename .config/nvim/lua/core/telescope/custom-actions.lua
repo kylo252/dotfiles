@@ -17,6 +17,7 @@ M.import_entry = function(prompt_bufnr)
 end
 
 M.tmux_start_project = function()
+  local _, action_state = pcall(require, "telescope.actions.state")
   local query = action_state.get_selected_entry()
   if query == false then
     return

@@ -167,6 +167,26 @@ function M.find_runtime_files(opts)
   }):find()
 end
 
+function M.find_files_local(opts)
+  opts = opts or {}
+  local theme_opts = themes.get_ivy {
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    prompt_prefix = ">> ",
+    prompt_title = "~ relative files ~",
+    cwd = require("telescope.utils").buffer_dir(),
+  }
+  opts = vim.tbl_deep_extend("force", theme_opts, opts)
+  require("telescope.builtin").find_files(opts)
+end
+
+function M.find_project_files()
+  local ok = pcall(builtin.git_files)
+  if not ok then
+    builtin.find_files()
+  end
+end
+
 function M.dynamic_grep(opts)
   opts = opts or themes.get_ivy {}
   opts.vimgrep_arguments = opts.vimgrep_arguments or vim.deepcopy(config.values.vimgrep_arguments)
