@@ -16,14 +16,15 @@ M.global_mappings = {
 M.mappings = {
   ["<Space>"] = { "<c-^>", "Go to the alternate buffer" },
   b = {
-    name = "+barbar",
-    b = { "<cmd>Telescope buffers theme=get_ivy<CR>", "buffers" },
-    q = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
-    e = { "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer" },
-    h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
-    l = { "<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right" },
-    d = { "<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory" },
-    L = { "<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language" },
+    name = "+buffers",
+    b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+    e = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
+    f = { "<cmd>Telescope buffers theme=get_ivy<CR>", "buffers" },
+    j = { "<cmd>BufferLinePick<cr>", "Jump" },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
+    l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
+    D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
+    L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
     y = { "<cmd>lua require('utils').copy_help_url()<cr>", "copy help URL" },
   },
   c = {
