@@ -64,9 +64,12 @@ tmux set-option -gq "@prefix_highlight_bg" "$onedark_green"
 tmux set-option -gq "@prefix_highlight_copy_mode_attr" "fg=$onedark_black,bg=$onedark_green"
 tmux set-option -gq "@prefix_highlight_output_prefix" "  "
 
-# Automatically rename windows to the current directory
 # checking `#{pane_current_command}` does not work when neovim is invoked from another program, e.g. `lf`.
-current_cmd="#(ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$' && echo 'nvim' || echo '#{pane_current_command}')"
+current_cmd="#(ps --no-headers -o command= -t '#{pane_tty}' | grep -oP '^(n?l?vim)' || echo '#{pane_current_command}')"
+# pgrep wasn't that useful here since the output format doesn't seem configurable
+# current_cmd="#(pgrep -t '#{pane_tty}' -la '^(nvim|lvim|vim)' | grep -oP '\d+ \K(n?l?vim)' || echo '#{pane_current_command}')"
+
+# automatically rename windows to the current directory
 current_path='#{b:pane_current_path}'
 
 status_right=(
