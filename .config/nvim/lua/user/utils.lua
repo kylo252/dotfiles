@@ -1,5 +1,6 @@
 local utils = {}
 
+local fmt = string.format
 function utils.reload_plugins()
   utils.reset_cache()
   vim.cmd(string.format("source %q/lua/plugins.lua", vim.fn.stdpath "config"))
@@ -123,6 +124,14 @@ function _G.require_clean(m)
   package.loaded[m] = nil
   _G[m] = nil
   local _, module = pcall(require, m)
+  return module
+end
+
+function _G.require_safe(m)
+  local status_ok, module = pcall(require, m)
+  if not status_ok then
+    _G.log_entry(fmt("error while loading [%s]: %s", m, module))
+  end
   return module
 end
 

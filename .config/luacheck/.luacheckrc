@@ -21,5 +21,7 @@ ignore = {
 globals = {
   "vim",
   "dump",
-  "require_clean"
+  "require_clean",
+  "require_safe",
+  "log_entry"
 }

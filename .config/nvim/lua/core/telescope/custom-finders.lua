@@ -61,10 +61,6 @@ end
 function M.find_dotfiles()
   local opts = themes.get_dropdown {
     previewer = false,
-    layout_config = {
-      height = 15,
-      width = 0.5,
-    },
     prompt = ">> ",
     prompt_title = "~ dotfiles ~",
     cwd = "~",
