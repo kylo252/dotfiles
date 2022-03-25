@@ -29,9 +29,9 @@ packer.init {
 }
 
 local function run_on_packer_complete()
-  vim.schedule(function()
-    vim.cmd [[ doautocmd ColorScheme ]]
-  end)
+  -- vim.schedule(function()
+  --   vim.cmd [[ doautocmd ColorScheme ]]
+  -- end)
 end
 
 local commands = {
