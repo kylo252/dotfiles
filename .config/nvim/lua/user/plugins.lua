@@ -16,10 +16,10 @@ packer.init {
   log = { level = "info" },
   git = {
     clone_timeout = 300,
-    subcommands = {
-      -- this is more efficient than what Packer is using
-      fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
-    },
+    --subcommands = {
+    -- this is more efficient than what Packer is using
+    --fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
+    --},
   },
   display = {
     open_fn = function()
@@ -29,9 +29,9 @@ packer.init {
 }
 
 local function run_on_packer_complete()
-  -- vim.schedule(function()
-  --   vim.cmd [[ doautocmd ColorScheme ]]
-  -- end)
+  vim.schedule(function()
+    vim.cmd [[ doautocmd ColorScheme ]]
+  end)
 end
 
 local commands = {
@@ -65,7 +65,6 @@ packer.startup(function(use)
     { "williamboman/nvim-lsp-installer" },
     {
       "hrsh7th/nvim-cmp",
-      event = "BufRead",
       config = function()
         require("core.cmp").config()
       end,
