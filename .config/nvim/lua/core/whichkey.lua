@@ -199,6 +199,7 @@ function M.setup()
   local select_labels = {
     ["af"] = "@function.outer",
     ["if"] = "@function.inner",
+    ["ak"] = "@comment.outer",
     ["ac"] = "@class.outer",
     ["ic"] = "@class.inner",
     ["aa"] = "@parameter.inner", -- "ap" is already used

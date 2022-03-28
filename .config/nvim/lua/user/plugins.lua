@@ -77,7 +77,7 @@ packer.startup(function(use)
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
     {
-      "b3nj5m1n/kommentary",
+      "numToStr/Comment.nvim",
       event = "BufReadPost",
       config = function()
         require("core.comment").setup()

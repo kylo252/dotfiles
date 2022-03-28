@@ -21,6 +21,7 @@ function M.setup()
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
+          ["ak"] = "@comment.outer",
           ["aa"] = "@parameter.inner", -- "ap" is already used
           ["ia"] = "@parameter.outer", -- "ip" is already used
         },
@@ -56,5 +57,4 @@ function M.setup()
     },
   }
 end
-
 return M
