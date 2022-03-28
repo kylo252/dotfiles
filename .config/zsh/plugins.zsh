@@ -20,22 +20,22 @@ znap source Aloxaf/fzf-tab
 znap source reegnz/jq-zsh-plugin
 znap source RobSis/zsh-completion-generator
 
-# znap eval pip-completion "pip completion --zsh  # $PYENV_VERSION"
-# znap eval pip-completion "source <(pip3 completion --zsh)"
+znap function _pip_completion pip 'eval "$(pip completion --zsh)"'
+compctl -K    _pip_completion pip
 
 znap eval zoxide 'zoxide init zsh'
 
-# TODO: use znap for this
 if command -v vivid >/dev/null; then
-  export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
+  znap eval ls 'eval "export LS_COLORS=$(vivid -m 24-bit generate one-dark)"'
 fi
 
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
   source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  znap install spwhitt/nix-zsh-completions
 fi
 
-source <(fnm env --fnm-dir="$FNM_DIR" --shell=zsh)
+znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
 
 autoload -Uz kp
 
