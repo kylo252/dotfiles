@@ -12,6 +12,10 @@ if [ -z "$VIRTUAL_ENV" ] && [ -n "$TMUX" ]; then
   fi
 fi
 
+if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
+  source "$XDG_CONFIG_HOME/rhel/profile.sh"
+fi
+
 source "$XDG_CONFIG_HOME/zsh/.p10k.lean.zsh"
 
 function __setup_x11() {

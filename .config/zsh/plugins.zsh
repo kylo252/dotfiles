@@ -7,10 +7,6 @@ source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
-if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
-  source "$XDG_CONFIG_HOME/rhel/settings.sh"
-fi
-
 znap source kazhala/dotbare
 znap source romkatv/powerlevel10k
 znap source zdharma-continuum/fast-syntax-highlighting

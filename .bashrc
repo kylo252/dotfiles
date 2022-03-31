@@ -3,7 +3,7 @@
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 
 if [ -d "$XDG_CONFIG_HOME/rhel" ]; then
-  source "$XDG_CONFIG_HOME/rhel/settings.sh"
+  source "$XDG_CONFIG_HOME/rhel/profile.sh"
 fi
 
 source "$XDG_CONFIG_HOME/bash/exports.bash"
