@@ -30,18 +30,18 @@ packer.init {
 
 local function run_on_packer_complete()
   vim.schedule(function()
+    vim.cmd [[ doautocmd User PackerComplete ]]
     vim.cmd [[ doautocmd ColorScheme ]]
   end)
 end
 
+packer.on_complete = run_on_packer_complete
+
 local commands = {
-  { name = "PackerRunOnComplete", fn = run_on_packer_complete },
   { name = "PackerRecompile", fn = require("user.utils").reset_cache },
 }
 
 require("user.utils").load_commands(commands)
-
-vim.cmd [[autocmd User PackerComplete PackerRunOnComplete]]
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
