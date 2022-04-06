@@ -28,7 +28,7 @@ function M.config()
       { command = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
-      { command = "gitsigns", filetypes = {} },
+      -- { command = "gitsigns", filetypes = {} },
       { command = "shellcheck", filetypes = {} },
     },
   }
