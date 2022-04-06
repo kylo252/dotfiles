@@ -196,8 +196,8 @@ function M.dynamic_grep(opts)
 
   opts.args = opts.args or ""
 
-  local type = string.match(opts.args, "type=(%w+)", 1)
-  local glob = string.match(opts.args, "glob=(%w+)", 1)
+  local type = string.match(opts.args, "[t|ft|type]=(%S+)", 1)
+  local glob = string.match(opts.args, "[g|glob]=(%S+)", 1)
 
   if type then
     opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--type=" .. type
