@@ -2,7 +2,16 @@ local M = {}
 
 local py_cwd = function(params)
   local u = require "null-ls.utils"
-  return u.root_pattern "pyproject.toml"(params.bufname)
+  local root_files = {
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    "pyrightconfig.json",
+    ".flake8",
+  }
+  return u.root_pattern(unpack(root_files))(params.bufname)
 end
 
 function M.config()
