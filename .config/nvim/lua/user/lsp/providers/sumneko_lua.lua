@@ -12,6 +12,7 @@ local opts = {
         library = {
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          [vim.fn.stdpath "data" .. "/site/pack/packer/start/LuaSnip"] = true,
         },
         maxPreload = 10000,
         preloadFileSize = 1000,

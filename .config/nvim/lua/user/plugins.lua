@@ -118,10 +118,10 @@ packer.startup(function(use)
       end,
     },
     {
-      "ggandor/lightspeed.nvim",
+      "ggandor/leap.nvim",
       event = "BufReadPost",
       config = function()
-        require("core.lightspeed").setup()
+        require("core.leap").setup()
       end,
     },
   }
@@ -137,6 +137,7 @@ packer.startup(function(use)
 
   use {
     "akinsho/nvim-toggleterm.lua",
+    branch = "main",
     event = "BufReadPost",
     config = function()
       require("core.terminal").setup()
@@ -164,6 +165,7 @@ packer.startup(function(use)
     },
     {
       "akinsho/bufferline.nvim",
+      branch = "main",
       config = function()
         require("core.bufferline").setup()
       end,
