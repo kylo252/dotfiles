@@ -4,9 +4,9 @@ local opts = {
   settings = {
     Lua = {
       telemetry = { enable = false },
-      diagnostics = {
-        enable = false,
-      },
+      -- diagnostics = {
+      --   enable = false,
+      -- },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
