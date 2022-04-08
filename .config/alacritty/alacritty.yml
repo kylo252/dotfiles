@@ -333,7 +333,9 @@ hints:
 #
 # - `mods` (see key bindings)
 mouse_bindings:
-  - {mouse: Right, action: PasteSelection}
+  - {mouse: Right, action: Copy}
+  - {mouse: Right, action: ClearSelection}
+  - {mouse: Middle, action: PasteSelection}
 
 # Key bindings
 #
