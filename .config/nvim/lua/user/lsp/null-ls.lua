@@ -38,7 +38,7 @@ function M.config()
     },
     code_actions = {
       -- { command = "gitsigns", filetypes = {} },
-      { command = "shellcheck", filetypes = {} },
+      { command = "shellcheck", filetypes = { "sh" } },
     },
   }
 end

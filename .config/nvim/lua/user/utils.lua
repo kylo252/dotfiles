@@ -135,4 +135,22 @@ function _G.require_safe(m)
   return module
 end
 
+vim.cmd [[
+function! Dump(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    new
+    nnoremap <silent> <buffer> q :close<CR>
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+command! -nargs=+ -complete=command Dump call Dump(<q-args>)
+]]
+
 return utils
