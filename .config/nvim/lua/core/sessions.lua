@@ -41,7 +41,7 @@ end
 
 function M.load_session_by_name(name)
   vim.validate { requested = { name, "s", true } }
-  local full_path = fnameescape(join_paths(defaults.dir, name))
+  local full_path = M.get_session_path(name)
   vim.schedule(function()
     vim.cmd("source " .. full_path)
   end)
