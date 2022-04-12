@@ -28,14 +28,14 @@ packer.init {
   },
 }
 
-local function run_on_packer_complete()
-  vim.schedule(function()
-    vim.cmd [[ doautocmd User PackerComplete ]]
-    vim.cmd [[ doautocmd ColorScheme ]]
-  end)
-end
-
-packer.on_complete = run_on_packer_complete
+-- local function run_on_packer_complete()
+--   vim.schedule(function()
+--     vim.cmd [[ doautocmd User PackerComplete ]]
+--     vim.cmd [[ doautocmd ColorScheme ]]
+--   end)
+-- end
+--
+-- packer.on_complete = run_on_packer_complete
 
 local commands = {
   { name = "PackerRecompile", fn = require("user.utils").reset_cache },
