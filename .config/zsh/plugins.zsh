@@ -31,7 +31,9 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   znap install spwhitt/nix-zsh-completions
 fi
 
-znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
+# doesn't seem to work on Darwin..
+# znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
+source <(fnm env --fnm-dir=${FNM_DIR} --shell=zsh)
 
 autoload -Uz kp
 
@@ -51,4 +53,10 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 bindkey '^ ' autosuggest-accept
 
 bindkey '^\ei' jq-complete
+
+
+if [ -d "/opt/homebrew" ]; then
+  znap eval brew "/opt/homebrew/bin/brew shellenv"
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+fi
 
