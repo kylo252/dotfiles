@@ -30,6 +30,7 @@
   soft-reset = reset HEAD~1 --soft
   #############
   fa = fetch --all
+  unshallow = !(git fetch --unshallow || git fetch --all) && git remote set-branches origin '*'
   qa = commit --amend --no-edit
   ro = !git rebase $(git rev-parse --abbrev-ref HEAD)
   smu = submodule update --init --recursive
