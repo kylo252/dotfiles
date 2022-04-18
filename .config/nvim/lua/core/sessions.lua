@@ -47,6 +47,12 @@ function M.load_session_by_name(name)
   end)
 end
 
+function M.get_sessions()
+  return vim.tbl_map(function(v)
+    return fnamemodify(v, ":t:r")
+  end, vim.fn.glob(defaults.dir .. "/*", false, true))
+end
+
 function M.load_session(name)
   name = name or ""
 
