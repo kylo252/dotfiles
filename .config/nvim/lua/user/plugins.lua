@@ -28,15 +28,6 @@ packer.init {
   },
 }
 
--- local function run_on_packer_complete()
---   vim.schedule(function()
---     vim.cmd [[ doautocmd User PackerComplete ]]
---     vim.cmd [[ doautocmd ColorScheme ]]
---   end)
--- end
---
--- packer.on_complete = run_on_packer_complete
-
 local commands = {
   { name = "PackerRecompile", fn = require("user.utils").reset_cache },
 }
@@ -54,7 +45,11 @@ packer.startup(function(use)
   use {
     {
       "nvim-treesitter/nvim-treesitter",
-      run = "TSUpdate",
+      run = function()
+        -- vim.schedule(function()
+        require("nvim-treesitter.installer").update()
+        -- end)
+      end,
       config = function()
         require("core.treesitter").setup()
       end,
@@ -69,7 +64,12 @@ packer.startup(function(use)
         require("core.cmp").config()
       end,
     },
-    { "L3MON4D3/LuaSnip" },
+    {
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    },
     { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
@@ -215,6 +215,13 @@ packer.startup(function(use)
       event = "BufReadPost",
       config = function()
         require("core.git").setup_gitlinker()
+      end,
+    },
+    {
+      "sindrets/diffview.nvim",
+      event = "BufReadPost",
+      config = function()
+        require("core.git").setup_diffview()
       end,
     },
   }
