@@ -136,6 +136,12 @@ done
 export PATH
 unset bin_list
 
+if [ -d "/opt/homebrew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
 # just in case latest zsh is not in '/usr/bin'
 # it's probably unnecessary
 SHELL="$(command -v zsh)"

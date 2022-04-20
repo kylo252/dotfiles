@@ -25,7 +25,7 @@ font:
     # family: SFMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Medium
+    # style: Medium
 
   # Bold font face
   bold:
@@ -240,9 +240,9 @@ cursor:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/zsh
-  # args:
-    # - --login
+  program: zsh
+  args:
+    - --login
 
 # Startup directory
 #
