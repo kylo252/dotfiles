@@ -15,7 +15,7 @@ local opts = {
           [vim.fn.stdpath "data" .. "/site/pack/packer/start/LuaSnip"] = true,
           [vim.fn.stdpath "data" .. "/site/pack/packer/start/telescope.nvim"] = true,
         },
-        maxPreload = 100,
+        maxPreload = 1000,
         preloadFileSize = 1000,
       },
     },
