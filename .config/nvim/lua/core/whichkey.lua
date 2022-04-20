@@ -107,7 +107,7 @@ M.mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    c = { "<cmd>lua require('user.lsp').get_client_capabilities()<cr>", "Show language-server capabilities" },
+    c = { "<cmd>lua require('user.lsp.utils').get_client_capabilities()<cr>", "Show language-server capabilities" },
     d = {
       "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
       "Buffer Diagnostics",

@@ -32,4 +32,27 @@ function M.conditional_document_highlight(id)
   vim.lsp.buf.document_highlight()
 end
 
+function M.get_client_capabilities(client_id)
+  local client
+  if not client_id then
+    local buf_clients = vim.lsp.buf_get_clients()
+    for _, buf_client in pairs(buf_clients) do
+      if buf_client.name ~= "null-ls" then
+        client = buf_client
+        break
+      end
+    end
+  else
+    client = vim.lsp.get_client_by_id(tonumber(client_id))
+  end
+
+  local lsp_caps = client.resolved_capabilities
+
+  print("client id:", client.id)
+  print("client name:", client.name)
+  print("resolved_capabilities:", vim.inspect(lsp_caps))
+
+  return lsp_caps
+end
+
 return M

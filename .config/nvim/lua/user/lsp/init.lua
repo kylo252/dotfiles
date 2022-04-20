@@ -57,33 +57,10 @@ local function setup_lsp_keybindings(bufnr)
   wk.register(keys, { mode = "n", buffer = bufnr })
 end
 
-function M.get_client_capabilities(client_id)
-  local client
-  if not client_id then
-    local buf_clients = vim.lsp.buf_get_clients()
-    for _, buf_client in pairs(buf_clients) do
-      if buf_client.name ~= "null-ls" then
-        client = buf_client
-        break
-      end
-    end
-  else
-    client = vim.lsp.get_client_by_id(tonumber(client_id))
-  end
-
-  local lsp_caps = client.resolved_capabilities
-
-  print("client id:", client.id)
-  print("client name:", client.name)
-  print("resolved_capabilities:", vim.inspect(lsp_caps))
-
-  return lsp_caps
-end
-
 --luacheck: no unused args
+---@diagnostic disable-next-line: unused-local
 function M.common_on_init(client, bufnr) end
 
---luacheck: no unused args
 function M.common_on_attach(client, bufnr)
   local blocked_clients = { "null-ls", "jsonls" }
   if not vim.tbl_contains(blocked_clients, client.name) then
