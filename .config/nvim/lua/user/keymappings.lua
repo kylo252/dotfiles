@@ -131,10 +131,6 @@ M.groups = {
     [">"] = "<gv",
     ["<"] = ">gv",
 
-    -- Visual mode pressing * or # searches for the current selection
-    ["*"] = "<cmd>/\\<<C-r>=expand('<cword>')<CR>\\><CR>",
-    ["#"] = "<cmd>?\\<<C-r>=expand('<cword>')<CR>\\><CR>",
-
     -- move selected line(s)
     ["K"] = ":move '<-2<CR>gv-gv",
     ["J"] = ":move '>+1<CR>gv-gv",
