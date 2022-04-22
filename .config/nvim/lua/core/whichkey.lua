@@ -216,6 +216,10 @@ function M.setup()
     ["[["] = "@class.outer",
     ["[M"] = "@function.outer",
     ["[]"] = "@class.outer",
+    ["]k"] = "@comment.outer",
+    ["[k"] = "@comment.outer",
+    ["]K"] = "@comment.outer",
+    ["[K"] = "@comment.outer",
   }
 
   local lsp_ts_labels = {
