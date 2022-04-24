@@ -65,7 +65,7 @@ tmux set-option -gq "@prefix_highlight_copy_mode_attr" "fg=$onedark_black,bg=$on
 tmux set-option -gq "@prefix_highlight_output_prefix" "  "
 
 # checking `#{pane_current_command}` does not work when neovim is invoked from another program, e.g. `lf`.
-current_cmd="#(ps --no-headers -o command= -t '#{pane_tty}' | grep -oP '^(n?l?vim)' || echo '#{pane_current_command}')"
+current_cmd="#(ps -f --no-headers -o command= -t '#{pane_tty}' | grep -oP '^(n?l?vim)' || echo '#{pane_current_command}')"
 # pgrep wasn't that useful here since the output format doesn't seem configurable
 # current_cmd="#(pgrep -t '#{pane_tty}' -la '^(nvim|lvim|vim)' | grep -oP '\d+ \K(n?l?vim)' || echo '#{pane_current_command}')"
 
