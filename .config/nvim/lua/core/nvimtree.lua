@@ -35,26 +35,24 @@ function M.setup()
 
   local setup_opts = {
     disable_netrw = true,
-    hijack_netrw = true,
-    open_on_setup = false,
-    ignore_ft_on_setup = {
-      "startify",
-      "dashboard",
-      "alpha",
-    },
-    update_to_buf_dir = {
-      enable = true,
-      auto_open = true,
-    },
-    auto_close = false,
-    open_on_tab = false,
-    hijack_cursor = false,
-    update_cwd = true,
+    auto_reload_on_write = true,
     diagnostics = nil,
+    hijack_cursor = false,
+    hijack_netrw = true,
+    hijack_unnamed_buffer_when_opening = false,
+    ignore_buffer_on_setup = false,
+    open_on_setup = false,
+    open_on_setup_file = false,
+    open_on_tab = false,
+    sort_by = "name",
+    update_cwd = true,
     update_focused_file = {
       enable = true,
       update_cwd = true,
       ignore_list = {},
+    },
+    ignore_ft_on_setup = {
+      "alpha",
     },
     system_open = {
       cmd = nil,
@@ -69,7 +67,6 @@ function M.setup()
       width = 30,
       height = 30,
       side = "left",
-      auto_resize = true,
       number = false,
       relativenumber = false,
       mappings = {
@@ -96,8 +93,6 @@ function M.setup()
         quit_on_open = false,
       },
     },
-    auto_open = false,
-    tab_open = false,
   }
 
   require("nvim-tree").setup(setup_opts)
