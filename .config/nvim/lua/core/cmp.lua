@@ -1,12 +1,12 @@
 local M = {}
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local T = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+local feedkeys = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 local cmp_format_layout = function(entry, vim_item)
@@ -49,6 +49,7 @@ M.config = function()
       { name = "nvim_lua", keyword_length = 2 },
       { name = "luasnip", keyword_length = 2 },
       { name = "buffer", keyword_length = 4 },
+      { name = "nvim_lsp_signature_help" },
       {
         name = "tmux",
         keyword_length = 4,
@@ -67,25 +68,25 @@ M.config = function()
       ghost_text = true,
     },
     mapping = {
-      ["<Tab>"] = cmp.mapping(function()
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-n>", "n")
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
-          vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
-        elseif check_backspace() then
-          vim.fn.feedkeys(T "<Tab>", "n")
+          feedkeys("<Plug>luasnip-expand-or-jump", "")
+        elseif has_words_before() then
+          cmp.complete()
         else
-          vim.fn.feedkeys(T "<Tab>", "n")
+          fallback()
         end
       end, {
         "i",
         "s",
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-p>", "n")
+        if cmp.visible() then
+          cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
+          feedkeys("<Plug>luasnip-jump-prev", "")
         else
           fallback()
         end
