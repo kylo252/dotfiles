@@ -116,7 +116,7 @@ M.mappings = {
       "<cmd>Telescope diagnostics<cr>",
       "Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua require('user.lsp.utils').format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {

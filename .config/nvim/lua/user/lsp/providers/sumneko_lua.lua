@@ -3,6 +3,7 @@ local utils = require "user.utils"
 local opts = {
   settings = {
     Lua = {
+      formatting = { enable = false },
       telemetry = { enable = false },
       -- diagnostics = {
       --   enable = false,
