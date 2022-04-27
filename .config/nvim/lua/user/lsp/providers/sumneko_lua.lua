@@ -13,8 +13,8 @@ local opts = {
         library = {
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          [vim.fn.stdpath "data" .. "/site/pack/packer/start/LuaSnip"] = true,
-          [vim.fn.stdpath "data" .. "/site/pack/packer/start/telescope.nvim"] = true,
+          -- [vim.fn.stdpath "data" .. "/site/pack/packer/start/LuaSnip"] = true,
+          -- [vim.fn.stdpath "data" .. "/site/pack/packer/start/telescope.nvim"] = true,
         },
         maxPreload = 1000,
         preloadFileSize = 1000,
