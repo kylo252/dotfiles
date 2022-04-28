@@ -32,6 +32,8 @@ local commands = {
   { name = "PackerRecompile", fn = require("user.utils").reset_cache },
 }
 
+require "user.impatient"
+
 require("user.utils").load_commands(commands)
 
 packer.startup(function(use)
