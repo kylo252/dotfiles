@@ -1,7 +1,8 @@
 local package_root = vim.fn.stdpath "data" .. "/site/pack"
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local utils = require "user.utils"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+if not utils.is_directory(install_path) then
   vim.fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
   vim.cmd "packadd packer.nvim"
 end
@@ -35,6 +36,11 @@ local commands = {
 require "user.impatient"
 
 require("user.utils").load_commands(commands)
+
+packer.on_complete = vim.schedule_wrap(function()
+  vim.api.nvim_exec_autocmds("ColorScheme", {})
+  -- vim.api.nvim_exec_autocmds("User", {pattern = "PackerComplete"})
+end)
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
@@ -170,12 +176,11 @@ packer.startup(function(use)
       config = function()
         require("core.bufferline").setup()
       end,
-      requires = "kyazdani42/nvim-web-devicons",
+      event = "BufWinEnter",
       -- event = "BufRead",
     },
     {
       "nvim-lualine/lualine.nvim",
-      event = "BufReadPost",
       config = function()
         require("core.statusline").setup()
       end,
