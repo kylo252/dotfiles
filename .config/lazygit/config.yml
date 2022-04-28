@@ -79,7 +79,7 @@ confirmOnQuit: false
 quitOnTopLevelReturn: false
 disableStartupPopups: false
 services: {}
-notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip'
+notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: true
 os:
   editCommandTemplate: '{{editor}} {{filename}}'

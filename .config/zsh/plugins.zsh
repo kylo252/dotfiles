@@ -25,6 +25,10 @@ if command -v vivid >/dev/null; then
   znap eval ls 'eval "export LS_COLORS=$(vivid -m 24-bit generate one-dark)"'
 fi
 
+if command -v module >/dev/null; then
+  compdef _module "ml"
+fi
+
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
   source "$HOME/.nix-profile/etc/profile.d/nix.sh"
