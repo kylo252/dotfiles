@@ -77,8 +77,9 @@ _G.load_config = function()
   -- Add the server that troubles you here, e.g. "sumneko_lua", "pyright", "tsserver"
   local name = "sumneko_lua"
 
-  -- You need to specify the server's command manually
-  local cmd_env
+  local setup_opts = {
+    on_attach = on_attach,
+  }
 
   if use_lsp_installer then
     local server_available, server = require("nvim-lsp-installer.servers").get_server(name)
@@ -86,13 +87,10 @@ _G.load_config = function()
       server:install()
     end
     local default_opts = server:get_default_options()
-    cmd_env = default_opts.cmd_env
+    setup_opts = vim.tbl_deep_extend("force", setup_opts, default_opts)
   end
 
-  nvim_lsp[name].setup {
-    cmd_env = cmd_env,
-    on_attach = on_attach,
-  }
+  nvim_lsp[name].setup(setup_opts)
 end
 
 if vim.fn.isdirectory(install_path) == 0 then
