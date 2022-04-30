@@ -53,6 +53,7 @@ function __setup_xdg() {
   export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
   export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
   export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
+  export ZK_NOTEBOOK_DIR="$HOME/notes/pages"
 }
 
 function __setup_history() {
