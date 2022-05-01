@@ -61,17 +61,27 @@ end
 ---@diagnostic disable-next-line: unused-local
 function M.common_on_init(client, bufnr) end
 
+function M.common_on_exit(_,_)
+  require("user.lsp.utils").cleanup_document_highlight(_, _)
+end
+
 function M.common_on_attach(client, bufnr)
-  local blocked_clients = { "null-ls", "jsonls" }
-  if not vim.tbl_contains(blocked_clients, client.name) then
-    require("user.autocmds").enable_lsp_document_highlight(client.id)
-  end
+  require("user.lsp.utils").setup_document_highlight(client, bufnr)
   setup_lsp_keybindings(bufnr)
 end
 
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   return require("cmp_nvim_lsp").update_capabilities(capabilities)
+end
+
+function M.get_common_opts()
+  return {
+    on_attach = M.common_on_attach,
+    on_init = M.common_on_init,
+    on_exit = M.common_on_exit,
+    capabilities = M.common_capabilities(),
+  }
 end
 
 function M.setup()

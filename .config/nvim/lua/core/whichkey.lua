@@ -55,7 +55,10 @@ M.mappings = {
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
     l = { "<cmd>DynamicGrep<CR>", "DynamicGrep" },
     m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
-    p = { "<cmd>lua require('core.telescope.custom-finders').find_files_local()<CR>", "Find files (local)" },
+    p = {
+      "<cmd>lua require('core.telescope.custom-finders').find_files_local()<CR>",
+      "Find files (local)",
+    },
     r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
     i = {
       name = "+internal",
@@ -71,7 +74,10 @@ M.mappings = {
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     },
     J = { "<cmd>FindRuntimeFiles<CR>", "Find runtime files" },
-    L = { "<cmd>lua require('core.telescope.custom-finders').local_buffer_fuzzy_grep()<CR>", "Local fuzzy grep" },
+    L = {
+      "<cmd>lua require('core.telescope.custom-finders').local_buffer_fuzzy_grep()<CR>",
+      "Local fuzzy grep",
+    },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     P = { "<cmd>Telescope projects theme=get_ivy<CR>", "Find recent projects" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
@@ -107,7 +113,10 @@ M.mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    c = { "<cmd>lua require('user.lsp.utils').get_client_capabilities()<cr>", "Show language-server capabilities" },
+    c = {
+      "<cmd>lua require('user.lsp.utils').get_client_capabilities()<cr>",
+      "Show language-server capabilities",
+    },
     d = {
       "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
       "Buffer Diagnostics",
@@ -116,7 +125,7 @@ M.mappings = {
       "<cmd>Telescope diagnostics<cr>",
       "Diagnostics",
     },
-    f = { "<cmd>lua require('user.lsp.utils').format()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
@@ -141,7 +150,10 @@ M.mappings = {
       name = "+logs",
       d = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
       i = { "<cmd>LspInstallLog<cr>", "Open lsp-installer logfile" },
-      l = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
+      l = {
+        "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>",
+        "Open the LSP logfile",
+      },
       n = { "<cmd>NullLsLog<cr>", "Open null-ls logfile" },
       p = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
     },

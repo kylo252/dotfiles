@@ -39,37 +39,38 @@ function M.toggle_format_on_save(opts)
       pattern = vim.fn.stdpath "config" .. "/**/*.lua",
       ---@usage timeout number timeout in ms for the format request
       timeout = 1000,
+      ---@usage filter func to select client
+      filter = function(clients)
+        return vim.tbl_filter(function(client)
+          local status_ok, method_supported = pcall(function()
+            return client.server_capabilities.documentFormattingProvider
+          end)
+          -- give higher prio to null-ls
+          if status_ok and method_supported and client.name == "null-ls" then
+            return "null-ls"
+          else
+            return status_ok and method_supported and client.name
+          end
+        end, clients)
+      end,
     }
-  if vim.fn.exists "#fmt_on_save#BufWritePre" == 0 then
-    local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
-    M.define_augroups {
-      fmt_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
-    }
+  local status, _ = pcall(vim.api.nvim_get_autocmds, {
+    group = "lsp_format_on_save",
+    event = "BufWritePre",
+  })
+  if not status then
+    -- vim.notify("setting up fmt_on_save", vim.log.levels.DEBUG)
+    vim.api.nvim_create_augroup("lsp_format_on_save", {})
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = "lsp_format_on_save",
+      pattern = opts.pattern,
+      callback = function()
+        vim.lsp.buf.format { timeout_ms = opts.timeout, filter = opts.filter }
+      end,
+    })
   else
-    vim.cmd "au! fmt_on_save"
-    vim.notify("disabled fmt_on_save", vim.log.levels.INFO)
+    vim.api.nvim_del_augroup_by_name("lsp_format_on_save")
   end
-end
-
-function M.enable_lsp_document_highlight(client_id)
-  M.define_augroups({
-    lsp_document_highlight = {
-      {
-        "CursorHold",
-        "<buffer>",
-        string.format("lua require('user.lsp.utils').conditional_document_highlight(%d)", client_id),
-      },
-      {
-        "CursorMoved",
-        "<buffer>",
-        "lua vim.lsp.buf.clear_references()",
-      },
-    },
-  }, true)
-end
-
-function M.disable_lsp_document_highlight()
-  M.disable_augroup "lsp_document_highlight"
 end
 
 --- Disable autocommand groups if it exists
@@ -88,7 +89,7 @@ end
 
 --- Create autocommand groups based on the passed definitions
 ---@param definitions table contains trigger, pattern and text. The key will be used as a group name
----@param buffer boolean indicate if the augroup should be local to the buffer
+---@param buffer? boolean indicate if the augroup should be local to the buffer
 function M.define_augroups(definitions, buffer)
   for group_name, definition in pairs(definitions) do
     vim.cmd("augroup " .. group_name)
@@ -109,6 +110,7 @@ end
 
 function M.setup()
   M.define_augroups(M.augroups)
+  vim.api.nvim_create_augroup("lsp_document_highlight", {})
   M.toggle_format_on_save()
   local commands = {
     { name = "ToggleFormatOnSave", fn = require("user.autocmds").toggle_format_on_save },

@@ -88,7 +88,9 @@ function M:setup()
     local source = null_ls.builtins.code_actions[provider.command].with(provider)
     table.insert(sources, source)
   end
-  null_ls.setup { sources = sources, log = { level = "warn" } }
+  local default_opts = require("user.lsp").get_common_opts()
+  local opts = vim.tbl_deep_extend("force", default_opts, { sources = sources, log = { level = "warn" } })
+  null_ls.setup(opts)
 end
 
 return M

@@ -9,6 +9,7 @@ local function resolve_config(name)
   local config = {
     on_attach = require("user.lsp").common_on_attach,
     on_init = require("user.lsp").common_on_init,
+    on_exit = require("user.lsp").common_on_exit,
     capabilities = require("user.lsp").common_capabilities(),
     flags = {
       debounce_text_changes = 150,
@@ -36,10 +37,10 @@ function M.setup(server_name)
   local server_available, requested_server = require("nvim-lsp-installer.servers").get_server(server_name)
 
   if server_available then
-    requested_server:setup(config)
-  else
-    require("lspconfig")[server_name].setup(config)
+    -- requested_server:setup(config)
+    config = vim.tbl_deep_extend("force", config, requested_server:get_default_options())
   end
+  require("lspconfig")[server_name].setup(config)
 end
 
 return M
