@@ -5,8 +5,16 @@ local before_init = function(_, config)
   end
 end
 
+local root_files = {
+  'pyproject.toml',
+  'pyrightconfig.json',
+  '.git',
+}
+
+local util = require 'lspconfig.util'
 return {
   -- autostart = false,
+  root_dir = util.root_pattern(unpack(root_files)),
   before_init = before_init,
   settings = {
     pyright = {},
