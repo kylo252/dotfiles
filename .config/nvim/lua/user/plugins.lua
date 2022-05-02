@@ -38,7 +38,7 @@ require "user.impatient"
 require("user.utils").load_commands(commands)
 
 packer.on_complete = vim.schedule_wrap(function()
-  vim.api.nvim_exec_autocmds("ColorScheme", {})
+  -- vim.api.nvim_exec_autocmds("ColorScheme", {})
   -- vim.api.nvim_exec_autocmds("User", {pattern = "PackerComplete"})
 end)
 
@@ -53,11 +53,11 @@ packer.startup(function(use)
   use {
     {
       "nvim-treesitter/nvim-treesitter",
-      run = function()
-        -- vim.schedule(function()
-        require("nvim-treesitter.installer").update()
-        -- end)
-      end,
+      -- run = function()
+      --   vim.schedule(function()
+      --     require("nvim-treesitter.installer").update()
+      --   end)
+      -- end,
       config = function()
         require("core.treesitter").setup()
       end,
