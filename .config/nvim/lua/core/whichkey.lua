@@ -19,7 +19,7 @@ M.mappings = {
     name = "+buffers",
     b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
     e = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
-    f = { "<cmd>Telescope buffers theme=get_ivy<CR>", "buffers" },
+    f = { "<cmd>Telescope buffers<CR>", "buffers" },
     j = { "<cmd>BufferLinePick<cr>", "Jump" },
     h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
     l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
@@ -48,18 +48,17 @@ M.mappings = {
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
-    b = { "<cmd>Telescope current_buffer_fuzzy_find theme=get_ivy<CR>", "Current buffer fuzzy-find" },
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current buffer fuzzy-find" },
     f = { "<cmd>lua require('core.telescope.custom-finders').find_project_files()<CR>", "Find files" },
     g = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "grep string v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
-    j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
+    j = { "<cmd>Telescope zoxide list<CR>", "Zoxide" },
     l = { "<cmd>DynamicGrep<CR>", "DynamicGrep" },
-    m = { "<cmd>Telescope marks theme=get_ivy<CR>", "Marks" },
+    m = { "<cmd>Telescope marks<CR>", "Marks" },
     p = {
       "<cmd>lua require('core.telescope.custom-finders').find_files_local()<CR>",
       "Find files (local)",
     },
-    r = { "<cmd>Telescope oldfiles cwd_only=true theme=get_ivy<CR>", "Find recent files (local)" },
     i = {
       name = "+internal",
       c = { "<cmd>Telescope commands<CR>", "commands" },
@@ -79,8 +78,8 @@ M.mappings = {
       "Local fuzzy grep",
     },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
-    P = { "<cmd>Telescope projects theme=get_ivy<CR>", "Find recent projects" },
-    R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
+    P = { "<cmd>Telescope projects<CR>", "Find recent projects" },
+    r = { "<cmd>Telescope oldfiles<CR>", "Find recent files" },
   },
   g = {
     name = "+git",
@@ -105,7 +104,7 @@ M.mappings = {
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-    S = { "<cmd>Telescope git_status theme=get_ivy<cr>", "Git status" },
+    S = { "<cmd>Telescope git_status<cr>", "Git status" },
     T = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blame " },
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
   },
@@ -119,7 +118,7 @@ M.mappings = {
       "Show language-server capabilities",
     },
     d = {
-      "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
+      "<cmd>Telescope diagnostics bufnr=0<cr>",
       "Buffer Diagnostics",
     },
     w = {
@@ -140,9 +139,9 @@ M.mappings = {
     Q = { "<cmd>Telescope quickfix<cr>", "Quickfix (Telescope)" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    s = { "<cmd> Telescope lsp_document_symbols theme=get_ivy<cr>", "Document Symbols" },
+    s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols theme=get_ivy<cr>",
+      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
   },
@@ -199,7 +198,7 @@ function M.setup()
         },
         motions = false, -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
-        windows = true, -- default bindings on <c-w>
+        windows = false, -- default bindings on <c-w> -- NOTE: broken on nvim v0.8 as of a3c19ec
         nav = true, -- misc bindings to work with windows
         z = true, -- bindings for folds, spelling and others prefixed with z
         g = true, -- bindings for prefixed with g
