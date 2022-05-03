@@ -84,6 +84,7 @@ M.mappings = {
   },
   g = {
     name = "+git",
+    a = { "<cmd>Telescope git_commits theme=get_ivy<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits theme=get_ivy<cr>", "Buffers commits" },
     Y = {
       r = {
