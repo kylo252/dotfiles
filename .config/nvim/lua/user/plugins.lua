@@ -245,7 +245,7 @@ packer.startup(function(use)
   }
   use {
     "michaelb/sniprun",
-    run = "bash ./install.sh",
+    -- run = "bash ./install.sh",
     cmd = "SnipRun",
     config = function()
       require("core.sniprun").setup()
