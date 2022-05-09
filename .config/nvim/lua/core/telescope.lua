@@ -98,51 +98,6 @@ function M.setup()
   local opts = M.config()
   require("telescope").setup(opts)
 
-  local commands = {
-    {
-      name = "DynamicGrep",
-      fn = function(nargs)
-        require("core.telescope.custom-finders").dynamic_grep { args = nargs.args, fargs = nargs.fargs }
-      end,
-      opts = { bang = true, nargs = "*", force = true },
-    },
-    {
-      name = "FindRuntimeFiles",
-      fn = require("core.telescope.custom-finders").find_runtime_files,
-    },
-    {
-      name = "FuzzyGrepString",
-      fn = require("core.telescope.custom-finders").fuzzy_grep_string,
-      opts = { bang = true, nargs = "*", force = true },
-    },
-    {
-      name = "SessionLoad",
-      fn = function(nargs)
-        require("core.sessions").load_session(nargs.args)
-      end,
-      opts = {
-        bang = true,
-        nargs = "?",
-        complete = require("core.sessions").get_sessions,
-        force = true,
-      },
-    },
-    {
-      name = "SessionSave",
-      fn = function(nargs)
-        require("core.sessions").save_session(nargs.args)
-      end,
-      opts = {
-        bang = true,
-        nargs = "?",
-        complete = require("core.sessions").get_sessions,
-        force = true,
-      },
-    },
-  }
-
-  require("user.utils").load_commands(commands)
-
   local keymaps = {
     normal_mode = {
       ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
