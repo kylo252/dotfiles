@@ -25,7 +25,7 @@ M.mappings = {
     l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
     D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
     L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
-    y = { "<cmd>lua require('utils').copy_help_url()<cr>", "copy help URL" },
+    y = { "<cmd>lua require('user.utils').copy_help_url()<cr>", "copy help URL" },
   },
   c = {
     name = "+commands",

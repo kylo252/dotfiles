@@ -10,12 +10,6 @@ local opts = {
       -- },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          -- [vim.fn.stdpath "data" .. "/site/pack/packer/start/LuaSnip"] = true,
-          -- [vim.fn.stdpath "data" .. "/site/pack/packer/start/telescope.nvim"] = true,
-        },
         maxPreload = 1000,
         preloadFileSize = 1000,
       },
@@ -39,7 +33,7 @@ local dev_opts = {
     types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
     -- plugins = true, -- installed opt or start plugins in packpath
     -- you can also specify the list of plugins to make available as a workspace library
-    plugins = { "plenary.nvim" },
+    plugins = { "plenary.nvim", "LuaSnip" },
   },
   lspconfig = opts,
 }
