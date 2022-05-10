@@ -21,11 +21,11 @@ M.augroups = {
     { "FileType", "markdown", "setlocal spell" },
   },
   _buffer_bindings = {
-    { "FileType", "floaterm", "nnoremap <silent> <buffer> Q :q<CR>" },
+    { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
   _general_windows = {
-    { "FileType", "qf,help,man", "nnoremap <silent> <buffer> Q :close<CR>" },
-    { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> Q :close<CR>" },
+    { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
+    { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
   },
   _cmp = {
     { "FileType", "TelescopePrompt", [[lua require('cmp').setup.buffer { enabled = false }]] },
@@ -69,7 +69,7 @@ function M.toggle_format_on_save(opts)
       end,
     })
   else
-    vim.api.nvim_del_augroup_by_name("lsp_format_on_save")
+    vim.api.nvim_del_augroup_by_name "lsp_format_on_save"
   end
 end
 

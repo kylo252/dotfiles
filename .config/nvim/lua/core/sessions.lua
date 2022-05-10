@@ -31,6 +31,10 @@ local defaults = {
   default_session_name = default_session_name,
 }
 
+local function basename(p)
+  return fnamemodify(p, ":t:r")
+end
+
 local function get_session_path(name)
   name = name or defaults.default_session_name()
   return fnameescape(join_paths(defaults.dir, name .. ".vim"))
@@ -49,8 +53,7 @@ function M.get_sessions()
     vim.fn.mkdir(defaults.dir, "p")
   end
   return vim.tbl_map(function(v)
-    local basename = fnamemodify(v, ":t:r")
-    return basename
+    return basename(v)
   end, vim.fn.glob(defaults.dir .. "/*", false, true))
 end
 
@@ -74,12 +77,16 @@ function M.load_session(name)
   local action_state = require "telescope.actions.state"
   require("telescope.builtin").find_files {
     prompt_title = "Select a session to load",
-    cwd = defaults.dir,
+    search_dirs = { join_paths(vim.fn.stdpath "cache", "sessions") },
+    path_display = function(_, path)
+      return basename(path)
+    end,
     attach_mappings = function(prompt_bufnr)
       actions.select_default:replace(function()
         local entry = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
-        load_session_by_name(entry.value)
+        -- NOTE: the result would still include the search result from fd, and not the displayed value
+        load_session_by_name(basename(entry.value))
       end)
       return true
     end,
