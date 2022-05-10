@@ -37,10 +37,10 @@ require "user.impatient"
 
 require("user.utils").load_commands(commands)
 
-packer.on_complete = vim.schedule_wrap(function()
-  -- vim.api.nvim_exec_autocmds("ColorScheme", {})
-  -- vim.api.nvim_exec_autocmds("User", {pattern = "PackerComplete"})
-end)
+-- packer.on_complete = vim.schedule_wrap(function()
+--   -- vim.api.nvim_exec_autocmds("ColorScheme", {})
+--   -- vim.api.nvim_exec_autocmds("User", {pattern = "PackerComplete"})
+-- end)
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
@@ -184,6 +184,7 @@ packer.startup(function(use)
       config = function()
         require("core.statusline").setup()
       end,
+      requires = { "kyazdani42/nvim-web-devicons" },
     },
     { "arkav/lualine-lsp-progress" },
     {
