@@ -28,6 +28,7 @@
   last = log -1 HEAD --stat
   reuse-msg = commit --reuse-message=ORIG_HEAD
   soft-reset = reset HEAD~1 --soft
+  unstage = restore --staged .
   #############
   fa = fetch --all
   unshallow = !(git fetch --unshallow || git fetch --all) && git remote set-branches origin '*'
