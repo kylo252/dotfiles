@@ -61,8 +61,8 @@ end
 ---@diagnostic disable-next-line: unused-local
 function M.common_on_init(client, bufnr) end
 
-function M.common_on_exit(_,_)
-  require("user.lsp.utils").cleanup_document_highlight(_, _)
+function M.common_on_exit(_, _)
+  require("user.autocmds").clear_augroup "lsp_document_highlight"
 end
 
 function M.common_on_attach(client, bufnr)
@@ -94,6 +94,7 @@ function M.setup()
   for _, server in ipairs(servers) do
     require("user.lsp.manager").setup(server)
   end
+  vim.api.nvim_create_augroup("lsp_document_highlight", {})
 end
 
 return M

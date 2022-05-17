@@ -40,6 +40,7 @@ local base_collection = {
       complete = require("core.sessions").get_sessions,
     },
   },
+  { name = "ToggleFormatOnSave", fn = require("user.autocmds").toggle_format_on_save },
 }
 
 function M.load_commands(collection)

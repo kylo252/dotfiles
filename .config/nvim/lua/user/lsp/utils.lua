@@ -22,15 +22,6 @@ function M.get_active_client_by_ft(filetype)
   return matches
 end
 
-function M.cleanup_document_highlight(_, _)
-  local status_ok, _ = pcall(vim.api.nvim_get_autocmds, {
-    group = "lsp_document_highlight",
-  })
-  if status_ok then
-    vim.api.nvim_del_augroup_by_name("lsp_document_highlight")
-  end
-end
-
 function M.setup_document_highlight(client, bufnr)
   local status_ok, method_supported = pcall(function()
     return client.server_capabilities.documentHighlightProvider
