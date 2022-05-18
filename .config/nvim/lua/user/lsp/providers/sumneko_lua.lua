@@ -1,6 +1,4 @@
-local utils = require "user.utils"
-
-local opts = {
+local default_opts = {
   settings = {
     Lua = {
       formatting = { enable = false },
@@ -9,7 +7,6 @@ local opts = {
       --   enable = false,
       -- },
       workspace = {
-        -- Make the server aware of Neovim runtime files
         maxPreload = 1000,
         preloadFileSize = 1000,
       },
@@ -17,14 +14,9 @@ local opts = {
   },
 }
 
-local awesome_lib = "/usr/share/awesome/lib"
-if utils.is_directory(awesome_lib) then
-  opts.settings.Lua.workspace.library[awesome_lib] = true
-end
-
 local lua_dev_loaded, lua_dev = pcall(require, "lua-dev")
 if not lua_dev_loaded then
-  return opts
+  return default_opts
 end
 
 local dev_opts = {
@@ -35,7 +27,7 @@ local dev_opts = {
     -- you can also specify the list of plugins to make available as a workspace library
     plugins = { "plenary.nvim", "LuaSnip" },
   },
-  lspconfig = opts,
+  lspconfig = default_opts,
 }
 
 return lua_dev.setup(dev_opts)
