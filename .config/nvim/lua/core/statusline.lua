@@ -88,6 +88,7 @@ local components = {
     "filename",
     color = {},
     cond = nil,
+    path = 1,
   },
 }
 

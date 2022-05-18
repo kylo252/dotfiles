@@ -6,7 +6,7 @@ function M.setup()
 
     detection_methods = { "lsp", "pattern" },
 
-    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+    patterns = { ".git" },
 
     show_hidden = true,
 
