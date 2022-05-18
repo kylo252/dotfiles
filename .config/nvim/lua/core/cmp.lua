@@ -96,6 +96,7 @@ M.config = function()
       }),
       ["<C-p>"] = { i = cmp.mapping.select_prev_item(), c = cmp.mapping.select_prev_item() },
       ["<C-n>"] = { i = cmp.mapping.select_next_item(), c = cmp.mapping.select_next_item() },
+      ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-c>"] = function()
         cmp.mapping.close()
         vim.cmd [[stopinsert]]
