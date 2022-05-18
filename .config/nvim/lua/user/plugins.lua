@@ -121,7 +121,6 @@ packer.startup(function(use)
     },
     {
       "nvim-telescope/telescope.nvim",
-      lock = true, -- don't change the checked-out branch
       config = function()
         require("core.telescope").setup()
       end,
@@ -256,7 +255,13 @@ packer.startup(function(use)
     config = function()
       require("core.neogen").setup()
     end,
-    event = "BufReadPost",
+    cmd = "Neogen",
+  }
+  use {
+    "mickael-menu/zk-nvim",
+    config = function()
+      require("core.zk").setup()
+    end,
   }
 
   use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }

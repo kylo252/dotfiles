@@ -15,6 +15,7 @@ znap source zsh-users/zsh-completions
 znap source Aloxaf/fzf-tab
 znap source reegnz/jq-zsh-plugin
 znap source RobSis/zsh-completion-generator
+znap source soimort/translate-shell
 
 znap function _pip_completion pip 'eval "$(pip completion --zsh)"'
 compctl -K    _pip_completion pip
