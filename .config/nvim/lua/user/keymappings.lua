@@ -21,25 +21,40 @@ local mode_adapters = {
   command_mode = "c",
   operator_mode = "o",
 }
+--
+--
+--table Can be as a mapping or tuple of a mapping and description or opts to override the defaults `{ noremap = true, silent = true }`
+---
 
--- Set key mappings individually
--- @param mode The keymap mode, can be one of the keys of mode_adapters
--- @param key The key of keymap
--- @param val Can be form as a mapping or tuple of mapping and user defined opt
-function M.set_keymaps(mode, key, val)
-  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+---@alias map-rhs string|function Right-hand side of the mapping, `:h {rhs}`
+
+---Set key mappings individually
+---@param mode string The keymap mode, can be one of the keys of mode_adapters
+---@param lhs string Left-hand side  of the mapping, `:h {lhs}`
+---@param rhs map-rhs
+---@param val string|table be as a mapping or tuple of a mapping and description or opts to override the defaults `{ noremap = true, silent = true }`
+-- ```lua
+-- set_keymaps("n", "<leader>xx", function() print 'hello' end)
+-- set_keymaps("n", "<leader>xy", { function() print 'hello' end, "this is a description" } )
+-- set_keymaps("n", "<leader>xz", { function() print 'hello' end }, { noremap=true, desc = "this is also a description" } )
+-- ```
+---@overload fun(mode: string, lhs: string, rhs: map-rhs)
+---@overload fun(mode: string, lhs: string, val: table)
+function M.set_keymaps(mode, lhs, val)
+  local opts = {}
   if type(val) == "table" then
-    opt = val[2]
+    opts = val[2]
     val = val[1]
   end
-  vim.api.nvim_set_keymap(mode, key, val, opt)
+  opts = vim.tbl_deep_extend("force", generic_opts[mode] or generic_opts_any, opts)
+  vim.keymap.set(mode, lhs, val, opts)
 end
 
 -- Load key mappings for a given mode
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
 function M.load_mode(mode, keymaps)
-  mode = mode_adapters[mode] and mode_adapters[mode] or mode
+  mode = mode_adapters[mode] or mode
   for k, v in pairs(keymaps) do
     M.set_keymaps(mode, k, v)
   end
@@ -108,6 +123,13 @@ M.groups = {
 
     -- fix gx
     ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+
+    ["<leader>fx"] = {
+      function()
+        print "hello"
+      end,
+      { desc = "print hello" },
+    },
 
     -- quick rename
     ["<F2>"] = ":%s@<c-r><c-w>@<c-r><c-w>@gc<c-f>$F@i",
