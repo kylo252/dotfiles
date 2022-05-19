@@ -34,7 +34,7 @@
   unshallow = !(git fetch --unshallow || git fetch --all) && git remote set-branches origin '*'
   qa = commit --amend --no-edit
   ro = !git rebase $(git rev-parse --abbrev-ref HEAD)
-  smu = submodule update --init --recursive
+  smu = submodule update --init --recursive --depth=1
   st = status
   #############
   potd = push origin HEAD:refs/drafts/master
@@ -42,6 +42,9 @@
   #############
   dots = !git --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
   #############
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored = !git ls-files -v | grep "^[[:lower:]]"
 [user]
 	email = 59826753+kylo252@users.noreply.github.com
 	name = kylo252

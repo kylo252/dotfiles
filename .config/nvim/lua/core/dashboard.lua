@@ -34,8 +34,8 @@ local footer = {
 
 local buttons = {
   entries = {
-    { "<c-r>", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
     { "<c-f>", "  Find File", "<CMD>Telescope find_files<CR>" },
+    { "<c-r>", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
     { "<c-n>", "  New File", "<CMD>ene!<CR>" },
     { "<c-j>", "  Recent Places", "<CMD>Telescope zoxide list<CR>" },
     { "<c-t>", "  Find Word", "<CMD>Telescope live_grep<CR>" },
