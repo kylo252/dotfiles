@@ -51,8 +51,8 @@ local buttons = {
     },
     {
       "SPC R",
-      "  Load Last Session",
-      "<CMD>lua require('persistence').load({ last = true })<cr>",
+      "  Load Session",
+      "<CMD>SessionLoad<cr>",
     },
   },
 }
