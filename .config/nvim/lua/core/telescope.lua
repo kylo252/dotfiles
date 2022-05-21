@@ -40,6 +40,7 @@ function M.config()
           ["<S-Up>"] = actions.cycle_previewers_prev,
           ["<S-Down>"] = actions.cycle_previewers_next,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["<C-h>"] = actions.which_key, -- keys from pressing <C-/>
           -- ["<C-i>"] = my_cool_custom_action,
         },
         n = {
@@ -53,6 +54,9 @@ function M.config()
       },
     },
     pickers = {
+      find_files = {
+        hidden = true,
+      },
       live_grep = {
         only_sort_text = true,
       },
