@@ -225,13 +225,6 @@ packer.startup(function(use)
         require("core.git").setup_gitlinker()
       end,
     },
-    {
-      "sindrets/diffview.nvim",
-      event = "BufReadPost",
-      config = function()
-        require("core.git").setup_diffview()
-      end,
-    },
   }
 
   -- utils
