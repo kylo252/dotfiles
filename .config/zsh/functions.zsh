@@ -46,18 +46,6 @@ function grc() {
   gh repo clone "$1" -- --depth=1
 }
 
-function nf-download() {
-  set -x
-  local FONTS_DIR="$HOME/.local/share/fonts"
-  local REQ_FONT_DIR="$FONTS_DIR/$1"
-  mkdir -p "$REQ_FONT_DIR"
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/"$1".zip -O "$REQ_FONT_DIR"/"$1".zip || exit 1
-  cd "$REQ_FONT_DIR"
-  unzip "$1".zip -d "$REQ_FONT_DIR" || exit 1
-  fd 'Windows' -x rm 2</dev/null
-  fc-cache -fv
-}
-
 function cpr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
 }
@@ -72,11 +60,6 @@ function jqz(){
 
 function mvr() {
   rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
-}
-
-function pprint() {
-  [ -z "$1" ] && echo "invalid argument" && return 1
-  echo "$1" | sed -e 's/\:/\n/g' | fzf
 }
 
 # find-in-file - usage: fif <SEARCH_TERM> <target>
@@ -127,7 +110,9 @@ function zfr() {
   znap restart
 }
 
-function gh-latest-release(){
+function gh-latest-release() {
   local repo="$1"
-  gh api "repos/$repo/releases/latest" --jq '.assets[].browser_download_url'
+  gh api "repos/$repo/releases/latest" \
+    --jq '.assets[].browser_download_url' \
+    | fzf --exit-0
 }

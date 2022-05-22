@@ -18,6 +18,9 @@ function __setup_defaults() {
   setopt IGNORE_EOF           # Prevent accidental C-d from exiting shell
   setopt INTERACTIVE_COMMENTS # Allow comments, even in interactive shells
   setopt LIST_PACKED          # Make completion lists more densely packed
+
+  # https://unix.stackexchange.com/q/48577
+  typeset -g WORDCHARS=${WORDCHARS/\//}
 }
 __setup_defaults
 unset -f __setup_defaults
@@ -53,14 +56,6 @@ function __setup_kemaps() {
 
   # [muscle-memory] use ctrl+backspace as well
   bindkey '^H' backward-kill-word
-
-  # https://stackoverflow.com/a/1438523
-  backward-kill-dir() {
-    local WORDCHARS=${WORDCHARS/\//}
-    zle backward-kill-word
-  }
-  zle -N backward-kill-dir
-  bindkey '^[^?' backward-kill-dir
 
   bindkey '^[[1;5C' vi-forward-word
 
