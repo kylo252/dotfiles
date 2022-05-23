@@ -124,6 +124,7 @@ packer.startup(function(use)
       config = function()
         require("core.telescope").setup()
       end,
+      requires = { "kyazdani42/nvim-web-devicons" },
     },
     {
       "ggandor/lightspeed.nvim",
@@ -160,15 +161,13 @@ packer.startup(function(use)
       end,
     },
     {
-      "kyazdani42/nvim-web-devicons",
-    },
-    {
       "kyazdani42/nvim-tree.lua",
       -- https://github.com/kyazdani42/nvim-tree.lua/issues/965
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
       config = function()
         require("core.nvimtree").setup()
       end,
+      requires = { "kyazdani42/nvim-web-devicons" },
     },
     {
       "akinsho/bufferline.nvim",
@@ -176,7 +175,7 @@ packer.startup(function(use)
         require("core.bufferline").setup()
       end,
       event = "BufWinEnter",
-      -- event = "BufRead",
+      requires = { "kyazdani42/nvim-web-devicons" },
     },
     {
       "nvim-lualine/lualine.nvim",
@@ -200,7 +199,6 @@ packer.startup(function(use)
         require("core.indent").setup()
       end,
     },
-
     {
       "goolord/alpha-nvim",
       config = function()
