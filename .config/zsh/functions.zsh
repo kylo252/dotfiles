@@ -116,3 +116,7 @@ function gh-latest-release() {
     --jq '.assets[].browser_download_url' \
     | fzf --exit-0
 }
+
+function __printkeys() {
+  stdbuf -o0 showkey -a | cat -
+}
