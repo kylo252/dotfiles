@@ -1,1 +1,4 @@
-vim.cmd [[ au BufRead,BufNewFile .clang* set filetype=yaml ]]
+vim.api.nvim_create_autocmd(
+  { "BufRead", "BufNewFile" },
+  { pattern = ".clang*", command = "set filetype=yaml" }
+)

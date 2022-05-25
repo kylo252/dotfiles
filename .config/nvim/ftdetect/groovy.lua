@@ -1,1 +1,4 @@
-vim.cmd [[ au BufRead,BufNewFile Jenkinsfile,*.dsl set filetype=groovy ]]
+vim.api.nvim_create_autocmd(
+  { "BufRead", "BufNewFile" },
+  { pattern = { "Jenkinsfile", "*.dsl" }, command = "set filetype=groovy" }
+)
