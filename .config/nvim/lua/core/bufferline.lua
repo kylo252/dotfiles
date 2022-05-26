@@ -1,5 +1,7 @@
 local M = {}
 
+--stylua: ignore start
+
 -- Common kill function for bdelete and bwipeout
 -- credits: based on bbye and nvim-bufdel
 ---@param kill_command? string defaults to "bd"
@@ -11,6 +13,7 @@ function M.buf_kill(kill_command, bufnr, force)
   local bo = vim.bo
   local api = vim.api
   local fmt = string.format
+  local fnamemodify = vim.fn.fnamemodify
 
   if bufnr == 0 or bufnr == nil then
     bufnr = api.nvim_get_current_buf()
@@ -21,21 +24,17 @@ function M.buf_kill(kill_command, bufnr, force)
   if not force then
     local warning
     if bo[bufnr].modified then
-      warning = fmt([[No write since last change for buffer %s]], bufname)
+      warning = fmt([[No write since last change for (%s)]], fnamemodify(bufname, ":t"))
     elseif api.nvim_buf_get_option(bufnr, "buftype") == "terminal" then
       warning = fmt([[Terminal %s will be killed]], bufname)
     end
     if warning then
-      vim.ui.select({ "Force", "Cancel" }, {
-        prompt = string.format([[%s. \nWould you like to close it by force anyway?]], warning),
+      vim.ui.input({
+        prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
       }, function(choice)
-        if choice then
-          force = true
-        end
+        if choice == "y" then force = true end
       end)
-      if not force then
-        return
-      end
+      if not force then return end
     end
   end
 
@@ -44,9 +43,7 @@ function M.buf_kill(kill_command, bufnr, force)
     return api.nvim_win_get_buf(win) == bufnr
   end, api.nvim_list_wins())
 
-  if #windows == 0 then
-    return
-  end
+  if #windows == 0 then return end
 
   if force then
     kill_command = kill_command .. "!"
@@ -78,6 +75,8 @@ function M.buf_kill(kill_command, bufnr, force)
     vim.cmd(string.format("%s %d", kill_command, bufnr))
   end
 end
+
+--stylua: ignore end
 
 M.setup = function()
   require("bufferline").setup {
