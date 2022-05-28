@@ -1,5 +1,3 @@
-vim.cmd "setl ts=4 sw=4"
-
 local u = require "user.utils"
 if u.is_file "src/uncrustify.cfg" then
   vim.cmd [[

@@ -48,8 +48,6 @@ function __setup_xdg() {
   export NPM_HOME="$XDG_DATA_HOME/npm"
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-  # this is just a workaround: http://hiphish.github.io/blog/2020/12/29/making-luarocks-xdg-compliant/
-  export LUAROCKS_HOME="$XDG_DATA_HOME/luarocks"
   export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
   export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
   export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
