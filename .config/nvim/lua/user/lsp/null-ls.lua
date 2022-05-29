@@ -70,27 +70,52 @@ function M.list_registered_linters(filetype)
   return registered_providers[linter_method] or {}
 end
 
+function M.register_sources(configs, method)
+  local null_ls = require "null-ls"
+
+  local sources, registered_names = {}, {}
+
+  for _, config in ipairs(configs) do
+    local cmd = config.exe or config.command
+    local name = config.name or cmd:gsub("-", "_")
+    local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
+    local source = type and null_ls.builtins[type][name]
+    if not source then
+      vim.notify("Not a valid source: " .. name, vim.log.levels.ERROR)
+    else
+      local command = source._opts.command
+
+      -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
+      local compat_opts = vim.deepcopy(config)
+      if config.args then
+        compat_opts.extra_args = config.args or config.extra_args
+        compat_opts.args = nil
+      end
+
+      local opts = vim.tbl_deep_extend("keep", { command = command }, compat_opts)
+      table.insert(sources, source.with(opts))
+      vim.list_extend(registered_names, { source.name })
+    end
+  end
+
+  if #sources > 0 then
+    null_ls.register { sources = sources }
+  end
+  return registered_names
+end
+
 function M:setup()
   local config = M.config()
 
   local null_ls = require "null-ls"
-  local sources = {}
-  for _, provider in ipairs(config.formatters) do
-    local source = null_ls.builtins.formatting[provider.command].with(provider)
-    table.insert(sources, source)
-  end
 
-  for _, provider in ipairs(config.linters) do
-    local source = null_ls.builtins.diagnostics[provider.command].with(provider)
-    table.insert(sources, source)
-  end
-  for _, provider in ipairs(config.code_actions) do
-    local source = null_ls.builtins.code_actions[provider.command].with(provider)
-    table.insert(sources, source)
-  end
   local default_opts = require("user.lsp").get_common_opts()
-  local opts = vim.tbl_deep_extend("force", default_opts, { sources = sources, log = { level = "warn" } })
+  local opts = vim.tbl_deep_extend("force", default_opts, { log = { level = "warn" } })
   null_ls.setup(opts)
+
+  M.register_sources(config.formatters, null_ls.methods.FORMATTING)
+  M.register_sources(config.linters, null_ls.methods.DIAGNOSTICS)
+  M.register_sources(config.code_actions, null_ls.methods.CODE_ACTION)
 end
 
 return M
