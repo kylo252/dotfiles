@@ -44,11 +44,12 @@
   #############
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
-  ignored = !git ls-files -v | grep "^[[:lower:]]"
+  ############
+  print-ignored = !git ls-files -v | grep "^[[:lower:]]"
+  print-author = log --pretty='%an %ae' -1
+  print-committer = log --pretty='%cn %ce' -1
 [user]
-	email = 59826753+kylo252@users.noreply.github.com
-	name = kylo252
-[gitreview]
-	remote = origin
+  email = 59826753+kylo252@users.noreply.github.com
+  name = kylo252
 [credential "https://github.com"]
-	helper = !gh auth git-credential
+  helper = !gh auth git-credential
