@@ -49,7 +49,6 @@ M.config = function()
       { name = "nvim_lua", keyword_length = 2 },
       { name = "luasnip", keyword_length = 2 },
       { name = "buffer", keyword_length = 4 },
-      { name = "nvim_lsp_signature_help" },
       {
         name = "tmux",
         keyword_length = 4,

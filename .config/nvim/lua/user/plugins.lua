@@ -37,10 +37,13 @@ require "user.impatient"
 
 require("user.utils").load_commands(commands)
 
--- packer.on_complete = vim.schedule_wrap(function()
---   -- vim.api.nvim_exec_autocmds("ColorScheme", {})
---   -- vim.api.nvim_exec_autocmds("User", {pattern = "PackerComplete"})
--- end)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "PackerComplete",
+  once = true,
+  callback = function()
+    vim.api.nvim_exec_autocmds("ColorScheme", {})
+  end,
+})
 
 packer.startup(function(use)
   -- packer can manage itself as an optional plugin
@@ -64,6 +67,7 @@ packer.startup(function(use)
     },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
     { "neovim/nvim-lspconfig" },
+    { "p00f/clangd_extensions.nvim" },
     { "jose-elias-alvarez/null-ls.nvim" },
     { "williamboman/nvim-lsp-installer" },
     {
@@ -82,7 +86,6 @@ packer.startup(function(use)
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
     {
       "numToStr/Comment.nvim",
