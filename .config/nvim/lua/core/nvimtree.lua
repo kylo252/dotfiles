@@ -1,18 +1,5 @@
 local M = {}
 
-local opts = {
-  show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-    tree_width = 35,
-  },
-  respect_buf_cwd = 1,
-  git_hl = 1,
-  root_folder_modifier = ":t",
-}
-
 function M.setup()
   local status_ok, _ = pcall(require, "nvim-tree")
   if not status_ok then
@@ -20,23 +7,20 @@ function M.setup()
     return
   end
 
-  for opt, val in pairs(opts) do
-    vim.g["nvim_tree_" .. opt] = val
-  end
-
   vim.g.netrw_banner = 0
 
   local function telescope_find_files(_)
     require("core.nvimtree").start_telescope "find_files"
   end
+
   local function telescope_find_str(_)
     require("core.nvimtree").start_telescope "live_grep"
   end
 
   local setup_opts = {
-    disable_netrw = true,
     auto_reload_on_write = true,
-    diagnostics = nil,
+    create_in_closed_folder = false,
+    disable_netrw = true,
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
@@ -45,7 +29,9 @@ function M.setup()
     open_on_setup_file = false,
     open_on_tab = false,
     sort_by = "name",
+    reload_on_bufenter = false,
     update_cwd = true,
+    respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
       update_cwd = true,
@@ -53,6 +39,10 @@ function M.setup()
     },
     ignore_ft_on_setup = {
       "alpha",
+    },
+    hijack_directories = {
+      enable = true,
+      auto_open = true,
     },
     system_open = {
       cmd = nil,
@@ -66,9 +56,12 @@ function M.setup()
     view = {
       width = 30,
       height = 30,
+      hide_root_folder = false,
       side = "left",
+      preserve_window_proportions = false,
       number = false,
       relativenumber = false,
+      signcolumn = "yes",
       mappings = {
         custom_only = false,
         list = {
@@ -76,21 +69,76 @@ function M.setup()
           { key = "h", action = "close_node" },
           { key = "v", action = "vsplit" },
           { key = "C", action = "cd" },
-          { key = "gtf", action = "find_files", action_cb = telescope_find_files },
-          { key = "gtg", action = "grep_string", action_cb = telescope_find_str },
+          { key = "tf", action = "find_files", action_cb = telescope_find_files },
+          { key = "tg", action = "grep_string", action_cb = telescope_find_str },
         },
       },
+    },
+    renderer = {
+      add_trailing = false,
+      group_empty = false,
+      highlight_git = false,
+      highlight_opened_files = "none",
+      root_folder_modifier = ":~",
+      indent_markers = {
+        enable = false,
+        icons = {},
+      },
+      icons = {
+        webdev_colors = true,
+        git_placement = "before",
+        padding = " ",
+        symlink_arrow = " ➛ ",
+        show = {
+          file = true,
+          folder = true,
+          folder_arrow = true,
+          git = true,
+        },
+        glyphs = {},
+      },
+      special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
     },
     filters = {
       dotfiles = false,
       custom = {},
     },
     actions = {
+      use_system_clipboard = true,
       change_dir = {
+        enable = true,
         global = false,
+        restrict_above_cwd = false,
+      },
+      expand_all = {
+        max_folder_discovery = 300,
       },
       open_file = {
         quit_on_open = false,
+        resize_window = true,
+        window_picker = {
+          enable = false,
+        },
+      },
+      remove_file = {
+        close_window = false,
+      },
+    },
+    diagnostics = nil,
+    live_filter = {
+      prefix = "[FILTER]: ",
+      always_show_folders = true, -- this gets confusing otherwise
+    },
+    log = {
+      enable = false,
+      truncate = false,
+      types = {
+        all = false,
+        config = false,
+        copy_paste = false,
+        diagnostics = false,
+        git = false,
+        profile = false,
       },
     },
   }
