@@ -10,8 +10,13 @@ function open-nvim-log() {
   _tmux_lnav_split "$HOME/.cache/nvim/*log*"
 }
 
+function open-nvim-nightly-log() {
+  _tmux_lnav_split "$HOME/.cache/nvim/nightly/nvim/lsp.log"
+}
+
 declare -a actions=(
   open-nvim-log
+  open-nvim-nightly-log
 )
 
 SELECTION=$(

@@ -44,9 +44,6 @@ _G.load_config = function()
   require("vim.lsp.log").set_format_func(vim.inspect)
   local nvim_lsp = require "lspconfig"
   local on_attach = function(_, bufnr)
-    local function buf_set_keymap(...)
-      vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
     local function buf_set_option(...)
       vim.api.nvim_buf_set_option(bufnr, ...)
     end
@@ -54,43 +51,52 @@ _G.load_config = function()
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     -- Mappings.
-    local opts = { noremap = true, silent = true }
-    buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-    buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-    buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-    buf_set_keymap("n", "<space>lD", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    buf_set_keymap("n", "<space>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    buf_set_keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float(0,{scope='line'})<CR>", opts)
-    buf_set_keymap("n", "<space>lk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-    buf_set_keymap("n", "<space>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-    buf_set_keymap("n", "<space>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    buf_set_keymap("n", "<space>li", "<cmd>LspInfo<CR>", opts)
-    buf_set_keymap("n", "<space>lI", "<cmd>LspInstallInfo<CR>", opts)
+    local opts = { buffer = bufnr, noremap = true, silent = true }
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set("n", "<space>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+    vim.keymap.set("n", "<space>a", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<space>li", "<cmd>LspInfo<CR>", opts)
+    vim.keymap.set("n", "<space>lI", "<cmd>LspInstallInfo<CR>", opts)
   end
 
   -- Add the server that troubles you here, e.g. "sumneko_lua", "pyright", "tsserver"
-  local name = "sumneko_lua"
+  local servers = {
+    "zk",
+    -- "prosemd_lsp",
+    "ltex",
+  }
 
   local setup_opts = {
     on_attach = on_attach,
   }
 
-  if use_lsp_installer then
-    local server_available, server = require("nvim-lsp-installer.servers").get_server(name)
-    if not server_available then
-      server:install()
+  for _, name in ipairs(servers) do
+    if use_lsp_installer then
+      local server_available, server = require("nvim-lsp-installer.servers").get_server(name)
+      if not server_available then
+        server:install()
+      end
+      local default_opts = server:get_default_options()
+      setup_opts = vim.tbl_deep_extend("force", setup_opts, default_opts)
     end
-    local default_opts = server:get_default_options()
-    setup_opts = vim.tbl_deep_extend("force", setup_opts, default_opts)
-  end
 
-  nvim_lsp[name].setup(setup_opts)
+    nvim_lsp[name].setup(setup_opts)
+  end
 end
 
 if vim.fn.isdirectory(install_path) == 0 then
