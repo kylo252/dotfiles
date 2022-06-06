@@ -122,7 +122,7 @@ M.groups = {
     ["]d"] = "<PageDown>",
 
     -- fix gx
-    ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
 
     ["<leader>fx"] = {
       function()
@@ -162,7 +162,7 @@ M.groups = {
     ["<S-Up"] = "k",
 
     -- fix gx
-    ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
 
     -- search for visually selected text
     ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],

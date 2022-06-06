@@ -34,7 +34,9 @@ function utils.xdg_open_handler()
     vim.notify("xdg-open was not found", vim.log.levels.WARN)
     return
   end
-  os.execute("xdg-open " .. vim.fn.expand "<cWORD>")
+  local uri = vim.fn.shellescape(vim.fn.expand "<cWORD>")
+  vim.notify("trying to open: " .. uri, vim.log.levels.DEBUG)
+  os.execute("xdg-open " .. uri)
 end
 
 function utils.copy_help_url()
@@ -56,7 +58,8 @@ function utils.copy_help_url()
     return ""
   end
 
-  local help_url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
+  local base_url = "https://neovim.io/doc/user/%s.html#%s"
+  local help_url = string.format(base_url, vim.fn.expand "%:t:r", last_search_query())
   vim.notify(help_url, vim.log.levels.INFO, { title = "help url" })
   vim.fn.setreg("+", help_url)
 end
