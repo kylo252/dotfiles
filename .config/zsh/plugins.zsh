@@ -23,7 +23,7 @@ compctl -K    _pip_completion pip
 znap eval zoxide 'zoxide init zsh'
 
 if command -v vivid >/dev/null; then
-  znap eval ls 'eval "export LS_COLORS=$(vivid -m 24-bit generate one-dark)"'
+  export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
 fi
 
 if command -v module >/dev/null; then
