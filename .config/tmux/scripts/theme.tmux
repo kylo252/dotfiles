@@ -72,6 +72,7 @@ current_cmd="#(ps -f --no-headers -o command= -t '#{pane_tty}' | grep -oP '^(n?l
 # automatically rename windows to the current directory
 current_path='#{b:pane_current_path}'
 
+# TODO: consider adding a git-status "#(gitmux '#{pane_current_path}')"
 status_right=(
   "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]${extra_widget}"
   ""

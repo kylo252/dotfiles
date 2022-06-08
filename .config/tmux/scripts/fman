@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -e
+
+CMD="zsh"
+SESSION="scratch"
+
+declare -a REST=()
+
+function usage() {
+  echo "Usage: fman [<options>]"
+  echo ""
+  echo "Options:"
+  echo "    -h, --help                  Print this help message"
+  echo "    -c, --command               command to execute"
+  echo "    -s, --session               session name"
+  echo "    --                          all arguments after this are passed verbatim to the command"
+}
+
+function parse_arguments() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -c | --command)
+        CMD="$2"
+        ;;
+      -s | --session)
+        SESSION="$2"
+        ;;
+      --)
+        REST=("$@")
+        ;;
+      -h | --help)
+        usage
+        exit 0
+    esac
+    shift
+  done
+}
+
+function main(){
+  parse_arguments "$@"
+  cur_session=$(tmux display -p '#S')
+  if [ "${cur_session}" == "${SESSION}" ]; then
+    tmux detach-client
+  else
+    # FIXME: we should probably quit the current process if it exists, but this doesn't seem to work even with -X
+    tmux display-popup -E -yC -xC -w 65% -h 65% \
+      "tmux new-session -c '#{pane_current_path}' -A -s ${SESSION} ${CMD} ${REST[*]}"
+  fi
+}
+
+main "$@"

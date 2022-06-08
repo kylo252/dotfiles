@@ -73,24 +73,9 @@ M.add_exec = function(opts)
     return
   end
 
-  local exec_func = string.format(
-    "<cmd>lua require('core.terminal')._exec_toggle({ cmd = '%s', count = %d, direction = '%s'})<CR>",
-    opts.cmd,
-    opts.count,
-    opts.direction
-  )
-
-  require("user.keymappings").load {
-    normal_mode = { [opts.keymap] = exec_func },
-    term_mode = { [opts.keymap] = exec_func },
-  }
-
-  local wk_status_ok, wk = pcall(require, "whichkey")
-  if not wk_status_ok then
-    return
-  end
-  wk.register({ [opts.keymap] = { opts.label } }, { mode = "n" })
-  wk.register({ [opts.keymap] = { opts.label } }, { mode = "t" })
+  vim.keymap.set({ "n", "t" }, opts.keymap, function()
+    require("core.terminal")._exec_toggle(opts)
+  end, { noremap = true, silent = true, desc = opts.label })
 end
 
 M._exec_toggle = function(opts)
