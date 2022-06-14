@@ -73,9 +73,15 @@ function __setup_fzf() {
 
 function __setup_misc() {
   export BAT_PAGER="less -RF"
-  # https://github.com/sharkdp/bat/issues/652
-  # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export BAT_THEME="TwoDark"
 
+  export CMAKE_BUILD_TYPE=RelWithDebInfo
+  export CMAKE_EXPORT_COMPILE_COMMANDS=1
+  export CMAKE_GENERATOR=Ninja
+
+  export DELTA_PAGER="less -RF"
+
+  export MANPAGER='less -s -M +Gg'
 }
 
 setup_functions=(
