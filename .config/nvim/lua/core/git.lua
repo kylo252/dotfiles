@@ -58,7 +58,12 @@ function M.get_blame_url()
   local filename = vim.fn.expand "%"
   local repo = require("lspconfig.util").find_git_ancestor(vim.fn.expand "%:p")
   local lnum = cur_pos[1] + 1
-  local args = { "log", "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename, "--pretty=%H", "--no-patch" }
+  local args = {
+    "log",
+    "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename,
+    "--pretty=%H",
+    "--no-patch",
+  }
   local job = require("plenary.job"):new { command = "git", args = args, cwd = repo }
   local commit_url
   job:after_success(function(this_job)
