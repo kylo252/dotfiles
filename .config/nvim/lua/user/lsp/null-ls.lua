@@ -1,7 +1,9 @@
 local M = {}
 
+local u = require "null-ls.utils"
+local h = require "null-ls.helpers"
+
 local py_cwd = function(params)
-  local u = require "null-ls.utils"
   local root_files = {
     "pyproject.toml",
     "setup.py",
@@ -27,10 +29,12 @@ function M.config()
         command = "luacheck",
         extra_args = {},
         filetypes = { "lua" },
-        cwd = function(params) -- force luacheck to find its '.luacheckrc' file
-          local u = require "null-ls.utils"
+        cwd = h.cache.by_bufnr(function(params) -- force luacheck to find its '.luacheckrc' file
           return u.root_pattern ".luacheckrc"(params.bufname)
-        end,
+        end),
+        runtime_condition = h.cache.by_bufnr(function(params)
+          return u.path.exists(u.path.join(params.root, ".luacheckrc"))
+        end),
       },
       { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       -- { command = "mypy", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },

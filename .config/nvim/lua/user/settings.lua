@@ -41,6 +41,7 @@ vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+vim.opt.laststatus = 3 -- global statusline
 
 vim.opt.iskeyword:append "-" -- used in searching and recognizing with many commands
 vim.opt.whichwrap:append "<,>,[,],h,l" -- let movement keys reach the previous line
