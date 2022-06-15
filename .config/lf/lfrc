@@ -10,6 +10,44 @@ set previewer ~/.config/lf/preview
 set ratios 1:1:3
 set scrolloff 10
 
+map <c-u> scrollup
+map <c-d> scrolldown
+
+cmd scrolldown &{{
+  file="$f"
+  step=5
+	# Retrieve the current preview offset.
+
+  if ! rg "$file" "$LF_SCROLLINGPREVIEW_TEMPDIR/offset"  2>/dev/null; then
+    offset=1
+  else
+    offset="$(rg "(\d) $file" --only-matching --no-line-number --replace '$1' "$LF_SCROLLINGPREVIEW_TEMPDIR/offset" 2>/dev/null)"
+    offset=$((offset+step))
+  fi
+	# Increment the offset.
+	echo "$offset $file" >"$LF_SCROLLINGPREVIEW_TEMPDIR/offset"
+
+	# Trigger a reload.
+	lf -remote "send $id reload"
+}}
+
+cmd scrollup &{{
+  file="$f"
+  step=5
+  if ! rg "$file" "$LF_SCROLLINGPREVIEW_TEMPDIR/offset"  2>/dev/null; then
+    offset=1
+  else
+    # Retrieve the current preview offset.
+    offset="$(rg "(\d) $file" --only-matching --no-line-number --replace '$1' "$LF_SCROLLINGPREVIEW_TEMPDIR/offset" 2>/dev/null)"
+    if [ "$offset" -gt step ]; then
+      offset=$((offset-step))
+    fi
+  fi
+
+  echo "$offset $file" >"$LF_SCROLLINGPREVIEW_TEMPDIR/offset"
+	lf -remote "send $id reload"
+}}
+
 # TODO: figure out why zle-cd is broken..
 cmd zle-cd %printf 'cd %q && zle reset-prompt\n' "$PWD" >&$ZLE_FIFO
 

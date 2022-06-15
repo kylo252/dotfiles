@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# credit: github.com/slavistan/lf-gadgets
+
+function __lf_cleanup() {
+	rm -rf "$LF_SCROLLINGPREVIEW_TEMPDIR"
+}
+
+trap __lf_cleanup INT HUP TERM
+
+# Set up temporary directory.
+LF_SCROLLINGPREVIEW_TEMPDIR="$(mktemp -d -t lf-scrollingpreview-XXXXXX)"
+export LF_SCROLLINGPREVIEW_TEMPDIR
+
+# Initialize scrolling offset (page number or line offset) and the file name
+echo "1" >"$LF_SCROLLINGPREVIEW_TEMPDIR/offset"
+
+lf "$@"
+
+__lf_cleanup
