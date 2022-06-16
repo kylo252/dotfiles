@@ -37,12 +37,9 @@ function M.config()
         end),
       },
       { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
-      -- { command = "mypy", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
-      { command = "shellcheck", extra_args = { "--exclude=SC1090,SC1091" }, filetypes = { "sh" } },
     },
     code_actions = {
-      -- { command = "gitsigns", filetypes = {} },
-      { command = "shellcheck", filetypes = { "sh" } },
+      -- { command = "proselint" },
     },
   }
 end
