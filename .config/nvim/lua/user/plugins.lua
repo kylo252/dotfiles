@@ -161,6 +161,7 @@ packer.startup(function(use)
       "kylo252/onedark.nvim",
       config = function()
         require("onedark").setup()
+        vim.cmd[[colorscheme onedark]]
       end,
     },
     {
