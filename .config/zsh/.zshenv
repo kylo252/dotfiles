@@ -92,6 +92,7 @@ function __setup_misc() {
   export CMAKE_BUILD_TYPE=RelWithDebInfo
   export CMAKE_EXPORT_COMPILE_COMMANDS=1
   export CMAKE_GENERATOR=Ninja
+  export CTEST_PARALLEL_LEVEL=$(nproc 2>/dev/null)
 
   export DELTA_PAGER="less -RF"
 
@@ -125,7 +126,6 @@ bin_list=(
   "$GEM_HOME/bin"
   "$NPM_HOME/bin"
   "$GOPATH/bin"
-  "$LUAROCKS_HOME/bin"
   "$XDG_CONFIG_HOME/rofi/bin"
   )
 

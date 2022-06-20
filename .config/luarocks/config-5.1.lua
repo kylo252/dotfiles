@@ -7,18 +7,18 @@
 --- `./configure --prefix=$HOME/.local --sysconfdir=$HOME/.config`
 
 rocks_trees = {
-  { name = "system", root = home .. "/.local" },
-
-  -- note: enabling will cause rocks to appear installed twice
-  -- { name = "user", root = home .. "/.local" };
+   { name = "system", root = "/usr/local" };
+   { name = "user", root = home .. "/.local" };
 }
 
-home_tree = home .. "/.local"
+-- home_tree = home .. "/.local"
 
 lua_interpreter = "luajit"
 cmake_generator = "Ninja"
+local_by_default = false
 
 variables = {
-  LUA_DIR = "/usr",
-  LUA_BINDIR = "/usr/sbin",
+   LUA_INCDIR = "/usr/include/luajit-2.1";
+   LUA_BINDIR = "/bin";
 }
+

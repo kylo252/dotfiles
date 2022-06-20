@@ -65,3 +65,4 @@ if [ -d "/opt/homebrew" ]; then
   export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
+znap eval luarock "luarocks path --no-bin 2>/dev/null"
