@@ -70,6 +70,8 @@ packer.startup(function(use)
     { "p00f/clangd_extensions.nvim" },
     { "jose-elias-alvarez/null-ls.nvim" },
     { "williamboman/nvim-lsp-installer" },
+    { "tamago324/nlsp-settings.nvim" },
+    { "b0o/schemastore.nvim" },
     {
       "hrsh7th/nvim-cmp",
       config = function()

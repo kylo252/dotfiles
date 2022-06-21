@@ -72,6 +72,7 @@ end
 
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   return require("cmp_nvim_lsp").update_capabilities(capabilities)
 end
 
@@ -84,9 +85,24 @@ function M.get_common_opts()
   }
 end
 
+local function bootstrap_nlsp(opts)
+  opts = opts or {}
+  local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
+  if lsp_settings_status_ok then
+    lsp_settings.setup(opts)
+  end
+end
+
 function M.setup()
   require("user.lsp.handlers").setup()
   require("vim.lsp.log").set_format_func(vim.inspect)
+  bootstrap_nlsp {
+    config_home = vim.fn.stdpath "config" .. "/lsp-settings",
+    append_default_schemas = true,
+    local_settings_dir = ".lsp",
+    local_settings_root_markers = { ".git" },
+    loader = "json",
+  }
   require("user.lsp.null-ls").setup()
 
   local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }

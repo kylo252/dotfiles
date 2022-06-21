@@ -1,5 +1,11 @@
+local custom_on_attach = function(client, bufnr)
+  require("user.lsp").common_on_attach(client, bufnr)
+  client.server_capabilities.documentFormattingProvider = true
+end
+
 return {
   -- filetypes = {"yaml"},
+  on_attach = custom_on_attach,
   settings = {
     yaml = {
       format = {
@@ -17,9 +23,6 @@ return {
       --   ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.20.5-standalone-strict/all.json"] = "frontend-service.yaml"
       -- },
       schemaDownload = { enable = true },
-      trace = {
-        server = "verbose",
-      },
     },
   },
 }
