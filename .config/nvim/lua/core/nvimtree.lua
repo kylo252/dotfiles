@@ -34,15 +34,15 @@ function M.setup()
     respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
-      update_cwd = true,
+      update_root = true,
       ignore_list = {},
     },
     ignore_ft_on_setup = {
       "alpha",
     },
     hijack_directories = {
-      enable = true,
-      auto_open = true,
+      -- kyazdani42/nvim-tree.lua#1363
+      enable = false,
     },
     system_open = {
       cmd = nil,
