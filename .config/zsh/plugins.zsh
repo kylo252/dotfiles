@@ -60,3 +60,9 @@ bindkey '^ ' autosuggest-accept
 bindkey '^\ei' jq-complete
 
 znap eval luarock "luarocks path --no-bin 2>/dev/null"
+
+if [ -d "/opt/homebrew" ]; then
+  export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  znap eval brew "/opt/homebrew/bin/brew shellenv"
+fi
