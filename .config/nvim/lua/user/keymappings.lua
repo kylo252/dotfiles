@@ -43,7 +43,7 @@ local mode_adapters = {
 function M.set_keymaps(mode, lhs, val)
   local opts = {}
   if type(val) == "table" then
-    opts = val[2]
+    opts = val[2] or {}
     val = val[1]
   end
   opts = vim.tbl_deep_extend("force", generic_opts[mode] or generic_opts_any, opts)

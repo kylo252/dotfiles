@@ -106,12 +106,20 @@ end
 function M.setup()
   local opts = M.config()
   require("telescope").setup(opts)
-
+  local finders = require "core.telescope.custom-finders"
   local keymaps = {
     normal_mode = {
-      ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
-      ["<C-p>"] = '<cmd>lua require("telescope.builtin").find_files({hidden = true, ignored = false})<CR>',
-      ["<M-d>"] = '<cmd>lua require("core.telescope").get_z_list()<CR>',
+      ["<C-p>"] = {
+        function()
+          finders.find_project_files { hidden = true, ignored = false }
+        end,
+      },
+      ["<leader>ft"] = {
+        function()
+          finders.dynamic_grep { args = "ft=" .. vim.bo.filetype }
+        end,
+        { desc = "live grep (same filetype)" },
+      },
     },
   }
   require("user.keymappings").load(keymaps)
