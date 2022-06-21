@@ -17,8 +17,3 @@ lua_interpreter = "luajit"
 cmake_generator = "Ninja"
 local_by_default = false
 
-variables = {
-   LUA_INCDIR = "/usr/include/luajit-2.1";
-   LUA_BINDIR = "/bin";
-}
-
