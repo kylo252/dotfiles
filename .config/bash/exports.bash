@@ -107,7 +107,9 @@ bin_list=(
   "$GEM_HOME/bin"
   "$NPM_HOME/bin"
   "$GOPATH/bin"
-)
+  "$XDG_CONFIG_HOME/rofi/bin"
+  "$XDG_CONFIG_HOME/tmux/bin"
+  )
 
 for extra in "${bin_list[@]}"; do
   PATH=$extra:$PATH
