@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 BASE_IDX=${BASE_IDX:-"$(tmux display -p "#{pane-base-index}")"}
 
@@ -30,14 +31,14 @@ function main() {
 window_panes="$(tmux display -p "#{window_panes}")"
 
 function newpane() {
-  tmux split-window -v -c '#{pane_current_path}' -p 30
+  tmux split-window -v -c '#{pane_current_path}' -l 30
 }
 
 function togglepane() {
   if ((window_panes > 1)); then
     tmux resize-pane -t "$BASE_IDX" -Z
   else
-    tmux split-window -v -c '#{pane_current_path}' -p 30
+    tmux split-window -v -c '#{pane_current_path}' -l 30
   fi
 }
 
