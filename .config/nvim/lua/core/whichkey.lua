@@ -85,16 +85,6 @@ M.mappings = {
     name = "+git",
     a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
-    Y = {
-      r = {
-        require_safe("gitlinker").get_repo_url,
-        "Copy repo URL",
-      },
-      b = {
-        require_safe("core.git").get_blame_url,
-        "Copy blame URL",
-      },
-    },
     d = { "LazyDots" },
     g = { "LazyGit" },
     j = { require_safe("gitsigns").next_hunk, "Next Hunk" },

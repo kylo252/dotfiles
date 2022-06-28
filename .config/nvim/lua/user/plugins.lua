@@ -163,7 +163,7 @@ packer.startup(function(use)
       "kylo252/onedark.nvim",
       config = function()
         require("onedark").setup()
-        vim.cmd[[colorscheme onedark]]
+        vim.cmd [[colorscheme onedark]]
       end,
     },
     {
@@ -223,7 +223,8 @@ packer.startup(function(use)
       end,
     },
     {
-      "ruifm/gitlinker.nvim",
+      "kylo252/gitlinker.nvim",
+      branch = "allow-remote-override",
       event = "BufReadPost",
       config = function()
         require("core.git").setup_gitlinker()

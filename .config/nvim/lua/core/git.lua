@@ -25,39 +25,90 @@ function M.setup_gitsigns()
   }
 end
 
-function M.setup_gitlinker()
-  local gitlinker = require "gitlinker"
-  local hosts = require("gitlinker").hosts
-
-  local get_gerrit_gitlies_type_url = function(url_data)
-    local url = "https://" .. url_data.host .. "/plugins/gitiles/" .. url_data.repo
-    if not url_data.file or not url_data.rev then
-      return url
-    end
-    url = url .. "/+/" .. url_data.rev .. "/" .. url_data.file
-    if not url_data.lstart then
-      return url
-    end
-    url = url .. "#" .. url_data.lstart
+local function get_gerrit_gitlies_type_url(url_data)
+  local url = "https://" .. url_data.host .. "/plugins/gitiles/" .. url_data.repo
+  if not url_data.file or not url_data.rev then
     return url
   end
+  url = url .. "/+/" .. url_data.rev .. "/" .. url_data.file
+  if not url_data.lstart then
+    return url
+  end
+  url = url .. "#" .. url_data.lstart
+  return url
+end
+
+function M.setup_gitlinker()
+  local gitlinker = require "gitlinker"
 
   gitlinker.setup {
     callbacks = {
-      ["github.com"] = hosts.get_github_type_url,
       ["gerrit"] = get_gerrit_gitlies_type_url,
     },
+    mappings = nil,
   }
+
+  local keymaps = {
+    normal_mode = {
+      ["<leader>gy"] = {
+        function()
+          require_safe("gitlinker").get_buf_range_url "n"
+        end,
+        { desc = "Copy line URL" },
+      },
+      ["<leader>gYy"] = {
+        function()
+          require_safe("gitlinker").get_buf_range_url("n", { remote = "origin" })
+        end,
+        { desc = "Copy line URL (origin)" },
+      },
+      ["<leader>gYr"] = {
+        function()
+          require("gitlinker").get_repo_url { remote = "origin" }
+        end,
+        { desc = "Copy repo URL" },
+      },
+      ["<leader>gYb"] = {
+        function()
+          M.get_github_blame_url { remote = "origin" }
+        end,
+        { desc = "Copy blame URL" },
+      },
+    },
+    visual_mode = {
+      ["<leader>gy"] = {
+        function()
+          require_safe("gitlinker").get_buf_range_url "v"
+        end,
+        { desc = "Copy range URL" },
+      },
+      ["<leader>gY"] = {
+        function()
+          require_safe("gitlinker").get_buf_range_url("v", { remote = "origin" })
+        end,
+        { desc = "Copy range URL (origin)" },
+      },
+    },
+  }
+
+  require("user.keymappings").load(keymaps)
 end
 
-function M.get_blame_url()
-  local repo_url = require("gitlinker").get_repo_url { print_url = false }
+function M.get_github_blame_url(opts)
+  local gitlinker = require "gitlinker"
+  local user_opts = vim.tbl_deep_extend("force", {
+    print_url = false,
+    remote = "origin",
+  }, opts or {})
+  local repo_url = gitlinker.get_repo_url(user_opts)
 
   local win_id = vim.api.nvim_get_current_win()
+  local bufnr = vim.api.nvim_get_current_buf()
   local cur_pos = vim.api.nvim_win_get_cursor(win_id)
-  local filename = vim.fn.expand "%"
-  local repo = require("lspconfig.util").find_git_ancestor(vim.fn.expand "%:p")
-  local lnum = cur_pos[1] + 1
+  ---@diagnostic disable-next-line: missing-parameter
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  local repo = vim.loop.cwd()
+  local lnum = cur_pos[1]
   local args = {
     "log",
     "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename,
