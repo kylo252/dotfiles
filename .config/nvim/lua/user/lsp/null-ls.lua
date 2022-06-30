@@ -1,7 +1,8 @@
 local M = {}
 
-local u = require "null-ls.utils"
-local h = require "null-ls.helpers"
+local path = require("null-ls.utils").path
+local root_pattern = require("null-ls.utils").root_pattern
+local nls_cache = require("null-ls.helpers").cache
 
 local py_cwd = function(params)
   local root_files = {
@@ -13,7 +14,7 @@ local py_cwd = function(params)
     "pyrightconfig.json",
     ".flake8",
   }
-  return u.root_pattern(unpack(root_files))(params.bufname)
+  return root_pattern(unpack(root_files))(params.bufname)
 end
 
 function M.config()
@@ -23,17 +24,27 @@ function M.config()
       { command = "isort", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       { command = "stylua", extra_args = {}, filetypes = { "lua" } },
       { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
+      {
+        command = "markdownlint",
+        filetypes = { "markdown" },
+        cwd = nls_cache.by_bufnr(function(params)
+          return root_pattern ".markdownlintrc"(params.bufname)
+        end),
+        condition = function(utils)
+          return utils.root_has_file ".markdownlintrc"
+        end,
+      },
     },
     linters = {
       {
         command = "luacheck",
         extra_args = {},
         filetypes = { "lua" },
-        cwd = h.cache.by_bufnr(function(params) -- force luacheck to find its '.luacheckrc' file
-          return u.root_pattern ".luacheckrc"(params.bufname)
+        cwd = nls_cache.by_bufnr(function(params) -- force luacheck to find its '.luacheckrc' file
+          return root_pattern ".luacheckrc"(params.bufname)
         end),
-        runtime_condition = h.cache.by_bufnr(function(params)
-          return u.path.exists(u.path.join(params.root, ".luacheckrc"))
+        runtime_condition = nls_cache.by_bufnr(function(params)
+          return path.exists(path.join(params.root, ".luacheckrc"))
         end),
       },
       { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
