@@ -132,7 +132,7 @@ M.setup = function()
     },
   }
 
-  require("user.utils").load_commands(commands)
+  require("user.commands").load_commands(commands)
 end
 
 return M

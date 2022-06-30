@@ -122,7 +122,12 @@ M.groups = {
     ["]d"] = "<PageDown>",
 
     -- fix gx
-    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
+    ["gx"] = {
+      function()
+        require("user.utils").xdg_open_handler()
+      end,
+      { desc = "xdg open" },
+    },
 
     ["<leader>fx"] = {
       function()
@@ -160,9 +165,6 @@ M.groups = {
     -- only move one line at a time
     ["<S-Down>"] = "j",
     ["<S-Up"] = "k",
-
-    -- fix gx
-    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
 
     -- search for visually selected text
     ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],

@@ -1,45 +1,35 @@
-local utils = {}
+local M = {}
 
-local fmt = string.format
-function utils.reload_plugins()
-  utils.reset_cache()
+function M.reload_plugins()
+  M.reset_cache()
   vim.cmd(string.format("source %q/lua/plugins.lua", vim.fn.stdpath "config"))
   local packer = require "packer"
   packer.sync()
 end
 
-function utils.check_lsp_client_active(name)
-  local clients = vim.lsp.get_active_clients()
-  for _, client in pairs(clients) do
-    if client.name == name then
-      return true, client
-    end
-  end
-  return false
+function M.open_uri(uri)
+  vim.notify("opening: " .. uri, vim.log.levels.INFO)
+  local task = {
+    command = "xdg-open",
+    args = { uri },
+  }
+  local Job = require "plenary.job"
+  Job:new(task):start()
 end
 
-function utils.get_active_client()
-  local clients = vim.lsp.buf_get_clients()
-  for _, client in pairs(clients) do
-    -- return the first valid client, this is fine for now
-    if client.name ~= "efm" and client.name ~= "null-ls" then
-      return client
-    end
-  end
-  return nil
-end
-
-function utils.xdg_open_handler()
+function M.xdg_open_handler()
   if vim.fn.executable "xdg-open" ~= 1 then
     vim.notify("xdg-open was not found", vim.log.levels.WARN)
     return
   end
-  local uri = vim.fn.shellescape(vim.fn.expand "<cWORD>")
-  vim.notify("trying to open: " .. uri, vim.log.levels.DEBUG)
-  os.execute("xdg-open " .. uri)
+
+  local ts_utils = require "nvim-treesitter.ts_utils"
+  local n = ts_utils.get_node_at_cursor()
+  local uri = vim.treesitter.query.get_node_text(n, 0)
+  M.open_uri(uri)
 end
 
-function utils.copy_help_url()
+function M.copy_help_url()
   if vim.bo.filetype ~= "help" then
     return
   end
@@ -62,9 +52,10 @@ function utils.copy_help_url()
   local help_url = string.format(base_url, vim.fn.expand "%:t:r", last_search_query())
   vim.notify(help_url, vim.log.levels.INFO, { title = "help url" })
   vim.fn.setreg("+", help_url)
+  M.open_uri(help_url)
 end
 
-function utils.gsub_args(args)
+function M.gsub_args(args)
   if args == nil or type(args) ~= "table" then
     return args
   end
@@ -75,32 +66,25 @@ function utils.gsub_args(args)
   return args
 end
 
-function utils.is_file(filename)
+function M.is_file(filename)
   local stat = vim.loop.fs_stat(filename)
   return stat and stat.type == "file" or false
 end
 
-function utils.is_directory(filename)
+function M.is_directory(filename)
   local stat = vim.loop.fs_stat(filename)
   return stat and stat.type == "directory" or false
 end
 
-function utils.reset_cache()
+function M.reset_cache()
   local packer_cache = vim.fn.stdpath "config" .. "/plugin/packer_compiled.lua"
-  if utils.is_file(packer_cache) then
+  if M.is_file(packer_cache) then
     vim.fn.delete(packer_cache)
     require("packer").compile()
   end
 end
 
-function utils.load_commands(collection)
-  local common_opts = { bang = true, force = true }
-  for _, cmd in pairs(collection) do
-    vim.api.nvim_create_user_command(cmd.name, cmd.fn, cmd.opts or common_opts)
-  end
-end
-
-function utils.on_dir_changed()
+function M.on_dir_changed()
   local entry = vim.loop.cwd()
   local Job = require "plenary.job"
   local job = Job:new {
@@ -133,27 +117,9 @@ end
 function _G.require_safe(m)
   local status_ok, module = pcall(require, m)
   if not status_ok then
-    _G.log_entry(fmt("error while loading [%s]: %s", m, module))
+    _G.log_entry(string.format("error while loading [%s]: %s", m, module))
   end
   return module
 end
 
-vim.cmd [[
-function! Dump(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "no output"
-  else
-    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    new
-    nnoremap <silent> <buffer> q :close<CR>
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
-command! -nargs=+ -complete=command Dump call Dump(<q-args>)
-]]
-
-return utils
+return M

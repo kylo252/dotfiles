@@ -35,7 +35,7 @@ local commands = {
 
 require "user.impatient"
 
-require("user.utils").load_commands(commands)
+require("user.commands").load_commands(commands)
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "PackerComplete",
