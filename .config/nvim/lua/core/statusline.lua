@@ -52,18 +52,23 @@ local components = {
   },
   lsp_clients = {
     function(msg)
-      msg = msg or "LSP Inactive"
-      local buf_clients = vim.lsp.buf_get_clients()
+      local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
       if next(buf_clients) == nil then
+        -- TODO: clean up this if statement
+        if type(msg) == "boolean" or #msg == 0 then
+          return "LS Inactive"
+        end
         return msg
       end
 
       local buf_client_names = {}
+      local buf_ft = vim.bo.filetype
+      local n = require "user.lsp.null-ls"
       for _, client in pairs(buf_clients) do
         if client.name == "null-ls" then
-          local null_ls_formatters = require("user.lsp.null-ls").list_registered_formatters(vim.bo.filetype)
+          local null_ls_formatters = n.list_registered_formatters(buf_ft)
           vim.list_extend(buf_client_names, null_ls_formatters)
-          local null_ls_linters = require("user.lsp.null-ls").list_registered_linters(vim.bo.filetype)
+          local null_ls_linters = n.list_registered_linters(buf_ft)
           vim.list_extend(buf_client_names, null_ls_linters)
         else
           table.insert(buf_client_names, client.name)
@@ -72,6 +77,7 @@ local components = {
 
       return table.concat(buf_client_names, ", ")
     end,
+    color = { gui = "bold" },
   },
   treesitter = {
     function()
