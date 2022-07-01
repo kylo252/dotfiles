@@ -52,20 +52,31 @@ packer.startup(function(use)
   use { "nvim-lua/popup.nvim" }
   use { "folke/lua-dev.nvim", filetype = "lua" }
 
-  -- LSP and linting
   use {
     {
       "nvim-treesitter/nvim-treesitter",
-      -- run = function()
-      --   vim.schedule(function()
-      --     require("nvim-treesitter.installer").update()
-      --   end)
-      -- end,
+      run = function()
+        vim.schedule(function()
+          require("nvim-treesitter.installer").update()
+        end)
+      end,
       config = function()
         require("core.treesitter").setup()
       end,
     },
-    { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
+    { "nvim-treesitter/playground" },
+    {
+      "numToStr/Comment.nvim",
+      event = "BufReadPost",
+      config = function()
+        require("core.comment").setup()
+      end,
+    },
+  }
+
+  -- LSP and linting
+  use {
     { "neovim/nvim-lspconfig" },
     { "p00f/clangd_extensions.nvim" },
     { "jose-elias-alvarez/null-ls.nvim" },
@@ -89,13 +100,6 @@ packer.startup(function(use)
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
-    {
-      "numToStr/Comment.nvim",
-      event = "BufReadPost",
-      config = function()
-        require("core.comment").setup()
-      end,
-    },
   }
 
   -- Helpers
@@ -108,6 +112,13 @@ packer.startup(function(use)
 
   -- Search
   use {
+    {
+      "nvim-telescope/telescope.nvim",
+      config = function()
+        require("core.telescope").setup()
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+    },
     {
       "jvgrootveld/telescope-zoxide",
       requires = { "nvim-telescope/telescope.nvim" },
@@ -123,13 +134,6 @@ packer.startup(function(use)
       config = function()
         require("core.project").setup()
       end,
-    },
-    {
-      "nvim-telescope/telescope.nvim",
-      config = function()
-        require("core.telescope").setup()
-      end,
-      requires = { "kyazdani42/nvim-web-devicons" },
     },
     {
       "ggandor/lightspeed.nvim",

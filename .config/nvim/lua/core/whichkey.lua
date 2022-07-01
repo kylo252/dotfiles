@@ -165,7 +165,17 @@ M.mappings = {
   },
   T = {
     name = "+TreeSitter",
+    f = { ":TSNodeUnderCursor<cr>", "Node under cursor" },
+    c = { ":TSCaptureUnderCursor<cr>", "Capture under Cursor" },
+    i = { ":TSConfigInfo<cr>", "Config info" },
+    t = { ":TSPlaygroundToggle<cr>", "Playground" },
     d = { "<cmd>lua require('neogen').generate()<cr>", "Neogen" },
+  },
+  z = {
+    name = "+zettel",
+    j = { "<cmd>ZkNotes<cr>", "notes" },
+    n = { "<cmd>ZkNew<cr>", "new" },
+    t = { "<cmd>ZkNewFromContentSelection<cr>", "new from selection" },
   },
 }
 

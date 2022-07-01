@@ -15,7 +15,6 @@ vim.opt.foldlevel = 10 -- don't close any folds by default
 vim.opt.foldmethod = "manual"
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.hidden = true -- required to keep multiple buffers and open multiple buffers
-vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.inccommand = "split" -- showsthe effects of :s as you type.
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.number = true -- set numbered lines
