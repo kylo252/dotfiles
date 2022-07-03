@@ -45,10 +45,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group '[' ']'
 
-bindkey '^ ' autosuggest-accept
-
-bindkey '^\ei' jq-complete
-
 znap eval luarock "luarocks path --no-bin 2>/dev/null"
 
 if [ -d "/opt/homebrew" ]; then
