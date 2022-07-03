@@ -26,16 +26,6 @@ if command -v vivid >/dev/null; then
   export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
 fi
 
-if command -v module >/dev/null; then
-  compdef _module "ml"
-fi
-
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-  export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.nix-profile/share/applications"
-  source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-  znap install spwhitt/nix-zsh-completions
-fi
-
 # doesn't seem to work on Darwin..
 # znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
 source <(fnm env --fnm-dir=${FNM_DIR} --shell=zsh)
