@@ -24,7 +24,7 @@ local base_definitions = {
     {
       group = "_filetype_settings",
       pattern = { "gitcommit", "markdown" },
-      command = "setl wrap spell spc= list lcs=trail:* tw=80 fo+=a",
+      command = "setl wrap spell spc= list lcs=trail:* tw=80",
     },
   },
   {
