@@ -21,33 +21,27 @@ local mode_adapters = {
   command_mode = "c",
   operator_mode = "o",
 }
---
---
---table Can be as a mapping or tuple of a mapping and description or opts to override the defaults `{ noremap = true, silent = true }`
----
 
+---@alias map-mode string The keymap mode, can be one of the keys of mode_adapters
+---@alias map-lhs string Left-hand side  of the mapping, `:h {lhs}`
 ---@alias map-rhs string|function Right-hand side of the mapping, `:h {rhs}`
+---@alias desc string|function Used to give a description to the mapping
+---@alias map-arguments string|table can be a single description string or a table, `:h :map-arguments`
 
----Set key mappings individually
----@param mode string The keymap mode, can be one of the keys of mode_adapters
----@param lhs string Left-hand side  of the mapping, `:h {lhs}`
----@param rhs map-rhs
----@param val string|table be as a mapping or tuple of a mapping and description or opts to override the defaults `{ noremap = true, silent = true }`
+---Set key mappings with overridable defaults `{ noremap = true, silent = true }`
 -- ```lua
--- set_keymaps("n", "<leader>xx", function() print 'hello' end)
--- set_keymaps("n", "<leader>xy", { function() print 'hello' end, "this is a description" } )
--- set_keymaps("n", "<leader>xz", { function() print 'hello' end }, { noremap=true, desc = "this is also a description" } )
+-- set_keymaps("n", "<leader>xy", function() print 'hello' end, "this is a description" )
+-- set_keymaps("n", "<leader>xz", function() print 'hello' end, { noremap=true, buffer=true, desc = "this is also a description" } )
 -- ```
----@overload fun(mode: string, lhs: string, rhs: map-rhs)
----@overload fun(mode: string, lhs: string, val: table)
-function M.set_keymaps(mode, lhs, val)
-  local opts = {}
-  if type(val) == "table" then
-    opts = val[2] or {}
-    val = val[1]
+---@overload fun(mode: map-mode, lhs: map-lhs, rhs: map-rhs, desc: desc|nil)
+---@overload fun(mode: map-mode, lhs: map-lhs, rhs: map-rhs, opts: map-arguments|nil)
+function M.set(mode, lhs, rhs, val)
+  val = val or {}
+  if type(val) ~= "table" then
+    val = { desc = val }
   end
-  opts = vim.tbl_deep_extend("force", generic_opts[mode] or generic_opts_any, opts)
-  vim.keymap.set(mode, lhs, val, opts)
+  val = vim.tbl_deep_extend("force", generic_opts[mode] or generic_opts_any, val)
+  vim.keymap.set(mode, lhs, rhs, val)
 end
 
 -- Load key mappings for a given mode
@@ -56,7 +50,12 @@ end
 function M.load_mode(mode, keymaps)
   mode = mode_adapters[mode] or mode
   for k, v in pairs(keymaps) do
-    M.set_keymaps(mode, k, v)
+    local opts = {}
+    if type(v) == "table" then
+      opts = v[2] or {}
+      v = v[1]
+    end
+    M.set(mode, k, v, opts)
   end
 end
 

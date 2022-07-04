@@ -54,25 +54,25 @@ function M.setup_gitlinker()
         function()
           require_safe("gitlinker").get_buf_range_url "n"
         end,
-        { desc = "Copy line URL" },
+        "Copy line URL",
       },
       ["<leader>gYy"] = {
         function()
           require_safe("gitlinker").get_buf_range_url("n", { remote = "origin" })
         end,
-        { desc = "Copy line URL (origin)" },
+        "Copy line URL (origin)",
       },
       ["<leader>gYr"] = {
         function()
           require("gitlinker").get_repo_url { remote = "origin" }
         end,
-        { desc = "Copy repo URL" },
+        "Copy repo URL",
       },
       ["<leader>gYb"] = {
         function()
           M.get_github_blame_url { remote = "origin" }
         end,
-        { desc = "Copy blame URL" },
+        "Copy blame URL",
       },
     },
     visual_mode = {
@@ -80,18 +80,18 @@ function M.setup_gitlinker()
         function()
           require_safe("gitlinker").get_buf_range_url "v"
         end,
-        { desc = "Copy range URL" },
+        "Copy range URL",
       },
       ["<leader>gY"] = {
         function()
           require_safe("gitlinker").get_buf_range_url("v", { remote = "origin" })
         end,
-        { desc = "Copy range URL (origin)" },
+        "Copy range URL (origin)",
       },
     },
   }
 
-  require("user.keymappings").load(keymaps)
+  require("user.keymaps").load(keymaps)
 end
 
 function M.get_github_blame_url(opts)

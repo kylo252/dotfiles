@@ -113,16 +113,17 @@ function M.setup()
         function()
           finders.find_project_files { hidden = true, ignored = false }
         end,
+        "find project files",
       },
       ["<leader>ft"] = {
         function()
           finders.dynamic_grep { args = "ft=" .. vim.bo.filetype }
         end,
-        { desc = "live grep (same filetype)" },
+        "live grep (same filetype)",
       },
     },
   }
-  require("user.keymappings").load(keymaps)
+  require("user.keymaps").load(keymaps)
 
   vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
 
