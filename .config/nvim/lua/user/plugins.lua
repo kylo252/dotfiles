@@ -147,7 +147,7 @@ packer.startup(function(use)
   -- TMUX and session management
   use {
     "aserowy/tmux.nvim",
-    event = "BufReadPost",
+    event = "UIEnter",
     config = function()
       require("core.tmux").setup()
     end,

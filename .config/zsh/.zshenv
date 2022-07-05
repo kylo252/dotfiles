@@ -49,8 +49,10 @@ function __setup_xdg() {
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
   export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
-  export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
+  export TERMINFO="$XDG_DATA_HOME/terminfo"
+  export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
   export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
+  export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
   export ZK_NOTEBOOK_DIR="$HOME/notes/pages"
 }
 
