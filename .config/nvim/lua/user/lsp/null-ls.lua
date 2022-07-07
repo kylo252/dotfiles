@@ -90,7 +90,8 @@ function M.register_sources(configs, method)
   for _, config in ipairs(configs) do
     local cmd = config.exe or config.command
     local name = config.name or cmd:gsub("-", "_")
-    local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
+    local type = method == null_ls.methods.CODE_ACTION and "code_actions"
+      or null_ls.methods[method]:lower()
     local source = type and null_ls.builtins[type][name]
     if not source then
       vim.notify("Not a valid source: " .. name, vim.log.levels.ERROR)

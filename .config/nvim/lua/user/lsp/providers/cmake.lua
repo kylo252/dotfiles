@@ -18,7 +18,7 @@ end
 local custom_on_attach = function(client, bufnr)
   require("user.lsp").common_on_attach(client, bufnr)
 
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  local opts = { noremap = true, silent = true, buffer = bufnr, desc = "Hover info" }
   vim.keymap.set("n", "<leader>lh", get_hover_info, opts)
 end
 

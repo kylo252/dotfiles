@@ -9,12 +9,10 @@ function M.set_tmux_win_title(pattern)
   local title = vim.fn.expand(pattern)
   vim.opt.titlestring = title
   local Job = require "plenary.job"
-  Job
-    :new({
-      command = "tmux",
-      args = { "rename-window", title },
-    })
-    :start()
+  Job:new({
+    command = "tmux",
+    args = { "rename-window", title },
+  }):start()
 end
 
 function M.setup()

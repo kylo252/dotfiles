@@ -102,7 +102,12 @@ end
 
 function _G.log_entry(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
-  local log = require("plenary.log").new { level = "info", plugin = "user_debug", info_level = 3, use_console = "sync" }
+  local log = require("plenary.log").new {
+    level = "info",
+    plugin = "user_debug",
+    info_level = 3,
+    use_console = "sync",
+  }
   log.info(unpack(objects))
   return ...
 end

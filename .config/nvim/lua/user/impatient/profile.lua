@@ -164,7 +164,10 @@ function M.print_profile(I)
   )
 
   local title1_width = time_cell_width + loader_cell_width - 1
-  local title1_fmt = ("%s │ %s │"):format(" %-" .. title1_width .. "s", "%-" .. title1_width .. "s")
+  local title1_fmt = ("%s │ %s │"):format(
+    " %-" .. title1_width .. "s",
+    "%-" .. title1_width .. "s"
+  )
 
   add "Note: this report is not a measure of startup time. Only use this for comparing"
   add "between cached and uncached loads of Lua modules"

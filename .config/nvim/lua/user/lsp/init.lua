@@ -37,7 +37,8 @@ local function setup_lsp_keybindings(bufnr)
   if not status_ok then
     return
   end
-  local visual_keys = { ["<leader>lf"] = { "<esc><cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" } }
+  local visual_keys =
+    { ["<leader>lf"] = { "<esc><cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" } }
 
   wk.register(visual_keys, { mode = "x", buffer = bufnr })
 
@@ -105,7 +106,8 @@ function M.setup()
   }
   require("user.lsp.null-ls").setup()
 
-  local servers = { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
+  local servers =
+    { "clangd", "sumneko_lua", "bashls", "dockerls", "jsonls", "yamlls", "pyright", "cmake" }
 
   for _, server in ipairs(servers) do
     require("user.lsp.manager").setup(server)

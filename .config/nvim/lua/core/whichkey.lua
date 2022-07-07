@@ -42,15 +42,27 @@ M.mappings = {
   },
   d = {
     name = "+dotfiles",
-    d = { "<cmd>lua require('core.telescope.custom-finders').find_dotfiles()<CR>", "Find dotfiles" },
-    g = { "<cmd>lua require('core.telescope.custom-finders').grep_dotfiles()<CR>", "Find dotfiles" },
+    d = {
+      "<cmd>lua require('core.telescope.custom-finders').find_dotfiles()<CR>",
+      "Find dotfiles",
+    },
+    g = {
+      "<cmd>lua require('core.telescope.custom-finders').grep_dotfiles()<CR>",
+      "Find dotfiles",
+    },
   },
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current buffer fuzzy-find" },
-    f = { "<cmd>lua require('core.telescope.custom-finders').find_project_files()<CR>", "Find files" },
-    g = { "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>", "grep string v2" },
+    f = {
+      "<cmd>lua require('core.telescope.custom-finders').find_project_files()<CR>",
+      "Find files",
+    },
+    g = {
+      "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>",
+      "grep string v2",
+    },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list<CR>", "Zoxide" },
     l = { "<cmd>DynamicGrep<CR>", "DynamicGrep" },
@@ -145,7 +157,10 @@ M.mappings = {
         "Open the LSP logfile",
       },
       n = { "<cmd>NullLsLog<cr>", "Open null-ls logfile" },
-      p = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
+      p = {
+        "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>",
+        "Open the Packer logfile",
+      },
     },
   },
   q = {

@@ -63,7 +63,9 @@ local function run_tmux(cmd)
   else
     exec_cmd = string.format([[ echo executing [ %q ]; '%q' ]], cmd_str, cmd_str)
   end
-  vim.cmd(string.format([[silent !tmux split-window %s bash -c '%s %s']], tmux_opts, exec_cmd, postfix))
+  vim.cmd(
+    string.format([[silent !tmux split-window %s bash -c '%s %s']], tmux_opts, exec_cmd, postfix)
+  )
 end
 
 function M.run_function_under_cursor()

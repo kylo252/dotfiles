@@ -27,20 +27,22 @@ function M.grep_string_v2(opts)
     end
   end
 
-  pickers.new(opts, {
-    prompt_title = "Search",
-    finder = finders.new_table(results),
-    sorter = sorters.fuzzy_with_index_bias,
-    attach_mappings = function(_, map)
-      map("i", "<C-y>", custom_actions.import_entry)
-      map("n", "<C-y>", custom_actions.import_entry)
-      map("i", "<C-space>", custom_actions.import_entry)
-      map("n", "<C-space>", custom_actions.import_entry)
-      map("i", "<CR>", custom_actions.fuzzy_filter_results)
-      map("n", "<CR>", custom_actions.fuzzy_filter_results)
-      return true
-    end,
-  }):find()
+  pickers
+    .new(opts, {
+      prompt_title = "Search",
+      finder = finders.new_table(results),
+      sorter = sorters.fuzzy_with_index_bias,
+      attach_mappings = function(_, map)
+        map("i", "<C-y>", custom_actions.import_entry)
+        map("n", "<C-y>", custom_actions.import_entry)
+        map("i", "<C-space>", custom_actions.import_entry)
+        map("n", "<C-space>", custom_actions.import_entry)
+        map("i", "<CR>", custom_actions.fuzzy_filter_results)
+        map("n", "<CR>", custom_actions.fuzzy_filter_results)
+        return true
+      end,
+    })
+    :find()
 end
 
 function M.fuzzy_grep_string(query)
@@ -117,14 +119,16 @@ function M.local_buffer_fuzzy_grep()
     return vim.tbl_flatten { vimgrep_arguments, "--", prompt, filelist }
   end, make_entry.gen_from_vimgrep(opts), opts.max_results, opts.cwd)
 
-  pickers.new(opts, {
-    prompt_title = "Live Grep",
-    finder = live_grepper,
-    previewer = config.values.grep_previewer(opts),
-    -- TODO: It would be cool to use `--json` output for this
-    -- and then we could get the highlight positions directly.
-    sorter = sorters.highlighter_only(opts),
-  }):find()
+  pickers
+    .new(opts, {
+      prompt_title = "Live Grep",
+      finder = live_grepper,
+      previewer = config.values.grep_previewer(opts),
+      -- TODO: It would be cool to use `--json` output for this
+      -- and then we could get the highlight positions directly.
+      sorter = sorters.highlighter_only(opts),
+    })
+    :find()
 end
 
 function M.find_runtime_files(opts)
@@ -137,30 +141,32 @@ function M.find_runtime_files(opts)
     vim.list_extend(runtimedirs, vim.fn.globpath(entry, "", 1, 1))
   end
 
-  pickers.new(opts, {
-    prompt_title = "select a runtime directory",
-    finder = finders.new_table(runtimedirs),
-    sorter = sorters.get_generic_fuzzy_sorter(opts),
-    attach_mappings = function(prompt_bufnr, map)
-      local find_in_dir = function()
-        local entry = action_state.get_selected_entry()
-        opts.cwd = entry.value
-        opts.next_picker = "find_files"
-        custom_actions.run_builtin(prompt_bufnr, opts)
-      end
-      local grep_in_dir = function()
-        local entry = action_state.get_selected_entry()
-        opts.cwd = entry.value
-        opts.next_picker = "live_grep"
-        custom_actions.run_builtin(prompt_bufnr, opts)
-      end
+  pickers
+    .new(opts, {
+      prompt_title = "select a runtime directory",
+      finder = finders.new_table(runtimedirs),
+      sorter = sorters.get_generic_fuzzy_sorter(opts),
+      attach_mappings = function(prompt_bufnr, map)
+        local find_in_dir = function()
+          local entry = action_state.get_selected_entry()
+          opts.cwd = entry.value
+          opts.next_picker = "find_files"
+          custom_actions.run_builtin(prompt_bufnr, opts)
+        end
+        local grep_in_dir = function()
+          local entry = action_state.get_selected_entry()
+          opts.cwd = entry.value
+          opts.next_picker = "live_grep"
+          custom_actions.run_builtin(prompt_bufnr, opts)
+        end
 
-      map("i", "<cr>", find_in_dir)
-      map("i", "<c-f>", find_in_dir)
-      map("i", "<c-g>", grep_in_dir)
-      return true
-    end,
-  }):find()
+        map("i", "<cr>", find_in_dir)
+        map("i", "<c-f>", find_in_dir)
+        map("i", "<c-g>", grep_in_dir)
+        return true
+      end,
+    })
+    :find()
 end
 
 function M.find_files_local(opts)
