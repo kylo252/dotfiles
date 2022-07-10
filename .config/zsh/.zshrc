@@ -66,7 +66,7 @@ unset setup_functions
 source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/functions.zsh"
 source "$ZDOTDIR/completions.zsh"
-source "$ZDOTDIR/plugins.zsh"
 source "$ZDOTDIR/keymaps.zsh"
+source "$ZDOTDIR/plugins.zsh"
 
 # zprof

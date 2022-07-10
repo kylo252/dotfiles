@@ -41,9 +41,6 @@ bindkey "^[," copy-prev-shell-word
 bindkey '^P' up-line-or-search
 bindkey '^N' down-line-or-search
 
-# line suggestion
-bindkey '^X^ ' autosuggest-accept
-
 # workaround: partial accept suggestion with forward-word
 function _expand_completion(){
   zle _expand_alias # bonus, expand aliases
@@ -55,4 +52,4 @@ zle -N _expand_completion
 bindkey '^ ' _expand_completion
 
 bindkey '^[[1;5C' vi-forward-word # ctrl+right
-bindkey '^[[1;5D' vi-backword-word # ctrl+left
+bindkey '^[[1;5D' vi-backward-word # ctrl+left
