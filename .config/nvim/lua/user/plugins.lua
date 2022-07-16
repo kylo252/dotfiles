@@ -266,6 +266,11 @@ packer.startup(function(use)
     end,
   }
 
-  use { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
+  use {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
+    end,
+  }
   use { "VebbNix/lf-vim" }
 end)

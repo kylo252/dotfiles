@@ -66,41 +66,55 @@ font:
 colors:
   # onedark Alacritty Colors
   primary:
-    background: '0x282c34'
-    foreground: '0xabb2bf'
+    background: '#282c34'
+    foreground: '#abb2bf'
 
   # Normal colors
   normal:
-    black:   '0x20232A'
-    red:     '0xe86671'
-    green:   '0x98c379'
-    yellow:  '0xe0af68'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x798294'
+    black:   '#20232A'
+    red:     '#e86671'
+    green:   '#98c379'
+    yellow:  '#e0af68'
+    blue:    '#61afef'
+    magenta: '#c678dd'
+    cyan:    '#56b6c2'
+    white:   '#abb2bf' # also serves as "light gray"
 
   # Bright colors
   bright:
-    black:   '0x21252b'
-    red:     '0xe86671'
-    green:   '0x98c379'
-    yellow:  '0xe0af68'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xabb2bf'
+    black:   '#31353f' # also serves as "dark gray"
+    red:     '#e86671'
+    green:   '#98c379'
+    yellow:  '#e0af68'
+    blue:    '#61afef'
+    magenta: '#c678dd'
+    cyan:    '#56b6c2'
+    white:   '#abb2bf'
+
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+   black:   '#131415'
+   red:     '#864343'
+   green:   '#777c44'
+   yellow:  '#9e824c'
+   blue:    '#556a7d'
+   magenta: '#75617b'
+   cyan:    '#5b7d78'
+   white:   '#828482'
 
   indexed_colors:
-    - { index: 16, color: '0xd19a66' }
-    - { index: 17, color: '0xf65866' }
+    - { index: 16, color: '#d19a66' }
+    - { index: 17, color: '#f65866' }
   # Cursor colors
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  cursor:
-    text: '#191919'
-    cursor: '#d8dee9'
+  # cursor:
+  #   text: '#191919'
+  #   cursor: '#d8dee9'
 
   vi_mode_cursor:
     text: CellBackground
@@ -239,10 +253,11 @@ cursor:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-shell:
-  program: zsh
-  args:
-    - --login
+# shell:
+#   program: /usr/bin/env
+#   args:
+#     - zsh
+#     - --login
 
 # Startup directory
 #
@@ -300,7 +315,7 @@ hints:
   enabled:
     - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
         -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
-      command: xdg-open
+      command: open
       post_processing: true
       mouse:
         enabled: true
@@ -634,7 +649,7 @@ key_bindings:
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # (macOS only)
-  - { key: F,               mods: Command|Control,        action: ToggleFullscreen          }
+  - { key: Return,          mods: Alt|Control,            action: ToggleFullscreen          }
   - { key: N,               mods: Command|Control,        action: SpawnNewInstance          }
   - { key: Return,          mods: Command,                action: ToggleSimpleFullscreen    }
   # make sure 'alt-' works, see https://github.com/alacritty/alacritty/issues/62
