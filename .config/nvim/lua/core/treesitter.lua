@@ -4,7 +4,7 @@ function M.setup()
   require("nvim-treesitter.install").compilers = { "clang", "gcc" }
 
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "bash", "lua", "c", "cpp", "vim", "json", "yaml" },
+    ensure_installed = { "bash", "lua", "c", "cpp", "vim", "json", "yaml", "python", "comment" },
     highlight = { enable = true },
     indent = { enable = true, disable = { "python", "yaml" } },
     autotag = { enable = true },
@@ -61,4 +61,5 @@ function M.setup()
     },
   }
 end
+
 return M

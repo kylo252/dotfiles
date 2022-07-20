@@ -23,7 +23,6 @@ font:
     #   - (Windows) Consolas
     family: Hack Nerd Font Mono
     # family: SFMono Nerd Font
-
     # The `style` can be specified to pick a specific face.
     # style: Medium
 
@@ -34,7 +33,6 @@ font:
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-
     # The `style` can be specified to pick a specific face.
     style: Bold
 
@@ -45,7 +43,6 @@ font:
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
     # family: monospace
-
     # The `style` can be specified to pick a specific face.
     style: Italic
 
@@ -56,7 +53,6 @@ font:
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
     # family: monospace
-
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
@@ -64,61 +60,32 @@ font:
   size: 12.0
 
 colors:
-  # onedark Alacritty Colors
+  # Default colors
   primary:
-    background: '#282c34'
-    foreground: '#abb2bf'
+    background: '#202734'
+    foreground: '#CBCCC6'
 
   # Normal colors
   normal:
-    black:   '#20232A'
-    red:     '#e86671'
-    green:   '#98c379'
-    yellow:  '#e0af68'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf' # also serves as "light gray"
+    black: '#191E2A'
+    red: '#FF3333'
+    green: '#BAE67E'
+    yellow: '#FFA759'
+    blue: '#73D0FF'
+    magenta: '#FFD580'
+    cyan: '#95E6CB'
+    white: '#C7C7C7'
 
   # Bright colors
   bright:
-    black:   '#31353f' # also serves as "dark gray"
-    red:     '#e86671'
-    green:   '#98c379'
-    yellow:  '#e0af68'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf'
-
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  dim:
-   black:   '#131415'
-   red:     '#864343'
-   green:   '#777c44'
-   yellow:  '#9e824c'
-   blue:    '#556a7d'
-   magenta: '#75617b'
-   cyan:    '#5b7d78'
-   white:   '#828482'
-
-  indexed_colors:
-    - { index: 16, color: '#d19a66' }
-    - { index: 17, color: '#f65866' }
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor. If these are unset,
-  # the cursor color will be the inverse of the cell color.
-  # cursor:
-  #   text: '#191919'
-  #   cursor: '#d8dee9'
-
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
+    black: '#686868'
+    red: '#F27983'
+    green: '#A6CC70'
+    yellow: '#FFCC66'
+    blue: '#5CCFE6'
+    magenta: '#FFEE99'
+    cyan: '#95E6CB'
+    white: '#FFFFFF'
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -145,13 +112,11 @@ window:
     instance: Alacritty
     # General application class
     general: Alacritty
-
   # GTK theme variant (Linux/BSD only)
   #
   # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
   # Set this to `None` to use the default theme variant.
   # gtk_theme_variant: None
-
 scrolling:
   history: 10000
 
@@ -172,14 +137,11 @@ bell:
   #   - EaseOutCirc
   #   - Linear
   animation: EaseOutExpo
-
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
   #duration: 0
-
   # Visual bell animation color.
   #color: '#ffffff'
-
   # Bell Command
   #
   # This program is executed whenever the bell is rung.
@@ -192,12 +154,10 @@ bell:
   #     args: ["Hello, World!"]
   #
   #command: None
-
-#selection:
+  #selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
-
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
@@ -211,7 +171,6 @@ cursor:
     #   - _ Underline
     #   - | Beam
     shape: Beam
-
     # Cursor blinking state
     #
     # Values for `blinking`:
@@ -220,7 +179,6 @@ cursor:
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
     # blinking: On
-
   # Vi mode cursor style
   #
   # If the vi mode cursor style is `None` or not specified, it will fall back to
@@ -228,21 +186,16 @@ cursor:
   #
   # See `cursor.style` for available options.
   # vi_mode_style: Block
-
   # Cursor blinking interval in milliseconds.
   #blink_interval: 750
-
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
   #unfocused_hollow: true
-
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
   #thickness: 0.15
-
 # Live config reload (changes require restart)
 #live_config_reload: true
-
 # Shell
 #
 # You can set `shell.program` to the path of your favorite shell, e.g.
@@ -258,27 +211,23 @@ cursor:
 #   args:
 #     - zsh
 #     - --login
-
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
 #working_directory: None
-
 # Send ESC (\x1b) before characters when alt is pressed.
 #alt_send_esc: true
-
 mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
   # alacritty should wait for accepting multiple clicks as one double
   # or triple click.
-  double_click: {threshold: 300}
-  triple_click: {threshold: 300}
-
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: true
 
 # Regex hints
 #
@@ -313,8 +262,8 @@ hints:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   enabled:
-    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
-        -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|g\
+        it:|ssh:|ftp:)[^\0-\x1f-<>\"\\s{-}\\^⟨⟩`]+"
       command: open
       post_processing: true
       mouse:
@@ -348,9 +297,9 @@ hints:
 #
 # - `mods` (see key bindings)
 mouse_bindings:
-  - {mouse: Right, action: Copy}
-  - {mouse: Right, action: ClearSelection}
-  - {mouse: Middle, action: PasteSelection}
+  - { mouse: Right, action: Copy }
+  - { mouse: Right, action: ClearSelection }
+  - { mouse: Middle, action: PasteSelection }
 
 # Key bindings
 #
@@ -557,9 +506,21 @@ mouse_bindings:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: Return,   mods: Control|Shift,      action: SpawnNewInstance }
-  - { key: Tab,      mods: Control,            command: { program: "tmux", args: ["select-window", "-t", "+"] }}
-  - { key: Tab,      mods: Shift|Control,      command: { program: "tmux", args: ["select-window", "-t", "-"] }}
+  - {
+      key: Return,
+      mods: Control|Shift,
+      action: SpawnNewInstance
+    }
+  - {
+      key: Tab,
+      mods: Control,
+      command: { program: "tmux", args: [ "select-window", "-t", "+" ] }
+    }
+  - {
+      key: Tab,
+      mods: Shift|Control,
+      command: { program: "tmux", args: [ "select-window", "-t", "-" ] }
+    }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -568,7 +529,6 @@ key_bindings:
   #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
-
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
@@ -617,7 +577,6 @@ key_bindings:
   #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
   #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
   #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
-
   # Search Mode
   #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
   #- { key: Escape,                mode: Search,     action: SearchCancel          }
@@ -630,7 +589,6 @@ key_bindings:
   #- { key: Down,                  mode: Search,     action: SearchHistoryNext     }
   #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
   #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
-
   # (Windows, Linux, and BSD only)
   #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
   #- { key: C,              mods: Control|Shift,                   action: Copy             }
@@ -644,53 +602,75 @@ key_bindings:
   #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
-
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
-
   # (macOS only)
-  - { key: Return,          mods: Alt|Control,            action: ToggleFullscreen          }
-  - { key: N,               mods: Command|Control,        action: SpawnNewInstance          }
-  - { key: Return,          mods: Command,                action: ToggleSimpleFullscreen    }
+  - {
+      key: Return,
+      mods: Alt|Control,
+      action: ToggleFullscreen
+    }
+  - {
+      key: N,
+      mods: Command|Control,
+      action: SpawnNewInstance
+    }
+  - {
+      key: Return,
+      mods: Command,
+      action: ToggleSimpleFullscreen
+    }
   # make sure 'alt-' works, see https://github.com/alacritty/alacritty/issues/62
-  - { key: A,               mods: Alt,                    chars: "\x1ba"                    }
-  - { key: B,               mods: Alt,                    chars: "\x1bb"                    }
-  - { key: C,               mods: Alt,                    chars: "\x1bc"                    }
-  - { key: D,               mods: Alt,                    chars: "\x1bd"                    }
-  - { key: E,               mods: Alt,                    chars: "\x1be"                    }
-  - { key: F,               mods: Alt,                    chars: "\x1bf"                    }
-  - { key: G,               mods: Alt,                    chars: "\x1bg"                    }
-  - { key: H,               mods: Alt,                    chars: "\x1bh"                    }
-  - { key: I,               mods: Alt,                    chars: "\x1bi"                    }
-  - { key: J,               mods: Alt,                    chars: "\x1bj"                    }
-  - { key: K,               mods: Alt,                    chars: "\x1bk"                    }
-  - { key: L,               mods: Alt,                    chars: "\x1bl"                    }
-  - { key: M,               mods: Alt,                    chars: "\x1bm"                    }
-  - { key: N,               mods: Alt,                    chars: "\x1bn"                    }
-  - { key: O,               mods: Alt,                    chars: "\x1bo"                    }
-  - { key: P,               mods: Alt,                    chars: "\x1bp"                    }
-  - { key: Q,               mods: Alt,                    chars: "\x1bq"                    }
-  - { key: R,               mods: Alt,                    chars: "\x1br"                    }
-  - { key: S,               mods: Alt,                    chars: "\x1bs"                    }
-  - { key: T,               mods: Alt,                    chars: "\x1bt"                    }
-  - { key: U,               mods: Alt,                    chars: "\x1bu"                    }
-  - { key: V,               mods: Alt,                    chars: "\x1bv"                    }
-  - { key: W,               mods: Alt,                    chars: "\x1bw"                    }
-  - { key: X,               mods: Alt,                    chars: "\x1bx"                    }
-  - { key: Y,               mods: Alt,                    chars: "\x1by"                    }
-  - { key: Z,               mods: Alt,                    chars: "\x1bz"                    }
-  - { key: Grave,           mods: Alt,                    chars: "\x1b`"                    } # Alt + `
-  - { key: Grave,           mods: Alt|Shift,              chars: "\x1b~"                    } # Alt + ~
-  - { key: Period,          mods: Alt,                    chars: "\x1b."                    } # Alt + .
-  - { key: Key8,            mods: Alt|Shift,              chars: "\x1b*"                    } # Alt + *
-  - { key: Key3,            mods: Alt|Shift,              chars: "\x1b#"                    } # Alt + #
-  - { key: Period,          mods: Alt|Shift,              chars: "\x1b>"                    } # Alt + >
-  - { key: Comma,           mods: Alt|Shift,              chars: "\x1b<"                    } # Alt + <
-  - { key: Minus,           mods: Alt|Shift,              chars: "\x1b_"                    } # Alt + _
-  - { key: Key5,            mods: Alt|Shift,              chars: "\x1b%"                    } # Alt + %
-  - { key: Key6,            mods: Alt|Shift,              chars: "\x1b^"                    } # Alt + ^
-  - { key: Backslash,       mods: Alt,                    chars: "\x1b\\"                   } # Alt + \
-  - { key: Backslash,       mods: Alt|Shift,              chars: "\x1b|"                    } # Alt + |
+  - { key: A, mods: Alt, chars: "\ea" }
+  - { key: B, mods: Alt, chars: "\eb" }
+  - { key: C, mods: Alt, chars: "\ec" }
+  - { key: D, mods: Alt, chars: "\ed" }
+  - { key: E, mods: Alt, chars: "\ee" }
+  - { key: F, mods: Alt, chars: "\ef" }
+  - { key: G, mods: Alt, chars: "\eg" }
+  - { key: H, mods: Alt, chars: "\eh" }
+  - { key: I, mods: Alt, chars: "\ei" }
+  - { key: J, mods: Alt, chars: "\ej" }
+  - { key: K, mods: Alt, chars: "\ek" }
+  - { key: L, mods: Alt, chars: "\el" }
+  - { key: M, mods: Alt, chars: "\em" }
+  - { key: N, mods: Alt, chars: "\en" }
+  - { key: O, mods: Alt, chars: "\eo" }
+  - { key: P, mods: Alt, chars: "\ep" }
+  - { key: Q, mods: Alt, chars: "\eq" }
+  - { key: R, mods: Alt, chars: "\er" }
+  - { key: S, mods: Alt, chars: "\es" }
+  - { key: T, mods: Alt, chars: "\et" }
+  - { key: U, mods: Alt, chars: "\eu" }
+  - { key: V, mods: Alt, chars: "\ev" }
+  - { key: W, mods: Alt, chars: "\ew" }
+  - { key: X, mods: Alt, chars: "\ex" }
+  - { key: Y, mods: Alt, chars: "\ey" }
+  - { key: Z, mods: Alt, chars: "\ez" }
+  - { key: Grave, mods: Alt, chars: "\e`" }
+  # Alt + `
+  - { key: Grave, mods: Alt|Shift, chars: "\e~" }
+  # Alt + ~
+  - { key: Period, mods: Alt, chars: "\e." }
+  # Alt + .
+  - { key: Key8, mods: Alt|Shift, chars: "\e*" }
+  # Alt + *
+  - { key: Key3, mods: Alt|Shift, chars: "\e#" }
+  # Alt + #
+  - { key: Period, mods: Alt|Shift, chars: "\e>" }
+  # Alt + >
+  - { key: Comma, mods: Alt|Shift, chars: "\e<" }
+  # Alt + <
+  - { key: Minus, mods: Alt|Shift, chars: "\e_" }
+  # Alt + _
+  - { key: Key5, mods: Alt|Shift, chars: "\e%" }
+  # Alt + %
+  - { key: Key6, mods: Alt|Shift, chars: "\e^" }
+  # Alt + ^
+  - { key: Backslash, mods: Alt, chars: "\e\\" }
+  # Alt + \
+  - { key: Backslash, mods: Alt|Shift, chars: "\e|" }
+  # Alt + |
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
   #- { key: Key0,           mods: Command,                    action: ResetFontSize         }
@@ -711,14 +691,11 @@ key_bindings:
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
-
-#debug:
+  #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
-
   # Keep the log file after quitting Alacritty.
   #persistent_logging: false
-
   # Log level
   #
   # Values for `log_level`:
@@ -729,9 +706,7 @@ key_bindings:
   #   - Debug
   #   - Trace
   #log_level: Warn
-
   # Print all received window events.
   #print_events: false
-
-
   # Normal colors
+theme: Ayu-Mirage

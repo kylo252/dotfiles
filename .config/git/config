@@ -13,8 +13,6 @@
   rebase = true
 [fetch]
   prune = true
-[mergetool "nvim"] 
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
   tool = nvim
 [mergetool] 
@@ -22,6 +20,13 @@
 [filter "spacify"]
   clean = expand --tabs=4 --initial
 [alias]
+  #############
+  aliases = !git config --get-regexp '^alias.' | sed -e 's/^alias\\.\\([^ ]*\\)/\\x1B[33m\\1\\x1B[0m =/'
+  #############
+  branches = branch -a
+  remotes = remote -v
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  #############
   amend = commit --amend
   auto-commit = !git add -A && git commit -m "updates"
   force-push = push --force -u
@@ -35,7 +40,7 @@
   qa = commit --amend --no-edit
   ro = !git rebase $(git rev-parse --abbrev-ref HEAD)
   smu = submodule update --init --recursive --depth=1
-  st = status
+  st = status -sb
   #############
   potd = push origin HEAD:refs/drafts/master
   potm = push origin HEAD:refs/for/master
