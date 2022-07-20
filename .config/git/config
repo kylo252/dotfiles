@@ -31,6 +31,7 @@
   auto-commit = !git add -A && git commit -m "updates"
   force-push = push --force -u
   last = log -1 HEAD --stat
+  diff-raw = !(GIT_PAGER=less git diff)
   reuse-msg = commit --reuse-message=ORIG_HEAD
   soft-reset = reset HEAD~1 --soft
   unstage = restore --staged .
