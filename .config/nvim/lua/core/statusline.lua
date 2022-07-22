@@ -110,8 +110,8 @@ local config = {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", "diff" },
-    lualine_c = { components.filename, { "lsp_progress", colors = { use = true } } },
+    lualine_b = { components.filename },
+    lualine_c = { "branch", "diff", { "lsp_progress", colors = { use = true } } },
     lualine_x = { components.diagnostics, components.lsp_clients, "filetype" },
     lualine_y = { components.treesitter },
     lualine_z = { "location" },

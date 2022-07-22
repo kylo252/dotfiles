@@ -47,7 +47,7 @@ function M.config()
           return path.exists(path.join(params.root, ".luacheckrc"))
         end),
       },
-      { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
+      -- { command = "flake8", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
     },
     code_actions = {
       -- { command = "proselint" },

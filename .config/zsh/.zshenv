@@ -95,11 +95,14 @@ function __setup_misc() {
   export CMAKE_BUILD_TYPE=RelWithDebInfo
   export CMAKE_EXPORT_COMPILE_COMMANDS=1
   export CMAKE_GENERATOR=Ninja
+
   export CTEST_PARALLEL_LEVEL=$(nproc 2>/dev/null)
 
   export DELTA_PAGER="less -RF"
 
   export MANPAGER='less -s -M +Gg'
+
+  export VCPKG_DISABLE_METRICS=1
 
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
   export ZSH_AUTOSUGGEST_USE_ASYNC="ON"

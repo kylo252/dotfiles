@@ -103,6 +103,8 @@ M.groups = {
     ["<S-l>"] = ":BufferLineCycleNext<CR>",
     ["<S-h>"] = ":BufferLineCyclePrev<CR>",
 
+    ["<S-q>"] = "<cmd>BufferKill<cr>",
+
     -- Move current line / block with Alt-j/k a la vscode.
     -- FIXME: this interferes with tmux
     -- ["<A-j>"] = ":m .+1<CR>==",

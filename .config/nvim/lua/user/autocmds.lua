@@ -7,7 +7,7 @@ local base_definitions = {
       group = "_general_settings",
       pattern = "*",
       callback = function()
-        require("vim.highlight").on_yank { higroup = "Search", timeout = 200 }
+        vim.highlight.on_yank { higroup = "Search", timeout = 200 }
       end,
     },
   },
