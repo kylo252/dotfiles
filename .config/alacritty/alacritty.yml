@@ -691,6 +691,14 @@ key_bindings:
   - { key: Key6,            mods: Alt|Shift,              chars: "\x1b^"                    } # Alt + ^
   - { key: Backslash,       mods: Alt,                    chars: "\x1b\\"                   } # Alt + \
   - { key: Backslash,       mods: Alt|Shift,              chars: "\x1b|"                    } # Alt + |
+  # QoL
+  - { key: Space,           mods: Alt,                    chars: " "                        }
+  - { key: W,               mods: Command,                chars: "\x1bw"                    } # unmap Quit
+  - { key: Back,            mods: Super,                  chars: "\x15"                     } # delete word/line
+  - { key: Left,            mods: Alt,                    chars: "\x1bb"                    } # one word left
+  - { key: Right,           mods: Alt,                    chars: "\x1bf"                    } # one word right
+  - { key: Left,            mods: Command,                chars: "\x1bOH",  mode: AppCursor } # Home
+  - { key: Right,           mods: Command,                chars: "\x1bOF",  mode: AppCursor } # End
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
   #- { key: Key0,           mods: Command,                    action: ResetFontSize         }
@@ -699,16 +707,13 @@ key_bindings:
   #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
   #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
   #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
-  #- { key: V,              mods: Command,                    action: Paste                 }
-  #- { key: C,              mods: Command,                    action: Copy                  }
+  - { key: V,               mods: Command,                  action: Paste                   }
+  - { key: C,               mods: Command,                  action: Copy                    }
   #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
   #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   #- { key: M,              mods: Command,                    action: Minimize              }
-  #- { key: Q,              mods: Command,                    action: Quit                  }
-  #- { key: W,              mods: Command,                    action: Quit                  }
-  #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
-  #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+  - { key: Q,               mods: Command,                    action: Quit                  }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
