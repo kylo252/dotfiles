@@ -89,12 +89,14 @@ function fif-v2() {
 }
 
 function dev-nvim() {
-  NIGHTLY_CACHE="$HOME/.cache/nvim/nightly";
-  fd 'log' -t file "$NIGHTLY_CACHE" -x rm -f;
-  env VIMRUNTIME="$HOME/.local/share/neovim/runtime" \
-    XDG_CACHE_HOME="$NIGHTLY_CACHE" \
-    XDG_STATE_HOME="$NIGHTLY_CACHE" \
-    "$HOME/.local/share/neovim/build/bin/nvim" "$@"
+  local nvim_repo="$HOME/.local/share/neovim"
+  local xdg_cache="$nvim_repo/build/Xtest_xdg/cache"
+  rm -rf "$xdg_cache";
+  mkdir -p "$xdg_cache";
+  env VIMRUNTIME="$nvim_repo/runtime" \
+    XDG_CACHE_HOME="$xdg_cache" \
+    XDG_STATE_HOME="$xdg_cache" \
+    "$nvim_repo/build/bin/nvim" "$@"
 }
 
 function min-nvim() {

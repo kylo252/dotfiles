@@ -7,11 +7,13 @@ function _tmux_lnav_split() {
 }
 
 function open-nvim-log() {
-  _tmux_lnav_split "$HOME/.cache/nvim/*log*"
+  _tmux_lnav_split "$HOME/.local/state/nvim/log"
 }
 
 function open-nvim-nightly-log() {
-  _tmux_lnav_split "$HOME/.cache/nvim/nightly/nvim/lsp.log"
+  local nvim_repo="$HOME/.local/share/neovim"
+  local xtest_cache="$nvim_repo/build/Xtest_xdg/cache"
+  _tmux_lnav_split "$xtest_cache/nvim/*log*"
 }
 
 declare -a actions=(
