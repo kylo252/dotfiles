@@ -8,10 +8,9 @@ prompt: enabled
 pager: bat --paging=always --color=always --style=plain
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: '!id="$(gh pr list -L50 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+    co: '!id=${1:-"$(gh pr list -L50 | fzf | cut -f1)"}; [ -n "$id" ] && gh pr checkout "$id"'
     rc: repo clone
     repo-delete: api -X DELETE "repos/$1"
     fork: repo fork --remote-name=fork --remote=true
     mp: pr list --author @me
     bugs: issue list --label=bugs
-    coi: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
