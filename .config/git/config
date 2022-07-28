@@ -49,6 +49,12 @@
   dots = !git --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
   dots-lazy = !lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
   #############
+  fuzzy = !dotbare -g
+  fedit = fuzzy fedit
+  fgrep = fuzzy fgrep
+  flog = fuzzy flog
+  fstat = fuzzy fstat
+  #############
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
   ############
