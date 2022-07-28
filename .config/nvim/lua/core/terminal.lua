@@ -31,10 +31,7 @@ local config = {
     winblend = 0,
   },
   execs = {
-    { "lazygit", "<leader>gg", "LazyGit", "float" },
-    { "lazygit", "<c-\\><c-g>", "LazyGit", "float" },
-    { "lazygit --git-dir=$HOME/.dtf.git --work-tree=$HOME", "<leader>gd", "LazyDots", "float" },
-    { "lf", "<c-e>", "lf", "float" },
+    { "lazygit", "<leader>gg", "lazygit", "float" },
   },
 }
 

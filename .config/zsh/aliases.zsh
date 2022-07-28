@@ -26,8 +26,7 @@ alias dte="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME dotbare fedit"
 alias dtm="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME dotbare fedit --modified"
 alias pre-dots-commit="GIT_DIR=$HOME/.dtf.git GIT_WORK_TREE=$HOME pre-commit"
 
-alias lzd='lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME"'
-alias lzg='lazygit'
+alias lg='lazygit'
 alias gu='gitui'
 
 [ -e /etc/arch-release ] && alias -g paks='sudo pacman -S'

@@ -47,6 +47,7 @@
   potm = push origin HEAD:refs/for/master
   #############
   dots = !git --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
+  dots-lazy = !lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
   #############
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
