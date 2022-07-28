@@ -1,18 +1,6 @@
 -- these are mostly the default values
 local M = {}
 
-M.global_mappings = {
-  ["<c-e>"] = { "lf" },
-  Q = { "<cmd>BufferKill<cr>", "close buffer" },
-  g = {
-    -- LSP
-    d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
-    D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to decleration" },
-    r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Go to references" },
-    i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation" },
-  },
-}
-
 M.mappings = {
   ["<Space>"] = { "<c-^>", "Go to the alternate buffer" },
   b = {
@@ -255,8 +243,6 @@ function M.setup()
   }
 
   wk.setup(setup_opts)
-
-  wk.register(M.global_mappings)
 
   wk.register(M.mappings, { prefix = "<leader>" })
 

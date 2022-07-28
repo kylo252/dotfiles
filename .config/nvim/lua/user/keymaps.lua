@@ -112,6 +112,7 @@ M.groups = {
     ["]q"] = ":cnext<CR>",
     ["[q"] = ":cprev<CR>",
     ["<C-q>"] = ":call QuickFixToggle()<CR>",
+    ["Q"] = { "<cmd>BufferKill<cr>", "close buffer" },
 
     -- save file
     ["<C-s>"] = "<cmd>w<CR>",

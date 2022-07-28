@@ -33,29 +33,32 @@ end
 vim.lsp.protocol.CompletionItemKind = M.get_lsp_kind()
 
 local function setup_lsp_keybindings(bufnr)
-  local status_ok, wk = pcall(require, "which-key")
-  if not status_ok then
-    return
-  end
-  local visual_keys =
-    { ["<leader>lf"] = { "<esc><cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" } }
-
-  wk.register(visual_keys, { mode = "x", buffer = bufnr })
-
-  local keys = {
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
-    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
-    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
-    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
-    ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
-    ["gl"] = {
-      "<cmd>lua vim.diagnostic.open_float(0, {scope='line'}) <CR>",
-      "Show line diagnostics",
+  local buffer_mappings = {
+    normal_mode = {
+      ["K"] = { vim.lsp.buf.hover, "Show hover" },
+      ["gd"] = { vim.lsp.buf.definition, "Goto Definition" },
+      ["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
+      ["gr"] = { vim.lsp.buf.references, "Goto references" },
+      ["gI"] = { vim.lsp.buf.implementation, "Goto Implementation" },
+      ["gs"] = { vim.lsp.buf.signature_help, "show signature help" },
+      ["gl"] = { vim.diagnostic.open_float, "Show line diagnostics" },
     },
+    insert_mode = {},
+    visual_mode = {},
   }
 
-  wk.register(keys, { mode = "n", buffer = bufnr })
+  local mappings = {
+    normal_mode = "n",
+    insert_mode = "i",
+    visual_mode = "v",
+  }
+
+  for mode_name, mode_char in pairs(mappings) do
+    for key, remap in pairs(buffer_mappings[mode_name]) do
+      local opts = { buffer = bufnr, desc = remap[2], noremap = true, silent = true }
+      vim.keymap.set(mode_char, key, remap[1], opts)
+    end
+  end
 end
 
 --luacheck: no unused args
@@ -69,6 +72,16 @@ end
 function M.common_on_attach(client, bufnr)
   require("user.lsp.utils").setup_document_highlight(client, bufnr)
   setup_lsp_keybindings(bufnr)
+
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- use gq for formatting
+  buf_set_option("formatexpr", "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})")
 end
 
 function M.common_capabilities()
