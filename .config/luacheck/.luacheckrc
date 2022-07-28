@@ -24,10 +24,6 @@ files["*_spec"].std = "+busted"
 -- Global objects defined by the C code
 globals = {
   "vim",
-  "dump",
-  "require_clean",
-  "require_safe",
-  "log_entry"
 }
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
