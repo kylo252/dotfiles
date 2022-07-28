@@ -13,6 +13,7 @@ gui:
   showCommandLog: true
   showFileTree: true # for rendering changes files in a tree format
   showListFooter: true
+  showIcons: true
   showRandomTip: false
   sidePanelWidth: 0.3333 # number from 0 to 1
   skipNoStagedFilesWarning: false
@@ -30,7 +31,7 @@ gui:
     selectedLineBgColor:
       - reverse
     selectedRangeBgColor:
-      - blue
+      - reverse
     cherryPickedCommitBgColor:
     - blue
     cherryPickedCommitFgColor:
@@ -53,7 +54,7 @@ git:
     args: ''
   pull:
     mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
-  autoFetch: false 
+  autoFetch: true
   autoRefresh: true
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative
     --pretty=medium {{branchName}} --
@@ -82,7 +83,8 @@ services: {}
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: true
 os:
-  editCommandTemplate: '{{editor}} {{filename}}'
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
   openCommand:  xdg-open {{filename}} >/dev/null
   openLinkCommand: xdg-open {{link}} >/dev/null
 
@@ -155,12 +157,10 @@ keybinding:
     toggleWhitespaceInDiffView: <c-w>
     increaseContextInDiffView: '}'
     decreaseContextInDiffView: '{'
-
   status:
     checkForUpdate: u
     recentRepos: <enter>
     allBranchesLogGraph: a
-
   files:
     commitChanges: c
     commitChangesWithoutHook: w
@@ -176,22 +176,20 @@ keybinding:
     toggleTreeView: '`'
     openMergeTool: M
     openStatusFilter: <c-b>
-
   branches:
     createPullRequest: o
     viewPullRequestOptions: O
     copyPullRequestURL: <c-y>
     checkoutBranchByName: c
     forceCheckoutBranch: F
-    rebaseBranch: r
-    renameBranch: R
+    rebaseBranch: R
+    renameBranch: r
     mergeIntoCurrentBranch: M
     viewGitFlowOptions: i
     fastForward: f
     pushTag: P
     setUpstream: u
     fetchRemote: f
-
   commits:
     squashDown: s
     renameCommit: r
@@ -215,19 +213,16 @@ keybinding:
     openLogMenu: <c-l>
     openInBrowser: o
     viewBisectOptions: b
-
   stash:
     popStash: g
-
   commitFiles:
     checkoutCommitFile: c
-
   main:
     toggleDragSelect: v
     toggleDragSelect-alt: V
     toggleSelectHunk: a
     pickBothHunks: b
-
+    editSelectHunk: E
   submodules:
     init: i
     update: u
