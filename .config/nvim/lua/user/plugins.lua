@@ -57,7 +57,7 @@ packer.startup(function(use)
       "nvim-treesitter/nvim-treesitter",
       run = function()
         vim.schedule(function()
-          require("nvim-treesitter.installer").update()
+          require("nvim-treesitter.install").update()
         end)
       end,
       config = function()
@@ -81,6 +81,12 @@ packer.startup(function(use)
     { "p00f/clangd_extensions.nvim" },
     { "jose-elias-alvarez/null-ls.nvim" },
     { "williamboman/nvim-lsp-installer" },
+    {
+      "williamboman/mason.nvim",
+      config = function()
+        require("core.mason").setup()
+      end,
+    },
     { "tamago324/nlsp-settings.nvim" },
     { "b0o/schemastore.nvim" },
     {
