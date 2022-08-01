@@ -1,6 +1,5 @@
-start_directory: "${PROJECT_DIR}"
-session_name: "${PROJECT_NAME}"
-shell_command_before: "${PRE_CMD}"
+session_name: "${PROJECT}"
+start_directory: "${XDG_DATA_HOME/${PROJECT}"
 windows:
 - window_name: editor
   panes:

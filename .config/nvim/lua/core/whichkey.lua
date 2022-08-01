@@ -9,6 +9,8 @@ M.mappings = {
     e = { "<cmd>BufferLinePickClose<cr>", "Pick which buffer to close" },
     f = { "<cmd>Telescope buffers<CR>", "buffers" },
     j = { "<cmd>BufferLinePick<cr>", "Jump" },
+    H = { "<cmd>BufferLineMoveNext<cr>", "Move buffer to the left" },
+    J = { "<cmd>BufferLineMovePrev<cr>", "Move buffer to the right" },
     h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
     l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
     D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
@@ -98,7 +100,7 @@ M.mappings = {
     S = { "<cmd>Telescope git_status<cr>", "Git status" },
     T = { require_safe("gitsigns").toggle_current_line_blame, "Toggle Blame " },
   },
-  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
+  j = { "<cmd>BufferLinePick<cr>", "magic buffer-picking mode" },
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
   l = {
     name = "LSP",

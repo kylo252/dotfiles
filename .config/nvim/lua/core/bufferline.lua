@@ -119,6 +119,26 @@ M.setup = function()
           padding = 1,
         },
       },
+
+      groups = {
+        items = {
+          require("bufferline.groups").builtin.ungrouped, -- the ungrouped buffers will be in the middle of the grouped ones
+          {
+            name = "docs",
+            display_name = "  ",
+            matcher = function(buf)
+              return buf.name:match "%.md"
+            end,
+          },
+          {
+            name = "manifests",
+            display_name = " ﬥ ",
+            matcher = function(buf)
+              return buf.name:match "%.json"
+            end,
+          },
+        },
+      },
     },
   }
 
