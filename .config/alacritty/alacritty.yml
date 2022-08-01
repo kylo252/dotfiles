@@ -691,6 +691,7 @@ key_bindings:
   - { key: Key6,            mods: Alt|Shift,              chars: "\x1b^"                    } # Alt + ^
   - { key: Backslash,       mods: Alt,                    chars: "\x1b\\"                   } # Alt + \
   - { key: Backslash,       mods: Alt|Shift,              chars: "\x1b|"                    } # Alt + |
+  - { key: Space,           mods: Control,                chars: "\x00"                     } # see alacritty#99
   # QoL
   - { key: Space,           mods: Alt,                    chars: " "                        }
   - { key: W,               mods: Command,                chars: "\x1bw"                    } # unmap Quit

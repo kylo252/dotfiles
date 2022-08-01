@@ -182,8 +182,8 @@ keybinding:
     copyPullRequestURL: <c-y>
     checkoutBranchByName: c
     forceCheckoutBranch: F
-    rebaseBranch: R
-    renameBranch: r
+    rebaseBranch: r
+    renameBranch: R
     mergeIntoCurrentBranch: M
     viewGitFlowOptions: i
     fastForward: f
