@@ -17,8 +17,10 @@ local add_package_path = function(package)
   end
 end
 
--- add_package_path "plenary.nvim"
-add_package_path "lspconfig.nvim"
+add_package_path "plenary"
+add_package_path "lspconfig"
+add_package_path "mason"
+add_package_path "mason-lspconfig"
 
 return {
   settings = {

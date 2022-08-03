@@ -40,9 +40,9 @@ function M.config()
         command = "luacheck",
         extra_args = {},
         filetypes = { "lua" },
-        cwd = nls_cache.by_bufnr(function(params) -- force luacheck to find its '.luacheckrc' file
-          return root_pattern ".luacheckrc"(params.bufname)
-        end),
+        -- cwd = nls_cache.by_bufnr(function(params) -- force luacheck to find its '.luacheckrc' file
+        --   return root_pattern ".luacheckrc"(params.bufname)
+        -- end),
         runtime_condition = nls_cache.by_bufnr(function(params)
           return path.exists(path.join(params.root, ".luacheckrc"))
         end),

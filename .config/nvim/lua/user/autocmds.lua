@@ -63,15 +63,6 @@ local base_definitions = {
     },
   },
   {
-    "BufReadPost",
-    {
-      group = "_lsp",
-      pattern = "*",
-      callback = require("user.lsp").setup,
-      once = true,
-    },
-  },
-  {
     "DirChanged",
     {
       group = "_general_settings",

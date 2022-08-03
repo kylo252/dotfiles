@@ -80,7 +80,8 @@ packer.startup(function(use)
     { "neovim/nvim-lspconfig" },
     { "p00f/clangd_extensions.nvim" },
     { "jose-elias-alvarez/null-ls.nvim" },
-    { "williamboman/nvim-lsp-installer" },
+    { "williamboman/nvim-lsp-installer", opt = true },
+    { "williamboman/mason-lspconfig.nvim" },
     {
       "williamboman/mason.nvim",
       config = function()
@@ -243,6 +244,7 @@ packer.startup(function(use)
   }
 
   -- utils
+  use { "gpanders/editorconfig.nvim" }
   use {
     "kevinhwang91/nvim-bqf",
     event = "BufReadPost",

@@ -29,6 +29,11 @@ function M.setup()
   }
 
   require("mason").setup(opts)
+
+  local ls_opts = { automatic_installation = { exclude = { "clangd" } } }
+
+  require("user.lsp").setup()
+  require("mason-lspconfig").setup(ls_opts)
 end
 
 return M
