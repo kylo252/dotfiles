@@ -17,6 +17,16 @@
   tool = nvim
 [mergetool] 
   prompt = true
+[diff]
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+  difftool = true # use a pager for large output, just like other git commands
+[alias]
+  dft = difftool
 [filter "spacify"]
   clean = expand --tabs=4 --initial
 [alias]
