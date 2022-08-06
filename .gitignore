@@ -54,3 +54,5 @@
 /.config/gh
 /.config/lazygit/state.yml
 
+
+.config/zsh/.zcompdump

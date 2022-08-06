@@ -52,3 +52,6 @@ if [ -d "/opt/homebrew" ]; then
   export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
   znap eval brew "/opt/homebrew/bin/brew shellenv"
 fi
+
+znap function _vcpkg vcpkg 'source $HOME/.config/vcpkg/hook.sh'
+compctl -K _vcpkg vcpkg
