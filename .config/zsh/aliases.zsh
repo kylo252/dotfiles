@@ -47,5 +47,5 @@ alias -g FZ='| fzf'
 
 alias -g pipuninstall='pip uninstall -y -r <(pip freeze --user)'
 
-alias -s {cpp,cxx,cc,c,hh,h,lua,vim,ts,js,yml,json,toml,ini,txt}="$EDITOR"
+alias -s {cpp,cxx,cc,c,hh,h,lua,vim,ts,js,yml,json,toml,ini,txt,cmake}="$EDITOR"
 alias -s md="glow"

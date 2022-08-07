@@ -98,8 +98,6 @@ function __setup_misc() {
 
   export CTEST_PARALLEL_LEVEL=$(nproc 2>/dev/null)
 
-  export DELTA_PAGER="less -RF"
-
   export MANPAGER='less -s -M +Gg'
 
   export VCPKG_DISABLE_METRICS=1

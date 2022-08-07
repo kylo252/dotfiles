@@ -1,11 +1,16 @@
 [core]
-  pager = delta --paging=always || less
+  pager = delta
 [interactive]
-  diffFilter = delta --color-only || less
+  diffFilter = delta --color-only
+[add.interactive]
+  useBuiltin = false # required for git 2.37.0
 [delta]
   features = decorations unobtrusive-line-numbers
   line-numbers = true
   whitespace-error-style = 22 reverse
+[delta "decorations"]
+  commit-style = yellow bold
+  commit-decoration-style = bold yellow box ul
 [color]
   ui = true
   colorMoved = default
@@ -25,8 +30,6 @@
   cmd = difft "$LOCAL" "$REMOTE"
 [pager]
   difftool = true # use a pager for large output, just like other git commands
-[alias]
-  dft = difftool
 [filter "spacify"]
   clean = expand --tabs=4 --initial
 [alias]
@@ -37,24 +40,21 @@
   remotes = remote -v
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   #############
-  amend = commit --amend
+  amend = commit --amend --date=now
   auto-commit = !git add -A && git commit -m "updates"
   force-push = push --force -u
   last = log -1 HEAD --stat
-  diff-raw = !(GIT_PAGER=less git diff)
   reuse-msg = commit --reuse-message=ORIG_HEAD
   soft-reset = reset HEAD~1 --soft
+  unshallow = !(git fetch --unshallow || git fetch --all) && git remote set-branches origin '*'
   unstage = restore --staged .
   #############
   fa = fetch --all
-  unshallow = !(git fetch --unshallow || git fetch --all) && git remote set-branches origin '*'
-  qa = commit --amend --no-edit
+  qa = amend --no-edit
   ro = !git rebase $(git rev-parse --abbrev-ref HEAD)
   smu = submodule update --init --recursive --depth=1
   st = status -sb
-  #############
-  potd = push origin HEAD:refs/drafts/master
-  potm = push origin HEAD:refs/for/master
+  dft = difftool
   #############
   dots = !git --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
   dots-lazy = !lazygit --git-dir="$HOME/.dtf.git" --work-tree="$HOME/"
