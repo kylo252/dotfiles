@@ -2,9 +2,8 @@
 
 function __setup_vcpkg() {
   while IFS=$'-' read -r arch _ os _; do
-    if [[ "$arch" == "x86_64" ]]; then
-      arch="x64"
-    fi
+    arch=${arch//x86_64/x64}
+    os=${os//darwin*/osx}
     export VCPKG_DEFAULT_TRIPLET="${arch}-${os}"
   done < <(clang -print-target-triple 2>/dev/null)
   export VCPKG_ROOT="$XDG_DATA_HOME/vcpkg"
