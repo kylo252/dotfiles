@@ -74,7 +74,7 @@
   print-committer-name = log --pretty='%cn' -1
   print-committer-email = log --pretty='%ce' -1
   ############
-  blameless = !env GIT_COMMITTER_NAME="$(git print-committer-name)" GIT_COMMITTER_EMAIL="$(git print-committer-email)" git
+  blameless = !env GIT_COMMITTER_NAME=\"$(git print-committer-name)\" GIT_COMMITTER_EMAIL=\"$(git print-committer-email)\" git
 [user]
   email = 59826753+kylo252@users.noreply.github.com
   name = kylo252
