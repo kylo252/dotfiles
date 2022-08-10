@@ -68,6 +68,7 @@
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
   ############
+  copy-last-hash = !git log --pretty='%H' -1 -z | tmux load-buffer -w -
   print-ignored = !git ls-files -v | grep "^[[:lower:]]"
   print-author = log --pretty='%an %ae' -1
   print-committer = log --pretty='%cn %ce' -1
