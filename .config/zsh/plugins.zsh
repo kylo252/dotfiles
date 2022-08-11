@@ -28,7 +28,7 @@ fi
 
 # doesn't seem to work on Darwin..
 # znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
-source <(fnm env --fnm-dir=${FNM_DIR} --shell=zsh)
+source <(fnm env --shell=zsh)
 
 autoload -Uz kp
 

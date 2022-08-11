@@ -4,6 +4,7 @@
 extra_paths=(
   /usr/share/zsh/vendor-completions
   /usr/share/zsh/site-functions
+  /opt/homebrew/share/zsh/site-functions
   "$ZDOTDIR/modules"
 )
 
