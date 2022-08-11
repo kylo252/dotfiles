@@ -25,13 +25,14 @@ function M.config()
       { command = "stylua", extra_args = {}, filetypes = { "lua" } },
       { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
       {
-        command = "markdownlint",
-        filetypes = { "markdown" },
+        command = "uncrustify",
+        filetypes = { "c" },
+        extra_args = { "-q", "-l", "C", "-c", "src/uncrustify.cfg", "--no-backup" },
         cwd = nls_cache.by_bufnr(function(params)
-          return root_pattern ".markdownlintrc"(params.bufname)
+          return root_pattern "src/uncrustify.cfg"(params.bufname)
         end),
         condition = function(utils)
-          return utils.root_has_file ".markdownlintrc"
+          return utils.root_has_file "src/uncrustify.cfg"
         end,
       },
     },

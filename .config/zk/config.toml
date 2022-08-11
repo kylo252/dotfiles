@@ -6,7 +6,7 @@
 language = "en"
 
 # The default title used for new note, if no `--title` flag is provided.
-default-title = "Untitled"
+default-title = "untitled"
 
 # Template used to generate a note's filename, without extension.
 filename = "{{id}}-{{slug title}}"
@@ -75,4 +75,4 @@ lucky = "zk list --quiet --format full --sort random --limit 1"
 # Report titles of wiki-links as hints.
 wiki-title = "hint"
 # Warn for dead links between notes.
-dead-link = "error"
+dead-link = "warning"

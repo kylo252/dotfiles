@@ -130,13 +130,6 @@ M.setup = function()
               return buf.name:match "%.md"
             end,
           },
-          {
-            name = "manifests",
-            display_name = " ﬥ ",
-            matcher = function(buf)
-              return buf.name:match "%.json"
-            end,
-          },
         },
       },
     },
