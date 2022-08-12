@@ -99,24 +99,10 @@ function M.get_common_opts()
   }
 end
 
-local function bootstrap_nlsp(opts)
-  opts = opts or {}
-  local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
-  if lsp_settings_status_ok then
-    lsp_settings.setup(opts)
-  end
-end
-
 function M.setup()
   require("user.lsp.handlers").setup()
   require("vim.lsp.log").set_format_func(vim.inspect)
-  bootstrap_nlsp {
-    config_home = vim.fn.stdpath "config" .. "/lsp-settings",
-    append_default_schemas = true,
-    local_settings_dir = ".lsp",
-    local_settings_root_markers = { ".git" },
-    loader = "json",
-  }
+
   require("user.lsp.null-ls").setup()
 
   local servers = {
@@ -133,6 +119,19 @@ function M.setup()
   for _, server in ipairs(servers) do
     require("user.lsp.manager").setup(server)
   end
+
+  pcall(function()
+    require("nlspsettings").setup {
+      config_home = vim.fn.stdpath "config" .. "/lsp-settings",
+      append_default_schemas = true,
+      local_settings_dir = ".lsp",
+      local_settings_root_markers = { ".git" },
+      loader = "json",
+      ignored_servers = {},
+      open_strictly = false,
+    }
+  end)
+
   vim.api.nvim_create_augroup("lsp_document_highlight", {})
 end
 

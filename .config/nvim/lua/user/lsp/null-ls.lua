@@ -118,7 +118,7 @@ function M.register_sources(configs, method)
   return registered_names
 end
 
-function M:setup()
+function M.setup()
   local config = M.config()
 
   local null_ls = require "null-ls"
