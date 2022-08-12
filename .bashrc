@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
+# shellcheck disable=1090,1091
 
-[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 source "$XDG_CONFIG_HOME/bash/exports.bash"
 
 source "$XDG_CONFIG_HOME/bash/aliases.bash"
 
-# append to the history file, don't overwrite it
 shopt -s histappend
-
-# update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+if shopt -oq posix; then
+  return
 fi
 
-[ -e "$XDG_CONFIG_HOME/fzf/fzf.bash" ] && source "$XDG_CONFIG_HOME/fzf/fzf.bash"
+extras=(
+  /usr/share/bash-completion/bash_completion
+  /etc/bash_completion
+  "$XDG_CONFIG_HOME/fzf/fzf.bash"
+)
+
+for f in "${extras[@]}"; do
+  test -f "$f" && source "$f"
+done
 
 eval "$(starship init bash)"
