@@ -21,6 +21,10 @@ local base_collection = {
     fn = require("core.telescope.custom-finders").find_runtime_files,
   },
   {
+    name = "ZkGrep",
+    fn = require("core.telescope.custom-finders").grep_notes,
+  },
+  {
     name = "SessionLoad",
     fn = function(nargs)
       require("core.sessions").load_session(nargs.args)
