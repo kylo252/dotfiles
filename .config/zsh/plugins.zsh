@@ -7,6 +7,12 @@ source "$XDG_CONFIG_HOME/lf/lf.zsh"
 
 source "$XDG_DATA_HOME/zsh/plugins/znap/znap.zsh"
 
+if [ -d "/opt/homebrew" ]; then
+  export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  znap eval brew "/opt/homebrew/bin/brew shellenv"
+fi
+
 znap source kazhala/dotbare
 znap source romkatv/powerlevel10k
 znap source zdharma-continuum/fast-syntax-highlighting
@@ -26,9 +32,7 @@ if command -v vivid >/dev/null; then
   export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
 fi
 
-# doesn't seem to work on Darwin..
-# znap eval fnm "fnm env --fnm-dir=$FNM_DIR --shell=zsh"
-source <(fnm env --shell=zsh)
+znap eval fnm "fnm env --shell=zsh"
 
 autoload -Uz kp
 
@@ -46,12 +50,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --only-dirs --color=always $
 zstyle ':fzf-tab:*' switch-group '[' ']'
 
 znap eval luarock "luarocks path --no-bin 2>/dev/null"
-
-if [ -d "/opt/homebrew" ]; then
-  export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
-  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-  znap eval brew "/opt/homebrew/bin/brew shellenv"
-fi
 
 znap function _vcpkg vcpkg 'source $HOME/.config/vcpkg/hook.sh'
 compctl -K _vcpkg vcpkg

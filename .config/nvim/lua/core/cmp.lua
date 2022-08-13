@@ -3,7 +3,7 @@ local M = {}
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0
-    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
 local feedkeys = function(key, mode)
@@ -94,9 +94,20 @@ M.config = function()
         "i",
         "s",
       }),
+      ["<C-k>"] = cmp.mapping.select_prev_item(),
+      ["<C-j>"] = cmp.mapping.select_next_item(),
+      ["<Down>"] = cmp.mapping(
+        cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+        { "i" }
+      ),
+      ["<Up>"] = cmp.mapping(
+        cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+        { "i" }
+      ),
+      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-p>"] = { i = cmp.mapping.select_prev_item(), c = cmp.mapping.select_prev_item() },
       ["<C-n>"] = { i = cmp.mapping.select_next_item(), c = cmp.mapping.select_next_item() },
-      ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-c>"] = function()
         cmp.mapping.close()
         vim.cmd [[stopinsert]]
