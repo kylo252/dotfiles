@@ -56,8 +56,7 @@ git:
     mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: true
   autoRefresh: true
-  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative
-    --pretty=medium {{branchName}} --
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --
   allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate
     --date=relative  --pretty=medium
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
