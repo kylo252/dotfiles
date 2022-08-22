@@ -47,6 +47,7 @@
     background_jobs         # presence of background jobs
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     context                 # user@hostname
+    vim_shell               # vim shell indicator (:sh)
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline
@@ -165,28 +166,14 @@
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
   local anchor_files=(
-    .bzr
-    .citc
     .git
-    .hg
     .node-version
     .python-version
     .go-version
-    .ruby-version
-    .lua-version
-    .java-version
-    .perl-version
-    .php-version
-    .tool-version
-    .shorten_folder_marker
-    .svn
-    .terraform
-    CVS
     Cargo.toml
     composer.json
     go.mod
     package.json
-    stack.yaml
   )
   typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
   # If set to "first" ("last"), remove everything before the first (last) subdirectory that contains
@@ -432,10 +419,12 @@
   typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
   # Custom icon.
   typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
+  # Custom prefix.
+  # typeset -g POWERLEVEL9K_VCS_PREFIX='%fon '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
-  # isn't in an svn or hg reposotiry.
+  # isn't in an svn or hg repository.
   typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
   # These settings are used for repositories other than Git or when gitstatusd fails and
@@ -490,9 +479,9 @@
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=
+  # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
+  # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Don't show the number of background jobs.
@@ -501,6 +490,12 @@
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=70
   # Custom icon.
   # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
+  # Vim shell indicator color.
+  typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=34
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
@@ -513,7 +508,7 @@
   # Context format when running with privileges: bold user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%B%n'
   # Context format when in SSH with privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_TEMPLATE='%B%n@%m'
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%B%n@%m'
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
@@ -529,9 +524,6 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=37
   # Don't show Python version next to the virtual environment name.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-  # If set to "false", won't show virtualenv if pyenv is already shown.
-  # If set to "if-different", won't show virtualenv if it's the same as pyenv.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
   # Separate environment name from Python version only with a space.
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
@@ -603,7 +595,7 @@
   #   - verbose: Enable instant prompt and print a warning when detecting console output during
   #              zsh initialization. Choose this if you've never tried instant prompt, haven't
   #              seen the warning, or if you are unsure what this all means.
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
   # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
   # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload
