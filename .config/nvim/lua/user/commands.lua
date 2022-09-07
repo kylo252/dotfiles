@@ -13,16 +13,22 @@ local base_collection = {
   },
   {
     name = "FuzzyGrepString",
-    fn = require("core.telescope.custom-finders").fuzzy_grep_string,
+    fn = function()
+      require("core.telescope.custom-finders").fuzzy_grep_string()
+    end,
     opts = { nargs = "*" },
   },
   {
     name = "FindRuntimeFiles",
-    fn = require("core.telescope.custom-finders").find_runtime_files,
+    fn = function()
+      require("core.telescope.custom-finders").find_runtime_files()
+    end,
   },
   {
     name = "ZkGrep",
-    fn = require("core.telescope.custom-finders").grep_notes,
+    fn = function()
+      require("core.telescope.custom-finders").grep_notes()
+    end,
   },
   {
     name = "SessionLoad",
