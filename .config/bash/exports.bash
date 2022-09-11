@@ -4,6 +4,7 @@ function __setup_defaults() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
+  export XDG_STATE_HOME="$HOME/.local/state"
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 
@@ -42,7 +43,7 @@ function __setup_xdg() {
 
 function __setup_history() {
   export HISTCONTROL=ignoreboth
-  export HISTFILE="$XDG_DATA_HOME/bash/history"
+  export HISTFILE="$XDG_STATE_HOME/bash/history"
   export HISTFILESIZE=100000
   export HISTIGNORE="ls:ps:history"NIT=1
   export HISTSIZE=100000 # History size in memory

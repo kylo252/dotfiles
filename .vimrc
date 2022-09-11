@@ -1,23 +1,23 @@
-if ! isdirectory(expand("$XDG_CACHE_HOME/vim"))
-  call mkdir(expand("$XDG_CACHE_HOME/vim/view"), "p", 0700)
-  call mkdir(expand("$XDG_CACHE_HOME/vim/backup"), "p", 0700)
-  call mkdir(expand("$XDG_CACHE_HOME/vim/undo"), "p", 0700)
-  call mkdir(expand("$XDG_CACHE_HOME/vim/swap"), "p", 0700)
-  call mkdir(expand("$XDG_CACHE_HOME/vim/viminfo"), "p", 0700)
-endif
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
 
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-set packpath=&runtimepath
+set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
 
-set viewdir=$XDG_CACHE_HOME/vim/view
-set backupdir=$XDG_CACHE_HOME/vim/backup
-set directory=$XDG_CACHE_HOME/vim/swap
-set undodir=$XDG_CACHE_HOME/vim/undo
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+let g:netrw_home = $XDG_DATA_HOME."/vim"
+call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
+
+set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+set directory=$XDG_STATE_HOME/vim/swap   | call mkdir(&directory, 'p')
+set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir,   'p')
+set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir,   'p')
+
+if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
 
 let g:c_syntax_for_h = 1
 
-let g:netrw_home = $XDG_CACHE_HOME . '/vim'
+let g:netrw_home = $XDG_DATA_HOME . '/vim'
 
 " set leader key
 let g:mapleader = "\<Space>"
