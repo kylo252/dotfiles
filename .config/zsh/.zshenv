@@ -44,6 +44,7 @@ function __setup_xdg() {
   export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
   export GNUPGHOME="$XDG_DATA_HOME/gnupg"
   export GOPATH="$XDG_DATA_HOME/go"
+  export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
   export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
   export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
   export NPM_HOME="$XDG_DATA_HOME/npm"
@@ -54,11 +55,12 @@ function __setup_xdg() {
   export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
   export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
   export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
+  export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
   export ZK_NOTEBOOK_DIR="$HOME/notes/pages"
 }
 
 function __setup_history() {
-  export HISTFILE="$XDG_DATA_HOME/zsh/history"
+  export HISTFILE="$XDG_STATE_HOME/zsh/history"
   export HISTSIZE=100000  # History size in memory
   export SAVEHIST=1000000 # The number of histsize
   export LISTMAX=50       # The size of asking history
@@ -102,7 +104,11 @@ function __setup_misc() {
 
   export VCPKG_DISABLE_METRICS=1
 
-  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
+  if [[ "$TERM" == "linux" ]]; then
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+  else
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
+  fi
   export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
   export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 }

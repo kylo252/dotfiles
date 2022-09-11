@@ -44,7 +44,8 @@ bindkey '^N' down-line-or-search
 # workaround: partial accept suggestion with forward-word
 function _expand_completion(){
   zle _expand_alias # bonus, expand aliases
-  zle vi-forward-word
+  zle vi-add-next
+  zle magic-space
 }
 
 zle -N _expand_completion

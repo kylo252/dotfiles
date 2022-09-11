@@ -32,7 +32,8 @@ if command -v vivid >/dev/null; then
   export LS_COLORS="$(vivid -m 24-bit generate one-dark)"
 fi
 
-znap eval fnm "fnm env --shell=zsh"
+# broken with znap since /run/user would change
+eval "$(fnm env --shell=zsh)"
 
 autoload -Uz kp
 
@@ -48,6 +49,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --only-dirs --color=always $realpath 2>/dev/null || ls $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group '[' ']'
+
+# https://wiki.archlinux.org/title/zsh#Persistent_rehash
+zstyle ':completion:*' rehash true
 
 znap eval luarock "luarocks path --no-bin 2>/dev/null"
 
