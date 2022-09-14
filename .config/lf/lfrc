@@ -10,8 +10,8 @@ set previewer ~/.config/lf/preview
 set ratios 1:1:3
 set scrolloff 10
 
-map <c-u> scrollup
-map <c-d> scrolldown
+map <c-e> scrollup
+map <c-b> scrolldown
 
 cmd scrolldown &{{
   file="$f"
@@ -156,7 +156,7 @@ map L bottom
 map u unselect
 map br bulkrename
 map r push :rename<space>
-map i $bat --pager='less -Rf' ---color=always --number --wrap auto --paging=always "$f" 
+map i $bat --pager='less -Rf' --color=always --number --wrap auto --paging=always "$f" 
 
 # create dir/file
 map ad push $mkdir<space>

@@ -55,7 +55,17 @@ case "$file" in
     ;;
   *.md) glow -s dark "$file" | bat ;;
   *)
-    unset COLORTERM
-    bat --pager='less -Rf' --color=always --number --wrap auto --paging=always --line-range "${offset}:" "$file"
+    case $(file --mime-type "$f" -b) in
+      text/*)
+        unset COLORTERM
+        bat --pager='less -Rf' --color=always --number --wrap auto --paging=always --line-range "${offset}:" "$file"
+        ;;
+      *)
+        cat <<EOF
+----- File Type Classification -----
+$(file "$f" -b) [$(file --mime-type "$f" -b)]
+EOF
+        ;;
+    esac
     ;;
 esac
