@@ -131,8 +131,6 @@ function M.setup()
       open_strictly = false,
     }
   end)
-
-  vim.api.nvim_create_augroup("lsp_document_highlight", {})
 end
 
 return M
