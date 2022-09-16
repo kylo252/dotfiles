@@ -1,5 +1,5 @@
 session_name: "${PROJECT}"
-start_directory: "${XDG_DATA_HOME/${PROJECT}"
+start_directory: "${XDG_DATA_HOME}/${PROJECT}"
 windows:
 - window_name: editor
   panes:

@@ -1,0 +1,14 @@
+session_name: wm
+windows:
+- window_name: awesome
+  start_directory: "${XDG_CONFIG_HOME}/awesome"
+  panes:
+    - nvim rc.lua
+- window_name: ref
+  start_directory: "${XDG_CACHE_HOME}/dots/awesome-dotfiles"
+  panes:
+    - nvim awesome/rc.lua
+- window_name: rofi
+  start_directory: "${XDG_CONFIG_HOME}/rofi"
+  panes:
+    - nvim config.rasi

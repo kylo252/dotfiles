@@ -152,6 +152,7 @@ end
 function M.setup()
   M.define_autocmds(base_definitions)
   M.toggle_format_on_save()
+  vim.filetype.add { extension = { ["rasi"] = "rasi" } }
 end
 
 return M
