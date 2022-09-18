@@ -105,6 +105,19 @@ function M.setup()
 
   require("user.lsp.null-ls").setup()
 
+  -- needs to be called before setting up jsonls
+  pcall(function()
+    require("nlspsettings").setup {
+      config_home = vim.fn.stdpath "config" .. "/lsp-settings",
+      append_default_schemas = true,
+      local_settings_dir = ".lsp",
+      local_settings_root_markers = { ".git" },
+      loader = "json",
+      ignored_servers = {},
+      open_strictly = false,
+    }
+  end)
+
   local servers = {
     "clangd",
     "sumneko_lua",
@@ -119,18 +132,6 @@ function M.setup()
   for _, server in ipairs(servers) do
     require("user.lsp.manager").setup(server)
   end
-
-  pcall(function()
-    require("nlspsettings").setup {
-      config_home = vim.fn.stdpath "config" .. "/lsp-settings",
-      append_default_schemas = true,
-      local_settings_dir = ".lsp",
-      local_settings_root_markers = { ".git" },
-      loader = "json",
-      ignored_servers = {},
-      open_strictly = false,
-    }
-  end)
 end
 
 return M
