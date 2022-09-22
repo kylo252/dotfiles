@@ -71,11 +71,13 @@
   copy-last-hash = !git log --pretty='%H' -1 -z | tmux load-buffer -w -
   print-ignored = !git ls-files -v | grep "^[[:lower:]]"
   print-author = log --pretty='%an %ae' -1
+  print-author-name = log --pretty='%an' -1
+  print-author-email = log --pretty='%ae' -1
   print-committer = log --pretty='%cn %ce' -1
   print-committer-name = log --pretty='%cn' -1
   print-committer-email = log --pretty='%ce' -1
   ############
-  blameless = !env GIT_COMMITTER_NAME=\"$(git print-committer-name)\" GIT_COMMITTER_EMAIL=\"$(git print-committer-email)\" git
+  blameless = !env GIT_COMMITTER_NAME=\"$(git print-author-name)\" GIT_COMMITTER_EMAIL=\"$(git print-author-email)\" git
 [user]
   email = 59826753+kylo252@users.noreply.github.com
   name = kylo252
