@@ -9,6 +9,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        "tray",
         "hyprland/language",
         "pulseaudio",
         "network",
