@@ -1,9 +1,6 @@
-session_name: "${PROJECT}"
-start_directory: "${XDG_DATA_HOME}/${PROJECT}"
+session_name: project
+start_directory: "${XDG_DATA_HOME}"
 windows:
 - window_name: editor
   panes:
-    - nvim
-- window_name: git
-  panes:
-    - git status
+    - nvim +'Telescope zoxide list'
