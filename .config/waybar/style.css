@@ -1,24 +1,15 @@
-* {
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: "Hack Nerd Font Mono", "Ubuntu Nerd Font";
-  font-size: 17px;
-}
-
-#workspaces {
-  font-family: "Hack Nerd Font Mono";
-  font-size: 28px;
-}
-
 #workspaces button {
-  padding: 0 5px;
+  /* font-weight: bolder; */
+  font-size: 17px;
   background-color: transparent;
   color: #5e81ac;
   /* Use box-shadow instead of border so the text isn't offset */
   box-shadow: inset 0 -3px transparent;
   /* Avoid rounded borders under each workspace name */
   border: none;
+  padding: 0 7px;
   border-radius: 0;
-  padding: 0 5px;
+
   /* background: transparent; */
   /* color: #ffffff; */
   /* border-bottom: 3px solid transparent; */
@@ -34,7 +25,6 @@
 
 #workspaces button.focused {
   /* background-color: #64727d; */
-  font-size: 28px;
   color: #bf616a;
   /* box-shadow: inset 0 -3px #ffffff; */
 }
@@ -50,10 +40,10 @@
   background-color: #eb4d4b;
 }
 
-#workspaces button.hidden {
-  color: #eb4d4b;
-  border-bottom: 3px solid transparent;
-}
+/* #workspaces button.hidden { */
+/*   color: #eb4d4b; */
+/*   border-bottom: 3px solid transparent; */
+/* } */
 
 #workspaces button.visible {
   color: #eb4d4b;
@@ -61,6 +51,7 @@
 }
 
 window#waybar {
+  font-family: "Ubuntu Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   background-color: rgba(30, 34, 42, 0.5);
   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
   color: #ffffff;
@@ -72,10 +63,10 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-/* #mode { */
-/*   background-color: #64727d; */
-/*   border-bottom: 3px solid #ffffff; */
-/* } */
+#mode {
+  background-color: #64727d;
+  border-bottom: 3px solid #ffffff;
+}
 
 #clock,
 #battery,
@@ -111,12 +102,36 @@ window#waybar.hidden {
   /* background-color: #26a65b; */
 }
 
+#upower {
+  padding: 0 1px;
+}
+
+#upower.charging {
+  color: #a3be8c;
+}
+
+#upower.discharging {
+  color: #abb2bf;
+}
+
 /* @keyframes blink { */
 /*   to { */
 /*     background-color: rgba(30, 34, 42, 0.5); */
 /*     color: #abb2bf; */
 /*   } */
 /* } */
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.5);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
 
 #battery.critical:not(.charging) {
   background-color: #f53c3c;
@@ -152,6 +167,8 @@ label:focus {
 
 #network {
   color: #88c0d0;
+  padding: 0 5px;
+  /* font-family: "Ubuntu Nerd Font"; */
 }
 
 #network.disconnected {
@@ -160,6 +177,10 @@ label:focus {
 
 #pulseaudio {
   /* background-color: #B48EAD; */
+  /* font-family: "Ubuntu Nerd Font"; */
+  /* font-family: "Ubuntu Nerd Font"; */
+  padding: 0 5px;
+  /* font-family: FontAwesome; */
   color: #b48ead;
 }
 
@@ -177,19 +198,32 @@ label:focus {
   background-color: #eb4d4b;
 }
 
-#idle_inhibitor {
-  background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
-}
-
 #language {
   background-color: transparent;
   color: #ecf0f1;
   padding: 0 5px;
   margin: 0 5px;
   min-width: 16px;
+}
+
+#tray {
+    background-color: transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+    background-color: transparent;
+    color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    color: #808080;
 }

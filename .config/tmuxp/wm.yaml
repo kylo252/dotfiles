@@ -1,18 +1,15 @@
 session_name: wm
 windows:
-- window_name: awesome
-  start_directory: "${XDG_CONFIG_HOME}/awesome"
-  panes:
-    - nvim rc.lua keys.lua apps.lua
-- window_name: ref
-  start_directory: "${XDG_CACHE_HOME}/dots/awesome-dotfiles"
-  panes:
-    - nvim awesome/rc.lua
-- window_name: rofi
-  start_directory: "${XDG_CONFIG_HOME}/rofi"
-  panes:
-    - nvim config.rasi
 - window_name: hyprland
   start_directory: "${XDG_CONFIG_HOME}/hypr"
   panes:
     - nvim hyprland.conf ~/.config/waybar/config
+- window_name: rofi
+  start_directory: "${XDG_CONFIG_HOME}/rofi"
+  panes:
+    - nvim config.rasi
+- window_name: awesome
+  start_directory: "${XDG_CONFIG_HOME}/awesome"
+  panes:
+    - nvim rc.lua keys.lua apps.lua
+    - nvim "${XDG_CACHE_HOME}/dots/awesome-dotfiles/awesome/rc.lua"
