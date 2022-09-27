@@ -7,8 +7,6 @@ function M.setup()
     return
   end
 
-  vim.g.netrw_banner = 0
-
   local function telescope_find_files(_)
     require("core.nvimtree").start_telescope "find_files"
   end
@@ -21,20 +19,27 @@ function M.setup()
     auto_reload_on_write = true,
     create_in_closed_folder = false,
     disable_netrw = true,
-    hijack_cursor = false,
+    hijack_cursor = true,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
     ignore_buffer_on_setup = false,
     open_on_setup = false,
     open_on_setup_file = false,
     open_on_tab = false,
+    focus_empty_on_setup = false,
+    ignore_buf_on_tab_change = {},
     sort_by = "name",
+    root_dirs = {},
+    prefer_startup_root = false,
+    sync_root_with_cwd = false,
     reload_on_bufenter = false,
-    update_cwd = true,
     respect_buf_cwd = true,
+    on_attach = "disable",
+    remove_keymaps = false,
+    select_prompts = false,
     update_focused_file = {
       enable = true,
-      update_root = true,
+      update_root = true, -- maybe replace with fs_event
       ignore_list = {},
     },
     ignore_ft_on_setup = {
@@ -50,7 +55,8 @@ function M.setup()
     },
     git = {
       enable = true,
-      ignore = false,
+      ignore = true,
+      show_on_dirs = true,
       timeout = 200,
     },
     view = {
@@ -101,6 +107,11 @@ function M.setup()
     filters = {
       dotfiles = false,
       custom = {},
+      exclude = {},
+    },
+    filesystem_watchers = {
+      enable = true,
+      debounce_delay = 50,
     },
     actions = {
       use_system_clipboard = true,
@@ -120,7 +131,7 @@ function M.setup()
         },
       },
       remove_file = {
-        close_window = false,
+        close_window = true,
       },
     },
     diagnostics = nil,

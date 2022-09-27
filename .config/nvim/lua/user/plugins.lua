@@ -181,6 +181,10 @@ packer.startup(function(use)
       "kyazdani42/nvim-tree.lua",
       -- https://github.com/kyazdani42/nvim-tree.lua/issues/965
       -- cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile" },
+      setup = function()
+        vim.g.loaded = 1
+        vim.g.loaded_netrwPlugin = 1
+      end,
       config = function()
         require("core.nvimtree").setup()
       end,
