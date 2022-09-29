@@ -21,47 +21,17 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Hack Nerd Font
+    family: Hack Nerd Font Mono
     # family: SFMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    # style: Medium
-
-  # Bold font face
-  bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold
-
-  # Italic font face
-  italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    style: Italic
-
-  # Bold italic font face
-  bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold Italic
+    # style: Regular
 
   # Point size
   size: 12.0
+
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: true
 
 colors:
   # Default colors
@@ -120,6 +90,17 @@ colors:
     text: CellBackground
     cursor: CellForeground
 
+  search:
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+    matches:
+     foreground: '#191919'
+     background: '#5c5d5c'
+    focused_match:
+     foreground: '#191919'
+     background: '#C7C7C7'
+
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -136,41 +117,30 @@ window:
     x: 5
     y: 5
 
-  # Window title
-  title: Alacritty
+  # Window title (Linux/BSD only):
+  title: alacritty
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
+  # Spread additional padding evenly around the terminal content.
+  # dynamic_padding: false
 
   # Window class (Linux/BSD only):
   class:
     # Application instance name
-    instance: Alacritty
+    instance: alacritty
     # General application class
-    general: Alacritty
-
-  # GTK theme variant (Linux/BSD only)
-  #
-  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
-  # Set this to `None` to use the default theme variant.
-  # gtk_theme_variant: None
+    general: alacritty
 
 scrolling:
   history: 10000
 
+  # Scrolling distance multiplier.
+  #multiplier: 3
+
 bell:
   # Visual Bell Animation
-  #
-  # Animation effect for flashing the screen when the visual bell is rung.
-  #
-  # Values for `animation`:
-  #   - Ease
-  #   - EaseOut
-  #   - EaseOutSine
-  #   - EaseOutQuad
-  #   - EaseOutCubic
-  #   - EaseOutQuart
-  #   - EaseOutQuint
-  #   - EaseOutExpo
-  #   - EaseOutCirc
-  #   - Linear
   animation: EaseOutExpo
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
@@ -193,13 +163,13 @@ bell:
   #
   #command: None
 
-#selection:
+selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  #save_to_clipboard: false
+  save_to_clipboard: true
 
 cursor:
   # Cursor style
@@ -278,7 +248,7 @@ mouse:
   triple_click: {threshold: 300}
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: true
 
 # Regex hints
 #
@@ -313,8 +283,9 @@ hints:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   enabled:
-    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
-        -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+              [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+      hyperlinks: true
       command: xdg-open
       post_processing: true
       mouse:
@@ -348,9 +319,9 @@ hints:
 #
 # - `mods` (see key bindings)
 mouse_bindings:
-  - {mouse: Right, action: Copy}
-  - {mouse: Right, action: ClearSelection}
-  - {mouse: Middle, action: PasteSelection}
+ - { mouse: Right,                 action: ExpandSelection }
+ - { mouse: Right,  mods: Control, action: ExpandSelection }
+ - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
 
 # Key bindings
 #
@@ -419,6 +390,8 @@ mouse_bindings:
 #   - ToggleFullscreen
 #   - SpawnNewInstance
 #       Spawn a new instance of Alacritty.
+#   - CreateNewWindow
+#       Create a new Alacritty window from the current process.
 #   - ClearLogNotice
 #       Clear Alacritty's UI warning and error notice.
 #   - ClearSelection
@@ -436,6 +409,8 @@ mouse_bindings:
 #   - ToggleBlockSelection
 #   - ToggleSemanticSelection
 #       Toggle semantic selection based on `selection.semantic_escape_chars`.
+#   - CenterAroundViCursor
+#       Center view around vi mode cursor
 #
 # - Vi mode exclusive cursor motion actions:
 #
@@ -739,5 +714,5 @@ key_bindings:
   # Print all received window events.
   #print_events: false
 
-
-  # Normal colors
+  # Highlight window damage information.
+  #highlight_damage: false
