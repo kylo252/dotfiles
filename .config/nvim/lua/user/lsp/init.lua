@@ -36,11 +36,13 @@ local function setup_lsp_keybindings(bufnr)
   local buffer_mappings = {
     normal_mode = {
       ["K"] = { vim.lsp.buf.hover, "Show hover" },
-      ["gd"] = { vim.lsp.buf.definition, "Goto Definition" },
+      ["gd"] = { vim.lsp.buf.definition, "Goto definition" },
+      ["[d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
+      ["]d"] = { vim.diagnostic.goto_prev, "Prev diagnostic" },
       ["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
       ["gr"] = { vim.lsp.buf.references, "Goto references" },
-      ["gI"] = { vim.lsp.buf.implementation, "Goto Implementation" },
-      ["gs"] = { vim.lsp.buf.signature_help, "show signature help" },
+      ["gI"] = { vim.lsp.buf.implementation, "Goto implementation" },
+      ["gs"] = { vim.lsp.buf.signature_help, "Show signature help" },
       ["gl"] = { vim.diagnostic.open_float, "Show line diagnostics" },
     },
     insert_mode = {},

@@ -148,8 +148,8 @@ label:focus {
 }
 
 #cpu {
-  background-color: #2ecc71;
-  color: #000000;
+  /* background-color: #2ecc71; */
+  color: #ff5555;
 }
 
 #memory {
@@ -191,7 +191,7 @@ label:focus {
 }
 
 #temperature {
-  background-color: #f0932b;
+  color: #f0932b;
 }
 
 #temperature.critical {
@@ -226,4 +226,21 @@ label:focus {
 
 #idle_inhibitor.activated {
     color: #808080;
+}
+
+#taskbar button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#taskbar button.active {
+  background: #64727d;
+}
+
+#taskbar button.minimized {
+  font-style: italic;
+}
+
+#taskbar button.maximized {
+  font-style: oblique;
 }

@@ -94,9 +94,9 @@ function __setup_misc() {
   export BAT_PAGER="less -RF"
   export BAT_THEME="TwoDark"
 
-  export CMAKE_BUILD_TYPE=RelWithDebInfo
-  export CMAKE_EXPORT_COMPILE_COMMANDS=1
-  export CMAKE_GENERATOR=Ninja
+  # export CMAKE_BUILD_TYPE=RelWithDebInfo
+  # export CMAKE_EXPORT_COMPILE_COMMANDS=1
+  # export CMAKE_GENERATOR=Ninja
 
   export CTEST_PARALLEL_LEVEL=$(nproc 2>/dev/null)
 
