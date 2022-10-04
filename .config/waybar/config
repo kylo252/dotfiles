@@ -8,7 +8,8 @@
         "wlr/workspaces"
     ],
     "modules-center": [
-        "wlr/taskbar"
+        // "wlr/taskbar"
+        "hyprland/window"
     ],
     "modules-right": [
         "tray",
@@ -53,8 +54,8 @@
             "default": ""
         }
     },
-    "wlr/taskbar": {
-        "format": "{icon} {title:10}",
+    "wlr/taskbar": { // unable to scope per workspace
+        "format": "{icon} {title:.15}",
         "icon-size": 17,
         "icon-theme": "Numix-Circle",
         "tooltip-format": "{title}",
@@ -88,7 +89,8 @@
         "input-filename": "temp1_input",
         "critical-threshold": 80,
         "format": "{icon}&#8239;{temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""],
+        "on-click": "alacritty --command htop"
     },
     // "hyprland/language": {
     //     // "format": "{}",
@@ -97,44 +99,25 @@
     //     "keyboard-name": "AT Translated Set 2 keyboard"
     // },
     "upower": {
-        "icon-size": 12,
+        "icon-size": 16,
         "hide-if-empty": true,
         "tooltip": true,
-        "format": "",
-        "format-alt": " {percentage} {time}"
+        // "tooltip-padding": 8,
+        "tooltip-spacing": 20,
+        "format": " {percentage}",
+        "format-alt": "{percentage} {time}"
     },
-    // "battery": {
-    //     "states": {
-    //         // "good": 95,
-    //         "warning": 20,
-    //         "critical": 10
-    //     },
-    //     "format": "{icon} {capacity}%",
-    //     "format-charging": " {capacity}%",
-    //     "format-plugged": " {capacity}%",
-    //     // "format-charging": " {capacity}%",
-    //     // "format-plugged": " {capacity}%",
-    //     "format-alt": "{icon}   {time}",
-    //     // "format-good": "", // An empty format will hide the module
-    //     // "format-full": "",
-    //     "format-icons": [
-    //         "",
-    //         "",
-    //         "",
-    //         "",
-    //         "",
-    //         ""
-    //     ]
-    // },
     "network": {
         "format": "{ifname}",
-        "format-wifi": " ",
+        "format-wifi": "  {signalStrength}%",
+        "interval": 60,
         "format-ethernet": "",
         "format-disconnected": "睊",
-        "tooltip-format-wifi": " {bandwidthDownBits} {essid} {signalStrength}%",
+        "tooltip-format-wifi": "  {essid} {signalStrength}%",
         "format-alt": " {ifname}: {ipaddr}/{cidr}",
         "max-length": 50
     },
+
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         // "format": "{volume}% {icon} ",
@@ -150,7 +133,6 @@
         "format-source": "&#8239;{volume}%",
         "format-source-muted": "",
         "format-icons": {
-            "speaker": "",
             "headphone": "",
             "hands-free": "",
             "headset": "",
@@ -167,8 +149,9 @@
     },
     "cpu": {
         "format": "&#8239;{usage}%",
-        "tooltip": false,
-        "on-click": "kitty procs --sortd cpu --watch-interval 2"
+        "tooltip": true,
+        "interval": 3,
+        "on-click": "alacritty --command procs --sortd cpu --watch-interval 2"
     },
     "memory": {
         "format": " {}%"
