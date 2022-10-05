@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ## onedark
-bg="#282c34"
-fg="#aab2bf"
+black="#282c34"
+white="#aab2bf"
 blue="#61afef"
 yellow="#e5c07b"
 red="#e06c75"
@@ -20,7 +20,9 @@ else
 fi
 
 tmux set -g status "on"
-tmux set -g status-style bg="$bg",none
+
+# bg=default will set the color automatically as the terminal
+tmux set -g status-style bg=default,none
 tmux set -g status-justify "left"
 
 tmux set -g status-right-style none
@@ -29,13 +31,13 @@ tmux set -g status-left-style none
 tmux set -g status-left-length "100"
 tmux set -g status-right-length "100"
 
-tmux set -g message-style fg="$fg"
-tmux set -g message-command-style fg="$fg"
+tmux set -g message-style fg="$white"
+tmux set -g message-command-style fg="$white"
 
 tmux set -g window-style fg="$dark_grey"
-tmux set -g window-active-style fg="$fg"
+tmux set -g window-active-style fg="$white"
 
-tmux set -g pane-border-style fg="$fg"
+tmux set -g pane-border-style fg="$white"
 tmux set -g pane-active-border-style fg="$green"
 
 tmux set -g display-panes-active-colour "$yellow"
@@ -46,9 +48,9 @@ tmux setw -g window-status-activity-style none
 
 tmux setw -g window-status-separator ""
 
-tmux set -g "@prefix_highlight_fg" "$bg"
+tmux set -g "@prefix_highlight_fg" "$black"
 tmux set -g "@prefix_highlight_bg" "$green"
-tmux set -g "@prefix_highlight_copy_mode_attr" "fg=$bg,bg=$green"
+tmux set -g "@prefix_highlight_copy_mode_attr" "fg=$black,bg=$green"
 tmux set -g "@prefix_highlight_output_prefix" "  "
 
 # checking `#{pane_current_command}` does not work when neovim is invoked from another program, e.g. `lf`.
@@ -61,37 +63,37 @@ current_path='#{b:pane_current_path}'
 
 # TODO: consider adding a git-status "#(gitmux '#{pane_current_path}')"
 status_right=(
-  "#[fg=$fg,bg=$bg,nounderscore,noitalics]${extra_widget}"
+  "#[fg=$white,bg=default,nounderscore,noitalics]${extra_widget}"
   ""
   "${date_format}"
-  "#[fg=$dark_grey,bg=$bg]#[fg=$dark_grey,bg=$dark_grey]#[fg=$fg, bg=$dark_grey]"
+  "#[fg=$dark_grey,bg=default]#[fg=$white, bg=$dark_grey]"
   "${time_format}"
-  "#[fg=$green,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$bg,bg=$green,bold]"
+  "#[fg=$green,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$black,bg=$green,bold]"
   "$host_format"
   "#[fg=$yellow, bg=$green]#[fg=$red,bg=$yellow]"
 )
 
 status_left=(
-  "#[fg=$bg,bg=$green,bold] #S"
-  "#{prefix_highlight}#[fg=$green,bg=$bg,nobold,nounderscore,noitalics]"
+  "#[fg=$black,bg=$green,bold] #S"
+  "#{prefix_highlight}#[fg=$green,bg=default,nobold,nounderscore,noitalics]"
 )
 
 current_win_status_format=(
-  "#[fg=$bg,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$fg,bg=$dark_grey,nobold]"
+  "#[fg=$black,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$white,bg=$dark_grey,nobold]"
   "#I"
   ""
   "#[fg=$green]$current_cmd"
   "#[fg=$blue]$current_path"
-  "#[fg=$dark_grey,bg=$bg,nobold,nounderscore,noitalics]"
+  "#[fg=$dark_grey,bg=default,nobold,nounderscore,noitalics]"
 )
 
 win_status_format=(
-  "#[fg=$bg,bg=$bg,nobold,nounderscore,noitalics]#[fg=$fg,bg=$bg]"
+  "#[fg=$black,bg=default,nobold,nounderscore,noitalics]#[fg=$white,bg=default]"
   "#I"
   ""
   "#[fg=$green]$current_cmd"
   "#[fg=$dark_grey]$current_path"
-  "#[fg=$bg,bg=$bg,nobold,nounderscore,noitalics]"
+  "#[fg=$black,bg=default,nobold,nounderscore,noitalics]"
 )
 
 tmux set -g status-right "${status_right[*]}"
