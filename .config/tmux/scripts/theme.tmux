@@ -64,13 +64,13 @@ current_path='#{b:pane_current_path}'
 # TODO: consider adding a git-status "#(gitmux '#{pane_current_path}')"
 status_right=(
   "#[fg=$white,bg=default,nounderscore,noitalics]${extra_widget}"
-  ""
-  "${date_format}"
-  "#[fg=$dark_grey,bg=default]#[fg=$white, bg=$dark_grey]"
+  "#[fg=$black,bg=default]#[bg=$black]"
+  "#[fg=$white,bg=$black]${date_format}"
+  "#[fg=$dark_grey,bg=$black]#[fg=$white,bg=$dark_grey]"
   "${time_format}"
   "#[fg=$green,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$black,bg=$green,bold]"
   "$host_format"
-  "#[fg=$yellow, bg=$green]#[fg=$red,bg=$yellow]"
+  "#[fg=$yellow,bg=$green]#[fg=$red,bg=$yellow]"
 )
 
 status_left=(
@@ -79,7 +79,7 @@ status_left=(
 )
 
 current_win_status_format=(
-  "#[fg=$black,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$white,bg=$dark_grey,nobold]"
+  "#[fg=$dark_grey,bg=default,nobold,nounderscore,noitalics]#[fg=$white,bg=$dark_grey,nobold]"
   "#I"
   ""
   "#[fg=$green]$current_cmd"
@@ -88,9 +88,8 @@ current_win_status_format=(
 )
 
 win_status_format=(
-  "#[fg=$black,bg=default,nobold,nounderscore,noitalics]#[fg=$white,bg=default]"
-  "#I"
-  ""
+  "#[fg=$black,bg=default,nobold,nounderscore,noitalics]#[fg=$white, bg=$black]"
+  "#I "
   "#[fg=$green]$current_cmd"
   "#[fg=$dark_grey]$current_path"
   "#[fg=$black,bg=default,nobold,nounderscore,noitalics]"
