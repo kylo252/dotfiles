@@ -10,17 +10,61 @@ function M.setup_gitsigns()
       changedelete = { hl = "GitSignsChange", text = "~" },
     },
     sign_priority = 10000,
-    keymaps = {
-      -- Default keymap options
-      noremap = true,
-      buffer = true,
+    current_line_blame_formatter = " <abbrev_sha> <summary> (<author>, <author_time:%Y-%m-%d>)",
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
 
-      ["n ]c"] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'" },
-      ["n [c"] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'" },
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        if type(opts) == "string" then
+          opts = { desc = opts }
+        end
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
 
-      -- Text objects
-      ["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-      ["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
+      -- Navigation
+      map("n", "]c", function()
+        if vim.wo.diff then
+          return "]c"
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true, desc = "next hunk" })
+
+      map("n", "[c", function()
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true, desc = "prev hunk" })
+
+      -- Actions
+      map({ "n", "v" }, "<leader>gs", gs.stage_hunk, "stage hunk")
+      map({ "n", "v" }, "<leader>gu", gs.undo_stage_hunk, "undo stage hunk")
+      map({ "n", "v" }, "<leader>gr", gs.reset_hunk, "reset hunk")
+      map("n", "<leader>gS", gs.stage_buffer, "stage buffer")
+      map("n", "<leader>gR", gs.reset_buffer, "reset buffer")
+      map("n", "<leader>gp", gs.preview_hunk, "preview hunk")
+      map("n", "<leader>gb", function()
+        gs.blame_line { full = true }
+      end, "blame")
+      map("n", "<leader>gt", gs.toggle_current_line_blame, "toggle current line blame")
+      map("n", "<leader>ghd", gs.diffthis, "diff this")
+      map("n", "<leader>ghD", function()
+        gs.diffthis "~"
+      end, "diff this with ~")
+
+      -- Text object
+      map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "select hunk")
+    end,
+    yadm = {
+      enable = false,
     },
   }
 end
