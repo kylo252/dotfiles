@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-onedark_black="#282c34"
-onedark_blue="#61afef"
-onedark_yellow="#e5c07b"
-onedark_red="#e06c75"
-onedark_white="#aab2bf"
-onedark_green="#98c379"
-onedark_visual_grey="#3e4452"
-onedark_comment_grey="#5c6370"
+## onedark
+bg="#282c34"
+fg="#aab2bf"
+blue="#61afef"
+yellow="#e5c07b"
+red="#e06c75"
+green="#98c379"
+dark_grey="#3e4452"
 
 time_format="%R"
 extra_widget=" "
@@ -19,50 +19,37 @@ else
   host_format="local"
 fi
 
-tmux set-option -gq "status" "on"
-tmux set-option -gq "status-justify" "left"
+tmux set -g status "on"
+tmux set -g status-style bg="$bg",none
+tmux set -g status-justify "left"
 
-tmux set-option -gq "status-left-length" "100"
-tmux set-option -gq "status-right-length" "100"
-tmux set-option -gq "status-right-attr" "none"
+tmux set -g status-right-style none
+tmux set -g status-left-style none
 
-tmux set-option -gq "message-fg" "$onedark_white"
-tmux set-option -gq "message-bg" "$onedark_black"
+tmux set -g status-left-length "100"
+tmux set -g status-right-length "100"
 
-tmux set-option -gq "message-command-fg" "$onedark_white"
-tmux set-option -gq "message-command-bg" "$onedark_black"
+tmux set -g message-style fg="$fg"
+tmux set -g message-command-style fg="$fg"
 
-tmux set-option -gq "status-attr" "none"
-tmux set-option -gq "status-left-attr" "none"
+tmux set -g window-style fg="$dark_grey"
+tmux set -g window-active-style fg="$fg"
 
-tmux set-option -gq "window-style" "fg=$onedark_comment_grey"
-tmux set-option -gq "window-active-style" "fg=$onedark_white"
+tmux set -g pane-border-style fg="$fg"
+tmux set -g pane-active-border-style fg="$green"
 
-tmux set-option -gq "pane-border-fg" "$onedark_white"
-tmux set-option -gq "pane-border-bg" "$onedark_black"
-tmux set-option -gq "pane-active-border-fg" "$onedark_green"
-tmux set-option -gq "pane-active-border-bg" "$onedark_black"
+tmux set -g display-panes-active-colour "$yellow"
+tmux set -g display-panes-colour "$blue"
 
-tmux set-option -gq "display-panes-active-colour" "$onedark_yellow"
-tmux set-option -gq "display-panes-colour" "$onedark_blue"
+tmux setw -g window-status-style none
+tmux setw -g window-status-activity-style none
 
-tmux set-option -gq "status-bg" "$onedark_black"
-tmux set-option -gq "status-fg" "$onedark_white"
+tmux setw -g window-status-separator ""
 
-tmux set-window-option -gq "window-status-fg" "$onedark_black"
-tmux set-window-option -gq "window-status-bg" "$onedark_black"
-tmux set-window-option -gq "window-status-attr" "none"
-
-tmux set-window-option -gq "window-status-activity-bg" "$onedark_black"
-tmux set-window-option -gq "window-status-activity-fg" "$onedark_black"
-tmux set-window-option -gq "window-status-activity-attr" "none"
-
-tmux set-window-option -gq "window-status-separator" ""
-
-tmux set-option -gq "@prefix_highlight_fg" "$onedark_black"
-tmux set-option -gq "@prefix_highlight_bg" "$onedark_green"
-tmux set-option -gq "@prefix_highlight_copy_mode_attr" "fg=$onedark_black,bg=$onedark_green"
-tmux set-option -gq "@prefix_highlight_output_prefix" "  "
+tmux set -g "@prefix_highlight_fg" "$bg"
+tmux set -g "@prefix_highlight_bg" "$green"
+tmux set -g "@prefix_highlight_copy_mode_attr" "fg=$bg,bg=$green"
+tmux set -g "@prefix_highlight_output_prefix" "  "
 
 # checking `#{pane_current_command}` does not work when neovim is invoked from another program, e.g. `lf`.
 current_cmd="#(ps -o command= -t '#{pane_tty}' | rg -o '^(n?l?vim)' || echo '#{pane_current_command}')"
@@ -74,41 +61,41 @@ current_path='#{b:pane_current_path}'
 
 # TODO: consider adding a git-status "#(gitmux '#{pane_current_path}')"
 status_right=(
-  "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]${extra_widget}"
+  "#[fg=$fg,bg=$bg,nounderscore,noitalics]${extra_widget}"
   ""
   "${date_format}"
-  "#[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]"
+  "#[fg=$dark_grey,bg=$bg]#[fg=$dark_grey,bg=$dark_grey]#[fg=$fg, bg=$dark_grey]"
   "${time_format}"
-  "#[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold]"
+  "#[fg=$green,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$bg,bg=$green,bold]"
   "$host_format"
-  "#[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
+  "#[fg=$yellow, bg=$green]#[fg=$red,bg=$yellow]"
 )
 
 status_left=(
-  "#[fg=$onedark_black,bg=$onedark_green,bold] #S"
-  "#{prefix_highlight}#[fg=$onedark_green,bg=$onedark_black,nobold,nounderscore,noitalics]"
+  "#[fg=$bg,bg=$green,bold] #S"
+  "#{prefix_highlight}#[fg=$green,bg=$bg,nobold,nounderscore,noitalics]"
 )
 
 current_win_status_format=(
-  "#[fg=$onedark_black,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_visual_grey,nobold]"
+  "#[fg=$bg,bg=$dark_grey,nobold,nounderscore,noitalics]#[fg=$fg,bg=$dark_grey,nobold]"
   "#I"
   ""
-  "#[fg=$onedark_green]$current_cmd"
-  "#[fg=$onedark_blue]$current_path"
-  "#[fg=$onedark_visual_grey,bg=$onedark_black,nobold,nounderscore,noitalics]"
+  "#[fg=$green]$current_cmd"
+  "#[fg=$blue]$current_path"
+  "#[fg=$dark_grey,bg=$bg,nobold,nounderscore,noitalics]"
 )
 
 win_status_format=(
-  "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_black]"
+  "#[fg=$bg,bg=$bg,nobold,nounderscore,noitalics]#[fg=$fg,bg=$bg]"
   "#I"
   ""
-  "#[fg=$onedark_green]$current_cmd"
-  "#[fg=$onedark_visual_grey]$current_path"
-  "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]"
+  "#[fg=$green]$current_cmd"
+  "#[fg=$dark_grey]$current_path"
+  "#[fg=$bg,bg=$bg,nobold,nounderscore,noitalics]"
 )
 
-tmux set-option -gq "status-right" "${status_right[*]}"
-tmux set-option -gq "status-left" "${status_left[*]}"
+tmux set -g status-right "${status_right[*]}"
+tmux set -g status-left "${status_left[*]}"
 
-tmux set-option -gq "window-status-current-format" "${current_win_status_format[*]}"
-tmux set-option -gq "window-status-format" "${win_status_format[*]}"
+tmux setw -g window-status-current-format "${current_win_status_format[*]}"
+tmux setw -g window-status-format "${win_status_format[*]}"
