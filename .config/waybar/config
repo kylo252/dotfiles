@@ -76,10 +76,9 @@
     },
     "clock": {
         "timezone": "Europe/Stockholm",
-        "format": "<span color='#bf616a'></span>{:%I:%M %p}",
-        // "format-alt": "{:%Y-%m-%d}"
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "<span color='#bf616a'></span> {:%a %b %d}"
+        "format": "<span color='#bf616a'></span>{:%a, %H:%M}",
+        "format-alt": "<span color='#bf616a'></span>  {:%A, %B %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "hyprland/window": {
         "format": "{}"
