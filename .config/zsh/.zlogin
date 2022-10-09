@@ -2,12 +2,18 @@
   
 # Asynchronously zcompile .zcompdump file.
 {
-  typeset -g zcompdump="$HOME/.local/share/zsh/zcompdump"
+  typeset -g zcompdump="$XDG_CACHE_HOME/zsh/compdump"
 
   if ([[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]) {
     zcompile "$zcompdump"
   }
 } &!
+
+if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+  export GDK_BACKEND=wayland
+  export MOZ_ENABLE_WAYLAND=1
+fi
+
 # if tmux is executable and not inside a tmux session, then try to attach.
 # if attachment fails, start a new session
 
