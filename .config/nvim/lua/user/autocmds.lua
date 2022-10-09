@@ -74,26 +74,26 @@ local base_definitions = {
 
 function M.toggle_format_on_save(opts)
   opts = opts
-      or {
-        ---@usage pattern string pattern used for the autocommand
-        pattern = vim.fn.stdpath "config" .. "/**/*.lua",
-        ---@usage timeout number timeout in ms for the format request
-        timeout = 1000,
-        ---@usage filter func to select client
-        filter = function(clients)
-          return vim.tbl_filter(function(client)
-            local status_ok, method_supported = pcall(function()
-              return client.server_capabilities.documentFormattingProvider
-            end)
-            -- give higher prio to null-ls
-            if status_ok and method_supported and client.name == "null-ls" then
-              return "null-ls"
-            else
-              return status_ok and method_supported and client.name
-            end
-          end, clients)
-        end,
-      }
+    or {
+      ---@usage pattern string pattern used for the autocommand
+      pattern = vim.fn.stdpath "config" .. "/**/*.lua",
+      ---@usage timeout number timeout in ms for the format request
+      timeout = 1000,
+      ---@usage filter func to select client
+      filter = function(clients)
+        return vim.tbl_filter(function(client)
+          local status_ok, method_supported = pcall(function()
+            return client.server_capabilities.documentFormattingProvider
+          end)
+          -- give higher prio to null-ls
+          if status_ok and method_supported and client.name == "null-ls" then
+            return "null-ls"
+          else
+            return status_ok and method_supported and client.name
+          end
+        end, clients)
+      end,
+    }
   local status, _ = pcall(vim.api.nvim_get_autocmds, {
     group = "lsp_format_on_save",
     event = "BufWritePre",

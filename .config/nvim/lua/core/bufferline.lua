@@ -82,10 +82,10 @@ M.setup = function()
   require("bufferline").setup {
     highlights = {
       background = {
-      italic = true
+        italic = true,
       },
       buffer_selected = {
-        bold = true
+        bold = true,
       },
     },
     options = {
