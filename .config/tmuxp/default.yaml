@@ -2,7 +2,11 @@ session_name: default
 windows:
 - window_name: main
   start_directory: ${XDG_CONFIG_HOME}/nvim
-- window_name: lvim
-  start_directory: ${XDG_DATA_HOME}/lunarvim/lvim
 - window_name: neovim
   start_directory: ${XDG_DATA_HOME}/neovim
+- window_name: lvim
+  start_directory: ${XDG_DATA_HOME}/lunarvim/lvim
+- window_name: hyprland
+  start_directory: "${XDG_CONFIG_HOME}/hypr"
+  panes:
+    - nvim hyprland.conf ~/.config/waybar/config

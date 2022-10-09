@@ -70,6 +70,7 @@ function __setup_fzf() {
   export FZF_DEFAULT_COMMAND="fd --type f"
   export FZF_DEFAULT_OPTS=" \
     --layout=reverse  --multi \
+    --cycle \
     --bind '?:toggle-preview' \
     --bind 'ctrl-a:select-all' \
     --bind 'ctrl-y:execute-silent(echo {+} | xclip)' \
