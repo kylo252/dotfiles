@@ -45,10 +45,7 @@ M.mappings = {
   f = {
     name = "+Find",
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current buffer fuzzy-find" },
-    f = {
-      "<cmd>lua require('core.telescope.custom-finders').find_project_files()<CR>",
-      "Find files",
-    },
+    f = { "<cmd>Telescope find_files<CR>", "Find files" },
     g = {
       "<cmd>lua require('core.telescope.custom-finders').grep_string_v2()<CR>",
       "grep string v2",

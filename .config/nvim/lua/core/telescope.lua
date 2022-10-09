@@ -109,12 +109,7 @@ function M.setup()
   local finders = require "core.telescope.custom-finders"
   local keymaps = {
     normal_mode = {
-      ["<C-p>"] = {
-        function()
-          finders.find_project_files { hidden = true, ignored = false }
-        end,
-        "find project files",
-      },
+      ["<C-p>"] = { "<cmd>Telescope find_files<CR>", "find project files" },
       ["<leader>ft"] = {
         function()
           finders.dynamic_grep { args = "ft=" .. vim.bo.filetype }
