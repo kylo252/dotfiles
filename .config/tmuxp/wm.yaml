@@ -3,7 +3,7 @@ windows:
 - window_name: hyprland
   start_directory: "${XDG_CONFIG_HOME}/hypr"
   panes:
-    - nvim hyprland.conf ~/.config/waybar/config
+    - nvim hyprland.conf ~/.config/waybar/config ~/.local/share/hyprland-git/wiki/pages/Home.md
 - window_name: rofi
   start_directory: "${XDG_CONFIG_HOME}/rofi"
   panes:
