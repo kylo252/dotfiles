@@ -52,7 +52,7 @@ function M.setup_gitsigns()
       map("n", "<leader>gR", gs.reset_buffer, "reset buffer")
       map("n", "<leader>gp", gs.preview_hunk, "preview hunk")
       map("n", "<leader>gl", function()
-        gs.blame_line { full = true }
+        gs.blame_line { ignore_whitespace = true }
       end, "line blame")
       map("n", "<leader>gt", gs.toggle_current_line_blame, "toggle current line blame")
       map("n", "<leader>ghd", gs.diffthis, "diff this")

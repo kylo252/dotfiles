@@ -11,13 +11,7 @@
 --type-add=automake:*makefile.in*
 
 # Using glob patterns to include/exclude files or folders
---glob=!git/*
---glob=!.git/*
---glob=!github/*
-
-# or
-# --glob
-# !git/*
+--glob=!.git/
 
 # Set the colors.
 # --colors=line:none

@@ -62,6 +62,7 @@ function M.setup()
     view = {
       adaptive_size = false,
       hide_root_folder = false,
+      centralize_selection = true,
       side = "left",
       preserve_window_proportions = false,
       number = false,
