@@ -38,7 +38,7 @@
   #############
   branches = branch -a
   remotes = remote -v
-  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   #############
   amend = commit --amend --date=now
   auto-commit = !git add -A && git commit -m "updates"

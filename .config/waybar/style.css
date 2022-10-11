@@ -6,7 +6,7 @@ window#waybar {
   /* background-color: rgba(30, 34, 42, 0.5); */
   /* font-family: FontAwesome, "Fira Sans SemiBold", "SF Compact Display Rounded", FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
   font-family: "UbuntuMono Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16;
+  font-size: 16px;
   background-color: rgba(43, 48, 59, 0.5);
   border-bottom: 3px solid rgba(100, 114, 125, 0.5);
   color: #ffffff;
