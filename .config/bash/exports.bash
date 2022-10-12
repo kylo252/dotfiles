@@ -23,21 +23,22 @@ function __setup_cli_colors() {
 
 function __setup_xdg() {
   export CARGO_HOME="$XDG_DATA_HOME/cargo"
-  export FNM_DIR="$XDG_DATA_HOME/fnm"
   export GEM_HOME="$XDG_DATA_HOME/gem"
   export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
   export GNUPGHOME="$XDG_DATA_HOME/gnupg"
   export GOPATH="$XDG_DATA_HOME/go"
+  export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
   export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+  export LESSHISTFILE="$XDG_STATE_HOME/less/history"
   export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
   export NPM_HOME="$XDG_DATA_HOME/npm"
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-  export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tldr"
   export TERMINFO="$XDG_DATA_HOME/terminfo"
   export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
   export TMUX_CONFIG_DIR="$XDG_CONFIG_HOME/tmux"
   export TREE_SITTER_DIR="$XDG_CONFIG_HOME/tree-sitter"
+  export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
   export ZK_NOTEBOOK_DIR="$HOME/notes/pages"
 }
 

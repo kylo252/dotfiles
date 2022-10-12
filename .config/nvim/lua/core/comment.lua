@@ -59,9 +59,6 @@ function M.setup()
       ---Extra mapping
       ---Includes `gco`, `gcO`, `gcA`
       extra = true,
-      ---Extended mapping
-      ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-      extended = true,
     },
 
     ---Pre-hook, called before commenting the line
