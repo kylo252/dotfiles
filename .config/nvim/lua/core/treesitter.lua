@@ -9,6 +9,9 @@ function M.setup()
     indent = { enable = true, disable = { "python", "yaml" } },
     autotag = { enable = true },
     rainbow = { enable = false },
+    incremental_selection = {
+      enable = true,
+    },
     textobjects = {
       select = {
         enable = true,

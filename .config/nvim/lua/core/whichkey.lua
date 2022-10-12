@@ -94,38 +94,17 @@ M.mappings = {
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
   l = {
     name = "LSP",
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     c = {
       "<cmd>lua require('user.lsp.utils').get_client_capabilities()<cr>",
       "Show language-server capabilities",
     },
-    d = {
-      "<cmd>Telescope diagnostics bufnr=0<cr>",
-      "Buffer Diagnostics",
-    },
-    w = {
-      "<cmd>Telescope diagnostics<cr>",
-      "Diagnostics",
-    },
-    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+    d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Buffer Diagnostics" },
+    w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>Mason<cr>", "Mason info" },
-    j = {
-      "<cmd>lua vim.diagnostic.goto_next()<cr>",
-      "Next Diagnostic",
-    },
-    k = {
-      "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-      "Prev Diagnostic",
-    },
     Q = { "<cmd>Telescope quickfix<cr>", "Quickfix (Telescope)" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-      "Workspace Symbols",
-    },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
   },
   L = {
     l = {
