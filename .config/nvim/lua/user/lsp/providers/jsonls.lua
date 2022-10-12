@@ -1,7 +1,14 @@
+local schemas = require("schemastore").json.schemas()
+table.insert(schemas, {
+  fileMatch = {
+    "vcpkg.json",
+  },
+  url = "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+})
 local opts = {
   settings = {
     json = {
-      schemas = require("schemastore").json.schemas(),
+      schemas = schemas,
     },
   },
   setup = {

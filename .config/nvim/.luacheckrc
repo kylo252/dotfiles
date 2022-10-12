@@ -2,13 +2,11 @@
 
 stds.nvim = {
   globals = {
-    "lvim",
-    vim = { fields = { "g" } },
+    "vim"
   },
   read_globals = {
     "jit",
     "os",
-    "vim",
     "join_paths",
     "require_clean",
     "require_safe",

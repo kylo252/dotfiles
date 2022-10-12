@@ -113,7 +113,7 @@ function M.setup()
       config_home = vim.fn.stdpath "config" .. "/lsp-settings",
       append_default_schemas = true,
       local_settings_dir = ".lsp",
-      local_settings_root_markers = { ".git" },
+      local_settings_root_markers = { ".git", ".lsp" },
       loader = "json",
       ignored_servers = {},
       open_strictly = false,
