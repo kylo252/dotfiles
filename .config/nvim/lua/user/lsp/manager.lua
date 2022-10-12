@@ -37,4 +37,39 @@ function M.setup(server_name)
   require("lspconfig")[server_name].setup(config)
 end
 
+function M.manual_setup(name)
+  local opts = {
+    reuse_client = function(client, conf)
+      -- return client.config.root_dir == conf.root_dir and client.name == conf.name
+      local buf_path = vim.fn.expand "%:p:h"
+      local root_dir =
+        vim.fs.dirname(vim.fs.find({ ".git" }, { path = buf_path, upward = true })[1])
+      -- vim.notify("got: " .. root_dir)
+      if root_dir and client.name == conf.name then
+        require("user.lsp.ws").add_workspace_folder(root_dir, { id = client.id })
+        return true
+      end
+    end,
+  }
+  local root_dir = vim.fs.dirname(vim.fs.find({ ".luarc.json", ".git" }, { upward = true })[1])
+
+  local ws = { {
+    name = root_dir,
+    uri = vim.uri_from_fname(root_dir),
+  } }
+  local config = resolve_config(name)
+
+  local ls_found, lspconf = pcall(require, "lspconfig.server_configurations." .. name)
+  if ls_found then
+    config = vim.tbl_deep_extend("force", lspconf.default_config, config)
+    if type(config.root_dir) == "function" then
+      config.root_dir = config.root_dir(vim.loop.cwd())
+    end
+    config.name = config.name or name
+  end
+  config.root_dir = nil
+  config.workspace_folders = ws
+  vim.lsp.start(config, opts)
+end
+
 return M
