@@ -1,39 +1,60 @@
-local xdg_data = os.getenv "XDG_DATA_HOME"
+local default_workspace = {
+  library = {
+    vim.fn.expand "$VIMRUNTIME",
+    require("neodev.config").types(),
+  },
 
-local ws_lib = {
-  vim.fn.expand "$VIMRUNTIME",
+  maxPreload = 5000,
+  preloadFileSize = 10000,
 }
 
-local lua_dev_types = require("neodev.sumneko").types()
-table.insert(ws_lib, lua_dev_types)
-table.insert(ws_lib, xdg_data .. "/busted")
-
-local add_package_path = function(package)
+local add_packages_to_workspace = function(packages, config)
+  -- config.settings.Lua = config.settings.Lua or { workspace = default_workspace }
   local runtimedirs = vim.api.nvim__get_runtime({ "lua" }, true, { is_lua = true })
+  local workspace = config.settings.Lua.workspace
   for _, v in pairs(runtimedirs) do
-    if v:match(package) then
-      table.insert(ws_lib, v)
+    for _, pack in ipairs(packages) do
+      if v:match(pack) and not vim.tbl_contains(workspace.library, v) then
+        table.insert(workspace.library, v)
+      end
     end
   end
 end
 
-add_package_path "nvim%-treesitter"
-add_package_path "lua%-dev"
-add_package_path "plenary"
-add_package_path "lspconfig"
-add_package_path "mason"
-add_package_path "mason%-lspconfig"
+local lspconfig = require "lspconfig"
 
-return {
+local make_on_new_config = function(on_new_config, _)
+  return lspconfig.util.add_hook_before(on_new_config, function(new_config, _)
+    local server_name = new_config.name
+
+    if server_name ~= "sumneko_lua" then
+      return
+    end
+    local plugins = { "plenary.nvim", "telescope.nvim", "nvim-treesitter", "LuaSnip" }
+    add_packages_to_workspace(plugins, new_config)
+  end)
+end
+
+lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+  on_new_config = make_on_new_config(lspconfig.util.default_config.on_new_config),
+})
+
+local opts = {
   settings = {
     Lua = {
-      formatting = { enable = false },
       telemetry = { enable = false },
-      workspace = {
-        library = ws_lib,
-        maxPreload = 3000,
-        preloadFileSize = 1000,
+      runtime = {
+        version = "LuaJIT",
+        special = {
+          reload = "require",
+        },
       },
+      diagnostics = {
+        globals = { "vim", "lvim", "packer_plugins", "reload" },
+      },
+      workspace = default_workspace,
     },
   },
 }
+
+return opts
