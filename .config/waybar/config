@@ -87,7 +87,7 @@
         "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
         "input-filename": "temp1_input",
         "critical-threshold": 80,
-        "format": "{icon}&#8239;{temperatureC}°C",
+        "format": "{icon}&#8239; {temperatureC}°C",
         "format-icons": ["", "", ""],
         "on-click": "alacritty --command htop"
     },
@@ -125,11 +125,11 @@
         // "format-source": "{volume}% ",
         // "format-source-muted": "",
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon}&#8239;{volume}%",
+        "format": "{icon}&#8239; {volume}%",
         "format-bluetooth": "{volume}% {icon}",
         "format-bluetooth-muted": " {icon}",
-        "format-muted": "婢&#8239;0% ",
-        "format-source": "&#8239;{volume}%",
+        "format-muted": "婢&#8239; 0% ",
+        "format-source": "&#8239; {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -147,7 +147,7 @@
         "on-click": "pavucontrol"
     },
     "cpu": {
-        "format": "&#8239;{usage}%",
+        "format": "&#8239; {usage}%",
         "tooltip": true,
         "interval": 3,
         "on-click": "alacritty --command procs --sortd cpu --watch-interval 2"

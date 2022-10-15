@@ -39,6 +39,7 @@ function __setup_cli_colors() {
 
 function __setup_xdg() {
   export CARGO_HOME="$XDG_DATA_HOME/cargo"
+  export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
   export GEM_HOME="$XDG_DATA_HOME/gem"
   export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
   export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -46,8 +47,7 @@ function __setup_xdg() {
   export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
   export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
   export LESSHISTFILE="$XDG_STATE_HOME/less/history"
-  export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-  export NPM_HOME="$XDG_DATA_HOME/npm"
+  export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
   export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
   export TERMINFO="$XDG_DATA_HOME/terminfo"

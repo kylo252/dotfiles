@@ -20,6 +20,7 @@ function setup_default_exports() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
+  export XDG_STATE_HOME="$HOME/.local/state"
 
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
@@ -35,10 +36,16 @@ function setup_default_exports() {
   export TPM_DIR="$XDG_DATA_HOME/tmux/plugins/tpm"
 }
 
+function setup_xdg() {
+  mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" \
+    "$XDG_CACHE_HOME" "$XDG_STATE_HOME"
+}
+
 function setup_dotfiles() {
 
   check_reqs
   setup_default_exports
+  setup_xdg
 
   echo "Fetching dependencies.."
 
