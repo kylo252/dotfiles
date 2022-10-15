@@ -279,9 +279,9 @@ packer.startup(function(use)
   }
 
   use {
-    "norcalli/nvim-colorizer.lua",
+    "nvchad/nvim-colorizer.lua",
     config = function()
-      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
+      require("colorizer").setup { filetypes = { "css", "scss", "html", "javascript" } }
     end,
   }
   use { "VebbNix/lf-vim" }
