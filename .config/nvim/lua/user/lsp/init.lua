@@ -92,8 +92,11 @@ end
 
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  return require("cmp_nvim_lsp").update_capabilities(capabilities)
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    capabilities.textDocument.completion = cmp_nvim_lsp.default_capabilities()
+  end
+  return capabilities
 end
 
 function M.get_common_opts()

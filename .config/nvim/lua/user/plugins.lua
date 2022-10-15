@@ -50,7 +50,7 @@ packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim" }
-  use { "folke/lua-dev.nvim", filetype = "lua" }
+  use { "folke/neodev.nvim", filetype = "lua" }
 
   use {
     {

@@ -2,7 +2,7 @@
 
 stds.nvim = {
   globals = {
-    "vim"
+    "vim",
   },
   read_globals = {
     "jit",
@@ -11,12 +11,13 @@ stds.nvim = {
     "require_clean",
     "require_safe",
     "log_entry",
-    "dump"
+    "dump",
   },
 }
 std = "lua51+nvim"
 
 files["tests/*_spec.lua"].std = "lua51+nvim+busted"
+files["lua/scratch*.lua"].ignore = { "212", "211" }
 
 -- Don't report unused self arguments of methods.
 self = false

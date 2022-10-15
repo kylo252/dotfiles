@@ -4,7 +4,7 @@ local ws_lib = {
   vim.fn.expand "$VIMRUNTIME",
 }
 
-local lua_dev_types = require("lua-dev.sumneko").types()
+local lua_dev_types = require("neodev.sumneko").types()
 table.insert(ws_lib, lua_dev_types)
 table.insert(ws_lib, xdg_data .. "/busted")
 
@@ -17,10 +17,12 @@ local add_package_path = function(package)
   end
 end
 
+add_package_path "nvim%-treesitter"
+add_package_path "lua%-dev"
 add_package_path "plenary"
 add_package_path "lspconfig"
 add_package_path "mason"
-add_package_path "mason-lspconfig"
+add_package_path "mason%-lspconfig"
 
 return {
   settings = {
@@ -29,7 +31,7 @@ return {
       telemetry = { enable = false },
       workspace = {
         library = ws_lib,
-        maxPreload = 1000,
+        maxPreload = 3000,
         preloadFileSize = 1000,
       },
     },
