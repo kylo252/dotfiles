@@ -213,7 +213,7 @@ packer.startup(function(use)
       "karb94/neoscroll.nvim",
       event = "BufReadPost",
       config = function()
-        require("neoscroll").setup { respect_scrolloff = true }
+        require("neoscroll").setup {}
       end,
     },
     {
@@ -241,8 +241,7 @@ packer.startup(function(use)
       end,
     },
     {
-      "kylo252/gitlinker.nvim",
-      branch = "allow-remote-override",
+      "ruifm/gitlinker.nvim",
       event = "BufReadPost",
       config = function()
         require("core.git").setup_gitlinker()
