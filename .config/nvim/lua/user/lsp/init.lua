@@ -91,12 +91,11 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.common_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if status_ok then
-    capabilities.textDocument.completion = cmp_nvim_lsp.default_capabilities()
+  if status_ok and cmp_nvim_lsp then
+    return cmp_nvim_lsp.default_capabilities()
   end
-  return capabilities
+  return vim.lsp.protocol.make_client_capabilities()
 end
 
 function M.get_common_opts()

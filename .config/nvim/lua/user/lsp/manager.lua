@@ -37,38 +37,63 @@ function M.setup(server_name)
   require("lspconfig")[server_name].setup(config)
 end
 
-function M.manual_setup(name)
-  local opts = {
-    reuse_client = function(client, conf)
-      -- return client.config.root_dir == conf.root_dir and client.name == conf.name
-      local buf_path = vim.fn.expand "%:p:h"
-      local root_dir =
-        vim.fs.dirname(vim.fs.find({ ".git" }, { path = buf_path, upward = true })[1])
-      -- vim.notify("got: " .. root_dir)
-      if root_dir and client.name == conf.name then
-        require("user.lsp.ws").add_workspace_folder(root_dir, { id = client.id })
-        return true
-      end
-    end,
-  }
-  local root_dir = vim.fs.dirname(vim.fs.find({ ".luarc.json", ".git" }, { upward = true })[1])
-
-  local ws = { {
+local get_workspace = function(config, bufnr)
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  local buf_path = vim.fs.dirname(bufname)
+  local root_dir =
+    vim.fs.dirname(vim.fs.find(config.workspace_markers, { path = buf_path, upward = true })[1])
+  local ws = {
     name = root_dir,
     uri = vim.uri_from_fname(root_dir),
-  } }
-  local config = resolve_config(name)
+  }
+  return ws
+end
 
-  local ls_found, lspconf = pcall(require, "lspconfig.server_configurations." .. name)
-  if ls_found then
-    config = vim.tbl_deep_extend("force", lspconf.default_config, config)
-    if type(config.root_dir) == "function" then
-      config.root_dir = config.root_dir(vim.loop.cwd())
-    end
-    config.name = config.name or name
+local should_reuse_client = function(client, config)
+  -- TODO: should use add_workspace_folder once it's client aware
+  local bufnr = vim.api.nvim_get_current_buf()
+  local ws = get_workspace(config, bufnr)
+  if not ws then
+    return
   end
-  config.root_dir = nil
-  config.workspace_folders = ws
+  local found
+  for _, folder in ipairs(client.workspace_folders) do
+    if folder.uri == ws.uri then
+      found = true
+    end
+  end
+  if found and client.name == config.name then
+    return true
+  end
+end
+
+---Setup a language server by providing a name
+---@param server_name string name of the language server
+---@param overrrides table? when available it will take predence over any default configurations
+function M.setup_manual(server_name, overrrides)
+  vim.validate { name = { server_name, "string" } }
+  overrrides = overrrides or {}
+  local success, conf = pcall(require, "lspconfig.server_configurations." .. server_name)
+  if not success then
+    vim.notify(
+      string.format("[lspconfig] This setup API is not supported for (%s) ..", server_name),
+      vim.log.levels.WARN
+    )
+    return
+  end
+  local config = vim.tbl_deep_extend("force", conf.default_config, overrrides)
+
+  -- this is missing by default for some reason..
+  config.name = config.name or server_name
+
+  -- only use git repos by default
+  config.workspace_markers = config.workspace_markers or { ".git" }
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  config.workspace_folders = config.workspace_folders or { get_workspace(config, bufnr) }
+  local opts = {
+    reuse_client = should_reuse_client,
+  }
   vim.lsp.start(config, opts)
 end
 

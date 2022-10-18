@@ -100,6 +100,7 @@ packer.startup(function(use)
       "L3MON4D3/LuaSnip",
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_lua").load { paths = vim.fn.stdpath "config" .. "/luasnippets" }
       end,
     },
     { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
@@ -173,7 +174,9 @@ packer.startup(function(use)
     {
       "kylo252/onedark.nvim",
       config = function()
-        require("onedark").setup()
+        require("onedark").setup {
+          style = "darker",
+        }
         vim.cmd [[colorscheme onedark]]
       end,
     },
