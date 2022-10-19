@@ -103,14 +103,6 @@ function __setup_misc() {
   export MANPAGER='less -s -M +Gg'
 
   export VCPKG_DISABLE_METRICS=1
-
-  if [[ "$TERM" == "linux" ]]; then
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
-  else
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
-  fi
-  export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
-  export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 }
 
 setup_functions=(

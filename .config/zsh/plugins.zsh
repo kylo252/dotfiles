@@ -37,6 +37,18 @@ eval "$(fnm env --shell=zsh)"
 
 autoload -Uz kp
 
+if [[ "$TERM" == "linux" ]]; then
+  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+else
+  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,italic,underline"
+fi
+
+export ZSH_AUTOSUGGEST_USE_ASYNC="ON"
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(vi-add-next)
+export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS
+
 # turn off git maintenance
 zstyle ':znap:*:*' git-maintenance off
 # disable sort when completing `git checkout`

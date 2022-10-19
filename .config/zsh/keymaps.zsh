@@ -38,19 +38,24 @@ bindkey '^[.' insert-last-word
 bindkey "^[," copy-prev-shell-word
 
 # partial history search
-bindkey '^P' up-line-or-search
-bindkey '^N' down-line-or-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
 
-# workaround: partial accept suggestion with forward-word
-function _expand_completion(){
-  zle _expand_alias # bonus, expand aliases
-  zle vi-add-next
+function _expand_alias_wrapper(){
+  zle _expand_alias
+  # fix color as well as allow typing
   zle magic-space
 }
 
-zle -N _expand_completion
+zle -N _expand_alias_wrapper
 
-bindkey '^ ' _expand_completion
+bindkey '^Xa' _expand_alias_wrapper
 
+bindkey '^@' vi-forward-word
+bindkey '^X^@' vi-add-eol
 bindkey '^[[1;5C' vi-forward-word # ctrl+right
 bindkey '^[[1;5D' vi-backward-word # ctrl+left
