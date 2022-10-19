@@ -1,7 +1,8 @@
 local clangd_flags = {
   "--all-scopes-completion",
   "--background-index",
-  "--pch-storage=memory",
+  "--suggest-missing-includes",
+  -- "--pch-storage=disk",
   "--log=info",
   "--enable-config",
   "--clang-tidy",
@@ -22,6 +23,7 @@ local custom_on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>lt", "<cmd>ClangdSymbolInfo<cr>", opts)
   vim.keymap.set("n", "<leader>lm", "<cmd>ClangdMemoryUsage<cr>", opts)
 
+  require("clangd_extensions.inlay_hints").setup_autocmd()
   require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
@@ -35,7 +37,6 @@ local custom_on_init = function(client, bufnr)
   require("clangd_extensions.config").setup {}
   -- Set up AST state stuff
   require("clangd_extensions.ast").init()
-  require("clangd_extensions.inlay_hints").setup_autocmd()
 
   vim.cmd [[
   command ClangdToggleInlayHints lua require('clangd_extensions.inlay_hints').toggle_inlay_hints()
