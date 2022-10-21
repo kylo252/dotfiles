@@ -149,7 +149,7 @@
     "cpu": {
         "format": "&#8239; {usage}%",
         "tooltip": true,
-        "interval": 3,
+        "interval": 1,
         "on-click": "alacritty --command procs --sortd cpu --watch-interval 2"
     },
     "memory": {
