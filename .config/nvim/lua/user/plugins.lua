@@ -107,6 +107,7 @@ packer.startup(function(use)
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
+    { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp" },
   }
 

@@ -29,6 +29,7 @@ M.config = function()
   if not status_cmp_ok then
     return
   end
+
   local status_luasnip_ok, luasnip = pcall(require, "luasnip")
   if not status_luasnip_ok then
     return
@@ -67,7 +68,7 @@ M.config = function()
       -- Let's play with this for a day or two
       ghost_text = true,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert {
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -94,8 +95,11 @@ M.config = function()
         "i",
         "s",
       }),
+
+      --[[ TODO: map it to something more useful? ]]
       ["<C-k>"] = cmp.mapping.select_prev_item(),
       ["<C-j>"] = cmp.mapping.select_next_item(),
+
       ["<Down>"] = cmp.mapping(
         cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
         { "i" }
@@ -106,8 +110,30 @@ M.config = function()
       ),
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-p>"] = { i = cmp.mapping.select_prev_item(), c = cmp.mapping.select_prev_item() },
-      ["<C-n>"] = { i = cmp.mapping.select_next_item(), c = cmp.mapping.select_next_item() },
+      ["<C-p>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "c",
+      }),
+      ["<C-n>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "c",
+      }),
       ["<C-c>"] = function()
         cmp.mapping.close()
         vim.cmd [[stopinsert]]
@@ -125,11 +151,21 @@ M.config = function()
   }
 
   -- Use buffer source for `/`
-  cmp.setup.cmdline("/", {
+  cmp.setup.cmdline({ "/", "?" }, {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       -- TODO: test out `rg` completion source
       { name = "buffer" },
     },
+  })
+
+  cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = "path" },
+    }, {
+      { name = "cmdline" },
+    }),
   })
 end
 return M
