@@ -37,11 +37,33 @@ function M.setup(server_name)
   require("lspconfig")[server_name].setup(config)
 end
 
-local get_workspace = function(config, bufnr)
+local function resolve_bufnr(bufnr)
+  vim.validate { bufnr = { bufnr, "n", true } }
+  if bufnr == nil or bufnr == 0 then
+    return vim.api.nvim_get_current_buf()
+  end
+  return bufnr
+end
+
+---@private
+---Resolve a workspace for a client
+---
+---@param markers string[] list of search patterns
+---@param bufnr number
+---@return table|nil list of `{ uri:string, name: string }`
+local function resolve_workspace(markers, bufnr)
+  if not markers then
+    return
+  end
+  bufnr = resolve_bufnr(bufnr)
   local bufname = vim.api.nvim_buf_get_name(bufnr)
   local buf_path = vim.fs.dirname(bufname)
-  local root_dir =
-    vim.fs.dirname(vim.fs.find(config.workspace_markers, { path = buf_path, upward = true })[1])
+  local anchor =
+    vim.fs.find(markers, { path = buf_path, stop = vim.loop.os_homedir(), upward = true })[1]
+  if not anchor then
+    return
+  end
+  local root_dir = vim.fs.dirname(anchor)
   local ws = {
     name = root_dir,
     uri = vim.uri_from_fname(root_dir),
@@ -49,22 +71,28 @@ local get_workspace = function(config, bufnr)
   return ws
 end
 
-local should_reuse_client = function(client, config)
-  -- TODO: should use add_workspace_folder once it's client aware
-  local bufnr = vim.api.nvim_get_current_buf()
-  local ws = get_workspace(config, bufnr)
+---@private
+---Returns true if a workspace marker for a given client is found
+---
+---@param client table see |vim.lsp.client|
+---@param config table
+---@param bufnr number
+---@return boolean|nil
+local function should_reuse_client(client, config, bufnr)
+  if client.name == config.name then
+    return
+  end
+  bufnr = resolve_bufnr(bufnr)
+  local ws = resolve_workspace(config.workspace_markers, bufnr)
   if not ws then
     return
   end
-  local found
   for _, folder in ipairs(client.workspace_folders) do
-    if folder.uri == ws.uri then
-      found = true
+    if ws.uri == folder.uri then
+      return true
     end
   end
-  if found and client.name == config.name then
-    return true
-  end
+  return vim.lsp.add_workspace_folder(ws, { id = client.id })
 end
 
 ---Setup a language server by providing a name
@@ -90,7 +118,8 @@ function M.setup_manual(server_name, overrrides)
   config.workspace_markers = config.workspace_markers or { ".git" }
 
   local bufnr = vim.api.nvim_get_current_buf()
-  config.workspace_folders = config.workspace_folders or { get_workspace(config, bufnr) }
+  config.workspace_folders = config.workspace_folders
+    or { resolve_workspace(config.workspace_markers, bufnr) }
   local opts = {
     reuse_client = should_reuse_client,
   }

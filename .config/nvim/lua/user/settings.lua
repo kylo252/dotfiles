@@ -21,11 +21,11 @@ vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.number = true -- set numbered lines
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.relativenumber = false -- set relative numbered lines
--- vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor.
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 2 -- always show tabs
--- vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
+vim.opt.sidescrolloff = 8 -- minimal number of screen lines to keep left and right of the cursor.
 vim.opt.signcolumn = "auto:1-2" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.smartcase = true -- overrides ignorecase (does not work for '*', '#')
 vim.opt.smartindent = false -- make indenting smarter again
@@ -50,15 +50,15 @@ vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-if vim.fn.has "wsl" == 1 then
-  -- vim.g.clipboard = {
-  --   copy = {
-  --     ["+"] = "win32yank -i --crlf",
-  --     ["*"] = "win32yank -i --crlf",
-  --   },
-  --   paste = {
-  --     ["+"] = "win32yank -o --lf",
-  --     ["*"] = "win32yank -o --lf",
-  --   },
-  -- }
+if vim.env.TMUX then
+  vim.g.clipboard = {
+    copy = {
+      ["+"] = "tmux load-buffer -w -",
+      ["*"] = "tmux load-buffer -w -",
+    },
+    paste = {
+      ["+"] = "tmux save-buffer -",
+      ["*"] = "tmux save-buffer -",
+    },
+  }
 end
