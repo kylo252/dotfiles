@@ -78,6 +78,7 @@
   print-committer-email = log --pretty='%ce' -1
   ############
   blameless = !env GIT_COMMITTER_NAME=\"$(git print-author-name)\" GIT_COMMITTER_EMAIL=\"$(git print-author-email)\" git
+  blameless-cp = !env GIT_COMMITTER_NAME=\"$(git log --pretty='%an' \"$1\"^!)\" GIT_COMMITTER_EMAIL=\"$(git log --pretty='%ae' \"$1\"^!)\" git cherry-pick
 [user]
   email = 59826753+kylo252@users.noreply.github.com
   name = kylo252
