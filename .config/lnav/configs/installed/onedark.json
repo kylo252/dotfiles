@@ -1,0 +1,205 @@
+{
+  "$schema": "https://lnav.org/schemas/config-v1.schema.json",
+  "ui": {
+    "theme-defs": {
+      "onedark": {
+        "vars": {
+          "bg0": "#282c34",
+          "bg1": "#3e4452",
+          "fg": "#abb2bf",
+          "black": "#181a1f",
+          "green": "#98c379",
+          "orange": "#d19a66",
+          "blue": "#61afef",
+          "yellow": "#e5c07b",
+          "cyan": "#56b6c2",
+          "red": "#e86671",
+          "grey": "#5c6370",
+          "magenta": "#c678dd",
+          "white": "#d6deeb",
+          "light_grey": "#848b98",
+          "dark_cyan": "#2b6f77",
+          "semantic_highlight_color": "semantic()"
+        },
+        "styles": {
+          "identifier": {
+            "color": "semantic()"
+          },
+          "text": {
+            "color": "$fg"
+          },
+          "alt-text": {
+            "color": "$fg",
+            "bold": true
+          },
+          "ok": {
+            "color": "$green",
+            "bold": true
+          },
+          "error": {
+            "color": "$red",
+            "bold": true
+          },
+          "warning": {
+            "color": "$orange",
+            "bold": true
+          },
+          "hidden": {
+            "color": "$yellow",
+            "bold": true
+          },
+          "adjusted-time": {
+            "color": "$magenta"
+          },
+          "skewed-time": {
+            "color": "$yellow"
+          },
+          "offset-time": {
+            "color": "$green"
+          },
+          "invalid-msg": {
+            "color": "$blue"
+          },
+          "focused": {
+            "color": "$bg0",
+            "background-color": "$fg"
+          },
+          "disabled-focused": {
+            "color": "$blue",
+            "background-color": "$fg"
+          },
+          "popup": {
+            "color": "$fg",
+            "background-color": "$bg1"
+          },
+          "h1": {
+            "underline": true
+          },
+          "h2": {
+            "underline": true
+          },
+          "h3": {
+            "underline": true
+          },
+          "h4": {
+            "underline": true
+          },
+          "h5": {
+            "underline": true
+          },
+          "h6": {
+            "underline": true
+          }
+        },
+        "syntax-styles": {
+          "keyword": {
+            "color": "$purple"
+          },
+          "string": {
+            "color": "$yellow"
+          },
+          "comment": {
+            "color": "$blue"
+          },
+          "doc-directive": {
+            "color": "$orange"
+          },
+          "variable": {
+            "color": "$orange"
+          },
+          "symbol": {
+            "color": "$cyan"
+          },
+          "number": {
+            "color": "$red"
+          },
+          "re-special": {
+            "color": "$cyan"
+          },
+          "re-repeat": {
+            "color": "$yellow"
+          },
+          "diff-delete": {
+            "color": "$red"
+          },
+          "diff-add": {
+            "color": "$green"
+          },
+          "diff-section": {
+            "color": "$magenta"
+          },
+          "file": {
+            "color": "$blue"
+          },
+          "spectrogram-low": {
+            "background-color": "$green"
+          },
+          "spectrogram-medium": {
+            "background-color": "$yellow"
+          },
+          "spectrogram-high": {
+            "background-color": "$red"
+          }
+        },
+        "status-styles": {
+          "disabled-title": {
+            "color": "$green",
+            "background-color": "$red",
+            "bold": true
+          },
+          "title": {
+            "color": "$purple",
+            "background-color": "$red",
+            "bold": true
+          },
+          "subtitle": {
+            "color": "$white",
+            "background-color": "$dark_cyan"
+          },
+          "info": {
+            "color": "$fg",
+            "background-color": "$bg1"
+          },
+          "text": {
+            "color": "$white",
+            "background-color": "$bg1"
+          },
+          "warn": {
+            "color": "$orange",
+            "background-color": "$bg1"
+          },
+          "alert": {
+            "color": "$red",
+            "background-color": "$bg1"
+          },
+          "active": {
+            "color": "$cyan",
+            "background-color": "$bg1"
+          },
+          "inactive": {
+            "color": "$white",
+            "background-color": "$bg1"
+          },
+          "inactive-alert": {
+            "color": "$red",
+            "background-color": "$bg1"
+          }
+        },
+        "log-level-styles": {
+          "warning": {
+            "color": "$orange"
+          },
+          "error": {
+            "color": "$red"
+          },
+          "critical": {
+            "color": "$red"
+          },
+          "fatal": {
+            "color": "$red"
+          }
+        }
+      }
+    }
+  }
+}
