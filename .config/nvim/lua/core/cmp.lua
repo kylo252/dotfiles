@@ -69,11 +69,35 @@ M.config = function()
       ghost_text = true,
     },
     mapping = cmp.mapping.preset.insert {
+      ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+      ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+      ["<Down>"] = cmp.mapping(
+        cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+        { "i" }
+      ),
+      ["<Up>"] = cmp.mapping(
+        cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+        { "i" }
+      ),
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-y>"] = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
+          end
+        end,
+      },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          feedkeys("<Plug>luasnip-expand-or-jump", "")
+        elseif luasnip.expand_or_locally_jumpable() then
+          luasnip.expand_or_jump()
+        elseif luasnip.jumpable(1) then
+          luasnip.jump(1)
         elseif has_words_before() then
           cmp.complete()
         else
@@ -87,7 +111,7 @@ M.config = function()
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          feedkeys("<Plug>luasnip-jump-prev", "")
+          luasnip.jump(-1)
         else
           fallback()
         end
@@ -95,49 +119,6 @@ M.config = function()
         "i",
         "s",
       }),
-
-      --[[ TODO: map it to something more useful? ]]
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-j>"] = cmp.mapping.select_next_item(),
-
-      ["<Down>"] = cmp.mapping(
-        cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-        { "i" }
-      ),
-      ["<Up>"] = cmp.mapping(
-        cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-        { "i" }
-      ),
-      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-p>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "c",
-      }),
-      ["<C-n>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "c",
-      }),
-      ["<C-c>"] = function()
-        cmp.mapping.close()
-        vim.cmd [[stopinsert]]
-      end,
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
@@ -147,6 +128,34 @@ M.config = function()
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
+      ["<C-c>"] = function()
+        cmp.mapping.close()
+        vim.cmd [[stopinsert]]
+      end,
+      ["<C-p>"] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          return false
+        end
+      end, {
+        "i",
+        "c",
+      }),
+      ["<C-n>"] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          return false
+        end
+      end, {
+        "i",
+        "c",
+      }),
     },
   }
 

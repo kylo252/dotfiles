@@ -49,9 +49,9 @@ function M.setup()
   -- Get a reference to the original signs handler
   local orig_signs_handler = vim.diagnostic.handlers.signs
   vim.diagnostic.handlers.signs = {
-    show = function(ns, bufnr, _, opts)
+    show = function(ns, bufnr, diagnostics, opts)
       -- diagnostics from the whole buffer, not just those passed to the handler
-      local diagnostics = vim.diagnostic.get(bufnr)
+      -- local diagnostics = vim.diagnostic.get(bufnr) -- disabled because slow!
 
       -- perf: avoid showing too many signs
       if #diagnostics > 20 then
