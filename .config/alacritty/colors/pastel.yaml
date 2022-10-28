@@ -11,7 +11,7 @@ colors:
     green:   '#BAE67E'
     yellow:  '#FFA759'
     blue:    '#73D0FF'
-    magenta: '#FFD580'
+    magenta: '#C678DD'
     cyan:    '#95E6CB'
     white:   '#C7C7C7'
 
@@ -22,7 +22,7 @@ colors:
     green:   '#98c379'
     yellow:  '#e0af68'
     blue:    '#61afef'
-    magenta: '#c678dd'
+    magenta: '#a626a4'
     cyan:    '#56b6c2'
     white:   '#abb2bf'
 
@@ -54,3 +54,13 @@ colors:
   vi_mode_cursor:
     text: CellBackground
     cursor: CellForeground
+
+  search:
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+    matches:
+     foreground: '#191919'
+     background: '#5c5d5c'
+    focused_match:
+     foreground: '#191919'
+     background: '#C7C7C7'

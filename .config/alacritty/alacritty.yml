@@ -33,80 +33,12 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-colors:
-  # Default colors
-  primary:
-    background: '#202734'
-    foreground: '#CBCCC6'
-
-  # Normal colors
-  normal:
-    black:   '#191E2A'
-    red:     '#FF3333'
-    green:   '#BAE67E'
-    yellow:  '#FFA759'
-    blue:    '#73D0FF'
-    magenta: '#FFD580'
-    cyan:    '#95E6CB'
-    white:   '#C7C7C7'
-
-  # Bright colors
-  bright:
-    black:   '#31353f' # also serves as "dark gray"
-    red:     '#e86671'
-    green:   '#98c379'
-    yellow:  '#e0af68'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf'
-
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  dim:
-   black:   '#131415'
-   red:     '#864343'
-   green:   '#777c44'
-   yellow:  '#9e824c'
-   blue:    '#556a7d'
-   magenta: '#75617b'
-   cyan:    '#5b7d78'
-   white:   '#828482'
-
-  indexed_colors:
-    - { index: 16, color: '#d19a66' }
-    - { index: 17, color: '#f65866' }
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor. If these are unset,
-  # the cursor color will be the inverse of the cell color.
-  # cursor:
-  #   text: '#191919'
-  #   cursor: '#d8dee9'
-
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
-
-  search:
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    matches:
-     foreground: '#191919'
-     background: '#5c5d5c'
-    focused_match:
-     foreground: '#191919'
-     background: '#C7C7C7'
-
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
-  WINIT_X11_SCALE_FACTOR: '1.0'
   TERM: alacritty
+  # WINIT_X11_SCALE_FACTOR: '1.0'
 
 window:
   # Window padding (changes require restart)
