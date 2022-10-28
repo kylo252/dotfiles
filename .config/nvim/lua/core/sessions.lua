@@ -17,7 +17,7 @@ end
 
 local default_session_name = function()
   -- get the cwd but strip the homeprefix and replace the path_sep with underscores
-  local def_name = fnamemodify(vim.fn.getcwd(), ":~:?")
+  local def_name = fnamemodify(vim.loop.cwd(), ":~:?")
   def_name = def_name:gsub("~" .. path_sep, ""):gsub(path_sep, "__")
   return def_name
 end

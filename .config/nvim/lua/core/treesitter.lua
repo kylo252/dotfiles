@@ -2,12 +2,6 @@
 local M = {}
 function M.setup()
   --[[ attempt to enable sh ]]
-  local bash_parser = vim.api.nvim_get_runtime_file("parser/bash*", false)[1]
-  vim.treesitter.require_language("sh", bash_parser, false, "bash")
-  assert(vim.treesitter.inspect_language "sh", "parser created")
-  assert(vim.treesitter.get_parser(nil, "sh", nil), "languageTree created")
-  require("nvim-treesitter.parsers").filetype_to_parsername["sh"] = "bash"
-
   require("nvim-treesitter.install").compilers = { "clang", "gcc" }
 
   require("nvim-treesitter.configs").setup {
@@ -70,6 +64,15 @@ function M.setup()
       },
     },
   }
+
+  local bash_parser = vim.api.nvim_get_runtime_file("parser/bash*", false)[1]
+  if not bash_parser then
+    return
+  end
+  vim.treesitter.require_language("sh", bash_parser, false, "bash")
+  assert(vim.treesitter.inspect_language "sh", "parser created")
+  assert(vim.treesitter.get_parser(nil, "sh", nil), "languageTree created")
+  require("nvim-treesitter.parsers").filetype_to_parsername["sh"] = "bash"
 end
 
 return M
