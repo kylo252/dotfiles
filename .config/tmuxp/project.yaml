@@ -4,3 +4,5 @@ windows:
 - window_name: editor
   panes:
     - nvim +'Telescope zoxide list'
+- window_name: neovim
+  start_directory: ${XDG_DATA_HOME}/neovim

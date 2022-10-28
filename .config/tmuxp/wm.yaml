@@ -1,9 +1,10 @@
 session_name: wm
 windows:
 - window_name: hyprland
-  start_directory: "${XDG_CONFIG_HOME}/hypr"
+  start_directory: "${XDG_CONFIG_HOME}"
   panes:
-    - nvim hyprland.conf ~/.config/waybar/config ~/.local/share/hyprland-git/wiki/pages/Home.md
+    - nvim hypr/hyprland.conf waybar/{config,style.css}
+    - nvim ~/.local/share/hyprland-git/wiki/pages/Home.md
 - window_name: rofi
   start_directory: "${XDG_CONFIG_HOME}/rofi"
   panes:
@@ -12,4 +13,3 @@ windows:
   start_directory: "${XDG_CONFIG_HOME}/awesome"
   panes:
     - nvim rc.lua keys.lua apps.lua
-    - nvim "${XDG_CACHE_HOME}/dots/awesome-dotfiles/awesome/rc.lua"
