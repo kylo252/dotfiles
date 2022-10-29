@@ -62,3 +62,9 @@ if vim.env.TMUX then
     },
   }
 end
+vim.filetype.add {
+  extension = {
+    ["*.pc"] = "csh",
+    ["*.pc.in"] = "csh",
+  },
+}

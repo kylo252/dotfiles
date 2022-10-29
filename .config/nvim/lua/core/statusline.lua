@@ -33,14 +33,19 @@ local conditions = {
     return vim.fn.empty(vim.fn.expand "%:t") ~= 1
   end,
   hide_in_width = function()
-    return vim.fn.winwidth(0) > 70
-  end,
-  check_git_workspace = function()
-    local filepath = vim.fn.expand "%:p:h"
-    local gitdir = vim.fn.finddir(".git", filepath .. ";")
-    return gitdir and #gitdir > 0 and #gitdir < #filepath
+    return vim.o.columns > 100
   end,
 }
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
 
 local components = {
   diagnostics = {
@@ -96,6 +101,22 @@ local components = {
     cond = nil,
     path = 1,
   },
+  diff = {
+    "diff",
+    source = diff_source,
+    symbols = {
+      added = " ",
+      modified = " ",
+      removed = " ",
+    },
+    padding = { left = 2, right = 1 },
+    diff_color = {
+      added = { fg = colors.green },
+      modified = { fg = colors.yellow },
+      removed = { fg = colors.red },
+    },
+    cond = nil,
+  },
 }
 
 local config = {
@@ -110,7 +131,7 @@ local config = {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", "diff" },
+    lualine_b = { "branch", components.diff },
     lualine_c = { components.filename },
     lualine_x = {
       { "lsp_progress", colors = { use = true } },
