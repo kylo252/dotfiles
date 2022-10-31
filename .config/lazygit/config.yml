@@ -19,6 +19,7 @@ gui:
   skipNoStagedFilesWarning: false
   skipStashWarning: false
   skipUnstageLineWarning: false
+  splitDiff: auto
   theme:
     lightTheme: false # For terminals with a light background
     activeBorderColor:
@@ -56,7 +57,8 @@ git:
     mode: 'ff-only' # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: true
   autoRefresh: true
-  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative
+    --pretty=medium {{branchName}} --
   allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate
     --date=relative  --pretty=medium
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
@@ -181,8 +183,8 @@ keybinding:
     copyPullRequestURL: <c-y>
     checkoutBranchByName: c
     forceCheckoutBranch: F
-    rebaseBranch: r
-    renameBranch: R
+    rebaseBranch: R
+    renameBranch: r
     mergeIntoCurrentBranch: M
     viewGitFlowOptions: i
     fastForward: f
@@ -200,6 +202,7 @@ keybinding:
     moveDownCommit: J
     moveUpCommit: K
     amendToCommit: A
+    resetCommitAuthor: a
     pickCommit: p
     revertCommit: t
     cherryPickCopy: c
@@ -228,10 +231,6 @@ keybinding:
     bulkMenu: b
 
 customCommands:
-  - key: 'U'
-    command: "git smu" # maybe it's not necessary
-    context: 'files'
-    loadingText: 'Updating all submodules'
   - key: '<c-g>'
     command: "git reuse-msg"
     context: 'files'
