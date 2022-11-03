@@ -9,6 +9,8 @@ systemctl --user import-environment "${env_vars[@]}"
 hash dbus-update-activation-environment \
   && dbus-update-activation-environment --systemd "${env_vars[@]}"
 
+sleep 1
+
 systemctl --user restart \
   xdg-desktop-portal \
   xdg-desktop-portal-wlr \
