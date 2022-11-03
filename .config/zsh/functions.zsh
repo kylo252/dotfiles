@@ -35,8 +35,12 @@ function ta() {
 }
 
 function ts() {
-  local session="$(tmuxp ls | fzf --exit-0)"
-  tmuxp load -y "$session"
+  if command -v smug &>/dev/null; then
+    smug start default -a
+  else
+    local session="$(tmuxp ls | fzf --exit-0)"
+    tmuxp load -y "$session"
+  fi
 }
 
 # an alias is not enough since we can only pass `depth` flag as a git command

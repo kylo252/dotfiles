@@ -1,4 +1,9 @@
 session_name: default
 windows:
-- window_name: main
-  start_directory: ${HOME}
+- layout: tiled
+  panes:
+    - focus: true
+    - git dots status
+- panes:
+    - nvim +'Telescope zoxide list'
+  start_directory: ${XDG_DATA_HOME}
