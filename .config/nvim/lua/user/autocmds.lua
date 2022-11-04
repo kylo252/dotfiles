@@ -15,23 +15,15 @@ local base_definitions = {
     "FileType",
     {
       group = "_filetype_settings",
-      pattern = "qf",
-      command = "setl nobuflisted",
-    },
-  },
-  {
-    "FileType",
-    {
-      group = "_filetype_settings",
       pattern = { "gitcommit", "markdown" },
-      command = "setl fdm=indent fdl=2 spc= conceallevel=1 list lcs=trail:* tw=100",
+      command = "setl fdm=indent fdl=4 spc= conceallevel=1 list lcs=trail:* tw=100",
     },
   },
   {
     "FileType",
     {
       group = "_buffer_mappings",
-      pattern = { "qf", "help", "man", "floaterm", "lspinfo", "lsp-installer", "null-ls-info" },
+      pattern = { "qf", "help", "man", "floaterm", "lspinfo", "mason", "null-ls-info" },
       command = "nnoremap <silent> <buffer> q :close<CR>",
     },
   },
@@ -44,14 +36,6 @@ local base_definitions = {
       callback = function()
         require("cmp").setup.buffer { enabled = false }
       end,
-    },
-  },
-  {
-    { "BufWinEnter", "BufRead", "BufNewFile" },
-    {
-      group = "_format_options",
-      pattern = "*",
-      command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
   },
   {
@@ -117,11 +101,6 @@ end
 --- This is safer than trying to delete the augroup itself
 ---@param name string the augroup name
 function M.clear_augroup(name)
-  -- defer the function in case the autocommand is still in-use
-  if vim.api.nvim_get_autocmds { group = name } then
-    vim.notify("ignoring request to clear autocmds from non-existent group " .. name)
-    return
-  end
   vim.schedule(function()
     local status_ok, _ = xpcall(function()
       vim.api.nvim_clear_autocmds { group = name }
