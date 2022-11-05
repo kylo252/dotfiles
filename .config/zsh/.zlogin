@@ -12,6 +12,9 @@
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
   export GDK_BACKEND=wayland
   export MOZ_ENABLE_WAYLAND=1
+  # if [[ ! "$XDG_DATA_DIRS" =~ "$XDG_DATA_HOME" ]]; then
+  #   export XDG_DATA_DIRS="$XDG_DATA_HOME:$XDG_DATA_DIRS"
+  # fi
 fi
 
 # if tmux is executable and not inside a tmux session, then try to attach.

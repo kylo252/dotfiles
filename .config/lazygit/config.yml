@@ -243,3 +243,7 @@ customCommands:
     command: "git rebase --abort"
     context: 'commits'
     loadingText: 'rebase --abort'
+  - key: '<c-f>'
+    command: "git fetch --all"
+    context: 'files'
+    loadingText: 'fetch --all'
