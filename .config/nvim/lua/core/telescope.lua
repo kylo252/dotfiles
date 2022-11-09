@@ -2,6 +2,7 @@ local M = {}
 
 function M.config()
   local _, actions = pcall(require, "telescope.actions")
+  local _, builtin = pcall(require, "telescope.builtin")
   local _, themes = pcall(require, "telescope.themes")
 
   return {
@@ -23,15 +24,17 @@ function M.config()
       },
       vimgrep_arguments = {
         "rg",
+        "--color=never",
         "--no-heading",
         "--hidden",
         "--with-filename",
         "--line-number",
         "--column",
         "--smart-case",
+        "--glob=!.git/",
       },
+      winblend = 0,
       find_command = { "fd", "--type=file", "--hidden" },
-      file_sorter = require("telescope.sorters").fuzzy_with_index_bias,
       mappings = {
         i = {
           ["<C-c>"] = actions.close,
@@ -68,36 +71,31 @@ function M.config()
         override_file_sorter = true,
         case_mode = "smart_case",
       },
-    },
-  }
-end
-
-function M.setup_z()
-  local _, builtin = pcall(require, "telescope.builtin")
-  local _, themes = pcall(require, "telescope.themes")
-
-  require("telescope._extensions.zoxide.config").setup {
-    previewer = false,
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 15,
-      width = 0.5,
-    },
-    prompt = ">> ",
-    prompt_title = "~ Zoxide ~",
-    mappings = {
-      ["<C-f>"] = {
-        action = function(selection)
-          builtin.find_files(themes.get_ivy { cwd = selection.path })
-          vim.cmd [[normal! A]]
-        end,
-      },
-      ["<C-g>"] = {
-        action = function(selection)
-          builtin.live_grep(themes.get_ivy { cwd = selection.path })
-          vim.cmd [[normal! A]]
-        end,
+      zoxide = {
+        prompt = ">> ",
+        prompt_title = "~ Zoxide ~",
+        mappings = {
+          default = {
+            action = function(selection)
+              vim.api.nvim_set_current_dir(selection.path)
+              vim.cmd("lcd " .. selection.path)
+            end,
+            after_action = function(selection)
+              dump(selection)
+              print("Directory changed to " .. selection.path)
+            end,
+          },
+          ["<C-f>"] = {
+            action = function(selection)
+              builtin.find_files { cwd = selection.path }
+            end,
+          },
+          ["<C-g>"] = {
+            action = function(selection)
+              builtin.live_grep { cwd = selection.path }
+            end,
+          },
+        },
       },
     },
   }
@@ -105,6 +103,7 @@ end
 
 function M.setup()
   local opts = M.config()
+
   require("telescope").setup(opts)
   local finders = require "core.telescope.custom-finders"
   local keymaps = {
@@ -120,12 +119,10 @@ function M.setup()
   }
   require("user.keymaps").load(keymaps)
 
-  vim.cmd [[cmap <M-r> <Plug>(TelescopeFuzzyCommandSearch)]]
-
-  M.setup_z()
   pcall(function()
     require("telescope").load_extension "fzf"
     require("telescope").load_extension "projects"
+    require("telescope").load_extension "zoxide"
   end)
 end
 
