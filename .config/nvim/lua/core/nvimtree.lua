@@ -31,9 +31,9 @@ function M.setup()
     sort_by = "name",
     root_dirs = {},
     prefer_startup_root = false,
-    sync_root_with_cwd = false,
+    sync_root_with_cwd = true,
     reload_on_bufenter = false,
-    respect_buf_cwd = true,
+    respect_buf_cwd = false,
     on_attach = "disable",
     remove_keymaps = false,
     select_prompts = false,
@@ -120,7 +120,7 @@ function M.setup()
     actions = {
       use_system_clipboard = true,
       change_dir = {
-        enable = true,
+        enable = false,
         global = false,
         restrict_above_cwd = false,
       },

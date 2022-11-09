@@ -51,6 +51,24 @@ local base_collection = {
     },
   },
   { name = "ToggleFormatOnSave", fn = require("user.autocmds").toggle_format_on_save },
+  {
+    name = "NullLsToggle",
+    fn = function(opts)
+      require("null-ls.sources").toggle(opts.args)
+    end,
+    opts = {
+      nargs = 1,
+      complete = function()
+        local s = require "null-ls.sources"
+        local available_sources = s.get_available()
+        local list = {}
+        for _, source in ipairs(available_sources) do
+          list[#list + 1] = source.name
+        end
+        return list
+      end,
+    },
+  },
 }
 
 function M.load_commands(collection)
