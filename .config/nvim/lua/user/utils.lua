@@ -76,6 +76,12 @@ function M.is_directory(filename)
   return stat and stat.type == "directory" or false
 end
 
+function M.join_paths(...)
+  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
+  local result = table.concat({ ... }, path_sep)
+  return result
+end
+
 function M.reset_cache()
   local packer_cache = vim.fn.stdpath "config" .. "/plugin/packer_compiled.lua"
   if M.is_file(packer_cache) then
@@ -94,13 +100,7 @@ function M.on_dir_changed()
   job:start()
 end
 
-function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
-  return ...
-end
-
-function _G.log_entry(...)
+local function log_entry(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   local log = require("plenary.log").new {
     level = "info",
@@ -112,14 +112,7 @@ function _G.log_entry(...)
   return ...
 end
 
-function _G.require_clean(m)
-  package.loaded[m] = nil
-  _G[m] = nil
-  local _, module = pcall(require, m)
-  return module
-end
-
-function _G.require_safe(m)
+local function require_safe(m)
   local status_ok, module = pcall(require, m)
   if not status_ok then
     local trace = debug.getinfo(2, "SL")
@@ -130,5 +123,20 @@ function _G.require_safe(m)
   end
   return module
 end
+
+local function reload(m)
+  local reloader = require_safe "plenary.reload"
+  if reloader then
+    reloader.reload_module(m, false)
+  else
+    package.loaded[m] = nil
+  end
+  return require_safe(m)
+end
+
+_G.reload = reload
+_G.log_entry = log_entry
+_G.P = vim.pretty_print
+_G.dump = vim.pretty_print
 
 return M

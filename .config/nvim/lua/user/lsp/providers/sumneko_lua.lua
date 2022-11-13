@@ -4,6 +4,7 @@ local default_workspace = {
     require("neodev.config").types(),
   },
 
+  checkThirdParty = false,
   maxPreload = 5000,
   preloadFileSize = 10000,
 }
@@ -47,7 +48,20 @@ local opts = {
         version = "LuaJIT",
         special = {
           reload = "require",
+          require_clean = "require",
         },
+        path = {
+          -- paths for meta/3rd libraries
+          "library/?.lua",
+          "library/?/init.lua",
+          -- Neovim lua files, config and plugins
+          "lua/?.lua",
+          "lua/?/init.lua",
+          -- default
+          "./?.lua",
+          "./init.lua",
+        },
+        -- pathStrict = true, -- seems broken for now
       },
       diagnostics = {
         globals = { "vim", "lvim", "packer_plugins", "reload" },

@@ -96,19 +96,19 @@ function M.setup_gitlinker()
     normal_mode = {
       ["<leader>gy"] = {
         function()
-          require_safe("gitlinker").get_buf_range_url "n"
+          gitlinker.get_buf_range_url "n"
         end,
         "Copy line URL",
       },
       ["<leader>gYy"] = {
         function()
-          require_safe("gitlinker").get_buf_range_url("n", { remote = "origin" })
+          gitlinker.get_buf_range_url("n", { remote = "origin" })
         end,
         "Copy line URL (origin)",
       },
       ["<leader>gYr"] = {
         function()
-          require("gitlinker").get_repo_url { remote = "origin" }
+          gitlinker.get_repo_url { remote = "origin" }
         end,
         "Copy repo URL",
       },
@@ -122,13 +122,13 @@ function M.setup_gitlinker()
     visual_mode = {
       ["<leader>gy"] = {
         function()
-          require_safe("gitlinker").get_buf_range_url "v"
+          gitlinker.get_buf_range_url "v"
         end,
         "Copy range URL",
       },
       ["<leader>gY"] = {
         function()
-          require_safe("gitlinker").get_buf_range_url("v", { remote = "origin" })
+          gitlinker.get_buf_range_url("v", { remote = "origin" })
         end,
         "Copy range URL (origin)",
       },

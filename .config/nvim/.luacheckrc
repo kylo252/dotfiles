@@ -1,3 +1,4 @@
+---@diagnostic disable
 -- vim: ft=lua tw=80
 
 stds.nvim = {
@@ -8,10 +9,10 @@ stds.nvim = {
     "jit",
     "os",
     "join_paths",
-    "require_clean",
-    "require_safe",
+    "reload",
     "log_entry",
     "dump",
+    "P",
   },
 }
 std = "lua51+nvim"

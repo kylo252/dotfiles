@@ -1,14 +1,10 @@
 local M = {}
 
 local uv = vim.loop
+local join_paths = require("user.utils").join_paths
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
 local fnameescape = vim.fn.fnameescape
 local fnamemodify = vim.fn.fnamemodify
-
-local function join_paths(...)
-  local result = table.concat({ ... }, path_sep)
-  return result
-end
 
 local function is_directory(filename)
   local stat = vim.loop.fs_stat(filename)

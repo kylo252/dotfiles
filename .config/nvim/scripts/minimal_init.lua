@@ -34,12 +34,6 @@ local function load_plugins()
   }
 end
 
-function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
-  return ...
-end
-
 local load_config = function()
   vim.lsp.set_log_level "trace"
   require("vim.lsp.log").set_format_func(vim.inspect)
