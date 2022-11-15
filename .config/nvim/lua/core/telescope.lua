@@ -80,10 +80,6 @@ function M.config()
               vim.api.nvim_set_current_dir(selection.path)
               vim.cmd("lcd " .. selection.path)
             end,
-            after_action = function(selection)
-              dump(selection)
-              print("Directory changed to " .. selection.path)
-            end,
           },
           ["<C-f>"] = {
             action = function(selection)
