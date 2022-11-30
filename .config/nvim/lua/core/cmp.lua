@@ -6,10 +6,6 @@ local has_words_before = function()
     and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
-local feedkeys = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 local cmp_format_layout = function(entry, vim_item)
   local icons = require("user.lsp").get_lsp_kind()
   vim_item.kind = icons[vim_item.kind]
@@ -83,13 +79,6 @@ M.config = function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-y>"] = cmp.mapping {
         i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
       },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -122,7 +111,6 @@ M.config = function()
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
       },
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -142,7 +130,6 @@ M.config = function()
         end
       end, {
         "i",
-        "c",
       }),
       ["<C-n>"] = cmp.mapping(function()
         if cmp.visible() then
@@ -154,27 +141,9 @@ M.config = function()
         end
       end, {
         "i",
-        "c",
       }),
     },
   }
-
-  -- Use buffer source for `/`
-  cmp.setup.cmdline({ "/", "?" }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      -- TODO: test out `rg` completion source
-      { name = "buffer" },
-    },
-  })
-
-  cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = "path" },
-    }, {
-      { name = "cmdline" },
-    }),
-  })
 end
+
 return M
