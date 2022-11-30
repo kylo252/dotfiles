@@ -44,6 +44,7 @@ function M.config()
           ["<S-Down>"] = actions.cycle_previewers_next,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<C-h>"] = actions.which_key, -- keys from pressing <C-/>
+          ["<M-z>"] = actions.to_fuzzy_refine,
           -- ["<C-i>"] = my_cool_custom_action,
         },
         n = {

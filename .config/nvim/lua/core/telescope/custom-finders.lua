@@ -50,14 +50,6 @@ function M.grep_string_v2(opts)
     :find()
 end
 
-function M.fuzzy_grep_string(query)
-  query = query or {}
-  builtin.grep_string(themes.get_ivy {
-    prompt_title = "Fuzzy grep string, initial query: " .. query,
-    search = query,
-  })
-end
-
 function M.grep_dotfiles()
   M.dynamic_grep {
     search_dirs = { vim.fn.stdpath "config", os.getenv "ZDOTDIR" },
@@ -251,11 +243,8 @@ function M.dynamic_grep(opts)
       -- end
 
       map("i", "<C-space>", fuzzy_filter_results)
-      map("n", "<C-space>", fuzzy_filter_results)
       map("i", "<C-f>", dynamic_filetype)
-      map("n", "<C-f>", dynamic_filetype)
       map("i", "<C-g>", dynamic_filetype_skip)
-      map("n", "<C-g>", dynamic_filetype_skip)
       -- map("i", "<M-r>", reset_search)
       -- map("n", "<M-r>", reset_search)
       return true
