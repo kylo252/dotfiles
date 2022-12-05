@@ -130,6 +130,7 @@ bin_list=(
   "$GOPATH/bin"
   "$XDG_CONFIG_HOME/rofi/bin"
   "$XDG_CONFIG_HOME/tmux/bin"
+  "$XDG_DATA_HOME/nvim/mason/bin"
   )
 
 for extra in "${bin_list[@]}"; do
