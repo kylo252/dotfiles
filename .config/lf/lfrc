@@ -90,6 +90,17 @@ cmd open ${{
   esac
 }}
 
+cmd toggle-preview ${{
+  case $(file --mime-type "$f" -b) in
+    text/*)
+      ~/.config/lf/preview "$f"
+      ;;
+    *)
+      ~/.config/lf/preview "$f" | bat --paging=always --language=yaml
+      ;;
+  esac
+}}
+
 cmd open_with_lnav ${{
   lnav "$f"
 }}
@@ -156,7 +167,7 @@ map L bottom
 map u unselect
 map br bulkrename
 map r push :rename<space>
-map i $bat --pager='less -Rf' --color=always --number --wrap auto --paging=always "$f" 
+map i toggle-preview
 
 # create dir/file
 map ad push $mkdir<space>

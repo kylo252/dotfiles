@@ -11,11 +11,11 @@ fi
 
 image_preview="$HOME/.config/lf/image"
 # Clear the last preview (if any)
-"$image_preview" clear
+# "$image_preview" clear
 
 # Calculate where the image should be placed on the screen.
 num=$(printf "%0.f\n" "$(echo "$(tput cols) / 2" | bc)")
-numb=$(printf "%0.f\n" "$(echo "$(tput cols) - "$num" - 1" | bc)")
+numb=$(printf "%0.f\n" "$(echo "$(tput cols) - $num - 1" | bc)")
 numc=$(printf "%0.f\n" "$(echo "$(tput lines) - 2" | bc)")
 
 case "$file" in
