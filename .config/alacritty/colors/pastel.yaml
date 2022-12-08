@@ -6,25 +6,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#191E2A'
+    black:   '#0f172a'
     red:     '#FF3333'
     green:   '#BAE67E'
     yellow:  '#FFA759'
     blue:    '#73D0FF'
     magenta: '#C678DD'
     cyan:    '#95E6CB'
-    white:   '#C7C7C7'
+    white:   '#e2e8f0'
 
   # Bright colors
   bright:
-    black:   '#31353f' # also serves as "dark gray"
+    black:   '#475569' # also serves as "dark gray"
     red:     '#e86671'
     green:   '#98c379'
     yellow:  '#e0af68'
     blue:    '#61afef'
     magenta: '#a626a4'
     cyan:    '#56b6c2'
-    white:   '#abb2bf'
+    white:   '#f8fafc'
 
   # Dim colors
   #
@@ -38,11 +38,11 @@ colors:
    blue:    '#556a7d'
    magenta: '#75617b'
    cyan:    '#5b7d78'
-   white:   '#828482'
+   white:   '#94a3b8'
 
-  indexed_colors:
-    - { index: 16, color: '#d19a66' }
-    - { index: 17, color: '#f65866' }
+  # indexed_colors:
+  #   - { index: 16, color: '#d19a66' }
+  #   - { index: 17, color: '#f65866' }
   # Cursor colors
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,

@@ -12,8 +12,8 @@ hash dbus-update-activation-environment \
 sleep 1
 
 systemctl --user restart \
+  xdg-desktop-portal-hyprland \
   xdg-desktop-portal \
-  xdg-desktop-portal-wlr \
   pipewire \
   pipewire-pulse \
   wireplumber
@@ -23,7 +23,7 @@ systemctl --user restart \
 # sleep 4
 # killall xdg-desktop-portal-wlr
 # killall xdg-desktop-portal
-#
+
 # /usr/lib/xdg-desktop-portal-wlr &
 # sleep 4
 # /usr/lib/xdg-desktop-portal &
