@@ -40,6 +40,7 @@ function __setup_cli_colors() {
 function __setup_xdg() {
   export CARGO_HOME="$XDG_DATA_HOME/cargo"
   export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+  export FNM_DIR="$XDG_DATA_HOME/fnm"
   export GEM_HOME="$XDG_DATA_HOME/gem"
   export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
   export GNUPGHOME="$XDG_DATA_HOME/gnupg"
