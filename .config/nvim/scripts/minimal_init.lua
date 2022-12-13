@@ -36,6 +36,7 @@ end
 
 local load_config = function()
   vim.lsp.set_log_level "trace"
+  vim.cmd [[syntax off]]
   require("vim.lsp.log").set_format_func(vim.inspect)
   local nvim_lsp = require "lspconfig"
   local on_attach = function(_, bufnr)
@@ -66,10 +67,11 @@ local load_config = function()
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
     vim.keymap.set("n", "<space>li", "<cmd>LspInfo<CR>", opts)
     vim.keymap.set("n", "<space>lI", "<cmd>Mason<CR>", opts)
+    vim.keymap.set("n", "<space>ll", vim.fn.execute("edit " .. vim.lsp.get_log_path()), opts)
   end
 
   -- Add the server that troubles you here, e.g. "clangd", "pyright", "tsserver"
-  local name = "sumneko_lua"
+  local name = "clangd"
 
   local setup_opts = {
     on_attach = on_attach,
