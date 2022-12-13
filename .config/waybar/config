@@ -15,12 +15,11 @@
         "tray",
         "cpu",
         // "idle_inhibitor",
-        // "hyprland/language",
         "temperature",
         "pulseaudio",
         "network",
+        "custom/language",
         "upower",
-        // "battery",
         "clock"
     ],
     "wlr/workspaces": {
@@ -48,6 +47,7 @@
             "5": "",
             "6": "",
             "7": "",
+            "8": "",
             // "urgent": "",
             // "active": "",
             "default": ""
@@ -90,12 +90,13 @@
         "format-icons": ["", "", ""],
         "on-click": "alacritty --command htop"
     },
-    // "hyprland/language": {
-    //     // "format": "{}",
-    //     // "format-us": "US",
-    //     // "format-se": "SE",
-    //     "keyboard-name": "AT Translated Set 2 keyboard"
-    // },
+    "custom/language": {
+        "exec": "bash ~/.config/waybar/scripts/kb-layout.sh",
+        "return-type": "json",
+        "restart-interval": 1,
+        "format": "{}",
+        "on-click": "bash ~/.config/hypr/scripts/switch-kb.sh"
+    },
     "upower": {
         "icon-size": 16,
         "hide-if-empty": true,

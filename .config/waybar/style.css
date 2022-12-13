@@ -97,7 +97,6 @@ label:focus {
   background-color: #000000;
 }
 
-
 #upower,
 #cpu,
 #memory,
@@ -107,6 +106,7 @@ label:focus {
 #tray,
 #idle_inhibitor,
 #bluetooth,
+#custom-language,
 #clock {
   background-color: #31353f;
   padding: 2px 8px;
@@ -164,11 +164,6 @@ label:focus {
 
 #network.disconnected {
   background-color: #f53c3c;
-}
-
-#language {
-  background-color: transparent;
-  color: #ecf0f1;
 }
 
 #tray {
