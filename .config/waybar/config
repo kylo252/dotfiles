@@ -13,6 +13,7 @@
     ],
     "modules-right": [
         "tray",
+        "bluetooth",
         "cpu",
         // "idle_inhibitor",
         "temperature",
@@ -116,7 +117,15 @@
         "format-alt": " {ifname}: {ipaddr}/{cidr}",
         "max-length": 50
     },
-
+    "bluetooth": {
+        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+        "format": "", // an empty format will hide the module
+        "format-connected": "",
+        "on-click": "blueman-manager",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         // "format": "{volume}% {icon} ",

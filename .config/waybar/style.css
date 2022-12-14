@@ -122,6 +122,14 @@ label:focus {
   font-weight: bold;
 }
 
+#bluetooth.connected {
+  color: #42A5F2;
+}
+
+#bluetooth.on {
+  color: #abb2bf;
+}
+
 #upower.charging {
   color: #a3be8c;
 }
