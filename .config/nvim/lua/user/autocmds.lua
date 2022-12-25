@@ -6,6 +6,7 @@ local base_definitions = {
     {
       group = "_general_settings",
       pattern = "*",
+      desc = "Highlight text on yank",
       callback = function()
         vim.highlight.on_yank { higroup = "Search", timeout = 200 }
       end,
@@ -23,8 +24,20 @@ local base_definitions = {
     "FileType",
     {
       group = "_buffer_mappings",
-      pattern = { "qf", "help", "man", "floaterm", "lspinfo", "mason", "null-ls-info" },
-      command = "nnoremap <silent> <buffer> q :close<CR>",
+      pattern = {
+        "qf",
+        "help",
+        "man",
+        "floaterm",
+        "lspinfo",
+        "lir",
+        "lsp-installer",
+        "null-ls-info",
+        "tsplayground",
+      },
+      callback = function()
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
+      end,
     },
   },
 
@@ -59,11 +72,11 @@ local base_definitions = {
 function M.toggle_format_on_save(opts)
   opts = opts
     or {
-      ---@usage pattern string pattern used for the autocommand
+      ---used for the autocommand, see |autpat|
       pattern = vim.fn.stdpath "config" .. "/**/*.lua",
-      ---@usage timeout number timeout in ms for the format request
+      ---time in ms for the format request
       timeout = 1000,
-      ---@usage filter func to select client
+      ---function to select client
       filter = function(clients)
         return vim.tbl_filter(function(client)
           local status_ok, method_supported = pcall(function()
@@ -71,7 +84,7 @@ function M.toggle_format_on_save(opts)
           end)
           -- give higher prio to null-ls
           if status_ok and method_supported and client.name == "null-ls" then
-            return "null-ls"
+            return true
           else
             return status_ok and method_supported and client.name
           end
