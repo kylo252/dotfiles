@@ -53,7 +53,7 @@ function M.setup()
       args = {},
     },
     notify = {
-      threshold = vim.log.levels.WARN,
+      threshold = vim.log.levels.INFO,
     },
     git = {
       enable = true,

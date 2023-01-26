@@ -25,14 +25,8 @@ function M.setup()
       source = "always",
       header = "",
       prefix = "",
-      format = function(d)
-        local t = vim.deepcopy(d)
-        local code = d.code or d.user_data.lsp.code
-        if code then
-          t.message = string.format("%s [%s]", t.message, code):gsub("1. ", "")
-        end
-        return t.message
-      end,
+      suffix = nil,
+      format = nil,
     },
   }
 
@@ -54,7 +48,7 @@ function M.setup()
       -- local diagnostics = vim.diagnostic.get(bufnr) -- disabled because slow!
 
       -- perf: avoid showing too many signs
-      if #diagnostics > 20 then
+      if #diagnostics > 30 then
         return
       end
 
