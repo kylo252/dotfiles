@@ -5,7 +5,7 @@
 window#waybar {
   /* background-color: rgba(30, 34, 42, 0.5); */
   /* font-family: FontAwesome, "Fira Sans SemiBold", "SF Compact Display Rounded", FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
-  font-family: "UbuntuMono Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-family: UbuntuNerdFont, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   background-color: rgba(43, 48, 59, 0.5);
   border-bottom: 3px solid rgba(100, 114, 125, 0.5);
@@ -22,7 +22,6 @@ window#waybar.hidden {
   font-size: 17px;
   margin-left: 2px;
   margin-right: 2px;
-  font-family: UbuntuNerdFontMono;
   background-color: transparent;
   color: #5e81ac;
   /* Use box-shadow instead of border so the text isn't offset */
@@ -40,7 +39,6 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-  font-family: UbuntuNerdFontMono;
   color: #c68a75;
   background: #64727d;
   /* border-bottom: 3px solid; */
@@ -48,18 +46,15 @@ window#waybar.hidden {
 }
 
 #workspaces button.urgent {
-  font-family: UbuntuNerdFontMono;
   background-color: #eb4d4b;
 }
 
 #workspaces button.hidden {
-  font-family: UbuntuNerdFontMono;
   color: #2a2e38;
   border-bottom: 3px solid transparent;
 }
 
 #workspaces button.visible {
-  font-family: UbuntuNerdFontMono;
   box-shadow: 2px 2px 6px 1px black;
   color: #2a2e38;
   background-color: #5a5d5f;
