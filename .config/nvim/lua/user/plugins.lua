@@ -67,6 +67,10 @@ function M.load(specs)
       readme = {
         root = join_paths(cache_dir, "lazy", "readme"),
       },
+      defaults = {
+        lazy = true,
+        version = nil,
+      },
     }
 
     lazy.setup(specs, opts)
@@ -78,12 +82,10 @@ function M.load(specs)
 end
 
 M.specs = {
-  -- packer can manage itself as an optional plugin
-  { "wbthomason/packer.nvim" },
+  { "folke/lazy.nvim" },
   { "nvim-lua/plenary.nvim" },
   { "nvim-lua/popup.nvim" },
   { "folke/neodev.nvim", ft = "lua" },
-
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
@@ -94,6 +96,15 @@ M.specs = {
     config = function()
       require("core.treesitter").setup()
     end,
+    event = { "BufWinEnter", "BufReadPost" },
+    cmd = {
+      "TSInstall",
+      "TSUninstall",
+      "TSUpdate",
+      "TSInstallInfo",
+      "TSInstallSync",
+      "TSInstallFromGrammar",
+    },
   },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "nvim-treesitter/playground" },
@@ -106,17 +117,24 @@ M.specs = {
   },
 
   -- LSP and linting
-  { "neovim/nvim-lspconfig" },
-  { "p00f/clangd_extensions.nvim" },
+  { "neovim/nvim-lspconfig", event = "VeryLazy" },
+  { "p00f/clangd_extensions.nvim", ft = { "c", "cpp" } },
   { "jose-elias-alvarez/null-ls.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
   {
     "williamboman/mason.nvim",
     config = function()
       require("core.mason").setup()
     end,
+    event = { "VeryLazy" },
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
   },
-  { "tamago324/nlsp-settings.nvim" },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    dependencies = "mason.nvim",
+    event = { "VeryLazy" },
+  },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings" },
   { "b0o/schemastore.nvim" },
 
   {
@@ -133,11 +151,11 @@ M.specs = {
       "cmp-tmux",
     },
   },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
-  { "andersevenrud/cmp-tmux", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "andersevenrud/cmp-tmux" },
   {
     "L3MON4D3/LuaSnip",
     config = function()
@@ -151,7 +169,7 @@ M.specs = {
     config = function()
       require("core.whichkey").setup()
     end,
-    lazy = true,
+    event = "VeryLazy",
   },
 
   -- Search
@@ -160,7 +178,9 @@ M.specs = {
     config = function()
       require("core.telescope").setup()
     end,
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "telescope-fzf-native.nvim" },
+    lazy = true,
+    cmd = "Telescope",
   },
   {
     "jvgrootveld/telescope-zoxide",
@@ -211,6 +231,7 @@ M.specs = {
       }
       vim.cmd [[colorscheme onedark]]
     end,
+    lazy = false,
   },
   {
     "kyazdani42/nvim-tree.lua",
@@ -223,6 +244,7 @@ M.specs = {
     config = function()
       require("core.nvimtree").setup()
     end,
+    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   {
@@ -239,6 +261,7 @@ M.specs = {
       require("core.statusline").setup()
     end,
     dependencies = { "kyazdani42/nvim-web-devicons" },
+    event = "VimEnter",
   },
   { "arkav/lualine-lsp-progress" },
   {
@@ -260,6 +283,7 @@ M.specs = {
     config = function()
       require("core.dashboard").setup()
     end,
+    lazy = false,
   },
 
   -- GIT
