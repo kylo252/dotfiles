@@ -1,5 +1,5 @@
 require "user.utils"
-require "user.plugins"
+require "user.plugins".load()
 require "user.settings"
 require("user.autocmds").setup()
 require("user.commands").setup()
