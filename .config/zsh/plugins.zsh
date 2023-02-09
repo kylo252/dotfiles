@@ -68,4 +68,7 @@ zstyle ':completion:*' rehash true
 znap eval luarock "luarocks path --no-bin 2>/dev/null"
 
 znap function _vcpkg vcpkg 'source $HOME/.config/vcpkg/hook.sh'
+
 compctl -K _vcpkg vcpkg
+
+[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"

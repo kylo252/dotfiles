@@ -196,6 +196,7 @@ M.specs = {
     config = function()
       require("core.project").setup()
     end,
+    event = "VimEnter",
   },
   {
     "ggandor/lightspeed.nvim",

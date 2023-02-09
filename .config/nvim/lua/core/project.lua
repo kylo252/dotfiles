@@ -12,7 +12,7 @@ function M.setup()
 
     silent_chdir = true,
 
-    ignore_lsp = { "null-ls" },
+    ignore_lsp = { "sumneko_lua", "null-ls" },
 
     datapath = vim.fn.stdpath "cache",
 
@@ -20,7 +20,7 @@ function M.setup()
     -- * global (default)
     -- * tab
     -- * win
-    scope_chdir = "win",
+    scope_chdir = "global",
 
     -- Don't calculate root dir on specific directories
     -- Ex: { "~/.cargo/*", ... }
