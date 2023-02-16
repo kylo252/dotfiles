@@ -54,5 +54,10 @@ vim.filetype.add {
   extension = {
     ["*.pc"] = "csh",
     ["*.pc.in"] = "csh",
+    ["*.dsl"] = "groovy",
+  },
+  pattern = {
+    [".clang*"] = "yaml",
+    ["Jenkinsfile"] = "groovy",
   },
 }
