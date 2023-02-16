@@ -18,6 +18,7 @@
         // "idle_inhibitor",
         "temperature",
         "pulseaudio",
+        // "wireplumber", // unstable
         "network",
         "custom/language",
         "upower",
@@ -128,6 +129,16 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
     },
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": " ",
+        // "on-click": "helvum",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
+    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         // "format": "{volume}% {icon} ",
@@ -149,11 +160,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
+            "default": [ "", "", "" ]
         },
         "on-click": "pavucontrol"
     },
