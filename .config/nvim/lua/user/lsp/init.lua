@@ -128,7 +128,7 @@ function M.setup()
 
   local servers = {
     "clangd",
-    "sumneko_lua",
+    "lua_ls",
     "bashls",
     "dockerls",
     "jsonls",

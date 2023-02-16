@@ -1,12 +1,5 @@
 local M = {}
 
-function M.reload_plugins()
-  M.reset_cache()
-  vim.cmd(string.format("source %q/lua/plugins.lua", vim.fn.stdpath "config"))
-  local packer = require "packer"
-  packer.sync()
-end
-
 function M.open_uri(uri)
   vim.notify("opening: " .. uri, vim.log.levels.INFO)
   local task = {
@@ -80,14 +73,6 @@ function M.join_paths(...)
   local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
   local result = table.concat({ ... }, path_sep)
   return result
-end
-
-function M.reset_cache()
-  local packer_cache = vim.fn.stdpath "config" .. "/plugin/packer_compiled.lua"
-  if M.is_file(packer_cache) then
-    vim.fn.delete(packer_cache)
-    require("packer").compile()
-  end
 end
 
 function M.on_dir_changed()

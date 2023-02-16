@@ -22,18 +22,7 @@ if not utils.is_directory(lazy_install_dir) then
   }
 end
 
-vim.opt.runtimepath:append(lazy_install_dir)
-vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
-
-local lazy_cache = require "lazy.core.cache"
-lazy_cache.setup {
-  performance = {
-    cache = {
-      enabled = true,
-      path = join_paths(cache_dir, "lazy", "cache"),
-    },
-  },
-}
+vim.opt.runtimepath:prepend(lazy_install_dir)
 
 function M.load(specs)
   specs = specs or M.specs
@@ -42,43 +31,34 @@ function M.load(specs)
     return
   end
 
-  -- remove plugins from rtp before loading lazy, so that all plugins won't be loaded on startup
-  vim.opt.runtimepath:remove(join_paths(plugins_dir, "*"))
+  local opts = {
+    install = {
+      missing = true,
+      colorscheme = { "onedark", "habamax" },
+    },
+    ui = {
+      border = "rounded",
+    },
+    root = plugins_dir,
+    git = {
+      timeout = 120,
+    },
+    lockfile = join_paths(cache_dir, "lazy-lock.json"),
+    performance = {
+      rtp = {
+        reset = false,
+      },
+    },
+    readme = {
+      root = join_paths(cache_dir, "lazy", "readme"),
+    },
+    defaults = {
+      lazy = true,
+      version = nil,
+    },
+  }
 
-  local status_ok = xpcall(function()
-    local opts = {
-      install = {
-        missing = true,
-        colorscheme = { "onedark", "habamax" },
-      },
-      ui = {
-        border = "rounded",
-      },
-      root = plugins_dir,
-      git = {
-        timeout = 120,
-      },
-      lockfile = join_paths(cache_dir, "lazy-lock.json"),
-      performance = {
-        rtp = {
-          reset = false,
-        },
-      },
-      readme = {
-        root = join_paths(cache_dir, "lazy", "readme"),
-      },
-      defaults = {
-        lazy = true,
-        version = nil,
-      },
-    }
-
-    lazy.setup(specs, opts)
-  end, debug.traceback)
-
-  if not status_ok then
-    log_entry "problems detected while loading plugins' configurations"
-  end
+  lazy.setup(specs, opts)
 end
 
 M.specs = {
