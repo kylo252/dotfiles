@@ -67,6 +67,15 @@ local base_definitions = {
       callback = require("user.utils").on_dir_changed,
     },
   },
+  {
+    "DirChanged",
+    {
+      group = "_general_settings",
+      pattern = "*",
+      desc = "set osc7 so that tmux can see it",
+      command = [[call chansend(v:stderr, printf("\033]7;%s\033", v:event.cwd))]],
+    },
+  },
 }
 
 function M.toggle_format_on_save(opts)

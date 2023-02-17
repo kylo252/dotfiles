@@ -14,6 +14,8 @@ function main() {
 
   case $command in
     newpane) newpane ;;
+    splitv) splitv "$@";;
+    splith) splith "$@";;
     rotateccw) rotateccw ;;
     rotatecw) rotatecw ;;
     focus) focus ;;
@@ -31,14 +33,22 @@ function main() {
 window_panes="$(tmux display -p "#{window_panes}")"
 
 function newpane() {
-  tmux split-window -v -c '#{pane_current_path}' -l 30
+  tmux new-window -c '#{?pane_path,#{pane_path},#{pane_current_path}}'
+}
+
+function splitv() {
+  tmux split-window -v -c '#{?pane_path,#{pane_path},#{pane_current_path}}' "$@"
+}
+
+function splith() {
+  tmux split-window -h -c '#{?pane_path,#{pane_path},#{pane_current_path}}' "$@"
 }
 
 function togglepane() {
   if ((window_panes > 1)); then
     tmux resize-pane -t "$BASE_IDX" -Z
   else
-    tmux split-window -v -c '#{pane_current_path}' -l 30
+    tmux split-window -v -c '#{?pane_path,#{pane_path},#{pane_current_path}}' -l 30%
   fi
 }
 

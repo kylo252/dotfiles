@@ -44,7 +44,7 @@ function main(){
   else
     # FIXME: we should probably quit the current process if it exists, but this doesn't seem to work even with -X
     tmux display-popup -E -yC -xC -w 85% -h 85% \
-      "tmux new-session -c '#{pane_current_path}' -A -s ${SESSION} ${CMD} ${REST[*]}"
+      "tmux new-session -c '#{?pane_path,#{pane_path},#{pane_current_path}}' -A -s ${SESSION} ${CMD} ${REST[*]}"
   fi
 }
 
