@@ -312,6 +312,7 @@ M.specs = {
     config = function()
       require("core.zk").setup()
     end,
+    cmd = "ZkNotes",
   },
 
   {
