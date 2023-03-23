@@ -15,14 +15,14 @@
         "tray",
         "bluetooth",
         "cpu",
-        // "idle_inhibitor",
         "temperature",
         "pulseaudio",
         // "wireplumber", // unstable
         "network",
         "custom/language",
         "upower",
-        "clock"
+        "clock",
+        "custom/powermenu"
     ],
     "wlr/workspaces": {
         "all-outputs": true,
@@ -66,13 +66,6 @@
         "on-click-middle": "close",
         "all-outputs": false
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
@@ -93,6 +86,11 @@
         "format": "{icon}&#8239; {temperatureC}°C",
         "format-icons": ["", "", ""],
         "on-click": "alacritty --command htop"
+    },
+    "custom/powermenu": {
+        "on-click": "bash ~/.config/rofi/bin/powermenu_t1",
+        "interval": "once",
+        "format": "  ",
     },
     "custom/language": {
         "exec": "bash ~/.config/waybar/scripts/kb-layout.sh",
