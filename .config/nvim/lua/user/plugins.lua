@@ -155,21 +155,22 @@ M.specs = {
   -- Search
   {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     config = function()
       require("core.telescope").setup()
     end,
-    dependencies = { "telescope-fzf-native.nvim" },
+    dependencies = { "telescope-fzf-native.nvim", "jvgrootveld/telescope-zoxide" },
     lazy = true,
     cmd = "Telescope",
   },
   {
     "jvgrootveld/telescope-zoxide",
-    dependencies = { "nvim-telescope/telescope.nvim" },
+    lazy = true,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
     build = "make",
+    lazy = true,
   },
   {
     "ahmedkhalf/project.nvim",
@@ -264,7 +265,7 @@ M.specs = {
     config = function()
       require("core.dashboard").setup()
     end,
-    lazy = false,
+    event = "VimEnter",
   },
 
   -- GIT
@@ -284,7 +285,6 @@ M.specs = {
   },
 
   -- utils
-  { "gpanders/editorconfig.nvim" },
   {
     "kevinhwang91/nvim-bqf",
     event = "BufReadPost",

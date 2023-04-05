@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
 
-function _tmux_lnav_split() {
+function log-view() {
   local file="$1"
-  local file_basedir=echo "$(dirname "$(readlink -m "$file")")"
-  tmux split-window -v -c "$file_basedir" "lnav $file"
+  # local file_basedir=echo "$(dirname "$(readlink -m "$file")")"
+  tmux split-window -v "lnav -c ':reset-session' $file"
 }
 
-function open-nvim-log() {
-  _tmux_lnav_split "$HOME/.local/state/nvim/log"
-}
+nvim_repo="$XDG_DATA_HOME/neovim"
+xtest_cache="$nvim_repo/build/Xtest_xdg/cache"
 
-function open-nvim-nightly-log() {
-  local nvim_repo="$HOME/.local/share/neovim"
-  local xtest_cache="$nvim_repo/build/Xtest_xdg/cache"
-  _tmux_lnav_split "$xtest_cache/nvim/*log*"
-}
-
-declare -a actions=(
-  open-nvim-log
-  open-nvim-nightly-log
+declare -A logs=(
+  [hyprland]="/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprland.log"
+  [nvim]="$XDG_STATE_HOME/nvim/log"
+  [nvim-lsp]="$XDG_STATE_HOME/nvim/lsp.log"
+  [nvim-nightly]="$xtest_cache/nvim/*log*"
+  [lvim]="$XDG_STATE_HOME/lvim/log"
+  [lvim-lsp]="$XDG_STATE_HOME/lvim/lsp.log"
 )
 
 SELECTION=$(
-  printf "%s\n" "${actions[@]}" |
-    fzf-tmux --exact --exit-0 --delimiter=' ' --reverse --header="select action "
+  printf "%s\n" "${!logs[@]}" |
+    fzf-tmux --exact --exit-0 --delimiter=' ' --reverse --header="select log file to view "
 ) &&
-  "$SELECTION"
+  log-view "${logs[$SELECTION]}"
