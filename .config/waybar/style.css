@@ -149,6 +149,10 @@ label:focus {
   color: #f53c3c;
 }
 
+#pulseaudio.bluetooth {
+  color: #42A5F2;
+}
+
 #temperature {
   color: #f0932b;
 }

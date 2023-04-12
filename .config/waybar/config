@@ -71,7 +71,6 @@
         "spacing": 10
     },
     "clock": {
-        "timezone": "Europe/Stockholm",
         "format": "<span color='#bf616a'></span>{:%a, %H:%M}",
         "format-alt": "<span color='#bf616a'></span>  {:%A, %B %d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -83,13 +82,12 @@
         "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
         "input-filename": "temp1_input",
         "critical-threshold": 80,
-        "format": "{icon}&#8239; {temperatureC}°C",
+        "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""],
         "on-click": "alacritty --command htop"
     },
     "custom/powermenu": {
         "on-click": "bash ~/.config/rofi/bin/powermenu_t1",
-        "interval": "once",
         "format": "  ",
     },
     "custom/language": {
@@ -138,23 +136,18 @@
         ]
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        // "format": "{volume}% {icon} ",
-        // "format": "{icon}",
-        // "format-muted": "婢",
-        // "format-source": "{volume}% ",
-        // "format-source-muted": "",
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon}&#8239; {volume}%",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-bluetooth-muted": " {icon} ",
-        "format-muted": " &#8239; 0% ",
-        "format-source": " &#8239; {volume}%",
+        "max-volume": 100,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        // "format-bluetooth-muted": " {icon}",
+        "tooltip-format": "{desc}",
+        "format-muted": " ",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -163,7 +156,7 @@
         "on-click": "pavucontrol"
     },
     "cpu": {
-        "format": "&#8239; {usage}%",
+        "format": " {usage}%",
         "tooltip": true,
         "interval": 1,
         "on-click": "alacritty --command procs --sortd cpu --watch-interval 2"
