@@ -44,18 +44,13 @@ function M.load(specs)
       timeout = 120,
     },
     lockfile = join_paths(cache_dir, "lazy-lock.json"),
-    performance = {
-      rtp = {
-        reset = false,
-      },
-    },
     readme = {
       root = join_paths(cache_dir, "lazy", "readme"),
     },
-    defaults = {
-      lazy = true,
-      version = nil,
-    },
+    -- defaults = {
+    --   lazy = false,
+    --   version = nil,
+    -- },
   }
 
   lazy.setup(specs, opts)
@@ -160,8 +155,8 @@ M.specs = {
       require("core.telescope").setup()
     end,
     dependencies = { "telescope-fzf-native.nvim", "jvgrootveld/telescope-zoxide" },
-    lazy = true,
-    cmd = "Telescope",
+    event = "UIEnter",
+    -- cmd = { "Telescope", "Telescope find_files" },
   },
   {
     "jvgrootveld/telescope-zoxide",
@@ -177,7 +172,7 @@ M.specs = {
     config = function()
       require("core.project").setup()
     end,
-    event = "VimEnter",
+    cmd = "Telescope projects",
   },
   {
     "ggandor/lightspeed.nvim",
@@ -234,7 +229,7 @@ M.specs = {
     config = function()
       require("core.bufferline").setup()
     end,
-    event = "BufWinEnter",
+    event = "UIEnter",
     dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   {
@@ -243,7 +238,7 @@ M.specs = {
       require("core.statusline").setup()
     end,
     dependencies = { "kyazdani42/nvim-web-devicons" },
-    event = "VimEnter",
+    event = "UIEnter",
   },
   { "arkav/lualine-lsp-progress" },
   {
@@ -321,7 +316,10 @@ M.specs = {
       require("colorizer").setup { ft = { "css", "scss", "html", "javascript" } }
     end,
   },
-  { "VebbNix/lf-vim" },
+  {
+    "VebbNix/lf-vim",
+    ft = "lfrc",
+  },
 }
 
 return M

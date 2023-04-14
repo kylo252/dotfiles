@@ -22,7 +22,7 @@ function M.setup()
     hijack_cursor = true,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    ignore_buffer_on_setup = false,
+    -- ignore_buffer_on_setup = false,
     ignore_buf_on_tab_change = {},
     sort_by = "name",
     root_dirs = {},

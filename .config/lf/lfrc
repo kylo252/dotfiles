@@ -106,12 +106,7 @@ cmd open_with_lnav ${{
 }}
 
 cmd rpc_nvim_edit ${{
-  
-  if ! command -v nvim-ctrl &>/dev/null; then
-    vmux "$f"
-  else
-    nvim-ctrl "tabedit $f"
-  fi
+  nvim --server ${NVIM_LISTEN_ADDRESS:-/run/user/1000/nvim.*} --remote "$f"
 }}
 
 cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
@@ -206,3 +201,4 @@ map gT z ~/local/share/Trash
 # show documentation
 map g? $lf -doc | bat -l man
 
+# vim: ft=lfrc

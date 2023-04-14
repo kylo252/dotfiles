@@ -1,11 +1,11 @@
 local M = {}
 
-local custom_actions = require "core.telescope.custom-actions"
-
 local status_ok, _ = pcall(require, "telescope")
 if not status_ok then
   return
 end
+
+local custom_actions = require "core.telescope.custom-actions"
 
 local builtin = require "telescope.builtin"
 local finders = require "telescope.finders"
