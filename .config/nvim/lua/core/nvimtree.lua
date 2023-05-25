@@ -1,18 +1,47 @@
 local M = {}
 
-function M.setup()
-  local status_ok, _ = pcall(require, "nvim-tree")
-  if not status_ok then
-    error "failed to load nvim-tree.config"
-    return
+local function on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return {
+      desc = "nvim-tree: " .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true,
+    }
   end
 
   local function telescope_find_files(_)
     require("core.nvimtree").start_telescope "find_files"
   end
 
-  local function telescope_find_str(_)
+  local function telescope_live_grep(_)
     require("core.nvimtree").start_telescope "live_grep"
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+
+  local useful_keys = {
+    ["l"] = { api.node.open.edit, opts "Open" },
+    ["o"] = { api.node.open.edit, opts "Open" },
+    ["<CR>"] = { api.node.open.edit, opts "Open" },
+    ["v"] = { api.node.open.vertical, opts "Open: Vertical Split" },
+    ["h"] = { api.node.navigate.parent_close, opts "Close Directory" },
+    ["C"] = { api.tree.change_root_to_node, opts "CD" },
+    ["gtg"] = { telescope_live_grep, opts "Telescope Live Grep" },
+    ["gtf"] = { telescope_find_files, opts "Telescope Find File" },
+  }
+
+  require("user.keymaps").load_mode("n", useful_keys)
+end
+
+function M.setup()
+  local status_ok, _ = pcall(require, "nvim-tree")
+  if not status_ok then
+    error "failed to load nvim-tree.config"
+    return
   end
 
   local setup_opts = {
@@ -30,7 +59,6 @@ function M.setup()
     sync_root_with_cwd = true,
     reload_on_bufenter = false,
     respect_buf_cwd = true,
-    on_attach = "disable",
     remove_keymaps = false,
     select_prompts = false,
     update_focused_file = {
@@ -55,6 +83,7 @@ function M.setup()
       show_on_dirs = true,
       timeout = 200,
     },
+    on_attach = on_attach,
     view = {
       adaptive_size = false,
       hide_root_folder = false,
@@ -64,17 +93,6 @@ function M.setup()
       number = false,
       relativenumber = false,
       signcolumn = "yes",
-      mappings = {
-        custom_only = false,
-        list = {
-          { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
-          { key = "h", action = "close_node" },
-          { key = "v", action = "vsplit" },
-          { key = "C", action = "cd" },
-          { key = "tf", action = "find_files", action_cb = telescope_find_files },
-          { key = "tg", action = "grep_string", action_cb = telescope_find_str },
-        },
-      },
     },
     renderer = {
       add_trailing = false,
