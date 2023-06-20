@@ -34,26 +34,15 @@ local footer = {
 
 local buttons = {
   entries = {
-    { "<c-f>", "  Find File", "<CMD>Telescope find_files<CR>" },
-    { "<c-r>", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
-    { "<c-n>", "  New File", "<CMD>ene!<CR>" },
-    { "<c-j>", "  Recent Places", "<CMD>Telescope zoxide list<CR>" },
-    { "<c-t>", "  Find Word", "<CMD>Telescope live_grep<CR>" },
-    {
-      "SPC p",
-      "  Plugins ",
-      "<cmd>edit ~/.config/nvim/lua/plugins.lua<cr>",
-    },
-    {
-      "SPC T",
-      "  Scratch",
-      "<CMD>edit " .. scratch_file .. " <CR>",
-    },
-    {
-      "SPC R",
-      "  Load Session",
-      "<CMD>SessionLoad<cr>",
-    },
+    { "SPC f f", "󰈞  Find File", "<CMD>Telescope find_files<CR>" },
+    { "SPC f r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+    { "SPC f l", "  Find Word", "<CMD>Telescope live_grep<CR>" },
+    { "SPC f j", "  Recent Places", "<CMD>Telescope zoxide list<CR>" },
+    { "SPC P", "  Recent Projects", "<CMD>Telescope projects<CR>" },
+    { "SPC e", "  New File", "<CMD>ene!<CR>" },
+    { "SPC R", "󰀘  Load Session", "<CMD>SessionLoad<cr>" },
+    { "SPC p", "  Plugins ", "<cmd>edit ~/.config/nvim/lua/user/plugins.lua<cr>" },
+    { "SPC s", "  Scratch", "<CMD>edit " .. scratch_file .. "<CR>" },
   },
 }
 
