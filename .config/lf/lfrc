@@ -161,7 +161,7 @@ map H top
 map L bottom
 map u unselect
 map br bulkrename
-map r push :rename<space>
+map r rename
 map i toggle-preview
 
 # create dir/file
