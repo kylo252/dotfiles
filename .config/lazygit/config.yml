@@ -21,7 +21,7 @@ gui:
   skipNoStagedFilesWarning: false
   skipRewordInEditorWarning: false
   skipStashWarning: false
-  skipUnstageLineWarning: false
+  skipDiscardChangeWarning: false
   splitDiff: auto
   # timeFormat: 02 Jan 06 15:04 MST
   # windowSize: ""
@@ -65,12 +65,8 @@ git:
     mode: "ff-only" # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: true
   autoRefresh: true
-  branchLogCmd:
-    git log --graph --color=always --abbrev-commit --decorate --date=relative
-    --pretty=medium {{branchName}} --
-  allBranchesLogCmd:
-    git log --graph --all --color=always --abbrev-commit --decorate
-    --date=relative  --pretty=medium
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
+  allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   commitPrefixes: {}
@@ -99,7 +95,6 @@ os:
   EditAtLine: "{{editor}} +{{line}} -- {{filename}}"
   open: xdg-open {{filename}} >/dev/null
   openLink: xdg-open {{link}} >/dev/null
-
 keybinding:
   universal:
     quit: q
@@ -241,7 +236,6 @@ keybinding:
     init: i
     update: u
     bulkMenu: b
-
 customCommands:
   - key: "<c-g>"
     command: "git reuse-msg"
