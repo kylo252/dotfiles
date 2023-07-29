@@ -17,7 +17,7 @@ local base_definitions = {
     {
       group = "_filetype_settings",
       pattern = { "gitcommit", "markdown" },
-      command = "setl fdm=indent fdl=4 spc= conceallevel=1 list lcs=trail:* tw=100",
+      command = "setl fdm=indent fdl=4 spc= cole=1 cocu=nc list lcs=trail:* tw=100",
     },
   },
   {
