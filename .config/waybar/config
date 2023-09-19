@@ -86,8 +86,9 @@
         "on-click": "alacritty --command htop"
     },
     "custom/powermenu": {
-        "on-click": "bash ~/.config/rofi/bin/powermenu_t1",
-        "format": "  ",
+        // see: https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
+        "on-click": "sleep 0.1 && bash ~/.config/rofi/bin/powermenu_t1",
+        "format": "  "
     },
     "custom/language": {
         "exec": "bash ~/.config/waybar/scripts/kb-layout.sh",
