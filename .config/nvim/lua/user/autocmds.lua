@@ -150,6 +150,17 @@ function M.define_autocmds(definitions)
   end
 end
 
+function M.hide_eol()
+  vim.opt.conceallevel = 3
+  vim.opt.concealcursor = "nvic"
+  vim.api.nvim_set_hl(0, "Ignore", { ctermfg = 15, fg = "bg" })
+  vim.api.nvim_create_autocmd("BufReadPost", {
+    buffer = 0,
+    command = "match Ignore /\r$/",
+  })
+  vim.cmd ":e"
+end
+
 function M.setup()
   M.define_autocmds(base_definitions)
   M.toggle_format_on_save()

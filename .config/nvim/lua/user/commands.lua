@@ -69,6 +69,7 @@ local base_collection = {
       end,
     },
   },
+  { name = "HideEOL", fn = require("user.autocmds").hide_eol },
 }
 
 function M.load_commands(collection)
