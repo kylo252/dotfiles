@@ -1,0 +1,70 @@
+import = ["~/.config/alacritty/colors/pastel.toml"]
+
+[bell]
+animation = "EaseOutExpo"
+
+[cursor.style]
+shape = "Beam"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "HackNerdFontMono"
+
+[keyboard]
+bindings = [
+  { key = "Tab",     mods = "Control",        command = { program = "tmux", args= ["select-window", "-t", "+"] } },
+  { key = "Tab",     mods = "Shift|Control",  command = { program = "tmux", args= ["select-window", "-t", "-"] } },
+  { key = "Return",  mods = "Control|Shift",  action = "SpawnNewInstance"            },
+  # QoL
+  { key = "Space",   mods = "Alt"    ,        chars = " "                            },
+  { key = "Back",    mods = "Super"  ,        chars = "\u0015"                       }, # delete word/line
+  { key = "Left",    mods = "Alt"    ,        chars = "\u001Bb"                      }, # one word left
+  { key = "Right",   mods = "Alt"    ,        chars = "\u001Bf"                      }, # one word right
+  # MacOS
+  { key = "V",       mods = "Command",        action = "Paste"                       },
+  { key = "C",       mods = "Command",        action = "Copy"                        },
+  { key = "Q",       mods = "Command",        action = "Quit"                        },
+  { key = "W",       mods = "Command",        chars = "\u001Bw"                      }, # unmap Quit
+  { key = "Left",    mods = "Command",        chars = "\u001BOH", mode = "AppCursor" }, # Home
+  { key = "Right",   mods = "Command",        chars = "\u001BOF", mode = "AppCursor" }, # End
+]
+
+[mouse]
+hide_when_typing = false
+
+[[mouse.bindings]]
+action = "ExpandSelection"
+mouse = "Right"
+
+[[mouse.bindings]]
+action = "ExpandSelection"
+mods = "Control"
+mouse = "Right"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mode = "~Vi"
+mouse = "Middle"
+
+[scrolling]
+history = 10000
+
+[selection]
+save_to_clipboard = true
+
+[window]
+dynamic_title = true
+title = "alacritty"
+
+[window.class]
+general = "alacritty"
+instance = "alacritty"
+
+[window.padding]
+x = 5
+y = 5
