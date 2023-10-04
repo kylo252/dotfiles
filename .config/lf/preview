@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-file="${f:-1}"
+file="$1"
 
 if ! rg "$file" "$LF_SCROLLINGPREVIEW_TEMPDIR/offset" 2>/dev/null; then
   offset=1
