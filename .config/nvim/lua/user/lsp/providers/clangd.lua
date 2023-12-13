@@ -24,9 +24,22 @@ local custom_on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>lm", "<cmd>ClangdMemoryUsage<cr>", opts)
 end
 
+local util = require "lspconfig.util"
+local root_files = {
+  -- ".clangd",  -- can be included in subdirs
+  -- ".clang-tidy",
+  -- ".clang-format",
+  "compile_commands.json",
+  "compile_flags.txt",
+  "configure.ac", -- AutoTools
+}
+
 local server_opts = {
   cmd = { provider, unpack(clangd_flags) },
   on_attach = custom_on_attach,
+  root_dir = function(fname)
+    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+  end,
 }
 
 return server_opts

@@ -7,7 +7,7 @@ local default_workspace = {
     "${3rd}/luv/library",
   },
 
-  maxPreload = 5000,
+  maxPreload = 10000,
   preloadFileSize = 10000,
 }
 
