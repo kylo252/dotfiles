@@ -2,36 +2,41 @@ local M = {}
 
 function M.setup()
   local opts = {
-    char = "┊",
-    filetype_exclude = {
-      "alpha",
-      "help",
-      "terminal",
-      "dashboard",
-      "lspinfo",
-      "lsp-installer",
-      "mason",
+    indent = { char = "┊" },
+    exclude = {
+      filetypes = {
+        "alpha",
+        "checkhealth",
+        "dashboard",
+        "gitcommit",
+        "help",
+        "lspinfo",
+        "lsp-installer",
+        "man",
+        "mason",
+        "packer",
+        "TelescopePrompt",
+        "TelescopeResults",
+        "terminal",
+        "",
+      },
+      buftypes = {
+        "terminal",
+        "nofile",
+        "quickfix",
+        "prompt",
+      },
     },
-    buftype_exclude = { "terminal" },
-
-    show_trailing_blankline_indent = false,
-    show_first_indent_level = false,
-    use_treesitter = true,
-    show_end_of_line = true,
-    show_current_context = true,
-    show_current_context_start = true,
-    char_blankline = "┊",
-    context_highlight_list = {
-      "IndentBlanklineIndent1",
-      "IndentBlanklineIndent2",
-      "IndentBlanklineIndent3",
-      "IndentBlanklineIndent4",
-      "IndentBlanklineIndent5",
-      "IndentBlanklineIndent6",
+    scope = {
+      enabled = true,
+      char = nil,
+      show_start = true,
+      show_end = true,
+      injected_languages = true,
     },
   }
 
-  require("indent_blankline").setup(opts)
+  require("ibl").setup(opts)
 end
 
 return M

@@ -313,7 +313,7 @@ M.specs = {
   {
     "nvchad/nvim-colorizer.lua",
     config = function()
-      require("colorizer").setup { ft = { "css", "scss", "html", "javascript" } }
+      require("colorizer").setup { filetypes = { "css", "scss", "html", "javascript" } }
     end,
   },
   {

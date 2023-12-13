@@ -85,7 +85,7 @@ function M.setup()
     on_attach = on_attach,
     view = {
       adaptive_size = false,
-      hide_root_folder = false,
+      -- hide_root_folder = false,
       centralize_selection = true,
       side = "left",
       preserve_window_proportions = false,
