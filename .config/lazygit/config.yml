@@ -16,6 +16,7 @@ gui:
   showFileTree: true # for rendering changes files in a tree format
   showListFooter: true
   showIcons: true
+  nerdFontsVersion: "3"
   showRandomTip: false
   sidePanelWidth: 0.3333 # number from 0 to 1
   skipNoStagedFilesWarning: false

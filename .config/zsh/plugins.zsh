@@ -65,7 +65,7 @@ zstyle ':fzf-tab:*' switch-group '[' ']'
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
-znap eval luarock "luarocks path --no-bin 2>/dev/null"
+# znap eval luarock "luarocks path --no-bin 2>/dev/null"
 
 znap function _vcpkg vcpkg 'source $HOME/.config/vcpkg/hook.sh'
 
