@@ -6,7 +6,7 @@ function M.setup()
 
     detection_methods = { "lsp", "pattern" },
 
-    patterns = { ".git" },
+    patterns = { ".git", ".luarc.json" },
 
     show_hidden = true,
 
