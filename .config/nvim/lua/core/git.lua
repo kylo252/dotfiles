@@ -88,6 +88,7 @@ function M.setup_gitlinker()
   gitlinker.setup {
     callbacks = {
       ["gerrit"] = get_gerrit_gitlies_type_url,
+      ["gitlab.*"] = require("gitlinker.hosts").get_gitlab_type_url,
     },
     mappings = nil,
   }

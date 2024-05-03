@@ -22,8 +22,8 @@
   prune = true
 [merge]
   tool = nvim
-[mergetool] 
-  prompt = true
+[mergetool "nvim"]
+	cmd = nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [diff]
   tool = difftastic
 [difftool]

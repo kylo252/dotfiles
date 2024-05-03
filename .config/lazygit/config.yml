@@ -5,10 +5,10 @@ gui:
   branchColors: {}
   commandLogSize: 8
   expandFocusedSidePanel: false
-  experimentalShowBranchHeads: true
   language: auto
   mainPanelSplitMode: "flexible" # one of 'horizontal' | 'flexible' | 'vertical'
   mouseEvents: true
+  nerdFontsVersion: "3"
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
   showBottomLine: true
@@ -16,23 +16,22 @@ gui:
   showFileTree: true # for rendering changes files in a tree format
   showListFooter: true
   showIcons: true
-  nerdFontsVersion: "3"
+  showBranchCommitHash: false
   showRandomTip: false
   sidePanelWidth: 0.3333 # number from 0 to 1
+  skipDiscardChangeWarning: false
   skipNoStagedFilesWarning: false
   skipRewordInEditorWarning: false
   skipStashWarning: false
-  skipDiscardChangeWarning: false
   splitDiff: auto
   # timeFormat: 02 Jan 06 15:04 MST
   # windowSize: ""
   theme:
-    lightTheme: false # For terminals with a light background
     activeBorderColor:
       - green
       - bold
     inactiveBorderColor:
-      - white
+      - default
     optionsTextColor:
       - blue
     selectedLineBgColor:
@@ -52,18 +51,16 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: ""
+    # pager: ""
     useConfig: false
+    externalDiffCommand: ""
   commit:
     signOff: false
-    verbose: default
   merging:
     # only applicable to unix users
     manualCommit: false
     # extra args passed to `git merge`, e.g. --no-ff
     args: ""
-  pull:
-    mode: "ff-only" # one of 'merge' | 'rebase' | 'ff-only'
   autoFetch: true
   autoRefresh: true
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
@@ -76,15 +73,12 @@ git:
     order: topo-order
     showGraph: when-maximised
     showWholeGraph: false
-  diffContextSize: 3
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often an update is checked for
 refresher:
   refreshInterval: 10 # file/submodule refresh interval in seconds
   fetchInterval: 60 # re-fetch interval in seconds
-reporting: "off" # one of: 'on' | 'off' | 'undetermined'
-splashUpdatesIndex: 0
 confirmOnQuit: false
 quitOnTopLevelReturn: false
 disableStartupPopups: false
@@ -92,10 +86,14 @@ services: {}
 notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: true
 os:
-  edit: "nvim"
-  EditAtLine: "{{editor}} +{{line}} -- {{filename}}"
+  edit: "nvim {{filename}}"
+  editAtLine: "{{editor}} +{{line}} -- {{filename}}"
   open: xdg-open {{filename}} >/dev/null
   openLink: xdg-open {{link}} >/dev/null
+  copyToClipboardCmd: printf "\033]52;c;$(printf {{text}} | base64)\a" > /dev/tty
+  # copyToClipboardCmd: printf "\033]52;c;$(printf {{text}} | tmux load-buffer -w -"
+  editInTerminal: true
+  openDirInEditor: 'lf {{dir}}'
 keybinding:
   universal:
     quit: q
@@ -133,7 +131,7 @@ keybinding:
     select: <space>
     goInto: <enter>
     confirm: <enter>
-    confirm-alt1: "y"
+    confirmInEditor: <a-enter>
     remove: d
     new: "n"
     edit: e
@@ -142,6 +140,8 @@ keybinding:
     scrollDownMain: <pgdown>
     scrollUpMain-alt1: <c-u>
     scrollDownMain-alt1: <c-d>
+    # scrollUpMain-alt2: K
+    # scrollDownMain-alt2: J
     executeCustomCommand: ":"
     createRebaseOptionsMenu: m
     pushFiles: P
@@ -160,11 +160,11 @@ keybinding:
     copyToClipboard: <c-o>
     openRecentRepos: <c-f>
     submitEditorText: <enter>
-    appendNewline: <a-enter>
     extrasMenu: "@"
     toggleWhitespaceInDiffView: <c-w>
     increaseContextInDiffView: "}"
     decreaseContextInDiffView: "{"
+    openDiffTool: <c-t>
   status:
     checkForUpdate: u
     recentRepos: <enter>
@@ -174,6 +174,7 @@ keybinding:
     commitChangesWithoutHook: w
     amendLastCommit: A
     commitChangesWithEditor: C
+    confirmDiscard: x
     ignoreFile: i
     refreshFiles: r
     stashAllChanges: s
@@ -184,6 +185,7 @@ keybinding:
     toggleTreeView: "`"
     openMergeTool: M
     openStatusFilter: <c-b>
+    copyFileInfoToClipboard: "y"
   branches:
     createPullRequest: o
     viewPullRequestOptions: O
@@ -195,9 +197,13 @@ keybinding:
     mergeIntoCurrentBranch: M
     viewGitFlowOptions: i
     fastForward: f
+    createTag: T
     pushTag: P
     setUpstream: u
     fetchRemote: f
+    sortOrder: s
+  worktrees:
+    viewWorktreeOptions: w
   commits:
     squashDown: s
     renameCommit: r
@@ -237,6 +243,8 @@ keybinding:
     init: i
     update: u
     bulkMenu: b
+  commitMessage:
+    switchToEditor: <c-o>
 customCommands:
   - key: "<c-g>"
     command: "git reuse-msg"
