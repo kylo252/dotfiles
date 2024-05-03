@@ -3,7 +3,7 @@ table.insert(schemas, {
   fileMatch = {
     "vcpkg.json",
   },
-  url = "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  url = "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
 })
 local opts = {
   settings = {

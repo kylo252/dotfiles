@@ -20,9 +20,9 @@ end
 function M.config()
   return {
     formatters = {
-      { command = "black", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
+      -- { command = "black", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       { command = "cmake-format" },
-      { command = "isort", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
+      -- { command = "isort", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
       { command = "stylua", extra_args = {}, filetypes = { "lua" } },
       { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" }, filetypes = { "sh" } },
       {

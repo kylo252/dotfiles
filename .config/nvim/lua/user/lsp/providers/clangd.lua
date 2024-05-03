@@ -1,10 +1,12 @@
 local clangd_flags = {
   "--all-scopes-completion",
   "--background-index",
-  "--log=info",
+  "--log=error",
+  "--pretty",
   "--enable-config",
   "--clang-tidy",
   "--completion-style=detailed",
+  -- "-j8",
   "--offset-encoding=utf-16", --temporary fix for null-ls
   "--query-driver=/bin/*-gcc,/bin/*-g++,/bin/clang-*", -- allow cross-compilers
   -- "--pch-storage=disk",

@@ -37,6 +37,7 @@ local base_definitions = {
       },
       callback = function()
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
+        vim.opt_local.buflisted = false
       end,
     },
   },

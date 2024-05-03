@@ -53,6 +53,7 @@ vim.g.loaded_ruby_provider = 0
 vim.filetype.add {
   extension = {
     ["*.pc"] = "csh",
+    ["*.tpp"] = "cpp",
     ["*.pc.in"] = "csh",
     ["*.dsl"] = "groovy",
   },

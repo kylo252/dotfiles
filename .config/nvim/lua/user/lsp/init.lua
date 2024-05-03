@@ -134,6 +134,7 @@ function M.setup()
     "jsonls",
     "yamlls",
     "pyright",
+    "ruff_lsp",
     "cmake",
   }
 
