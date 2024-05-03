@@ -4,6 +4,7 @@ local utils = require "user.utils"
 local join_paths = utils.join_paths
 
 local cache_dir = vim.fn.stdpath "cache"
+local config_dir = vim.fn.stdpath "config"
 local data_dir = vim.fn.stdpath "data"
 
 local plugins_dir = join_paths(data_dir, "site", "pack", "lazy", "opt")
@@ -43,7 +44,7 @@ function M.load(specs)
     git = {
       timeout = 120,
     },
-    lockfile = join_paths(cache_dir, "lazy-lock.json"),
+    lockfile = join_paths(config_dir, "lazy-lock.json"),
     readme = {
       root = join_paths(cache_dir, "lazy", "readme"),
     },
