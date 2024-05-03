@@ -1,8 +1,15 @@
 local M = {}
+local join_paths = require("user.utils").join_paths
 
 function M.setup()
   local opts = {
+    PATH = "prepend",
+    log_level = vim.log.levels.INFO,
+    max_concurrent_installers = 4,
     ui = {
+      install_root_dir = join_paths(vim.fn.stdpath "data", "mason"),
+      check_outdated_packages_on_open = false,
+      border = "rounded",
       keymaps = {
         toggle_package_expand = "<CR>",
         install_package = "i",
@@ -13,11 +20,10 @@ function M.setup()
         uninstall_package = "X",
         cancel_installation = "<C-c>",
         apply_language_filter = "<C-f>",
+        toggle_package_install_log = "<CR>",
+        toggle_help = "g?",
       },
     },
-    log_level = vim.log.levels.INFO,
-    max_concurrent_installers = 4,
-
     github = {
       -- The template URL to use when downloading assets from GitHub.
       -- The placeholders are the following (in order):
