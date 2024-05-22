@@ -22,8 +22,16 @@
         "custom/language",
         "upower",
         "clock",
+        "idle_inhibitor",
         "custom/powermenu"
     ],
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
     "hyprland/workspaces": {
         "all-outputs": true,
         "format": "{icon}",
@@ -82,7 +90,11 @@
         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 85,
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""],
+        "format-icons": [
+            "",
+            "",
+            ""
+        ],
         "on-click": "alacritty --command htop"
     },
     "custom/powermenu": {
@@ -151,7 +163,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": [ "", "", "" ]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol"
     },

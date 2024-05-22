@@ -182,14 +182,14 @@ label:focus {
   background-color: #eb4d4b;
 }
 
-#idle_inhibitor {
-  background-color: transparent;
-  color: #2d3436;
-}
+/* #idle_inhibitor { */
+/*   background-color: transparent; */
+/*   color: #2d3436; */
+/* } */
 
-#idle_inhibitor.activated {
-  color: #808080;
-}
+/* #idle_inhibitor.activated { */
+/*   color: #808080; */
+/* } */
 
 @keyframes blink {
   to {
