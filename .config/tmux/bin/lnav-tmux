@@ -10,7 +10,7 @@ nvim_repo="$XDG_DATA_HOME/neovim"
 xtest_cache="$nvim_repo/build/Xtest_xdg/cache"
 
 declare -A logs=(
-  [hyprland]="/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprland.log"
+  [hyprland]="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprland.log"
   [nvim]="$XDG_STATE_HOME/nvim/log"
   [nvim-lsp]="$XDG_STATE_HOME/nvim/lsp.log"
   [nvim-nightly]="$xtest_cache/nvim/*log*"

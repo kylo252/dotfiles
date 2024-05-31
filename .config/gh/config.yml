@@ -16,3 +16,4 @@ aliases:
     bugs: issue list --label=bugs
     coi: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
     results: '!gh run list --branch "$(git branch --show-current)"'
+version: "1"
