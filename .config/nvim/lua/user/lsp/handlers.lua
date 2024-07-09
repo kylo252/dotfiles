@@ -48,7 +48,7 @@ function M.setup()
       -- local diagnostics = vim.diagnostic.get(bufnr) -- disabled because slow!
 
       -- perf: avoid showing too many signs
-      if #diagnostics > 30 then
+      if #diagnostics > 90 then
         return
       end
 
