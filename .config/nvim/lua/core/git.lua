@@ -3,11 +3,11 @@ local M = {}
 function M.setup_gitsigns()
   require("gitsigns").setup {
     signs = {
-      add = { hl = "GitSignsAdd", text = "│" },
-      change = { hl = "GitSignsChange", text = "│" },
-      delete = { hl = "GitSignsDelete", text = "_" },
-      topdelete = { hl = "GitSignsDelete", text = "‾" },
-      changedelete = { hl = "GitSignsChange", text = "~" },
+      add = { text = "│" },
+      change = { text = "│" },
+      delete = { text = "_" },
+      topdelete = { text = "‾" },
+      changedelete = { text = "~" },
     },
     sign_priority = 10000,
     current_line_blame_formatter = " <abbrev_sha> <summary> (<author>, <author_time:%Y-%m-%d>)",
@@ -63,9 +63,6 @@ function M.setup_gitsigns()
       -- Text object
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "select hunk")
     end,
-    yadm = {
-      enable = false,
-    },
   }
 end
 

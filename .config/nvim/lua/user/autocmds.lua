@@ -77,6 +77,15 @@ local base_definitions = {
       command = [[call chansend(v:stderr, printf("\033]7;%s\033", v:event.cwd))]],
     },
   },
+  {
+    "ExitPre",
+    {
+      group = "_general_settings",
+      pattern = "*",
+      desc = "reset cursor back when leaving Neovim",
+      command = "set guicursor=a:ver90",
+    },
+  },
 }
 
 function M.toggle_format_on_save(opts)
